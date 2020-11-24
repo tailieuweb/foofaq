@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import LoginProver from "../../provider/login";
+import LoginProvider from "../../provider/login";
 
 // styles
 import "./index.scss";
