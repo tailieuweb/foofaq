@@ -1,11 +1,13 @@
 import React from "react";
 // import FacebookLogin from "react-facebook-login";
 // import GoogleLogin from "react-google-login";
-import { useHistory } from "react-router-dom";
 import { FacebBookLogin } from "../../provider/login";
+import { useHistory, Redirect } from "react-router-dom";
 
 // styles
 import "./index.scss";
+import { GoogleLogin } from "../../provider/login";
+import Button from "@material-ui/core/Button";
 
 // images
 // import GoogleIcon from "../../images/google_icon.svg";
@@ -24,15 +26,15 @@ const Login = () => {
     }
   };
 
-  // const responseGoogle = async (res) => {
-  //   if (res.profileObj.name) {
-  //     localStorage.setItem("accessToken", res.accessToken);
-  //     history.replace("/");
-  //     console.log(res);
-  //   }
-  // };
+  const handlerGoogleLogin = async (res) => {
+    if (res.profileObj.name) {
+      localStorage.setItem("accessToken", res.accessToken);
+      history.replace("/");
+      console.log(res);
+    }
+  };
 
-  // if (localStorage.getItem("accessToken")) return <Redirect to="/" />;
+  if (localStorage.getItem("accessToken")) return <Redirect to="/" />;
 
   return (
     <div className="LoginContainer">
@@ -45,6 +47,7 @@ const Login = () => {
           <FacebBookLogin handlerLogin={handlerFacebookLogin} />
           {/* Github */}
           Code Github Login here
+          <GoogleLogin handlerLogin={handlerGoogleLogin}></GoogleLogin>
         </div>
       </div>
     </div>
