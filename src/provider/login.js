@@ -12,8 +12,12 @@ export const FacebBookLogin = (props) => {
       textButton="FACEBOOK"
       fields="name,email,picture"
       callback={props.handlerLogin}
-      render={() => (
-        <button className="gg-login-btn">
+      render={(renderProps) => (
+        <button
+          className="gg-login-btn"
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}
+        >
           <span
             className="icon"
             style={{
