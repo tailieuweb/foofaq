@@ -1,40 +1,31 @@
 import React from "react";
-// import FacebookLogin from "react-facebook-login";
-// import GoogleLogin from "react-google-login";
-import { useHistory } from "react-router-dom";
-import { FacebBookLogin, GithubLogin} from "../../provider/login";
+
+// Components
+import LoginProvider from "../../provider/login";
+
 // styles
 import "./index.scss";
-import { GitHub } from "@material-ui/icons";
-
-// images
-// import GoogleIcon from "../../images/google_icon.svg";
-// import FacebookIcon from "../../images/facebook_icon.svg";
-// import InputLogin from "./InputLogin";
 
 const Login = () => {
-  const history = useHistory();
+  //const history = useHistory();
 
-  const responseFacebook = async (res) => {
+  const handlerFacebookLogin = async (res) => {
+    console.log(res);
     if (res.status !== "unknown") {
-      // localStorage.setItem("accessToken", res.accessToken);
-      history.replace("/");
-      console.log(res);
       alert("Logged in successfully!");
     }
   };
-  const resGithub = (response) => {
-    console.log(response)
-  };
-  // const responseGoogle = async (res) => {
-  //   if (res.profileObj.name) {
-  //     localStorage.setItem("accessToken", res.accessToken);
-  //     history.replace("/");
-  //     console.log(res);
-  //   }
-  // };
 
-  // if (localStorage.getItem("accessToken")) return <Redirect to="/" />;
+  const handlerGoogleLogin = async (res) => {
+    console.log(res);
+    if (res.profileObj.name) {
+      alert("Logged in successfully!");
+    }
+  };
+
+  const handlerGithubLogin = async (res) => {
+    alert("Logged in successfully!");
+  };
 
   return (
     <div className="LoginContainer">
@@ -43,11 +34,11 @@ const Login = () => {
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
-          {/* Code Google Login here */}
-          <FacebBookLogin responseFacebook={responseFacebook} />
+          <LoginProvider type="gg" handlerLogin={handlerGoogleLogin} />
+          {/* Facebook */}
+          <LoginProvider type="fb" handlerLogin={handlerFacebookLogin} />
           {/* Github */}
-          {/* Code Github Login here */}
-          <GithubLogin resGithub={resGithub}/>
+          <LoginProvider type="git" handlerLogin={handlerGithubLogin} />
         </div>
       </div>
     </div>
