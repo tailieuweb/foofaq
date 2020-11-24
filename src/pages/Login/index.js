@@ -17,8 +17,8 @@ const Login = () => {
   };
 
   const handlerGoogleLogin = async (res) => {
+    console.log(res);
     if (res.profileObj.name) {
-      console.log(res);
       alert("Logged in successfully!");
     }
   };
