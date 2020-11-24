@@ -5,7 +5,7 @@ import React from "react";
 
 // styles
 import "./index.scss";
-
+import { GoogleWLogin } from "../../provider/login";
 // images
 // import GoogleIcon from "../../images/google_icon.svg";
 // import FacebookIcon from "../../images/facebook_icon.svg";
@@ -38,12 +38,8 @@ const Login = () => {
         <div className="LeftSection"></div>
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
-          {/* Google */}
-          // Code Google Login here
-          {/* Facebook */}
-          // Code Facebook Login here
-          {/* Github */}
-          // Code Github Login here
+
+          <GoogleWLogin></GoogleWLogin>
         </div>
       </div>
     </div>
