@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 
 import QuestionList from "./pages/QuestionList";
+import Login from "./pages/Login";
 
 import "./index.scss";
 
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/" component={QuestionList}></Route>
+          <Route exact path="/login" component={Login}></Route>
         </Switch>
       </Router>
     </Provider>
