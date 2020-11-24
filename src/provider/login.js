@@ -58,7 +58,7 @@ export const FacebookLoginProvider = (props) => {
 
 export const GithubLogin = () => {};
 
-const LoginProver = ({ type, handlerLogin }) => {
+const LoginProvider = ({ type, handlerLogin }) => {
   switch (type) {
     case "gg":
     case "google":
@@ -69,4 +69,4 @@ const LoginProver = ({ type, handlerLogin }) => {
   }
 };
 
-export default LoginProver;
+export default LoginProvider;

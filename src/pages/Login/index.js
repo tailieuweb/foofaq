@@ -30,9 +30,9 @@ const Login = () => {
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
-          <LoginProver type="gg" handlerLogin={handlerGoogleLogin} />
+          <LoginProvider type="gg" handlerLogin={handlerGoogleLogin} />
           {/* Facebook */}
-          <LoginProver type="fb" handlerLogin={handlerFacebookLogin} />
+          <LoginProvider type="fb" handlerLogin={handlerFacebookLogin} />
           {/* Github */}
         </div>
       </div>
