@@ -15,7 +15,7 @@ import "./index.scss";
 const Login = () => {
   const history = useHistory();
 
-  const responseFacebook = async (res) => {
+  const handlerFacebookLogin = async (res) => {
     if (res.status !== "unknown") {
       // localStorage.setItem("accessToken", res.accessToken);
       history.replace("/");
@@ -42,7 +42,7 @@ const Login = () => {
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
           Code Google Login here
-          <FacebBookLogin responseFacebook={responseFacebook} />
+          <FacebBookLogin handlerLogin={handlerFacebookLogin} />
           {/* Github */}
           Code Github Login here
         </div>

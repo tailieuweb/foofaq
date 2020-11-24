@@ -11,7 +11,7 @@ export const FacebBookLogin = (props) => {
       appId="187968122879403"
       textButton="FACEBOOK"
       fields="name,email,picture"
-      callback={props.responseFacebook}
+      callback={props.handlerLogin}
       render={() => (
         <button className="gg-login-btn">
           <span
