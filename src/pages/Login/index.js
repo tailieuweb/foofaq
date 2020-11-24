@@ -1,7 +1,9 @@
 import React from "react";
-// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login";
 // import GoogleLogin from "react-google-login";
 // import { useHistory, Redirect } from "react-router-dom";
+// Components
+import { FacebookLogin, GoogleLogin } from "../../provider/login";
 
 // styles
 import "./index.scss";
@@ -14,23 +16,19 @@ import "./index.scss";
 const Login = () => {
   // const history = useHistory();
 
-  // const responseFacebook = async (res) => {
-  //   if (res.status !== "unknown") {
-  //     localStorage.setItem("accessToken", res.accessToken);
-  //     history.replace("/");
-  //     console.log(res);
-  //   }
-  // };
+  const handlerFacebookLogin = async (res) => {
+    if (res.status !== "unknown") {
+      console.log(res);
+      alert("Logged in successfully!");
+    }
+  };
 
-  // const responseGoogle = async (res) => {
-  //   if (res.profileObj.name) {
-  //     localStorage.setItem("accessToken", res.accessToken);
-  //     history.replace("/");
-  //     console.log(res);
-  //   }
-  // };
-
-  // if (localStorage.getItem("accessToken")) return <Redirect to="/" />;
+  const handlerGoogleLogin = async (res) => {
+    if (res.profileObj.name) {
+      console.log(res);
+      alert("Logged in successfully!");
+    }
+  };
 
   return (
     <div className="LoginContainer">
@@ -39,11 +37,10 @@ const Login = () => {
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
-          // Code Google Login here
+          <GoogleLogin handlerLogin={handlerGoogleLogin} />
           {/* Facebook */}
-          // Code Facebook Login here
+          <FacebookLogin handlerLogin={handlerFacebookLogin} />
           {/* Github */}
-          // Code Github Login here
         </div>
       </div>
     </div>
