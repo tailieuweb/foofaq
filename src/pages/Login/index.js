@@ -2,10 +2,10 @@ import React from "react";
 // import FacebookLogin from "react-facebook-login";
 // import GoogleLogin from "react-google-login";
 import { useHistory } from "react-router-dom";
-import { FacebBookLogin } from "../../provider/login";
-
+import { FacebBookLogin, GithubLogin} from "../../provider/login";
 // styles
 import "./index.scss";
+import { GitHub } from "@material-ui/icons";
 
 // images
 // import GoogleIcon from "../../images/google_icon.svg";
@@ -23,7 +23,9 @@ const Login = () => {
       alert("Logged in successfully!");
     }
   };
-
+  const resGithub = (response) => {
+    console.log(response)
+  };
   // const responseGoogle = async (res) => {
   //   if (res.profileObj.name) {
   //     localStorage.setItem("accessToken", res.accessToken);
@@ -41,10 +43,11 @@ const Login = () => {
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
-          Code Google Login here
+          {/* Code Google Login here */}
           <FacebBookLogin responseFacebook={responseFacebook} />
           {/* Github */}
-          Code Github Login here
+          {/* Code Github Login here */}
+          <GithubLogin resGithub={resGithub}/>
         </div>
       </div>
     </div>
