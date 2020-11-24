@@ -1,10 +1,10 @@
 import React from "react";
 // import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 // import GoogleLogin from "react-google-login";
-import { useHistory, Redirect } from "react-router-dom";
+// import { useHistory, Redirect } from "react-router-dom";
 
 // styles
-import "./Login.scss";
+import "./index.scss";
 
 // images
 // import GoogleIcon from "../../images/google_icon.svg";
@@ -12,7 +12,7 @@ import "./Login.scss";
 // import InputLogin from "./InputLogin";
 
 const Login = () => {
-  const history = useHistory();
+  // const history = useHistory();
 
   // const responseFacebook = async (res) => {
   //   if (res.status !== "unknown") {

@@ -1,0 +1,104 @@
+.fb-login-btn,
+.gg-login-btn {
+  width: 160px;
+  height: 46px;
+
+  font-size: 1.2rem;
+
+  margin: 10px 0;
+  line-height: 46px;
+
+  color: #000 !important;
+  background: transparent;
+  box-shadow: -2px -2px 4px #eee, 2px 2px 4px #adbfd5 !important;
+
+  border: none;
+  border-radius: 2px;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+
+    box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
+  }
+
+  span.icon {
+    display: inline-block;
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    background-size: cover;
+
+    margin-right: 10px;
+
+    vertical-align: sub;
+  }
+
+  span.text {
+    display: inline-block;
+
+    width: 70px;
+
+    margin-left: 5px;
+
+    text-align: left;
+  }
+}
+
+.LoginContainer {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+
+  .LoginWrapper {
+    height: 500px;
+    width: 750px;
+
+    display: flex;
+
+    background: #fff;
+    box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12);
+
+    border-radius: 4px;
+
+    .LeftSection {
+      width: 40%;
+
+      background-image: url("https://i.pinimg.com/564x/3c/e5/f6/3ce5f6f5ee9dba8cfb2445cbe94eae10.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .RightSection {
+      width: 60%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .LoginTitle {
+        font-size: 2.8rem;
+        font-weight: bolder;
+        line-height: 4rem;
+      }
+
+      .ButtonGroup {
+        display: flex;
+
+        margin: 1em 0;
+
+        button {
+          margin: 0 0.5em;
+        }
+      }
+    }
+  }
+}
