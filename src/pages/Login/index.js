@@ -1,24 +1,17 @@
 import React from "react";
-// import FacebookLogin from "react-facebook-login";
-// import GoogleLogin from "react-google-login";
-// import { useHistory, Redirect } from "react-router-dom";
+
 // Components
-import { FacebookLogin, GoogleLogin } from "../../provider/login";
+import LoginProver from "../../provider/login";
 
 // styles
 import "./index.scss";
-
-// images
-// import GoogleIcon from "../../images/google_icon.svg";
-// import FacebookIcon from "../../images/facebook_icon.svg";
-// import InputLogin from "./InputLogin";
 
 const Login = () => {
   // const history = useHistory();
 
   const handlerFacebookLogin = async (res) => {
+    console.log(res);
     if (res.status !== "unknown") {
-      console.log(res);
       alert("Logged in successfully!");
     }
   };
@@ -37,9 +30,9 @@ const Login = () => {
         <div className="RightSection">
           <h2 className="LoginTitle">Login With</h2>
           {/* Google */}
-          <GoogleLogin handlerLogin={handlerGoogleLogin} />
+          <LoginProver type="gg" handlerLogin={handlerGoogleLogin} />
           {/* Facebook */}
-          <FacebookLogin handlerLogin={handlerFacebookLogin} />
+          <LoginProver type="fb" handlerLogin={handlerFacebookLogin} />
           {/* Github */}
         </div>
       </div>

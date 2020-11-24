@@ -1,34 +1,40 @@
 // import
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import GoogleLogin from "react-google-login";
+
+// icon
+import GoogleIcon from "../images/google_icon.svg";
 import FacebookIcon from "../images/facebook_icon.svg";
-import GooglewLogin from "react-google-login";
-import { useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 
 // export
-export const GoogleLogin = (props) => {
-  const history = useHistory();
-
-  //if (localStorage.getItem("accessToken")) return <Redirect to="/" />;
+export const GoogleLoginProvider = (props) => {
   return (
-    <GooglewLogin
+    <GoogleLogin
       clientId="257182584784-k2kdfsbii17muh4rirar6m5nhm7mueuc.apps.googleusercontent.com"
-      render={(renderProps) => (
-        <div onClick={renderProps.onClick} disabled={renderProps.disabled}>
-          <span className="text">
-            <Button variant="contained">Google</Button>
-          </span>
-        </div>
-      )}
       buttonText="Login"
       onSuccess={props.handlerLogin}
       onFailure={props.handlerLogin}
       cookiePolicy={"single_host_origin"}
+      render={(renderProps) => (
+        <button
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}
+          className="gg-login-btn"
+        >
+          <span
+            className="icon"
+            style={{
+              backgroundImage: `url(${GoogleIcon})`,
+            }}
+          ></span>
+          <span className="text">Google</span>
+        </button>
+      )}
     />
   );
 };
 
-export const FacebBookLogin = (props) => {
+export const FacebookLoginProvider = (props) => {
   return (
     <FacebookLogin
       appId="187968122879403"
@@ -36,7 +42,7 @@ export const FacebBookLogin = (props) => {
       fields="name,email,picture"
       callback={props.handlerLogin}
       render={() => (
-        <button className="gg-login-btn">
+        <button className="fb-login-btn">
           <span
             className="icon"
             style={{
@@ -51,3 +57,16 @@ export const FacebBookLogin = (props) => {
 };
 
 export const GithubLogin = () => {};
+
+const LoginProver = ({ type, handlerLogin }) => {
+  switch (type) {
+    case "gg":
+    case "google":
+      return <GoogleLoginProvider handlerLogin={handlerLogin} />;
+    case "fb":
+    case "facebook":
+      return <FacebookLoginProvider handlerLogin={handlerLogin} />;
+  }
+};
+
+export default LoginProver;
