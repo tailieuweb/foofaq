@@ -7,7 +7,7 @@ import LoginProvider from "../../provider/login";
 import "./index.scss";
 
 const Login = () => {
-  // const history = useHistory();
+  //const history = useHistory();
 
   const handlerFacebookLogin = async (res) => {
     console.log(res);
@@ -23,6 +23,13 @@ const Login = () => {
     }
   };
 
+  const handlerGithubLogin = async (res) => {
+    console.log(res);
+    if(res.code){
+      alert("Logged in successfully!");
+    }
+  };
+
   return (
     <div className="LoginContainer">
       <div className="LoginWrapper">
@@ -34,6 +41,7 @@ const Login = () => {
           {/* Facebook */}
           <LoginProvider type="fb" handlerLogin={handlerFacebookLogin} />
           {/* Github */}
+          <LoginProvider type="git" handlerLogin={handlerGithubLogin} />
         </div>
       </div>
     </div>
