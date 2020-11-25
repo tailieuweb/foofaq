@@ -6,6 +6,7 @@ import GitHubLogin from 'react-github-login';
 // icon
 import GoogleIcon from "../images/google_icon.svg";
 import FacebookIcon from "../images/facebook_icon.svg";
+import GithubIcon from "../images/githubicon.svg";
 
 // export
 export const GoogleLoginProvider = (props) => {
@@ -65,8 +66,9 @@ export const GithubLoginProvider = (props) => {
   return(
     <GitHubLogin clientId="25b42705135af0bdf314"
       redirectUri=""
-      onSuccess={props.resGithub}
-      onFailure={props.resGithub}
+      scope="repo"
+      onSuccess={props.handlerLogin}
+      onFailure={props.handlerLogin}
       className="git-login-btn"
       buttonText="Github"
       />

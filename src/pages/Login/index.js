@@ -5,6 +5,7 @@ import LoginProvider from "../../provider/login";
 
 // styles
 import "./index.scss";
+import { computeHeadingLevel } from "@testing-library/react";
 
 const Login = () => {
   //const history = useHistory();
@@ -24,7 +25,10 @@ const Login = () => {
   };
 
   const handlerGithubLogin = async (res) => {
-    alert("Logged in successfully!");
+    console.log(res);
+    if(res.code){
+      alert("Logged in successfully!");
+    }
   };
 
   return (
