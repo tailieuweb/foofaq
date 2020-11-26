@@ -1,19 +1,23 @@
 .fb-login-btn,
-.gg-login-btn {
-  width: 160px;
-  height: 46px;
+.gg-login-btn, 
+.git-login-btn {
+  display: flex;
+  align-items: center;
 
   font-size: 1.2rem;
 
-  margin: 10px 0;
-  line-height: 46px;
-
-  color: #000 !important;
   background: transparent;
-  box-shadow: -2px -2px 4px #eee, 2px 2px 4px #adbfd5 !important;
-
+  outline: none;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
+
+  width: 180px;
+  height: 50px;
+
+  margin: 12px 0;
+  padding: 0.5rem;
+
+  line-height: 46px;
 
   cursor: pointer;
 
@@ -21,31 +25,63 @@
   &:focus {
     outline: none;
 
-    box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
+    // box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
   }
 
-  span.icon {
-    display: inline-block;
+  span.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
 
-    background-size: cover;
+    position: relative;
 
-    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 4px;
 
-    vertical-align: sub;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    
+    span.icon {
+      display: inline-block;
+      width: 1.3rem;
+      height: 1.3rem;
+
+      line-height: 1.3rem;
+  
+      background-size: cover;
+    }
   }
 
   span.text {
-    display: inline-block;
+    display: block;
 
     width: 70px;
 
-    margin-left: 5px;
-
-    text-align: left;
+    margin: 0 auto;
   }
+}
+
+.gg-login-btn {
+  color: #fff;
+
+  background-color: rgb(253,17,17);
+  box-shadow: 0 10px 20px rgba(253,17,17, 0.5) !important;
+}
+
+.fb-login-btn {
+  color: #fff;
+
+  background-color: rgb(0,53,244);
+  box-shadow: 0 10px 20px rgba(0,53,244, 0.5) !important;
+}
+
+.git-login-btn {
+  color: #fff;
+
+  background-color:#9312FF;
+  box-shadow: 0 10px 20px #d890f0 !important;
 }
 
 .LoginContainer {
@@ -59,7 +95,7 @@
 
   .LoginWrapper {
     height: 500px;
-    width: 750px;
+    width: 650px;
 
     display: flex;
 
