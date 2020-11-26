@@ -23,12 +23,14 @@ export const GoogleLoginProvider = (props) => {
           disabled={renderProps.disabled}
           className="gg-login-btn"
         >
-          <span
-            className="icon"
-            style={{
-              backgroundImage: `url(${GoogleIcon})`,
-            }}
-          ></span>
+          <span className="icon-wrapper">
+            <span
+              className="icon"
+              style={{
+                backgroundImage: `url(${GoogleIcon})`,
+              }}
+            ></span>
+          </span>
           <span className="text">Google</span>
         </button>
       )}
@@ -49,12 +51,14 @@ export const FacebookLoginProvider = (props) => {
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}
         >
-          <span
-            className="icon"
-            style={{
-              backgroundImage: `url(${FacebookIcon})`,
-            }}
-          ></span>
+          <span className="icon-wrapper">
+            <span
+              className="icon"
+              style={{
+                backgroundImage: `url(${FacebookIcon})`,
+              }}
+            ></span>
+          </span>
           <span className="text">Facebook</span>
         </button>
       )}
@@ -69,20 +73,17 @@ export const GithubLoginProvider = (props) => {
       scope="repo"
       onSuccess={props.handlerLogin}
       onFailure={props.handlerLogin}
+      className="git-login-btn"
     >
-      <button
-          className="git-login-btn"
-          // onClick={renderProps.onClick}
-          // disabled={renderProps.disabled}
-        >
-          <span
-            className="icon"
-            style={{
-              backgroundImage: `url(${GithubIcon})`,
-            }}
-          ></span>
-          <span className="text">Github</span>
-        </button>
+      <span className="icon-wrapper">
+        <span
+          className="icon"
+          style={{
+            backgroundImage: `url(${GithubIcon})`,
+          }}
+        ></span>
+      </span>
+      <span className="text">Github</span>
     </GitHubLogin>
     );
 };
