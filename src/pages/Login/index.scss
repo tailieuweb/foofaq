@@ -1,28 +1,29 @@
 
-.fb-login-btn,
-.gg-login-btn, .git-login-btn {
-  width: 160px;
-  height: 46px;
-
+button {
   font-size: 1.2rem;
 
-  margin: 10px 0;
-  line-height: 46px;
-
-  color: #000 !important;
+  outline: none;
   background: transparent;
-  box-shadow: -2px -2px 4px #eee, 2px 2px 4px #adbfd5 !important;
-
   border: none;
   border-radius: 2px;
 
-  cursor: pointer;
+  width: 160px;
+  height: 46px;
 
+  margin: 12px 0;
+  line-height: 46px;
+
+  cursor: pointer;
+}
+
+.fb-login-btn,
+.gg-login-btn, 
+.git-login-btn {
   &:hover,
   &:focus {
     outline: none;
 
-    box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
+    // box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
   }
 
   span.icon {
@@ -49,6 +50,30 @@
   }
 }
 
+.gg-login-btn {
+  color: #fff;
+
+  background-color: rgb(214,40,57);
+  box-shadow: 0 10px 20px rgba(214,40,57, 0.5) !important;
+}
+
+.fb-login-btn {
+  color: #fff;
+
+  background-color: rgb(14,70,154);
+  box-shadow: 0 10px 20px rgba(14,70,154, 0.5) !important;
+}
+
+.git-login-btn {
+  color: #000;
+
+  background-color: rgb(230,230,250);
+  box-shadow: 0 10px 20px rgba(230,230,250, 1) !important;
+
+  margin: 0;
+  padding: 0;
+}
+
 .LoginContainer {
   height: 100vh;
 
@@ -60,7 +85,7 @@
 
   .LoginWrapper {
     height: 500px;
-    width: 750px;
+    width: 650px;
 
     display: flex;
 

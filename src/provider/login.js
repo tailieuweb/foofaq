@@ -45,7 +45,7 @@ export const FacebookLoginProvider = (props) => {
       callback={props.handlerLogin}
       render={(renderProps) => (
         <button
-          className="gg-login-btn"
+          className="fb-login-btn"
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}
         >
@@ -69,9 +69,21 @@ export const GithubLoginProvider = (props) => {
       scope="repo"
       onSuccess={props.handlerLogin}
       onFailure={props.handlerLogin}
-      className="git-login-btn"
-      buttonText="Github"
-      />
+    >
+      <button
+          className="git-login-btn"
+          // onClick={renderProps.onClick}
+          // disabled={renderProps.disabled}
+        >
+          <span
+            className="icon"
+            style={{
+              backgroundImage: `url(${GithubIcon})`,
+            }}
+          ></span>
+          <span className="text">Github</span>
+        </button>
+    </GitHubLogin>
     );
 };
 
