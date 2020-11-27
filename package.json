@@ -1,7 +1,7 @@
 {
   "name": "foofaq",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend Api App Faq",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/tailieuweb/foofaq.git"
   },
-  "author": "",
+  "author": "Nhom G",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tailieuweb/foofaq/issues"
@@ -24,7 +24,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-promise-router": "^3.0.3",
+    "express-promise-router": "^4.0.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6"
