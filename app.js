@@ -1,12 +1,12 @@
 // Config env
 require('dotenv').config()
 
+//Package module
+const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require("morgan");
-const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();
 
 // Setup connect mongodb by mongoose
 mongoose
@@ -23,18 +23,21 @@ mongoose
 
 // app
 const app = express();
+const userRoute = require("./routes/user");
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
+
+
 app.get("/", (req, res, next) => {
 	return res.status(200).json({
 		message: "Server is OK!",
 	});
 });
-
+app.use("/users", userRoute);
 // Catch 404 Errors and forward them to error handler
 app.use((req, res, next) => {
 	const err = new Error("Not Found");
