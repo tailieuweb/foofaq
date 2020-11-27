@@ -69,6 +69,13 @@ const replaceUser = async (req, res, next) => {
 	return res.status(200).json({ success: true });
 };
 
+const signOut = async (req, res) => {
+	res.clearCookie('token');
+	res.json({
+		message: 'Signout success'
+	});
+};
+
 const secret = async (req, res, next) => {
 	return res.status(200).json({ resources: true });
 };
@@ -121,6 +128,7 @@ module.exports = {
 	newUser,
 	replaceUser,
 	secret,
+	signOut,
 	signIn,
 	signUp,
 	updateUser,

@@ -21,6 +21,8 @@ router.route('/auth/github/callback').get(passport.authenticate('github', { fail
 router.route('/signup').post(validateBody(schemas.authSignUpSchema), UserController.signUp)
 // Route login
 router.route('/signin').post(validateBody(schemas.authSignInSchema), passport.authenticate('local', { session: false }), UserController.signIn)
+// Route logout
+router.route('/signout').get(UserController.signOut)
 // Route secret
 router.route('/secret').get(passport.authenticate('jwt', { session: false }), UserController.secret)
 //Route get detail a user
