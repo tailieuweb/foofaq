@@ -15,37 +15,27 @@ const encodedToken = (userID) => {
 	);
 };
 
-const secret = async (req, res, next) => {
-	return res.status(200).json({ resources: true });
-};
-
-const signIn = async (req, res, next) => {
+const authGithub = async (req, res, next) => {
 	// Assign a token
 	const token = encodedToken(req.user._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(200).json({ success: true });
+	return res.status(200).json({ success: true, user: req.user });
 };
 
-const signUp = async (req, res, next) => {
-	const { firstName, lastName, email, password } = req.value.body;
-
-	// Check if there is a user with the same user
-	const foundUser = await User.findOne({ email });
-	if (foundUser)
-		return res
-			.status(403)
-			.json({ error: { message: "Email is already in use." } });
-
-	// Create a new user
-	const newUser = new User({ firstName, lastName, email, password });
-	newUser.save();
-
-	// Encode a token
-	const token = encodedToken(newUser._id);
+const authFacebook = async (req, res, next) => {
+	// Assign a token
+	const token = encodedToken(req.user._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(201).json({ success: true });
+	return res.status(200).json({ success: true, user: req.user });
+};
+
+const authGoogle = async (req, res, next) => {
+	// Assign a token
+	const token = encodedToken(req.user._id);
+	res.setHeader("Authorization", token);
+	return res.status(200).json({ success: true, user: req.user });
 };
 
 const getUser = async (req, res, next) => {
@@ -69,7 +59,7 @@ const newUser = async (req, res, next) => {
 };
 
 const replaceUser = async (req, res, next) => {
-	// Enforce new user to old user
+	// enforce new user to old user
 	const { userID } = req.value.params;
 
 	const newUser = req.value.body;
@@ -77,6 +67,39 @@ const replaceUser = async (req, res, next) => {
 	const result = await User.findByIdAndUpdate(userID, newUser);
 
 	return res.status(200).json({ success: true });
+};
+
+const secret = async (req, res, next) => {
+	return res.status(200).json({ resources: true });
+};
+
+const signIn = async (req, res, next) => {
+	// Assign a token
+	const token = encodedToken(req.user._id);
+
+	res.setHeader("Authorization", token);
+	return res.status(200).json({ success: true });
+};
+
+const signUp = async (req, res, next) => {
+	const { username, firstName, lastName, email, password } = req.value.body;
+
+	// Check if there is a user with the same user
+	const foundUser = await User.findOne({ email });
+	if (foundUser)
+		return res
+			.status(403)
+			.json({ error: { message: "Email is already in use." } });
+
+	// Create a new user
+	const newUser = new User({ username, firstName, lastName, email, password });
+	newUser.save();
+
+	// Encode a token
+	const token = encodedToken(newUser._id);
+
+	res.setHeader("Authorization", token);
+	return res.status(201).json({ success: true });
 };
 
 const updateUser = async (req, res, next) => {
@@ -90,12 +113,15 @@ const updateUser = async (req, res, next) => {
 };
 
 module.exports = {
-	secret,
-	signIn,
-	signUp,
+	authGithub,
+	authFacebook,
+	authGoogle,
 	getUser,
 	index,
 	newUser,
 	replaceUser,
+	secret,
+	signIn,
+	signUp,
 	updateUser,
 };

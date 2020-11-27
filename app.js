@@ -1,14 +1,13 @@
 // Config env
 require('dotenv').config()
 
-//Package module
-const bodyParser = require('body-parser');
-const express = require('express');
-const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const express = require("express");
 const morgan = require("morgan");
-const cors = require('cors');
+const mongoose = require("mongoose");
+const passport = require('passport')
 
-// Setup connect mongodb by mongoose
+// setup connect mongodb by mongoose
 mongoose
 	.connect(process.env.DATABASE_LOCAL, {
 		useCreateIndex: true,
@@ -21,23 +20,26 @@ mongoose
 		console.error(`❌ Connect database is failed with error which is ${error}`)
 	);
 
-// app
 const app = express();
+
+
 const userRoute = require("./routes/user");
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize()); //passport.initialize() middleware
+
 // Routes
+app.use("/users", userRoute);
 
-
+// Routes
 app.get("/", (req, res, next) => {
 	return res.status(200).json({
 		message: "Server is OK!",
 	});
 });
-app.use("/users", userRoute);
+
 // Catch 404 Errors and forward them to error handler
 app.use((req, res, next) => {
 	const err = new Error("Not Found");

@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const UserSchema = new Schema({
 	username: {
 		type: String,
+
 	},
 	firstName: {
 		type: String,
@@ -20,6 +21,23 @@ const UserSchema = new Schema({
 	},
 	password: {
 		type: String,
+	},
+	authGoogleID: {
+		type: String,
+		default: null,
+	},
+	authFacebookID: {
+		type: String,
+		default: null,
+	},
+	authGithubID: {
+		type: String,
+		default: null,
+	},
+	authType: {
+		type: String,
+		enum: ["local", "google", "facebook", "github"],
+		default: "local",
 	},
 	image: {
 		type: String,
