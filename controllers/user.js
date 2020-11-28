@@ -20,7 +20,7 @@ const authGithub = async (req, res, next) => {
 	const token = encodedToken(req.user._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(200).json({ success: true, user: req.user });
+	return res.status(200).json({ success: true });
 };
 
 const authFacebook = async (req, res, next) => {
@@ -28,14 +28,14 @@ const authFacebook = async (req, res, next) => {
 	const token = encodedToken(req.user._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(200).json({ success: true, user: req.user });
+	return res.status(200).json({ success: true });
 };
 
 const authGoogle = async (req, res, next) => {
 	// Assign a token
 	const token = encodedToken(req.user._id);
 	res.setHeader("Authorization", token);
-	return res.status(200).json({ success: true, user: req.user });
+	return res.status(200).json({ success: true });
 };
 
 const getUser = async (req, res, next) => {
