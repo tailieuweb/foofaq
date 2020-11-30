@@ -12,6 +12,7 @@ import "./index.scss";
 
 import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
+import QuestionApproval from "./pages/QuestionApproval";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -25,7 +26,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/login" component={Login}></Route>
-          <Route path="/" component={QuestionList}></Route>
+          <Route exact path="/" component={QuestionList}></Route>
+          <Route path="/" component={QuestionApproval}></Route>
         </Switch>
       </Router>
     </Provider>
