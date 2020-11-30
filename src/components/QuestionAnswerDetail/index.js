@@ -2,7 +2,7 @@
 import React from "react";
 
 //import style
-import "./QuestionAnswerDetail.scss";
+import "./index.scss";
 
 //material
 import Paper from "@material-ui/core/Paper";

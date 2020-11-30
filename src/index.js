@@ -14,7 +14,8 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 import AnswerForm from "./components/AnswerForm";
 import QuestionForm from "./components/QuestionForm";
-import AnswerDetail from "./components/QuestionAnswerDetail"
+import AnswerDetail from "./components/QuestionAnswerDetail";
+import QuestionDetail from "./pages/QuestionDetail";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -29,7 +30,7 @@ ReactDOM.render(
         <Switch>
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
-          <Route path="/" component={AnswerDetail}></Route>
+          <Route path="/" component={QuestionDetail}></Route>
         </Switch>
       </Router>
     </Provider>

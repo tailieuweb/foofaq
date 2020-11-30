@@ -2,7 +2,7 @@
 import React from "react";
 
 //import style
-import "./QuestionDetail.scss";
+import "./index.scss";
 
 //material
 import Paper from "@material-ui/core/Paper";
@@ -10,8 +10,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 //components
-import QuestionAnswerDetail from "../../components/QuestionAnswerDetail/QuestionAnswerDetail";
-import QuestionInfoDetail from "../../components/QuestionInfoDetail/QuestionInfoDetail";
+import QuestionAnswerDetail from "../../components/QuestionAnswerDetail";
+import QuestionInfoDetail from "../../components/QuestionInfoDetail";
 import AnswerForm from "../../components/AnswerForm";
 
 const QuestionDetail = () => {
