@@ -12,7 +12,7 @@ import Tab from "@material-ui/core/Tab";
 //components
 import QuestionAnswerDetail from "../../components/QuestionAnswerDetail/QuestionAnswerDetail";
 import QuestionInfoDetail from "../../components/QuestionInfoDetail/QuestionInfoDetail";
-import AnswerForm from "../../components/AnswerForm/AnswerForm";
+import AnswerForm from "../../components/AnswerForm";
 
 const QuestionDetail = () => {
   const [value, setValue] = React.useState(0);
