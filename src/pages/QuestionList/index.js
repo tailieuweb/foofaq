@@ -1,18 +1,26 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// import axios from "axios";
+
+import QuestionCard from "../../components/QuestionCard";
 
 const QuestionList = () => {
-  const history = useHistory();
-  function handleClick(e) {
-    localStorage.removeItem("accessToken");
-    history.replace("/login");
-  }
+  // const [userInfo, setUserInfo] = useState(null);
+  // const [userMessages, setUserMessages] = useState(null);
+  // const [userSetting, setUserSetting] = useState(null);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const user = await axios.get("http://localhost:8080/user/1");
+  //     console.log(user.data);
+  //     setUserInfo(user.data.user);
+  //     setUserMessages(user.data.messages);
+  //     setUserSetting(user.data.userSetting);
+  //   })();
+  // }, []);
+
   return (
     <div>
-      <h1>Hello World</h1>
-      <button
-        onClick={handleClick}
-      >Logout</button>
+      <QuestionCard />
     </div>
   );
 };

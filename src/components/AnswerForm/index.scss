@@ -1,0 +1,22 @@
+.answerForm{
+    text-align: center;
+    border: solid 1px #CED4DA;
+    border-radius: 15px;
+    padding: 35px 20px;
+    margin: 50px;
+    position: relative;
+    .answerText{
+        position: absolute;
+        top: -5%;
+        left: 1%;
+    }
+    .aroundEditorAnswer{
+        height: 180px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .aroundBtnAnswer{
+        text-align: right;
+    }
+    
+}
