@@ -12,7 +12,7 @@ import GithubIcon from "../images/githubicon.svg";
 export const GoogleLoginProvider = (props) => {
   return (
     <GoogleLogin
-      clientId="257182584784-k2kdfsbii17muh4rirar6m5nhm7mueuc.apps.googleusercontent.com"
+      clientId="" //TODO: write your key here
       buttonText="Login"
       onSuccess={props.handlerLogin}
       onFailure={props.handlerLogin}
@@ -41,7 +41,7 @@ export const GoogleLoginProvider = (props) => {
 export const FacebookLoginProvider = (props) => {
   return (
     <FacebookLogin
-      appId="187968122879403"
+      appId="" //TODO: write your key here
       textButton="FACEBOOK"
       fields="name,email,picture"
       callback={props.handlerLogin}
@@ -68,8 +68,9 @@ export const FacebookLoginProvider = (props) => {
 
 export const GithubLoginProvider = (props) => {
   return(
-    <GitHubLogin clientId="25b42705135af0bdf314"
-      redirectUri=""
+    <GitHubLogin 
+      clientId="" //TODO: write your key here
+      redirectUri="" 
       scope="repo"
       onSuccess={props.handlerLogin}
       onFailure={props.handlerLogin}
