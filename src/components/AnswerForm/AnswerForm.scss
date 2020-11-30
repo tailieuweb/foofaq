@@ -1,0 +1,29 @@
+.Add-Answers {
+  width: 100%;
+  position: relative;
+  .Editor {
+    width: 80.5%;
+    position: relative;
+    margin-left: 17.3%;
+    margin-top: 3%;
+    padding: 3%;
+    border: 1px solid;
+    border-radius: 10px;
+    display: block;
+
+    .Your-Answer {
+      position: relative;
+      background-color: #d5e8d4;
+      text-align: center;
+      font-size: 30px;
+      h3 {
+        padding-top: 5px;
+      }
+    }
+  }
+  .Btn-Send {
+    position: absolute;
+    right: 4%;
+    bottom: 5px;
+  }
+}

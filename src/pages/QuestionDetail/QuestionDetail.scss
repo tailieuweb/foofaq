@@ -1,0 +1,93 @@
+.Nav {
+  flex-grow: 1;
+}
+.Question,
+.Answers {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  .Box-Question,
+  .Box-Answers {
+    margin: 10px;
+    padding: 3%;
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    border-radius: 10px;
+
+    .Question-Title,
+    .Answer-Title {
+      font-size: 25px;
+    }
+    .Question-Detail,
+    .Answer-Detail {
+      display: block;
+      text-align: left;
+    }
+    .User-Info {
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      margin: 10px;
+      .Avatar {
+        width: 100%;
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .Votes {
+    border: 0.5px solid black;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+    height: 75px;
+    width: 90px;
+    .Votes-Results {
+      float: left;
+      text-align: center;
+      width: 49%;
+      height: 75px;
+      padding: 35% 0px;
+    }
+    .GroupBtnVote {
+      width: 40%;
+      .Btn-Votes {
+        background-color: whitesmoke;
+        color: #000;
+        margin: 0px;
+        height: 50%;
+      }
+    }
+  }
+}
+.Answers {
+  .Box-Answers {
+    margin-top: 5%;
+    border: 1px solid;
+
+    .Answers-Group {
+      position: absolute;
+      top: 15%;
+      left: 21%;
+      width: 10%;
+      height: 30px;
+      background-color: #d5e8d4;
+      text-align: center;
+      border-radius: 10px;
+      h3 {
+        padding-top: 5px;
+      }
+    }
+    .Answer-Title {
+      padding: 10px;
+    }
+    .Answer-Detail {
+      padding: 10px;
+    }
+  }
+}

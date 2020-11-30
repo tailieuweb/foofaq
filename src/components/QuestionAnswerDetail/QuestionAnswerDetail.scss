@@ -1,0 +1,77 @@
+.Answers {
+  max-width: 100%;
+  position: relative;
+
+  .Box-Answers {
+    margin: 10px;
+    padding: 3%;
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    border-radius: 10px;
+    .Answer-Info {
+      padding: 2%;
+      margin-bottom: 2%;
+    }
+    .Answers-Group {
+      position: absolute;
+      top: 1%;
+      left: 21%;
+      width: 10%;
+      height: 30px;
+      background-color: #d5e8d4;
+      text-align: center;
+      border-radius: 10px;
+      h3 {
+        padding-top: 5px;
+      }
+    }
+    .Answer-Title {
+      font-size: 25px;
+      padding: 10px;
+    }
+    .Answer-Detail {
+      display: block;
+      padding: 10px;
+      text-align: left;
+    }
+    .User-Info {
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      margin: 10px;
+      .Avatar {
+        width: 100%;
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .Votes {
+    border: 0.5px solid black;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+    height: 75px;
+    width: 90px;
+    .Votes-Results {
+      float: left;
+      text-align: center;
+      width: 49%;
+      height: 75px;
+      padding: 35% 0px;
+    }
+    .GroupBtnVote {
+      width: 40%;
+      .Btn-Votes {
+        background-color: whitesmoke;
+        color: #000;
+        margin: 0px;
+        height: 50%;
+      }
+    }
+  }
+}
