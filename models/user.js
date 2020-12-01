@@ -14,12 +14,18 @@ const UserSchema = new Schema({
 	},
 	username: {
 		type: String,
-
 	},
 	email: {
 		type: String,
-		unique: true,
 		lowercase: true,
+	},
+	firstName: {
+		type: String,
+		default : null
+	},
+	lastName: {
+		type: String,
+		default : null
 	},
 	authType: {
 		type: String,
