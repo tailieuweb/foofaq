@@ -33,6 +33,7 @@ ReactDOM.render(
           <Route path="/" component={QuestionList}></Route> */}
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/" component={QuestionList}></Route>
+          {/* <Route path="/detail" component={QuestionDetail}></Route> */}
           {/* <Route path="/approval" component={QuestionApproval}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/category" component={CategoryTag}></Route>
