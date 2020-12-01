@@ -48,13 +48,12 @@ const replaceUser = async (req, res, next) => {
 	const {
 		userID
 	} = req.params;
-
 	const newUser = req.body;
 
 	const result = await User.findByIdAndUpdate(userID, newUser);
 
 	return res.status(200).json({
-		success: true,
+		success: true, user: result
 	});
 };
 
@@ -114,13 +113,11 @@ const updateUser = async (req, res, next) => {
 	const {
 		userID
 	} = req.params;
-
 	const newUser = req.body;
 
-	const result = await User.findByIdAndUpdate(userID, newUser);
-
-	return res.status(200).json({
-		success: true,
+	const result = await User.findByIdAndUpdate(userID, newUser)
+	return await res.status(200).json({
+		success: true, user: result
 	});
 };
 
