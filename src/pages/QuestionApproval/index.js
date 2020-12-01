@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { Route } from "react-router-dom";
 import QuestionApprovalCard from "../../components/QuestionApprovalCard";
-import { Route, Switch } from "react-router-dom";
-//import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
+import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
 const index = () => {
   return (
     <div>
-      <Switch>
-        <Route path="/approval" component={QuestionApprovalCard}></Route>
-
-        {/* <Route
-          path="/detailapproval"
-          component={QuestionApprovalDetail}
-        ></Route> */}
-      </Switch>
+      <QuestionApprovalCard></QuestionApprovalCard>
+      <Route path="/detailapproval" component={QuestionApprovalDetail}></Route>
     </div>
   );
 };
