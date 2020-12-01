@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import moment from "moment";
 
 // components
 import Grid from "@material-ui/core/Grid";
@@ -63,8 +64,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionCard = () => {
+const QuestionCard = ({ question }) => {
   const classes = useStyles();
+
+  const {
+    title,
+    content,
+    point,
+    views,
+    createdAt,
+    categories,
+    answers,
+  } = question;
 
   return (
     <div className={classes.root}>
@@ -75,7 +86,7 @@ const QuestionCard = () => {
               <ArrowDropUpIcon />
             </IconButton>
             <Typography gutterBottom variant="h4">
-              0
+              {point}
             </Typography>
             <IconButton aria-label="downvote">
               <ArrowDropDownIcon />
@@ -86,18 +97,18 @@ const QuestionCard = () => {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Link gutterBottom variant="h5">
-                  How to use classes to “control dreams”?
+                  {title}
                 </Link>
                 <Typography variant="body2" color="textSecondary">
-                  Background I have been playing around with Deep Dream and
-                  Inceptionism, using the Caffe framework to visualize layers of
-                  GoogLeNet, an architecture built for the Imagenet project, a
-                  large visual...
+                  {content.length <= 150
+                    ? content
+                    : content.slice(0, 150) + "..."}
                 </Typography>
                 {/* categories */}
                 <div className={classes.chips}>
-                  <Chip label="JavaScript" clickable />
-                  <Chip label="ReactJS" clickable />
+                  {categories.map((category) => (
+                    <Chip key={category.id} label={category.name} clickable />
+                  ))}
                 </div>
                 {/* views and answer */}
                 <Grid container spacing={2} className={classes.footerCard}>
@@ -109,7 +120,7 @@ const QuestionCard = () => {
                       startIcon={<VisibilityIcon />}
                       className={classes.buttonView}
                     >
-                      69k Views
+                      {views} Views
                     </Button>
                     <Button
                       variant="outlined"
@@ -117,7 +128,7 @@ const QuestionCard = () => {
                       startIcon={<QuestionAnswerIcon />}
                       className={classes.buttonView}
                     >
-                      96k Answer
+                      {answers.length} Answer
                     </Button>
                   </Grid>
                   {/* user */}
@@ -131,7 +142,7 @@ const QuestionCard = () => {
                       </ListItemAvatar>
                       <ListItemText
                         primary="MaiaVictor"
-                        secondary={"asked Mar 7 '18 at 22:44"}
+                        secondary={`asked ${moment(createdAt).fromNow()}`}
                       />
                     </ListItem>
                   </Grid>
@@ -146,4 +157,3 @@ const QuestionCard = () => {
 };
 
 export default QuestionCard;
-
