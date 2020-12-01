@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import LoginProvider from "../../provider/login";
+import LoginProvider from "../../provider/login-sample";
 
 // styles
 import "./index.scss";
@@ -25,7 +25,7 @@ const Login = () => {
 
   const handlerGithubLogin = async (res) => {
     console.log(res);
-    if(res.code){
+    if (res.code) {
       alert("Logged in successfully!");
     }
   };
