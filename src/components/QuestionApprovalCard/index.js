@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-
+import moment from "moment";
 import HeaderAsideNavbar from "../HeaderAsideNavbar";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
@@ -17,8 +17,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Link from "../../common/CustomLink";
-
-import Pagination from "@material-ui/lab/Pagination";
 
 //
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
@@ -180,7 +178,10 @@ const Index = (props) => {
                       </div>
                       <div clasName="col-md-2  col-12">
                         <div className="user-question">
-                          <div className="question-time"> Asked 5 days ago</div>
+                          <div className="question-time">
+                            {" "}
+                            {`asked ${moment(question.createdAt).fromNow()}`}
+                          </div>
                           <img
                             className="avt"
                             src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
@@ -236,7 +237,6 @@ const Index = (props) => {
           </div>
         </div>
       </div>
-      <Pagination count={10} variant="outlined" shape="rounded" />
     </div>
   );
 };
