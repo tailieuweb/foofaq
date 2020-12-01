@@ -52,6 +52,7 @@ const QuestionList = () => {
             }
           })
         );
+        return null;
       });
     }
   }, [questionsRaw]);
