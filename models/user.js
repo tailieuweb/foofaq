@@ -14,12 +14,18 @@ const UserSchema = new Schema({
 	},
 	username: {
 		type: String,
-
 	},
 	email: {
 		type: String,
-		unique: true,
 		lowercase: true,
+	},
+	firstName: {
+		type: String,
+		default : null
+	},
+	lastName: {
+		type: String,
+		default : null
 	},
 	authType: {
 		type: String,
@@ -33,6 +39,7 @@ const UserSchema = new Schema({
 
 
 //Hash password
+
 // UserSchema.pre("save", async function (next) {
 // 	try {
 // 		if (this.authType !== "local") next();
@@ -50,7 +57,7 @@ const UserSchema = new Schema({
 // 	}
 // });
 
-//Compare password with hashed password
+
 // UserSchema.methods.isValidPassword = async function (newPassword) {
 // 	try {
 // 		return await bcrypt.compare(newPassword, this.password);
