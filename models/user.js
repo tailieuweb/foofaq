@@ -31,10 +31,7 @@ const UserSchema = new Schema({
 	},
 });
 
-<<<<<<< HEAD
 //Hash password
-=======
->>>>>>> server/TueNH
 // UserSchema.pre("save", async function (next) {
 // 	try {
 // 		if (this.authType !== "local") next();
@@ -52,10 +49,8 @@ const UserSchema = new Schema({
 // 	}
 // });
 
-<<<<<<< HEAD
+
 //Compare password with hashed password
-=======
->>>>>>> server/TueNH
 // UserSchema.methods.isValidPassword = async function (newPassword) {
 // 	try {
 // 		return await bcrypt.compare(newPassword, this.password);
