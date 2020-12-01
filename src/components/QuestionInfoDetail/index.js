@@ -1,12 +1,13 @@
 //import react
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { Editor } from "react-draft-wysiwyg";
 
 //import style
 import "./index.scss";
+
+//components
+import QuestionForm from "../../components/QuestionForm";
 
 //material
 import Grid from "@material-ui/core/Grid";
@@ -16,7 +17,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
 
 //material icon
 import EditIcon from "@material-ui/icons/Edit";
@@ -24,7 +24,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import SaveIcon from "@material-ui/icons/Save";
+// import SaveIcon from "@material-ui/icons/Save";
 
 //images
 import PersonAvatar from "../../images/Person-Avatar.png";
@@ -61,41 +61,51 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
     marginRight: "10px",
   },
+  views: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: "0.5rem 0.5rem 0 0",
+    },
+  },
 }));
 
 const QuestionInfoDetail = () => {
   //use state
   const [editMode, setEditMode] = React.useState(true);
-  const [editorState, setEditorState] = React.useState(
-    EditorState.createEmpty()
-  );
-
-  //Editor function
-  function onEditorStateChange(editorState) {
-    setEditorState({
-      editorState,
-    });
-  }
 
   // change Mode function
   function changeMode() {
     setEditMode(!editMode);
   }
 
+  //User Info Component
+  function UserInfo() {
+    return (
+      <div>
+        <Paper className="Box-Question" elevation={3}>
+          <div className="User-Info">
+            <img alt="avatar" src={PersonAvatar} />
+            name: <br />
+            Date:
+            <Typography variant="body2" color="textSecondary" component="p">
+              September 14, 2016
+            </Typography>{" "}
+            <br />
+            Votes: <br />
+          </div>
+        </Paper>
+      </div>
+    );
+  }
+
   // Question Info component
   function QuestionInfo() {
     return (
       <div>
-        <Grid className="Question" container spacing={3}>
+        <Grid className="Question" container>
           <Grid item xs={2}>
-            <Paper className="Box-Question" elevation={3}>
-              <div className="User-Info">
-                <img alt="avatar" src={PersonAvatar} />
-                name: <br />
-                Date: <br />
-                Votes: <br />
-              </div>
-            </Paper>
+            <UserInfo />
           </Grid>
           <Grid item xs={10}>
             {/* Question Details */}
@@ -172,28 +182,23 @@ const QuestionInfoDetail = () => {
   function EditMode() {
     return (
       <div>
-        <Grid className="Question" container spacing={3}>
+        <Grid className="Question" container>
           <Grid item xs={2}>
-            <div className="User-Info"></div>
+            <UserInfo />
           </Grid>
           <Grid item xs={10}>
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
-              <Editor
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={onEditorStateChange}
-              />
+              <QuestionForm />
+              {/* <Button
+                variant="outlined"
+                color="primary"
+                className={classes.buttonSave}
+                onClick={changeMode}
+              >
+                Save <SaveIcon />{" "}
+              </Button> */}
             </Paper>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.buttonSave}
-              onClick={changeMode}
-            >
-              Save <SaveIcon />{" "}
-            </Button>
           </Grid>
         </Grid>
       </div>
