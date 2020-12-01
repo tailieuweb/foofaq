@@ -24,6 +24,7 @@ const app = express();
 
 
 const userRoute = require("./routes/user");
+const questionRoute = require("./routes/question");
 
 // Middlewares
 app.use(morgan("dev"));
