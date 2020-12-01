@@ -1,10 +1,12 @@
-import React from "react";
-import QuestionApproval from "../../components/QuestionApprovalCard";
-
+import React, { useState } from "react";
+import QuestionApprovalCard from "../../components/QuestionApprovalCard";
+import { Route } from "react-router-dom";
+import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
 const index = () => {
   return (
     <div>
-      <QuestionApproval></QuestionApproval>
+      <Route path="/approval" component={QuestionApprovalCard}></Route>
+      <Route path="/approvaldetail" component={QuestionApprovalDetail}></Route>
     </div>
   );
 };

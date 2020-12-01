@@ -15,6 +15,7 @@ import QuestionList from "./pages/QuestionList";
 import AnswerForm from "./components/AnswerForm";
 import QuestionForm from "./components/QuestionForm";
 import AnswerDetail from "./components/QuestionAnswerDetail"
+import QuestionApproval from "./pages/QuestionApproval";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -30,6 +31,9 @@ ReactDOM.render(
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
           <Route path="/" component={AnswerDetail}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/" component={QuestionList}></Route>
+          <Route path="/" component={QuestionApproval}></Route>
         </Switch>
       </Router>
     </Provider>
