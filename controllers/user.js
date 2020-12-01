@@ -51,7 +51,7 @@ const index = async (req, res, next) => {
 };
 
 const newUser = (req, res, next) => {
-	const newUser = new User(req.body);
+	const newUser = new User(req.value.body);
 	newUser.save();
 	return res.status(201).json({ user: newUser });
 };
@@ -78,44 +78,33 @@ const secret = async (req, res, next) => {
 	return res.status(200).json({ resources: true });
 };
 
-// const signIn = async (req, res, next) => {
-// 	// Assign a token
-// 	const token = encodedToken(req.user._id);
-
-// 	res.setHeader("Authorization", token);
-// 	return res.status(200).json({ success: true });
-// };
-
 const signIn = async (req, res, next) => {
+	// Assign a token
+	const token = encodedToken(req.user._id);
 
+	res.setHeader("Authorization", token);
+	return res.status(200).json({ success: true });
+};
 
-	const { authID, authType } = req.body;
+const signUp = async (req, res, next) => {
+	const { username, email } = req.value.body;
+
 	// Check if there is a user with the same user
-	const foundUser = await User.findOne({
-		authID: authID,
-		authType: authType,
-	});
-
-	if (foundUser) {
-		console.log("login");
-		let token = encodedToken(foundUser._id);
-		res.setHeader("Authorization", token);
+	const foundUser = await User.findOne({ email });
+	if (foundUser)
 		return res
-			.status(200)
-			.json({ success: true, user: foundUser, token : token });
-		next()
-	}
+			.status(403)
+			.json({ error: { message: "Email is already in use." } });
 
 	// Create a new user
-	console.log("regist");
-	const newUser = new User(req.body);
+	const newUser = new User({ username, firstName, lastName, email, password });
 	newUser.save();
 
 	// Encode a token
-	let token = encodedToken(newUser._id);
+	const token = encodedToken(newUser._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(201).json({ success: true,user : newUser, token : token});
+	return res.status(201).json({ success: true });
 };
 
 const updateUser = async (req, res, next) => {
@@ -129,7 +118,7 @@ const updateUser = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-	const { userID } = req.params
+	const { userID } = req.value.params
 	//Get a deck deck
 	const user = await User.findById(userID)
 	await user.remove()
@@ -147,7 +136,7 @@ module.exports = {
 	secret,
 	signOut,
 	signIn,
-	
+	signUp,
 	updateUser,
 	deleteUser
 };

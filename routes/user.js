@@ -19,7 +19,7 @@ router.patch('/:userID', UserController.updateUser)
 router.delete('/:userID', UserController.deleteUser)
 
 // Route register
-// router.post('/signup', UserController.signUp)
+router.post('/signup', UserController.signUp)
 // Route login
 router.post('/signin', UserController.signIn)
 // Route logout

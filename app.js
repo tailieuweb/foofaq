@@ -28,6 +28,7 @@ const userRoute = require("./routes/user");
 // Middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // app.use(passport.initialize()); //passport.initialize() middleware
