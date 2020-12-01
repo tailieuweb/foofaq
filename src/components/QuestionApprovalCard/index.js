@@ -113,7 +113,7 @@ const Index = (props) => {
               <div className="row">
                 <div className="col-md-10 col-12">
                   <div className="question-content">
-                    <Link id="abs" to="/approvaldetail">
+                    <Link id="abs" to="/detailapproval">
                       <h5 className="question-title">Quetion 1</h5>
                     </Link>
                     <p className="question-des">

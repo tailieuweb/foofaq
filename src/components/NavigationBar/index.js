@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.scss";
 //icons
 import { AccountCircle } from "@material-ui/icons";
 import SearchIcon from "@material-ui/icons/Search";
@@ -177,9 +176,9 @@ export default function NavigationBar() {
   );
 
   return (
-      //not yet inactive
-    <div className={classes.grow} >
-      <AppBar position="static" >
+    //not yet inactive
+    <div className={classes.grow}>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"

@@ -12,12 +12,11 @@ import "./index.scss";
 
 import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
-import AnswerForm from "./components/AnswerForm";
-import QuestionForm from "./components/QuestionForm";
-import AnswerDetail from "./components/QuestionAnswerDetail";
 import QuestionApproval from "./pages/QuestionApproval";
-import AnswerDetail from "./components/QuestionAnswerDetail";
-import QuestionDetail from "./pages/QuestionDetail";
+// import QuestionDetail from "./pages/QuestionDetail";
+// import CategoryTag from "./components/CategoryCard";
+// import NavigationBar from "./components/NavigationBar";
+// import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -32,11 +31,16 @@ ReactDOM.render(
         <Switch>
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
-          <Route path="/" component={AnswerDetail}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/" component={QuestionList}></Route>
-          <Route path="/" component={QuestionApproval}></Route>
-          <Route path="/" component={QuestionDetail}></Route>
+          {/* <Route path="/approval" component={QuestionApproval}></Route>
+          <Route path="/detail" component={QuestionDetail}></Route>
+          <Route path="/category" component={CategoryTag}></Route>
+          <Route path="/navigation" component={NavigationBar}></Route>
+          <Route
+            path="/detailapproval"
+            component={QuestionApprovalDetail}
+          ></Route> */}
         </Switch>
       </Router>
     </Provider>
