@@ -6,25 +6,19 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const passport = require('passport')
-const { MongoDB } = require('./ORM/MongoDB')
-// var a = new MongoDB();
-// a.urlDB("process.env.DATABASE_LOCAL");
-// a.init()
-// const a = new MongoDB();
-// const mongo = new MongoDB("dsfsd");
 
-// setup connect mongodb by mongoose
-// mongoose
-// 	.connect(process.env.DATABASE_LOCAL, {
-// 		useCreateIndex: true,
-// 		useNewUrlParser: true,
-// 		useUnifiedTopology: true,
-// 		useFindAndModify: true
-// 	})
-// 	.then(() => console.log("✅ Connected database from mongodb."))
-// 	.catch((error) =>
-// 		console.error(`❌ Connect database is failed with error which is ${error}`)
-// 	);
+//setup connect mongodb by mongoose
+mongoose
+	.connect(process.env.DATABASE_LOCAL, {
+		useCreateIndex: true,
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: true
+	})
+	.then(() => console.log("✅ Connected database from mongodb."))
+	.catch((error) =>
+		console.error(`❌ Connect database is failed with error which is ${error}`)
+	);
 
 const app = express();
 

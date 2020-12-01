@@ -50,8 +50,8 @@ const schemas = {
 
   userSchema: Joi.object().keys({
     username: Joi.string().min(2).required(),
-    firstName: Joi.string().min(2).required(),
-    lastName: Joi.string().min(2).required(),
+    // firstName: Joi.string().min(2).required(),
+    // lastName: Joi.string().min(2).required(),
     email: Joi.string().email().required()
   }),
 

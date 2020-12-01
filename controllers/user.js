@@ -119,6 +119,14 @@ const updateUser = async (req, res, next) => {
 	return res.status(200).json({ success: true });
 };
 
+const deleteUser = async (req, res, next) => {
+	const { userID } = req.value.params
+	//Get a deck deck
+	const user = await User.findById(userID)
+	await user.remove()
+	return res.status(200).json({ success: true })
+}
+
 module.exports = {
 	authGithub,
 	authFacebook,
@@ -132,4 +140,5 @@ module.exports = {
 	signIn,
 	signUp,
 	updateUser,
+	deleteUser
 };

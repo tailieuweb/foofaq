@@ -31,5 +31,7 @@ router.route('/:userID').get(validateParam(schemas.idSchema, 'userID'), UserCont
 router.route('/:userID').put(validateParam(schemas.idSchema, 'userID'), validateBody(schemas.userSchema), UserController.replaceUser)
 //Route update user
 router.route('/:userID').patch(validateParam(schemas.idSchema, 'userID'), validateBody(schemas.userOptionalSchema), UserController.updateUser)
+//Route delete user
+router.route('/:userID').delete(validateParam(schemas.idSchema, 'userID'), UserController.deleteUser)
 
 module.exports = router
