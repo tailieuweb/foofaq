@@ -1,50 +1,66 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import axios from 'axios';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.scss";
 
-class QuestionForm extends Component {
-    state = {
-      editorState: EditorState.createEmpty(),
+function QuestionForm(){
+  const [title, setTitle] = useState("");
+  const [tag, setTag] = useState("");
+  // const [editorState = EditorState.createEmpty(), setEditorState] = useState([]);
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      questionPost();
     }
-  
-    onEditorStateChange = (editorState) => {
-      this.setState({
-        editorState,
-      });
-    };
-    render() {
-      const { editorState } = this.state;
+    const questionPost = () => {
+      axios.post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", { title: title, tag: tag });
+    }
+    // const onEditorStateChange = () => {
+    //   setEditorState(editorState);
+    // };
       return (
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="questionForm">
-                  <div class="form-group">
-                    <label for="questionTitle"><b>Tiêu đề</b></label>
-                    <input type="text" class="form-control" id="questionTitle" aria-describedby="questionTitle" placeholder="Nhập tiêu đề câu hỏi..."/>
+                  <div className="form-group">
+                    <label htmlFor="questionTitle"><b>Tiêu đề</b></label>
+                    <input type="text" 
+                    className="form-control" 
+                    id="questionTitle" 
+                    aria-describedby="questionTitle" 
+                    placeholder="Nhập tiêu đề câu hỏi..."
+                    value={title}
+                    onChange={(e) => {setTitle(e.target.value)}}
+                    />
                   </div>
-                  <label for="aroundEditorQuestion"><b>Nội dung</b></label>
+                  <label htmlFor="aroundEditorQuestion"><b>Nội dung</b></label>
                   <div className="aroundEditorQuestion" id="aroundEditorQuestion">
                     <Editor
-                      editorState={editorState}
+                      // editorState={editorState}
                       wrapperClassName="demo-wrapper"
                       editorClassName="demo-editor"
-                      onEditorStateChange={this.onEditorStateChange}
+                      // onEditorStateChange={onEditorStateChange}
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="questionTag"><b>Thẻ</b></label>
-                      <input type="text" class="form-control" id="questionTag" aria-describedby="questionTag" placeholder="Nhập thẻ liên quan đến câu hỏi..."/>
+                    <div className="form-group">
+                      <label htmlFor="questionTag"><b>Thẻ</b></label>
+                      <input type="text" 
+                      className="form-control" 
+                      id="questionTag" 
+                      aria-describedby="questionTag" 
+                      placeholder="Nhập thẻ liên quan đến câu hỏi..."
+                      value={tag}
+                      onChange={(e) => {setTag(e.target.value)}}
+                      />
                     </div>
                     <div className="aroundBtnQuestion">
-                      <button type="button" className="btn btn-success">Đăng</button>
+                      <input type="submit" className="btn btn-success" value="Đăng"/>
                     </div>
                 </div>
             </form>
       );
     }
-  }
 
 export default QuestionForm;
 
