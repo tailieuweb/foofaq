@@ -50,11 +50,9 @@ const index = async (req, res, next) => {
 	return res.status(200).json({ users });
 };
 
-const newUser = async (req, res, next) => {
+const newUser = (req, res, next) => {
 	const newUser = new User(req.value.body);
-
-	await newUser.save();
-
+	newUser.save();
 	return res.status(201).json({ user: newUser });
 };
 
@@ -89,7 +87,7 @@ const signIn = async (req, res, next) => {
 };
 
 const signUp = async (req, res, next) => {
-	const { username, firstName, lastName, email, password } = req.value.body;
+	const { username, email } = req.value.body;
 
 	// Check if there is a user with the same user
 	const foundUser = await User.findOne({ email });
