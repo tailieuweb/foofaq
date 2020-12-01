@@ -1,11 +1,11 @@
 // Config env
-require('dotenv').config()
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const passport = require('passport')
+const passport = require("passport");
 
 //setup connect mongodb by mongoose
 mongoose
@@ -13,7 +13,7 @@ mongoose
 		useCreateIndex: true,
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		useFindAndModify: true
+		useFindAndModify: true,
 	})
 	.then(() => console.log("✅ Connected database from mongodb."))
 	.catch((error) =>
@@ -22,17 +22,12 @@ mongoose
 
 const app = express();
 
-
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// app.use(passport.initialize()); //passport.initialize() middleware
 
 // Routes
 app.use("/users", userRoute);

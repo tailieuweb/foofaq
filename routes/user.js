@@ -18,13 +18,15 @@ router.patch('/:userID', UserController.updateUser)
 //Route delete user
 router.delete('/:userID', UserController.deleteUser)
 
-// Route register
-router.post('/signup', UserController.signUp)
 // Route login
 router.post('/signin', UserController.signIn)
 // Route logout
-router.get('/signout', UserController.signOut)
+router.post('/signout', UserController.signOut)
 // Route secret
-router.get('/secret', UserController.secret)
+router.get('/secret/:userID', UserController.requireSignin, (req, res) => {
+	res.json({
+		message: 'you have access to secret page'
+	});
+});
 
 module.exports = router
