@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import HeaderAsideNavbar from "../HeaderAsideNavbar";
+import React, { useState, useEffect } from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
+import moment from "moment";
+import HeaderAsideNavbar from "../HeaderAsideNavbar";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
 import "./index.scss";
+
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import { green } from "@material-ui/core/colors";
@@ -11,24 +17,113 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Link from "../../common/CustomLink";
+//
+import Pagination from "@material-ui/lab/Pagination";
+
+//
+import { DialogDecline } from "../Dialog";
+
+//
+import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+  buttonr: {
+    borderColor: green[500],
+    marginRight: "20px",
+    outline: "none",
+  },
+  pag: {
+    marginBottom: "50px",
+    width: "100%",
+  },
+  pagechill: {
+    marginLeft: "30%",
+  },
+  checkIcon: {
+    color: green[500],
+    fontSize: 30,
+  },
+  buttonc: {
+    borderColor: "red",
+    outline: "none",
+  },
+  closeIcon: {
+    fontSize: 30,
+    fontWeight: "bold",
+    cursor: "pointer",
+    color: "red",
+  },
+}));
 
 const Index = (props) => {
-  const [open, setOpen] = React.useState(false);
-  const [decline, setDecline] = React.useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
-  const handleClickOpenApproval = () => {
-    setOpen(true);
+  const [filterQuestions, setFilterQuestions] = useState([]);
+  const [page, setPage] = useState(1);
+  const [renderQuestions, setRenderQuestions] = useState([]);
+//  const [keyword, setKeyword] = useState("");
+
+  const [decline, setDecline] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [count, setCount] = useState(2);
+  let status = true;
+  let title, content;
+  //pagination
+
+  useEffect(() => {
+    setRenderQuestions(filterQuestions.slice((page - 1) * 5, page * 5));
+  }, [filterQuestions, page]);
+
+  useEffect(() => {
+    setFilterQuestions(questions);
+  }, [questions]);
+  console.log(questions);
+  const handleChange = (event, value) => {
+    setPage(value);
   };
-  const handleClickOpenDecline = () => {
+  console.log(page);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      setOpen(false);
+    }
+  };
+
+  //decline
+  const handleClickOpenDecline = (id) => {
+    declineQuestion(id);
+    setDecline(false);
+  };
+
+  const handleClickDecline = () => {
     setDecline(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
   const handleCloseDecline = () => {
     setDecline(false);
   };
+  //approve
+  const handleClickOpenApproval = (id) => {
+    approveQuestion(id, status);
+    setOpen(true);
+  };
+  //get question
+  let id = 1;
+  useEffect(() => {
+    (async () => {
+      const questionData = await getQuestions(page);
+      setQuestions(questionData);
+    })();
+  }, []);
+  console.log("hehe" + questions.length);
 
   return (
     <div>
@@ -46,7 +141,7 @@ const Index = (props) => {
             <div className="user">
               <img
                 className="avt"
-                src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
+                src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
                 alt="user"
               />
               <div className="adminname">Admin 1</div>
@@ -72,117 +167,118 @@ const Index = (props) => {
                 </div>
               </div>
             </div>
+            {renderQuestions.map((question) => {
+              if (question.status === false) {
+                title = question.title;
+                content = question.content;
 
-            <div className="question-list">
-              <div className="app-dec">
-                <Button
-                  variant="outlined"
-                  style={{
-                    borderColor: green[500],
-                    marginRight: "20px",
-                    outline: "none",
-                  }}
-                  onClick={handleClickOpenApproval}
-                >
-                  <CheckIcon
-                    style={{
-                      color: green[500],
-                      fontSize: 30,
-                    }}
-                  ></CheckIcon>
-                </Button>
-                <Button
-                  variant="outlined"
-                  style={{
-                    borderColor: "red",
-                    outline: "none",
-                  }}
-                  onClick={handleClickOpenDecline}
-                >
-                  <CloseIcon
-                    style={{
-                      fontSize: 30,
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                      color: "red",
-                    }}
-                    color="action"
-                  ></CloseIcon>
-                </Button>
-              </div>
-              <div className="row">
-                <div className="col-md-10 col-12">
-                  <div className="question-content">
-                    <Link id="abs" to="/detailapproval">
-                      <h5 className="question-title">Quetion 1</h5>
-                    </Link>
-                    <p className="question-des">
-                      {" "}
-                      Vũ Trọng Phụng (1912-1939) là một nhà văn, nhà báo nổi
-                      tiếng của Việt Nam vào đầu thế kỷ 20. Tuy thời gian cầm
-                      bút rất ngắn ngủi, với tác phẩm đầu tay là truyện ngắn
-                      Chống nạng lên đường đăng trên Ngọ báo vào năm 1930, ông
-                      đã để lại một kho tác phẩm đáng kinh ngạc: hơn 30 truyện
-                      ngắn, 9 tập tiểu thuyết, 9 tập phóng sự, 7 vở kịch, cùng
-                      một bản dịch vở kịch từ tiếng Pháp, một số bài viết phê
-                      bình, .{" "}
-                    </p>
+                return (
+                  <div className="question-list">
+                    <div className="app-dec">
+                      <Button
+                        variant="outlined"
+                        className={classes.buttonr}
+                        onClick={() => {
+                          handleClickOpenApproval(question.id);
+                        }}
+                      >
+                        <CheckIcon className={classes.checkIcon}></CheckIcon>
+                      </Button>
+                      <Button
+                        className={classes.buttonc}
+                        variant="outlined"
+                        onClick={() => {
+                          handleClickDecline();
+                        }}
+                      >
+                        <CloseIcon
+                          className={classes.closeIcon}
+                          color="action"
+                        ></CloseIcon>
+                      </Button>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-10 col-12">
+                        <div className="question-content">
+                          <Link id="abs" to={"/detailapproval/" + question.id}>
+                            <h5 className="question-title">{title}</h5>
+                          </Link>
+                          <p className="question-des">{content}</p>
+                        </div>
+                      </div>
+                      <div clasName="col-md-2  col-12">
+                        <div className="user-question">
+                          <div className="question-time">
+                            {" "}
+                            {`asked ${moment(question.createdAt).fromNow()}`}
+                          </div>
+                          <img
+                            className="avt"
+                            src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+                            alt="user"
+                          />
+                          <div className="username">User 1</div>
+                        </div>
+                      </div>
+                    </div>
+                    <Dialog
+                      open={decline}
+                      onClose={handleCloseDecline}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {"Are you sure to decline ?"}
+                      </DialogTitle>
+
+                      <DialogActions>
+                        <Button
+                          onClick={() => {
+                            handleCloseDecline();
+                          }}
+                          color="primary"
+                        >
+                          Disagree
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            handleClickOpenDecline(question.id);
+                          }}
+                          color="primary"
+                          autoFocus
+                        >
+                          Decline
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                    <Snackbar
+                      open={open}
+                      autoHideDuration={200}
+                      onClose={handleClose}
+                    >
+                      <Alert onClose={handleClose} severity="success">
+                        This is a success message!
+                      </Alert>
+                    </Snackbar>
                   </div>
-                </div>
-                <div clasName="col-md-2  col-12">
-                  <div className="user-question">
-                    <div className="question-time"> Asked 5 days ago</div>
-                    <img
-                      className="avt"
-                      src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
-                      alt="user"
-                    />
-                    <div className="username">User 1</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                );
+              }
+            })}
           </div>
         </div>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure to approve ?"}
-        </DialogTitle>
-
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Approve
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog
-        open={decline}
-        onClose={handleCloseDecline}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure to decline ?"}
-        </DialogTitle>
-
-        <DialogActions>
-          <Button onClick={handleCloseDecline} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleCloseDecline} color="primary" autoFocus>
-            Decline
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div className={classes.pag}>
+        <Pagination
+          className={classes.pagechill}
+          count={count}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChange}
+          page={page}
+          siblingCount={1}
+          boundaryCount={1}
+        />
+      </div>{" "}
     </div>
   );
 };
