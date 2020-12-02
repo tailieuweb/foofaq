@@ -8,6 +8,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 // components
 import QuestionCard from "../../components/QuestionCard";
+import AdvancedFilter from "../../components/AdvancedFilter";
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -59,6 +60,7 @@ const QuestionList = () => {
 
   return (
     <Container maxWidth="lg">
+      <AdvancedFilter />
       {questions ? (
         questions.map((question) => (
           <QuestionCard
