@@ -15,9 +15,9 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 // import QuestionDetail from "./pages/QuestionDetail";
 // import CategoryTag from "./components/CategoryCard";
-// import NavigationBar from "./components/NavigationBar";
+import TabNav from "./components/NavigationBar/NavTag";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
-
+import QuestionCategoryList from "./pages/QuestionCategoryList"
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -42,6 +42,8 @@ ReactDOM.render(
             path="/detailapproval"
             component={QuestionApprovalDetail}
           ></Route> */}
+          <Route path="/navigation" component={TabNav}></Route>
+          <Route path="/category" component={QuestionCategoryList}></Route>
         </Switch>
       </Router>
     </Provider>
