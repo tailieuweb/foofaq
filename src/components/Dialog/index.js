@@ -11,7 +11,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 export const DialogDecline = (props) => {
   return (
     <Dialog
-      open={decline}
+      open={props.decline}
       onClose={props.handleCloseDecline}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -24,42 +24,46 @@ export const DialogDecline = (props) => {
         <Button onClick={props.handleCloseDecline} color="primary">
           Disagree
         </Button>
-        <Button onClick={props.handleCloseDecline} color="primary" autoFocus>
+        <Button onClick={props.handleClickOpenDecline} color="primary" autoFocus>
           Decline
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
-export const DialogDecline = (props) => {
-  return (
-    <Dialog
-      open={feedback}
-      onClose={handleFeedBack}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogTitle id="form-dialog-title">
-        Decline post an give feedback
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>You can feedback here.</DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Feedback"
-          type="text"
-          fullWidth
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleFeedBack} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleFeedBack} color="primary">
-          Feedback
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+
+
+
+
+// export const DialogFeedback = (props) => {
+//   return (
+//     <Dialog
+//       open={feedback}
+//       onClose={handleFeedBack}
+//       aria-labelledby="form-dialog-title"
+//     >
+//       <DialogTitle id="form-dialog-title">
+//         Decline post an give feedback
+//       </DialogTitle>
+//       <DialogContent>
+//         <DialogContentText>You can feedback here.</DialogContentText>
+//         <TextField
+//           autoFocus
+//           margin="dense"
+//           id="name"
+//           label="Feedback"
+//           type="text"
+//           fullWidth
+//         />
+//       </DialogContent>
+//       <DialogActions>
+//         <Button onClick={handleFeedBack} color="primary">
+//           Cancel
+//         </Button>
+//         <Button onClick={handleFeedBack} color="primary">
+//           Feedback
+//         </Button>
+//       </DialogActions>
+//     </Dialog>
+//   );
+// };

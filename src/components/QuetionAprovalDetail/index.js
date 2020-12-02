@@ -11,11 +11,15 @@ import TextField from "@material-ui/core/TextField";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import "./index.scss";
-import { questionApprovalDetail } from "../../helpers";
+
+//api
+import { questionApprovalDetail, approveQuestion } from "../../helpers";
+
 import { useParams } from "react-router-dom";
-function Index(props) {
-  const [decline, setDecline] = React.useState(false);
-  const [feedback, setFeedback] = React.useState(false);
+import { DialogDecline } from "../Dialog";
+function Index() {
+  const [decline, setDecline] = useState(false);
+  const [feedback, setFeedback] = useState(false);
   const [question, setQuestion] = useState("");
   const { id } = useParams();
 
@@ -25,11 +29,15 @@ function Index(props) {
       setQuestion(questionData);
     })();
   }, []);
-
+  console.log(decline);
   const handleClickOpenDecline = () => {
     setDecline(true);
   };
-  const handleClickOpenApproval = () => {};
+  let status = true;
+
+  const handleClickOpenApproval = () => {
+    approveQuestion(id, status);
+  };
   const handleClickOpenFeedBack = () => {
     setFeedback(true);
   };
@@ -122,6 +130,9 @@ function Index(props) {
           </div>
         </div>
       </div>
+      <DialogDecline
+        handleCloseDecline={(handleCloseDecline, decline)}
+      ></DialogDecline>
     </div>
   );
 }

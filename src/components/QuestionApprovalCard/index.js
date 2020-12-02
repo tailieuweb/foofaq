@@ -17,6 +17,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Link from "../../common/CustomLink";
+//
+import Pagination from "@material-ui/lab/Pagination";
+
+//
+import { DialogDecline } from "../Dialog";
 
 //
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
@@ -31,28 +36,74 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  buttonr: {
+    borderColor: green[500],
+    marginRight: "20px",
+    outline: "none",
+  },
+  pag: {
+    marginBottom: "50px",
+    width: "100%",
+  },
+  pagechill: {
+    marginLeft: "30%",
+  },
+  checkIcon: {
+    color: green[500],
+    fontSize: 30,
+  },
+  buttonc: {
+    borderColor: "red",
+    outline: "none",
+  },
+  closeIcon: {
+    fontSize: 30,
+    fontWeight: "bold",
+    cursor: "pointer",
+    color: "red",
+  },
 }));
 
 const Index = (props) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
+  const [filterQuestions, setFilterQuestions] = useState([]);
+  const [page, setPage] = useState(1);
+  const [renderQuestions, setRenderQuestions] = useState([]);
+//  const [keyword, setKeyword] = useState("");
 
+  const [decline, setDecline] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [count, setCount] = useState(2);
+  let status = true;
+  let title, content;
+  //pagination
+
+  useEffect(() => {
+    setRenderQuestions(filterQuestions.slice((page - 1) * 5, page * 5));
+  }, [filterQuestions, page]);
+
+  useEffect(() => {
+    setFilterQuestions(questions);
+  }, [questions]);
+  console.log(questions);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+  console.log(page);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       setOpen(false);
     }
   };
-  let title, content;
-  let status = true;
 
-  const [decline, setDecline] = useState(false);
-  const [questions, setQuestions] = useState([]);
   //decline
   const handleClickOpenDecline = (id) => {
     declineQuestion(id);
     setDecline(false);
   };
+
   const handleClickDecline = () => {
     setDecline(true);
   };
@@ -68,15 +119,12 @@ const Index = (props) => {
   let id = 1;
   useEffect(() => {
     (async () => {
-      const questionData = await getQuestions();
+      const questionData = await getQuestions(page);
       setQuestions(questionData);
     })();
   }, []);
-  questions.map((q) => {
-    if (status === true) {
-      console.log(q);
-    }
-  });
+  console.log("hehe" + questions.length);
+
   return (
     <div>
       <div className="row">
@@ -119,50 +167,32 @@ const Index = (props) => {
                 </div>
               </div>
             </div>
-            {questions.map((question) => {
+            {renderQuestions.map((question) => {
               if (question.status === false) {
                 title = question.title;
                 content = question.content;
-                console.log("hehehe" + question);
 
                 return (
                   <div className="question-list">
                     <div className="app-dec">
                       <Button
                         variant="outlined"
-                        style={{
-                          borderColor: green[500],
-                          marginRight: "20px",
-                          outline: "none",
-                        }}
+                        className={classes.buttonr}
                         onClick={() => {
                           handleClickOpenApproval(question.id);
                         }}
                       >
-                        <CheckIcon
-                          style={{
-                            color: green[500],
-                            fontSize: 30,
-                          }}
-                        ></CheckIcon>
+                        <CheckIcon className={classes.checkIcon}></CheckIcon>
                       </Button>
                       <Button
+                        className={classes.buttonc}
                         variant="outlined"
-                        style={{
-                          borderColor: "red",
-                          outline: "none",
-                        }}
                         onClick={() => {
                           handleClickDecline();
                         }}
                       >
                         <CloseIcon
-                          style={{
-                            fontSize: 30,
-                            fontWeight: "bold",
-                            cursor: "pointer",
-                            color: "red",
-                          }}
+                          className={classes.closeIcon}
                           color="action"
                         ></CloseIcon>
                       </Button>
@@ -237,6 +267,18 @@ const Index = (props) => {
           </div>
         </div>
       </div>
+      <div className={classes.pag}>
+        <Pagination
+          className={classes.pagechill}
+          count={count}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChange}
+          page={page}
+          siblingCount={1}
+          boundaryCount={1}
+        />
+      </div>{" "}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API_URL = "https://5fc48ee536bc790016343a0b.mockapi.io/";
-export const getQuestions = async () => {
-  const question = await axios.get(API_URL + `questions?page=1&limit=5`);
+export const getQuestions = async (page) => {
+  const question = await axios.get(API_URL + `questions?&status=false`);
   return question.data;
 };
 export const approveQuestion = async (id, status) => {
