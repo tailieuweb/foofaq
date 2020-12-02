@@ -6,18 +6,34 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const MySQL = require('./orm/database');
+
+// var options = `mongodb+srv://tranbinhan:tranbinhan@cluster0.0v1l9.mongodb.net/quanly?retryWrites=true`
+
+// const a = new MongoDB(options)
+// a.connect()
+
+var options = {
+	host: 'localhost',
+	user: 'root',
+	password: '',
+	database: 'shop'
+}
+const b = new MySQL(options)
+b.connect()
+
 
 //setup connect mongodb by mongoose
-mongoose
-	.connect(process.env.DATABASE_LOCAL, {
-		useCreateIndex: true,
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
-	.then(() => console.log("✅ Connected database from mongodb."))
-	.catch((error) =>
-		console.error(`❌ Connect database is failed with error which is ${error}`)
-	);
+// mongoose
+// 	.connect(process.env.DATABASE_LOCAL, {
+// 		useCreateIndex: true,
+// 		useNewUrlParser: true,
+// 		useUnifiedTopology: true,
+// 	})
+// 	.then(() => console.log("✅ Connected database from mongodb."))
+// 	.catch((error) =>
+// 		console.error(`❌ Connect database is failed with error which is ${error}`)
+// 	);
 
 const app = express();
 
