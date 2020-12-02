@@ -30,6 +30,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/users", userRoute);
+app.use("/question", questionRoute);
 
 // Routes
 app.get("/", (req, res, next) => {
