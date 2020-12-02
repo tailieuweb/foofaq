@@ -28,6 +28,14 @@ const UserSchema = new Schema({
 		type: String,
 		default: null
 	},
+	firstName: {
+		type: String,
+		default : null
+	},
+	lastName: {
+		type: String,
+		default : null
+	},
 	authType: {
 		type: String,
 		enum: ["google", "facebook", "github"],
@@ -37,6 +45,9 @@ const UserSchema = new Schema({
 		default: null
 	},
 });
+
+
+//Hash password
 
 // UserSchema.pre("save", async function (next) {
 // 	try {

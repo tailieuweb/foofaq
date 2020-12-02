@@ -70,16 +70,33 @@ const secret = async (req, res, next) => {
 	});
 };
 
+// const signIn = async (req, res, next) => {
+// 	// Assign a token
+// 	const token = encodedToken(req.user._id);
+
+// 	res.setHeader("Authorization", token);
+// 	return res.status(200).json({ success: true });
+// };
+
 const signIn = async (req, res, next) => {
-	const {
-		authID,
-		authType
-	} = req.body;
+
+
+	const { authID, authType } = req.body;
 	// Check if there is a user with the same user
 	const foundUser = await User.findOne({
 		authID: authID,
 		authType: authType,
 	});
+
+	if (foundUser) {
+		console.log("login");
+		let token = encodedToken(foundUser._id);
+		res.setHeader("Authorization", token);
+		return res
+			.status(200)
+			.json({ success: true, user: foundUser, token : token });
+		next()
+	}
 
 	if (foundUser) {
 		console.log("login");
@@ -96,17 +113,13 @@ const signIn = async (req, res, next) => {
 	// Create a new user
 	console.log("regist");
 	const newUser = new User(req.body);
-	await newUser.save();
+	newUser.save();
 
 	// Encode a token
 	let token = encodedToken(newUser._id);
 
 	res.setHeader("Authorization", token);
-	return res.status(201).json({
-		success: true,
-		user: newUser,
-		token: token,
-	});
+	return res.status(201).json({ success: true,user : newUser, token : token});
 };
 
 const updateUser = async (req, res, next) => {
@@ -122,9 +135,7 @@ const updateUser = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-	const {
-		userID
-	} = req.params;
+	const { userID } = req.params
 	//Get a deck deck
 	const user = await User.findById(userID);
 	await user.remove();
@@ -145,6 +156,7 @@ module.exports = {
 	secret,
 	signOut,
 	signIn,
+	
 	updateUser,
 	deleteUser,
 	requireSignin
