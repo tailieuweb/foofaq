@@ -105,12 +105,19 @@ function QuestionForm({ id }) {
 
   //Truong hop id co gia tri => PUT
   else{
-    
+    handleSubmit = (event) => {
+      event.preventDefault();
+      questionPut();
+    }
   }
   
   async function getQuestion(){
     const response = await axios.get('https://5fc48ee536bc790016343a0b.mockapi.io/questions/12');
     return response.data;
+  }
+
+  const a = () => {
+    setTitle("aaaaaaaaaaaaaaaaaaaaa");
   }
 
   const questionPut = () => {
@@ -120,15 +127,15 @@ function QuestionForm({ id }) {
         console.log("Successfully");
         setTitle("");
         setTag("");
-        console.log("POST Successfully");
-        setNofi("POST Successfully");
+        console.log("PUT Successfully");
+        setNofi("PUT Successfully");
         setOpen(true);
       })
       .catch(function (error) {
         // handle error
         console.log(error);
         console.log(error);
-        setNofi("POST Failed");
+        setNofi("PUT Failed");
         setOpen(true);
       });
   }
