@@ -6,7 +6,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const { MongoDB, MySQL } = require('./orm/database');
+const { Database } = require('./orm/database');
 
 
 
@@ -18,14 +18,14 @@ const { MongoDB, MySQL } = require('./orm/database');
 // 	password: '',
 // 	database: '<enter yourdatabase here>'
 // }
-// const DB = new MySQL(optionsMySQL);
-// DB.connect();
+// const DB = new Database(optionsMySQL)
+// DB.connect("mysql")
 //Example connect MySQL end
 
 //Example connect MongoDB start
-const optionsMongoDB = 'mongodb://localhost:27017/faq'
-const DB = new MongoDB(optionsMongoDB)
-DB.connect()
+// const optionsMongoDB = 'mongodb://localhost:27017/faq'
+// const DB = new Database(optionsMongoDB)
+// DB.connect("mongo")
 //Example connect MongoDB end
 
 //setup connect mongodb by mongoose
