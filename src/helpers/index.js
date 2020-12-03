@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const API_URL = "https://5fc48ee536bc790016343a0b.mockapi.io/";
-export const getQuestions = async (page, perPage) => {
+export const getQuestions = async (page, perPage,keyword) => {
   const question = await axios.get(
-    API_URL + `questions?page=${page}&limit=${perPage}&status=false`
+    API_URL +
+      `questions?search=${keyword}&page=${page}&limit=${perPage}&status=false`
   );
   return question.data;
 };

@@ -3,20 +3,13 @@ import HeaderAsideNavbar from "../HeaderAsideNavbar";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import TextField from "@material-ui/core/TextField";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import "./index.scss";
 
 //api
 import { questionApprovalDetail, approveQuestion } from "../../helpers";
 
 import { useParams } from "react-router-dom";
-import { DialogDecline } from "../Dialog";
+import { DialogDecline, DialogFeedback } from "../Dialog";
 function Index() {
   const [decline, setDecline] = useState(false);
   const [feedback, setFeedback] = useState(false);
@@ -134,6 +127,10 @@ function Index() {
         handleCloseDecline={handleCloseDecline}
         decline={decline}
       ></DialogDecline>
+      <DialogFeedback
+      feedback={feedback}
+      handleFeedBack={handleFeedBack}
+      ></DialogFeedback>
     </div>
   );
 }
