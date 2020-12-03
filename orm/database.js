@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const mysql = require('mysql');
 
-module.exports = class MongoDB {
+class MongoDB {
 	constructor(options) {
 		this.options = options;
 	}
@@ -20,7 +20,7 @@ module.exports = class MongoDB {
 	}
 }
 
-module.exports = class MySQL {
+class MySQL {
 	constructor(options) {
 		this.options = options;
 	}
@@ -33,5 +33,9 @@ module.exports = class MySQL {
 			console.log("✅ Connected database from mysql.")
 		})
 	}
+}
+module.exports = {
+	MongoDB : MongoDB,
+	MySQL : MySQL
 }
 
