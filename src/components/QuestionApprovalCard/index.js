@@ -24,7 +24,12 @@ import Pagination from "@material-ui/lab/Pagination";
 import { DialogDecline } from "../Dialog";
 
 //
-import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
+import {
+  allQuestion,
+  getQuestions,
+  approveQuestion,
+  declineQuestion,
+} from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -68,30 +73,20 @@ const Index = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const [filterQuestions, setFilterQuestions] = useState([]);
   const [page, setPage] = useState(1);
-  const [renderQuestions, setRenderQuestions] = useState([]);
-//  const [keyword, setKeyword] = useState("");
 
   const [decline, setDecline] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [count, setCount] = useState(2);
+  const [all, setAll] = useState([]);
+
+  let count = Number(all.length) / 5;
+  let perPage = 5;
   let status = true;
   let title, content;
-  //pagination
 
-  useEffect(() => {
-    setRenderQuestions(filterQuestions.slice((page - 1) * 5, page * 5));
-  }, [filterQuestions, page]);
-
-  useEffect(() => {
-    setFilterQuestions(questions);
-  }, [questions]);
-  console.log(questions);
   const handleChange = (event, value) => {
     setPage(value);
   };
-  console.log(page);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       setOpen(false);
@@ -100,12 +95,12 @@ const Index = (props) => {
 
   //decline
   const handleClickOpenDecline = (id) => {
-    declineQuestion(id);
     setDecline(false);
   };
 
-  const handleClickDecline = () => {
-    setDecline(true);
+  const handleClickDecline = (id) => {
+    declineQuestion(id);
+    console.log(id);
   };
   const handleCloseDecline = () => {
     setDecline(false);
@@ -116,14 +111,19 @@ const Index = (props) => {
     setOpen(true);
   };
   //get question
-  let id = 1;
   useEffect(() => {
     (async () => {
-      const questionData = await getQuestions(page);
+      const questionData = await getQuestions(page, perPage);
       setQuestions(questionData);
     })();
-  }, []);
-  console.log("hehe" + questions.length);
+  }, [page, perPage]);
+
+  useEffect(() => {
+    (async () => {
+      const questionData = await allQuestion();
+      setAll(questionData);
+    })();
+  }, [page, perPage]);
 
   return (
     <div>
@@ -167,7 +167,7 @@ const Index = (props) => {
                 </div>
               </div>
             </div>
-            {renderQuestions.map((question) => {
+            {questions.map((question) => {
               if (question.status === false) {
                 title = question.title;
                 content = question.content;
@@ -188,7 +188,7 @@ const Index = (props) => {
                         className={classes.buttonc}
                         variant="outlined"
                         onClick={() => {
-                          handleClickDecline();
+                          handleClickDecline(question.id);
                         }}
                       >
                         <CloseIcon
@@ -196,6 +196,37 @@ const Index = (props) => {
                           color="action"
                         ></CloseIcon>
                       </Button>
+
+                      <Dialog
+                        open={decline}
+                        onClose={handleCloseDecline}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogTitle id="alert-dialog-title">
+                          {"Are you sure to decline ?"}
+                        </DialogTitle>
+
+                        <DialogActions>
+                          <Button
+                            onClick={() => {
+                              handleCloseDecline();
+                            }}
+                            color="primary"
+                          >
+                            Disagree
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              handleClickOpenDecline(question.id);
+                            }}
+                            color="primary"
+                            autoFocus
+                          >
+                            Decline
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </div>
                     <div className="row">
                       <div className="col-md-10 col-12">
@@ -221,36 +252,7 @@ const Index = (props) => {
                         </div>
                       </div>
                     </div>
-                    <Dialog
-                      open={decline}
-                      onClose={handleCloseDecline}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-                      <DialogTitle id="alert-dialog-title">
-                        {"Are you sure to decline ?"}
-                      </DialogTitle>
 
-                      <DialogActions>
-                        <Button
-                          onClick={() => {
-                            handleCloseDecline();
-                          }}
-                          color="primary"
-                        >
-                          Disagree
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            handleClickOpenDecline(question.id);
-                          }}
-                          color="primary"
-                          autoFocus
-                        >
-                          Decline
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
                     <Snackbar
                       open={open}
                       autoHideDuration={200}

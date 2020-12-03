@@ -131,7 +131,8 @@ function Index() {
         </div>
       </div>
       <DialogDecline
-        handleCloseDecline={(handleCloseDecline, decline)}
+        handleCloseDecline={handleCloseDecline}
+        decline={decline}
       ></DialogDecline>
     </div>
   );
