@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
-import draftToMarkdown from 'draftjs-to-markdown';
 import { Editor } from 'react-draft-wysiwyg';
 import axios from 'axios';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -67,7 +66,6 @@ function QuestionForm({ id }) {
   };
 
   const [title, setTitle] = useState("");
-
   const [tag, setTag] = useState("");
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
