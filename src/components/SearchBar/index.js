@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
 import "./index.scss";
+import axios from "axios";
+import CategoryCard from "../CategoryCard";
+import { Grid, makeStyles } from "@material-ui/core";
 
-function Index(props) {
+function SearchBar(props) {
   return (
     <div>
       <div className="search-container">
-        <input type="text" id="search-bar" placeholder="Search..." />
-        <button className="btn-search">
-          {" "}
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search..."
+          onChange={props.handleChangeSearch}
+        />
+        <button onClick={props.handleSearch} className="btn-search">
           <SearchIcon className="search-icon"></SearchIcon>
         </button>
       </div>
@@ -17,4 +23,4 @@ function Index(props) {
   );
 }
 
-export default Index;
+export default SearchBar;

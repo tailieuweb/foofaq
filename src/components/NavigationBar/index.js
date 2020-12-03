@@ -192,7 +192,7 @@ export default function NavigationBar() {
             Q&A
           </Typography>
 
-          <Button variant="text" color="inherit" disabled={true}>
+          <Button variant="text" color="inherit">
             Home
           </Button>
           <Button variant="text" color="inherit">
