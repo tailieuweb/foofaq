@@ -79,6 +79,10 @@ const Index = (props) => {
   const [questions, setQuestions] = useState([]);
   const [all, setAll] = useState([]);
 
+  //search
+  const [keyword, setKeyword] = useState("");
+  const [key, setKey] = useState("");
+
   let count = Number(all.length) / 5;
   let perPage = 5;
   let status = true;
@@ -113,17 +117,26 @@ const Index = (props) => {
   //get question
   useEffect(() => {
     (async () => {
-      const questionData = await getQuestions(page, perPage);
+      const questionData = await getQuestions(page, perPage, key);
       setQuestions(questionData);
     })();
-  }, [page, perPage]);
+  }, [page, perPage, key]);
+
+  // searchBar
+
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
 
   useEffect(() => {
     (async () => {
       const questionData = await allQuestion();
       setAll(questionData);
     })();
-  }, [page, perPage]);
+  }, []);
 
   return (
     <div>
@@ -135,7 +148,10 @@ const Index = (props) => {
         <div className="col-md-10">
           {" "}
           <div className="searchBar">
-            <SearchBar></SearchBar>
+            <SearchBar
+              handleChangeSearch={handleChangeSearch}
+              handleSearch={handleSearch}
+            />{" "}
           </div>
           <div className="infoadmin">
             <div className="user">
@@ -163,6 +179,15 @@ const Index = (props) => {
                     <Button className="btn-fill" variant="contained">
                       Oldest Fist
                     </Button>
+                    <Link to="/form">
+                      <Button
+                        className="btn-fill"
+                        variant="contained"
+                        color="primary"
+                      >
+                        Add Question
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -196,7 +221,9 @@ const Index = (props) => {
                           color="action"
                         ></CloseIcon>
                       </Button>
-
+                      <Link to={`/form/${question.id}`}>
+                        <Button variant="outlined"> Edit </Button>
+                      </Link>
                       <Dialog
                         open={decline}
                         onClose={handleCloseDecline}
