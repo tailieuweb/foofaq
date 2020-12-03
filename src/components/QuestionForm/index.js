@@ -57,7 +57,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-function QuestionForm({ type, question }) {
+function QuestionForm({ id }) {
 
   const [open, setOpen] = React.useState(false);
 
@@ -74,18 +74,43 @@ function QuestionForm({ type, question }) {
   let content = draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
 
   const [nofi, setNofi] = useState("");
-  
-  const handleSubmit = (event) => {
+  let handleSubmit = (event) => {
     event.preventDefault();
   }
 
-  const questionGet = () => {
-    (async () => {
-      const res = await axios.get(
-        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/12`
-      );
-      console.log(res.data);
-    })();
+  //Truong hop POST k co gia tri id (id duoc truyen null)
+  if(id === null){
+    handleSubmit = (event) => {
+      event.preventDefault();
+      questionPost();
+    }
+    const questionPost = () => {
+      axios.post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", { title: title, tag: tag, content: content })
+        .then(function (response) {
+          // handle success
+          setTitle("");
+          setTag("");
+          console.log("POST Successfully");
+          setNofi("POST Successfully");
+          setOpen(true);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          setNofi("POST Failed");
+          setOpen(true);
+        });
+    }
+  }
+
+  //Truong hop id co gia tri => PUT
+  else{
+    
+  }
+  
+  async function getQuestion(){
+    const response = await axios.get('https://5fc48ee536bc790016343a0b.mockapi.io/questions/12');
+    return response.data;
   }
 
   const questionPut = () => {
@@ -107,25 +132,6 @@ function QuestionForm({ type, question }) {
         setOpen(true);
       });
   }
-
-  const questionPost = () => {
-    axios.post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", { title: title, tag: tag, content: content })
-      .then(function (response) {
-        // handle success
-        setTitle("");
-        setTag("");
-        console.log("POST Successfully");
-        setNofi("POST Successfully");
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setNofi("POST Failed");
-        setOpen(true);
-      });
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="questionForm">

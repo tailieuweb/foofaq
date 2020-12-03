@@ -9,7 +9,7 @@ function QuestionCreateForm() {
     return(
         <div>
             <NavigationBar></NavigationBar>
-            <QuestionForm></QuestionForm>
+            <QuestionForm id={null}></QuestionForm>
         </div>
     )
 }
