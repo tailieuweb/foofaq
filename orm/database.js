@@ -1,11 +1,15 @@
-
+const enforceAbstractClass = require("abstract-class");
 const mongoose = require("mongoose");
-const mysql = require('mysql');
+const mysql = require("mysql");
 
-class MongoDB {
+class Database {
 	constructor(options) {
 		this.options = options;
+		enforceAbstractClass(Database, this, "connect");
 	}
+}
+
+class MongoDB extends Database {
 	connect() {
 		mongoose
 			.connect(this.options, {
@@ -15,27 +19,24 @@ class MongoDB {
 			})
 			.then(() => console.log("✅ Connected database from mongodb."))
 			.catch((error) =>
-				console.error(`❌ Connect database is failed with error which is ${error}`)
+				console.error(
+					`❌ Connect database is failed with error which is ${error}`
+				)
 			);
 	}
 }
 
-class MySQL {
-	constructor(options) {
-		this.options = options;
-	}
+class MySQL extends Database {
 	connect() {
-		var connection = mysql.createConnection(this.options
-		);
+		var connection = mysql.createConnection(this.options);
 
 		connection.connect(function (err) {
 			if (err) throw err;
-			console.log("✅ Connected database from mysql.")
-		})
+			console.log("✅ Connected database from mysql.");
+		});
 	}
 }
 module.exports = {
-	MongoDB : MongoDB,
-	MySQL : MySQL
-}
-
+	MongoDB,
+	MySQL,
+};
