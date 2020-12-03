@@ -6,22 +6,25 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const MySQL = require('./orm/database');
+const Database = require('./orm/database');
 
-// var options = `mongodb+srv://tranbinhan:tranbinhan@cluster0.0v1l9.mongodb.net/quanly?retryWrites=true`
+//Example connect MySQL start
+// var optionsMySQL = {
+// 	host: 'localhost',
+// 	user: 'root',
+// 	password: '',
+// 	database: '<enter yourdatabase here>'
+// }
+// const MySQL = new Database.MySQL(optionsMySQL);
+// MySQL.connect();
+//Example connect MySQL end
 
-// const a = new MongoDB(options)
-// a.connect()
-
-var options = {
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'shop'
-}
-const b = new MySQL(options)
-b.connect()
-
+//Example connect MongoDB start
+var optionsMongoDB = 'enter your url connection'
+const Mongo = new Database.MongoDB(optionsMongoDB)
+Mongo.connect()
+console.log(Mongo)
+//Example connect MongoDB end
 
 //setup connect mongodb by mongoose
 // mongoose
