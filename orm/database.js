@@ -43,11 +43,14 @@ class multi {
 
 class MongoDB {
 	constructor(options) {
-		this.options = options;
+		this.optionsUrl = options.host
+		this.optionsType = options.type
 	}
+
 	connectMongoDB() {
+
 		mongoose
-			.connect(this.options, {
+			.connect(this.optionsUrl, {
 				useCreateIndex: true,
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -57,11 +60,15 @@ class MongoDB {
 				console.error(`❌ Connect database is failed with error which is ${error}`)
 			);
 	}
+	getAll(Model) {
+		return Model.find()
+	}
 }
 
 class MySQL {
 	constructor(options) {
 		this.options = options;
+		this.optionsType = options.type
 	}
 	connectMySQL() {
 		var connection = mysql.createConnection(this.options
@@ -78,17 +85,18 @@ class Database extends multi.inherit(MongoDB, MySQL) {
 	constructor(options) {
 		super(options, options)
 	}
-	connect(type) {
-		if (type === "mongo") {
+	connect() {
+		if (this.options.type === "mongo") {
 			super.connectMongoDB();
 		}
-		if (type === "mysql") {
+		if (this.options.type === "mysql") {
 			super.connectMySQL();
 		}
-
+	}
+	getAll(Model) {
+		return super.getAll(Model);
 	}
 }
-
 module.exports = {
 	Database
 };

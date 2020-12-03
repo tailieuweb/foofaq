@@ -4,11 +4,10 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const passport = require("passport");
 const { Database } = require('./orm/database');
 
-
+const User = require("./models/User");
 
 
 //Example connect MySQL start
@@ -19,13 +18,20 @@ const { Database } = require('./orm/database');
 // 	database: '<enter yourdatabase here>'
 // }
 // const DB = new Database(optionsMySQL)
-// DB.connect("mysql")
+// DB.connect()
 //Example connect MySQL end
 
 //Example connect MongoDB start
-// const optionsMongoDB = 'mongodb://localhost:27017/faq'
-// const DB = new Database(optionsMongoDB)
-// DB.connect("mongo")
+var optionsMongoDB = {
+	host: 'mongodb://localhost:27017/faq',
+	type: 'mongo'
+}
+const DB = new Database(optionsMongoDB)
+DB.connect()
+const a = DB.getAll(User)
+console.log(a)
+const b = User.find()
+
 //Example connect MongoDB end
 
 //setup connect mongodb by mongoose
