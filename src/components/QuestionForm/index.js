@@ -77,7 +77,15 @@ function QuestionForm({ type, question }) {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    questionPut();
+  }
+
+  const questionGet = () => {
+    (async () => {
+      const res = await axios.get(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/12`
+      );
+      console.log(res.data);
+    })();
   }
 
   const questionPut = () => {
