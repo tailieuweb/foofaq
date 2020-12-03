@@ -14,8 +14,6 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 // import QuestionDetail from "./pages/QuestionDetail";
-// import CategoryTag from "./components/CategoryCard";
-import TabNav from "./components/NavigationBar/NavTag";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList"
 const composeEnhancers =
@@ -36,13 +34,11 @@ ReactDOM.render(
           {/* <Route path="/detail" component={QuestionDetail}></Route> */}
           {/* <Route path="/approval" component={QuestionApproval}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
-          <Route path="/category" component={CategoryTag}></Route>
           <Route path="/navigation" component={NavigationBar}></Route>
           <Route
             path="/detailapproval"
             component={QuestionApprovalDetail}
           ></Route> */}
-          <Route path="/navigation" component={TabNav}></Route>
           <Route path="/category" component={QuestionCategoryList}></Route>
         </Switch>
       </Router>

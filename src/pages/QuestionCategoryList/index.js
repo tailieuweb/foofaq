@@ -22,23 +22,35 @@ const useStyles = makeStyles((theme) => ({
 function CategoryList() {
   const classes = useStyles();
   const [categories, setCategories] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const [key, setKey] = useState("");
 
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        `https://5fc48ee536bc790016343a0b.mockapi.io/categories?page=1&limit=4`
+        `https://5fc48ee536bc790016343a0b.mockapi.io/categories?search=${key}&page=1&limit=4`
       );
       console.log(res.data);
       setCategories(res.data);
     })();
-  }, []);
+  }, [key]);
+
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
 
   return (
     <>
       <NavigationBar />
       <NavTag />
       <Container maxWidth="lg">
-        <SearchBar />
+        <SearchBar
+          handleChangeSearch={handleChangeSearch}
+          handleSearch={handleSearch}
+        />
         <Grid container className={classes.root} spacing={2}>
           {categories ? (
             categories.map((category) => (
