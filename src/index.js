@@ -13,10 +13,11 @@ import "./index.scss";
 import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
-import QuestionDetail from "./pages/QuestionDetail";
+// import QuestionDetail from "./pages/QuestionDetail";
 import CategoryTag from "./components/CategoryCard";
 import NavigationBar from "./components/NavigationBar";
 import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
+import QuestionCreateForm from "./pages/QuestionCreateForm";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -32,15 +33,17 @@ ReactDOM.render(
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
           <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/" component={QuestionList}></Route>
-          <Route path="/approval" component={QuestionApproval}></Route>
-          <Route path="/detail" component={QuestionDetail}></Route>
-          <Route path="/category" component={CategoryTag}></Route>
+          {/* <Route exact path="/" component={QuestionList}></Route> */}
+          {/* <Route path="/detail" component={QuestionDetail}></Route> */}
+          {/* <Route path="/approval" component={QuestionApproval}></Route> */}
+          {/* <Route path="/detail" component={QuestionDetail}></Route> */}
+          {/* <Route path="/category" component={CategoryTag}></Route>
           <Route path="/navigation" component={NavigationBar}></Route>
           <Route
             path="/detailapproval/:id"
             component={QuestionApprovalDetail}
-          ></Route>
+          ></Route> */}
+          <Route path="/" component={QuestionCreateForm}></Route>
         </Switch>
       </Router>
     </Provider>
