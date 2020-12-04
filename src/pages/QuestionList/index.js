@@ -58,9 +58,18 @@ const QuestionList = () => {
     }
   }, [questionsRaw]);
 
+  const handleSearch = (params) => {
+    (async () => {
+      const res = await axios.get(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=1`
+      );
+      setQuestionsRaw(res.data);
+    })();
+  };
+
   return (
     <Container maxWidth="lg">
-      <AdvancedFilter />
+      <AdvancedFilter handleSearch={handleSearch} />
       {questions ? (
         questions.map((question) => (
           <QuestionCard
