@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonBase, Grid, Paper, Typography } from "@material-ui/core";
-import img from "../../images/et.jpg";
+import { allEvent } from "../../helpers/helper";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -10,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: "auto",
     maxWidth: 500,
+    marginTop: 20,
+    marginBottom: 20,
   },
   image: {
     width: 128,
@@ -25,35 +28,51 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ComplexGrid() {
   const classes = useStyles();
-
+  const [events, setEvents] = useState("");
+  useEffect(() => {
+    (async () => {
+      const EventData = await allEvent();
+      setEvents(EventData);
+      console.log(EventData);
+    })();
+  }, []);
+  console.log(events);
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={img} />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h5">
-                  Q12020 Events
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  27 Jan–06 Apr 2020, Global
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  All events with the exception of SaaStr 2020 that the Stack
-                  Overflow team will be at in Q12020. Events are in the US and
-                  London.
-                </Typography>
+      {events ? (
+        events.map((event) => (
+          <Paper className={classes.paper} key={event.id}>
+            <Grid container spacing={2}>
+              <Grid item>
+                <ButtonBase className={classes.image}>
+                  <img
+                    className={classes.img}
+                    alt="complex"
+                    src={event.image}
+                  />
+                </ButtonBase>
+              </Grid>
+              <Grid item xs={12} sm container>
+                <Grid item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="h5">
+                      {event.name}
+                    </Typography>
+                    <Typography variant="body1" color="textSecondary">
+                      {event.date.slice(0, 10)}
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                      {event.description}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
+          </Paper>
+        ))
+      ) : (
+        <label>Failed</label>
+      )}
     </div>
   );
 }
