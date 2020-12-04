@@ -42,15 +42,12 @@ class multi {
 
 
 class MongoDB {
-	constructor(options) {
-		this.optionsUrl = options.host
-		this.optionsType = options.type
+	constructor() {
+		this.type = "mongo"
 	}
-
-	connectMongoDB() {
-
+	connectMongoDB(options) {
 		mongoose
-			.connect(this.optionsUrl, {
+			.connect(options.host, {
 				useCreateIndex: true,
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -60,18 +57,33 @@ class MongoDB {
 				console.error(`❌ Connect database is failed with error which is ${error}`)
 			);
 	}
-	getAll(Model) {
+	find(Model) {
 		return Model.find()
+	}
+	save(Model, data) {
+		const newData = new Model(data);
+		return newData.save();
+	}
+	findById(Model, id) {
+		return Model.findById(id)
+	}
+	findOne(Model, fields) {
+		return Model.findOne(fields)
+	}
+	findByIdAndUpdate(Model, id, data) {
+		return Model.findByIdAndUpdate(id, data)
+	}
+	remove(Model, id) {
+		return Model.deleteOne(id)
 	}
 }
 
 class MySQL {
-	constructor(options) {
-		this.options = options;
-		this.optionsType = options.type
+	constructor() {
+		this.type = "mysql"
 	}
-	connectMySQL() {
-		var connection = mysql.createConnection(this.options
+	connectMySQL(options) {
+		var connection = mysql.createConnection(options
 		);
 
 		connection.connect(function (err) {
@@ -82,21 +94,56 @@ class MySQL {
 }
 
 class Database extends multi.inherit(MongoDB, MySQL) {
-	constructor(options) {
-		super(options, options)
+	constructor() {
+		super()
 	}
-	connect() {
-		if (this.options.type === "mongo") {
-			super.connectMongoDB();
+	connect(options) {
+		if (options.type === "mongo") {
+			super.connectMongoDB(options);
 		}
-		if (this.options.type === "mysql") {
-			super.connectMySQL();
+		if (options.type === "mysql") {
+			super.connectMySQL(options);
 		}
-	}
-	getAll(Model) {
-		return super.getAll(Model);
 	}
 }
+
+class Controller extends multi.inherit(MongoDB, MySQL) {
+	constructor(type) {
+		super(type);
+		this.type = type;
+	}
+	find(Model) {
+		if (this.type === 'mongo') {
+			return super.find(Model);
+		}
+	}
+
+	save(Model, data) {
+		if (this.type === 'mongo')
+			return super.save(Model, data);
+
+	}
+	findById(Model, id) {
+		if (this.type === 'mongo')
+			return super.findById(Model, id)
+
+	}
+	findOne(Model, fields) {
+		if (this.type === 'mongo')
+			return super.findOne(Model, fields)
+	}
+	findByIdAndUpdate(Model, id, data) {
+		if (this.type === 'mongo')
+			return super.findByIdAndUpdate(Model, id, data)
+
+	}
+	remove(Model, id) {
+		if (this.type === 'mongo')
+			return super.remove(Model, id)
+	}
+}
+
 module.exports = {
-	Database
+	Database,
+	Controller
 };

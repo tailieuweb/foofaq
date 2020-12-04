@@ -7,7 +7,6 @@ const morgan = require("morgan");
 const passport = require("passport");
 const { Database } = require('./orm/database');
 
-const User = require("./models/User");
 
 
 //Example connect MySQL start
@@ -26,28 +25,11 @@ var optionsMongoDB = {
 	host: 'mongodb://localhost:27017/faq',
 	type: 'mongo'
 }
-const DB = new Database(optionsMongoDB)
-DB.connect()
-const a = DB.getAll(User)
-console.log(a)
-const b = User.find()
+const DB = new Database()
+DB.connect(optionsMongoDB)
 
-//Example connect MongoDB end
-
-//setup connect mongodb by mongoose
-// mongoose
-// 	.connect(process.env.DATABASE_LOCAL, {
-// 		useCreateIndex: true,
-// 		useNewUrlParser: true,
-// 		useUnifiedTopology: true,
-// 	})
-// 	.then(() => console.log("✅ Connected database from mongodb."))
-// 	.catch((error) =>
-// 		console.error(`❌ Connect database is failed with error which is ${error}`)
-// 	);
 
 const app = express();
-
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 
