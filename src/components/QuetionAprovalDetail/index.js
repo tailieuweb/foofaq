@@ -1,34 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeaderAsideNavbar from "../HeaderAsideNavbar";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import TextField from "@material-ui/core/TextField";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import "./index.scss";
 
-function Index(props) {
-  const [open, setOpen] = React.useState(false);
-  const [decline, setDecline] = React.useState(false);
-  const [feedback, setFeedback] = React.useState(false);
+//api
+import { questionApprovalDetail, approveQuestion } from "../../helpers";
 
-  const handleClickOpenApproval = () => {
-    setOpen(true);
-  };
+import { useParams } from "react-router-dom";
+import { DialogDecline, DialogFeedback } from "../Dialog";
+function Index() {
+  const [decline, setDecline] = useState(false);
+  const [feedback, setFeedback] = useState(false);
+  const [question, setQuestion] = useState("");
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const questionData = await questionApprovalDetail(id);
+      setQuestion(questionData);
+    })();
+  }, []);
+  console.log(decline);
   const handleClickOpenDecline = () => {
     setDecline(true);
+  };
+  let status = true;
+
+  const handleClickOpenApproval = () => {
+    approveQuestion(id, status);
   };
   const handleClickOpenFeedBack = () => {
     setFeedback(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   const handleFeedBack = () => {
     setFeedback(false);
   };
@@ -61,26 +67,9 @@ function Index(props) {
           </div>
           <div className="question-detail">
             <hr />
-            <h4 className="question-title">Quetion 1</h4>
+            <h4 className="question-title">{question.title}</h4>
             <div className="question-des">
-              <p>
-                Văn học theo cách nói chung nhất, là bất kỳ tác phẩm nào bằng
-                văn bản. Hiểu theo nghĩa hẹp hơn, thì văn học là dạng văn bản
-                được coi là một hình thức nghệ thuật, hoặc bất kỳ một bài viết
-                nào được coi là có giá trị nghệ thuật hoặc trí tuệ, thường là do
-                cách thức triển khai ngôn ngữ theo những cách khác với cách sử
-                dụng bình thường. Trong các định nghĩa hiện đại hơn, văn học bao
-                hàm cả các văn bản được nói ra hoặc được hát lên (văn học truyền
-                miệng). Sự phát triển trong công nghệ in ấn đã cho phép phân
-                phối và phát triển các tác phẩm chữ viết, và tạo ra loại văn học
-                điện tử. Văn học có thể phân loại thành: hư cấu hoặc phi hư cấu
-                (theo nội dung), và thơ hoặc văn xuôi (theo hình thức). Thể loại
-                văn xuôi có thể phân loại tiếp thành tiểu thuyết, truyện ngắn và
-                kịch bản. Các tác phẩm văn học có thể được phân loại theo từng
-                giai đoạn lịch sử được nhắc đến, hoặc một số thể loại nội dung
-                hoặc hành văn đặc thù (bi kịch, hài kịch, lãng mạn, gợi
-                tình,...)
-              </p>
+              <p>{question.content}</p>
               <div className="user">
                 <div className="question-time-detail">
                   {" "}
@@ -134,74 +123,14 @@ function Index(props) {
           </div>
         </div>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure to approve ?"}
-        </DialogTitle>
-
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Approve
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog
-        open={decline}
-        onClose={handleCloseDecline}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure to decline ?"}
-        </DialogTitle>
-
-        <DialogActions>
-          <Button onClick={handleCloseDecline} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleCloseDecline} color="primary" autoFocus>
-            Decline
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* feedback */}
-      <Dialog
-        open={feedback}
-        onClose={handleFeedBack}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">
-          Decline post an give feedback
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>You can feedback here.</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Feedback"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleFeedBack} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleFeedBack} color="primary">
-            Feedback
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DialogDecline
+        handleCloseDecline={handleCloseDecline}
+        decline={decline}
+      ></DialogDecline>
+      <DialogFeedback
+      feedback={feedback}
+      handleFeedBack={handleFeedBack}
+      ></DialogFeedback>
     </div>
   );
 }
