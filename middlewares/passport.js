@@ -30,7 +30,7 @@ passport.use(
     },
     async (payload, done) => {
       try {
-        const user = await controllers.findById(User , payload.sub);
+        const user = await controllers.findById(User, payload.sub);
 
         if (!user) return done(null, false);
 
@@ -47,9 +47,8 @@ passport.use(
   new LocalStrategy(
     async (username, password, done) => {
       try {
-        const user = await controllers.findOne(User, {username} );
+        const user = await controllers.findOne(User, { username });
         if (!user) return done(null, false);
-
         const isCorrectPassword = await user.isValidPassword(password);
 
         if (!isCorrectPassword) return done(null, false);

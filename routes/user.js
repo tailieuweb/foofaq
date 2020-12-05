@@ -6,7 +6,6 @@ const UserController = require('../controllers/user')
 
 //Use password backage
 const passport = require('passport');
-const passportConf = require('../middlewares/passport');
 const User = require('../models/user');
 
 // -----------------------------------------------------------------------
@@ -18,8 +17,6 @@ router.post('/', UserController.newUser)
 
 //Route get detail a user
 router.get('/:userID', UserController.getUser)
-//Route relace user
-router.put('/:userID', UserController.replaceUser)
 //Route update user
 router.patch('/:userID', UserController.updateUser)
 //Route delete user
@@ -27,7 +24,7 @@ router.delete('/:userID', UserController.deleteUser)
 // Route register
 router.post('/signup', UserController.signUp)
 // Route login
-router.post('/signin', passport.authenticate('local' , { failureFlash: true,session : false}) , UserController.signIn);
+router.post('/signin', UserController.signIn);
 // Route login sns
 router.post('/signinsns', UserController.signInSNS)
 // Route logout
