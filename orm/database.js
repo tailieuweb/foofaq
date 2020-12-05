@@ -77,7 +77,7 @@ class MongoDB {
 		return Model.findByIdAndUpdate(id)
 	}
 	remove(Model, id) {
-		return Model.deleteOne(id)
+		return Model.findByIdAndDelete(id)
 	}
 }
 
@@ -137,7 +137,6 @@ class Controller extends multi.inherit(MongoDB, MySQL) {
 	findByIdAndUpdate(Model, id, data) {
 		if (this.type === 'mongo')
 			return super.findByIdAndUpdate(Model, id, data)
-
 	}
 	remove(Model, id) {
 		if (this.type === 'mongo')
