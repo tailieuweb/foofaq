@@ -10,59 +10,70 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
 	authID: {
 		type: String,
-		default : null
+		default: null
 	},
 	username: {
 		type: String,
-
 	},
 	email: {
 		type: String,
-		unique: true,
 		lowercase: true,
+		unique: false,
+	},
+	firstName: {
+		type: String,
+		default: null
+	},
+	lastName: {
+		type: String,
+		default: null
+	},
+	firstName: {
+		type: String,
+		default: null
+	},
+	lastName: {
+		type: String,
+		default: null
 	},
 	authType: {
 		type: String,
-		enum: ["google", "facebook", "github"],
+		enum: ["local", "google", "facebook", "github"],
+		default: "local",
 	},
 	image: {
 		type: String,
-		default : null
+		default: null
 	},
 });
 
-<<<<<<< HEAD
+
 //Hash password
-=======
->>>>>>> server/TueNH
-// UserSchema.pre("save", async function (next) {
-// 	try {
-// 		if (this.authType !== "local") next();
 
-// 		// Generate a salt
-// 		const salt = await bcrypt.genSalt(10);
-// 		// Generate a password hash (salt + hash)
-// 		const passwordHashed = await bcrypt.hash(this.password, salt);
-// 		// Re-assign password hashed
-// 		this.password = passwordHashed;
+UserSchema.pre("save", async function (next) {
+	try {
+		if (this.authType !== "local") next();
 
-// 		next();
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// });
+		// Generate a salt
+		const salt = await bcrypt.genSalt(10);
+		// Generate a password hash (salt + hash)
+		const passwordHashed = await bcrypt.hash(this.password, salt);
+		// Re-assign password hashed
+		this.password = passwordHashed;
 
-<<<<<<< HEAD
-//Compare password with hashed password
-=======
->>>>>>> server/TueNH
-// UserSchema.methods.isValidPassword = async function (newPassword) {
-// 	try {
-// 		return await bcrypt.compare(newPassword, this.password);
-// 	} catch (error) {
-// 		throw new Error(error);
-// 	}
-// };
+		next();
+	} catch (error) {
+		next(error);
+	}
+});
+
+UserSchema.methods.isValidPassword = async function (newPassword) {
+	try {
+		return await bcrypt.compare(newPassword, this.password);
+	} catch (error) {
+		throw new Error(error);
+	}
+};
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

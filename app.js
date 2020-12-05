@@ -1,40 +1,45 @@
 // Config env
-require('dotenv').config()
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
-const passport = require('passport')
+const passport = require("passport");
+const { Database } = require('./orm/database');
 
-//setup connect mongodb by mongoose
-mongoose
-	.connect(process.env.DATABASE_LOCAL, {
-		useCreateIndex: true,
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: true
-	})
-	.then(() => console.log("✅ Connected database from mongodb."))
-	.catch((error) =>
-		console.error(`❌ Connect database is failed with error which is ${error}`)
-	);
+
+
+//Example connect MySQL start
+// const optionsMySQL = {
+// 	host: 'localhost',
+// 	user: 'root',
+// 	password: '',
+// 	database: '<enter yourdatabase here>'
+// }
+// const DB = new Database(optionsMySQL)
+// DB.connect()
+//Example connect MySQL end
+
+//Example connect MongoDB start
+var optionsMongoDB = {
+	host: 'mongodb://localhost:27017/faq',
+	type: 'mongo'
+}
+const DB = new Database()
+DB.connect(optionsMongoDB)
+
 
 const app = express();
-
-
 const userRoute = require("./routes/user");
+const questionRoute = require("./routes/question");
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// app.use(passport.initialize()); //passport.initialize() middleware
 
 // Routes
 app.use("/users", userRoute);
+app.use("/question", questionRoute);
 
 // Routes
 app.get("/", (req, res, next) => {
