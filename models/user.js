@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 //Create Schema
 const Schema = mongoose.Schema;
 
-//const bcrypt = require("bcryptjs");
+//Use hash password
+const bcrypt = require("bcryptjs");
 
 //Initiate UserSchema
 const UserSchema = new Schema({
@@ -15,18 +16,13 @@ const UserSchema = new Schema({
 	username: {
 		type: String,
 	},
+	password: {
+		type: String,
+	},
 	email: {
 		type: String,
 		lowercase: true,
 		unique: false,
-	},
-	firstName: {
-		type: String,
-		default: null
-	},
-	lastName: {
-		type: String,
-		default: null
 	},
 	firstName: {
 		type: String,
@@ -49,7 +45,6 @@ const UserSchema = new Schema({
 
 
 //Hash password
-
 UserSchema.pre("save", async function (next) {
 	try {
 		if (this.authType !== "local") next();

@@ -1,11 +1,15 @@
-// const passport = require("passport");
-// const JwtStrategy = require("passport-jwt").Strategy;
-// const LocalStrategy = require("passport-local").Strategy;
-// const GooglePlusTokenStrategy = require("passport-google-plus-token");
-// const FacebookTokenStrategy = require("passport-facebook-token");
-// const GithubStrategy = require("passport-github2").Strategy;
-// const { ExtractJwt } = require("passport-jwt");
-// const { JWT_SECRET, auth } = require("../configs");
+const passport = require("passport");
+const JwtStrategy = require("passport-jwt").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+//const GooglePlusTokenStrategy = require("passport-google-plus-token");
+//const FacebookTokenStrategy = require("passport-facebook-token");t
+const GithubStrategy = require("passport-github2").Strategy;
+const { ExtractJwt } = require("passport-jwt");
+const { JWT_SECRET, auth } = require("../configs");
+
+const { Controller } = require("../orm/database");
+const User = require("../models/user");
+const controllers = new Controller("mongo");
 
 // const User = require("../models/User");
 
@@ -17,50 +21,46 @@
 //   done(null, obj);
 // });
 
-// // Passport Jwt
-// passport.use(
-//   new JwtStrategy(
-//     {
-//       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken("Authorization"),
-//       secretOrKey: JWT_SECRET,
-//     },
-//     async (payload, done) => {
-//       try {
-//         const user = await User.findById(payload.sub);
+// Passport Jwt
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken("Authorization"),
+      secretOrKey: JWT_SECRET,
+    },
+    async (payload, done) => {
+      try {
+        const user = await controllers.findById(User , payload.sub);
 
-//         if (!user) return done(null, false);
+        if (!user) return done(null, false);
 
-//         done(null, user);
-//       } catch (error) {
-//         done(error, false);
-//       }
-//     }
-//   )
-// );
+        done(null, user);
+      } catch (error) {
+        done(error, false);
+      }
+    }
+  )
+);
 
-// // Passport local
-// passport.use(
-//   new LocalStrategy(
-//     {
-//       usernameField: "email",
-//     },
-//     async (email, password, done) => {
-//       try {
-//         const user = await User.findOne({ email });
+// Passport local
+passport.use(
+  new LocalStrategy(
+    async (username, password, done) => {
+      try {
+        const user = await controllers.findOne(User, {username} );
+        if (!user) return done(null, false);
 
-//         if (!user) return done(null, false);
+        const isCorrectPassword = await user.isValidPassword(password);
 
-//         const isCorrectPassword = await user.isValidPassword(password);
+        if (!isCorrectPassword) return done(null, false);
 
-//         if (!isCorrectPassword) return done(null, false);
-
-//         done(null, user);
-//       } catch (error) {
-//         done(error, false);
-//       }
-//     }
-//   )
-// );
+        done(null, user);
+      } catch (error) {
+        done(error, false);
+      }
+    }
+  )
+);
 
 // // Passport Google
 // // passport.use(
