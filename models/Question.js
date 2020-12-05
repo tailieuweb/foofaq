@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const questionSchema = new Schema({
+const QuestionSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -15,4 +15,4 @@ const questionSchema = new Schema({
         default: Date.now
     }
 });
-module.exports = mongoose.model("Question",questionSchema);
+module.exports = mongoose.model("Question",QuestionSchema);
