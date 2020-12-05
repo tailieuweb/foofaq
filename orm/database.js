@@ -121,7 +121,6 @@ class Controller extends multi.inherit(MongoDB, MySQL) {
 	save(Model, data) {
 		if (this.type === 'mongo')
 			return super.save(Model, data);
-
 	}
 	findById(Model, id) {
 		if (this.type === 'mongo')

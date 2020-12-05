@@ -7,20 +7,6 @@ const morgan = require("morgan");
 const passport = require("passport");
 const { Database } = require('./orm/database');
 
-
-
-//Example connect MySQL start
-// const optionsMySQL = {
-// 	host: 'localhost',
-// 	user: 'root',
-// 	password: '',
-// 	database: '<enter yourdatabase here>'
-// }
-// const DB = new Database(optionsMySQL)
-// DB.connect()
-//Example connect MySQL end
-
-//Example connect MongoDB start
 var optionsMongoDB = {
 	host: 'mongodb://localhost:27017/faq',
 	type: 'mongo'

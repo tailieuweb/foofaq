@@ -128,20 +128,32 @@ const signIn = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
 	const { userID } = req.params;
 	const newUser = req.body;
+	try {
+		const result = await controllers.findByIdAndUpdate(User, userID, newUser);
+		return res.status(200).json({
+			success: true
+		})
+	} catch (error) {
+		return res.status(500).json({
+			error: { message: "Update user failed" }
+		});
+	}
+}
 
-	const result = await controllers(User, userID, newUser);
-	return await res.status(200).json({
-		success: true,
-		user: result,
-	});
-};
 
 const deleteUser = async (req, res, next) => {
-	const userID = req.params;
-	await controllers.remove(User, userID);
-	return res.status(200).json({
-		success: true,
-	});
+	const _id = req.params;
+	try {
+		await controllers.remove(User, userID);
+		return res.status(200).json({
+			success: true,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			error: { message: "Delete user failed" }
+		});
+	}
+
 };
 
 requireSignin = expressJwt({
