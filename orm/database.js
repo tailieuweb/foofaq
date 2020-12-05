@@ -73,6 +73,9 @@ class MongoDB {
 	findByIdAndUpdate(Model, id, data) {
 		return Model.findByIdAndUpdate(id, data)
 	}
+	findByIdAndDelete(Model, id) {
+		return Model.findByIdAndUpdate(id)
+	}
 	remove(Model, id) {
 		return Model.deleteOne(id)
 	}
