@@ -11,7 +11,7 @@ const encodedToken = (userID) => {
 	return JWT.sign(
 		{
 			iss: "Huy Tue",
-			_id: userID,
+			sub: userID,
 			iat: new Date().getTime(),
 			exp: new Date().setDate(new Date().getDate() + 1),
 		},
@@ -90,7 +90,17 @@ const signUp = async (req, res, next) => {
 	return res.status(201).json({ success: true });
 };
 
+//Login with normal user
 const signIn = async (req, res, next) => {
+	const loginToken = encodedToken(req.user._id);
+	res.setHeader("Authorization", loginToken);
+	return res.status(200).json({
+		success : true
+	});
+};
+
+//Login with SNS user
+const signInSNS = async (req, res, next) => {
 	const { authID, authType } = req.body;
 	// Check if there is a user with the same user
 	const foundUser = await controllers.findOne(User, {
@@ -169,6 +179,7 @@ module.exports = {
 	secret,
 	signOut,
 	signIn,
+	signInSNS,
 	signUp,
 	updateUser,
 	deleteUser,
