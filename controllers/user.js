@@ -142,7 +142,7 @@ const updateUser = async (req, res, next) => {
 
 
 const deleteUser = async (req, res, next) => {
-	const _id = req.params;
+	const { userID } = req.params;
 	try {
 		await controllers.remove(User, userID);
 		return res.status(200).json({
