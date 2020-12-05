@@ -17,7 +17,8 @@ router.put('/:userID', UserController.replaceUser)
 router.patch('/:userID', UserController.updateUser)
 //Route delete user
 router.delete('/:userID', UserController.deleteUser)
-
+// Route register
+router.post('/signup', UserController.signUp)
 // Route login
 router.post('/signin', UserController.signIn)
 // Route logout

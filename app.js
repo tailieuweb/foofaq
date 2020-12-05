@@ -4,42 +4,18 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const passport = require("passport");
-const Database = require('./orm/database');
+const { Database } = require('./orm/database');
 
-//Example connect MySQL start
-// var optionsMySQL = {
-// 	host: 'localhost',
-// 	user: 'root',
-// 	password: '',
-// 	database: '<enter yourdatabase here>'
-// }
-// const MySQL = new Database.MySQL(optionsMySQL);
-// MySQL.connect();
-//Example connect MySQL end
+var optionsMongoDB = {
+	host: 'mongodb://localhost:27017/faq',
+	type: 'mongo'
+}
+const DB = new Database()
+DB.connect(optionsMongoDB)
 
-//Example connect MongoDB start
-var optionsMongoDB = 'enter your url connection'
-const Mongo = new Database.MongoDB(optionsMongoDB)
-Mongo.connect()
-console.log(Mongo)
-//Example connect MongoDB end
-
-//setup connect mongodb by mongoose
-// mongoose
-// 	.connect(process.env.DATABASE_LOCAL, {
-// 		useCreateIndex: true,
-// 		useNewUrlParser: true,
-// 		useUnifiedTopology: true,
-// 	})
-// 	.then(() => console.log("✅ Connected database from mongodb."))
-// 	.catch((error) =>
-// 		console.error(`❌ Connect database is failed with error which is ${error}`)
-// 	);
 
 const app = express();
-
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 

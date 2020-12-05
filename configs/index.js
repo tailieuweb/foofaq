@@ -1,14 +1,15 @@
 module.exports = {
   JWT_SECRET: process.env.JWT_SECRET,
-
   mongoDB: {
-    host: 'mongodb+srv://<username>:<password>@cluster0.0v1l9.mongodb.net/quanly?retryWrites=true'
+    host: process.env.DATABASE_CLOUD,
+    type: 'mongo',
   },
   mySQL: {
     host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'testapi'
+    user: process.env.USER_MYSQL,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE_MYSQL,
+    type: 'mysql'
   },
   github: {
     CLIENT_ID: process.env.GITHUB_CLIENT_ID,
