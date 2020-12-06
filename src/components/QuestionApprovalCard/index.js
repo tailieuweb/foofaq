@@ -109,7 +109,7 @@ const Index = (props) => {
     }
   };
   const handleCloseDecline = () => {
-    setDecline(false);  
+    setDecline(false);
   };
   //approve
   const handleClickOpenApproval = (id) => {
@@ -167,7 +167,7 @@ const Index = (props) => {
             <div className="col-md-6 col-12">
               <div className="col-rgt">
                 {" "}
-                <div className="total">Total: 1</div>
+                <div className="total">Total: {all.length}</div>
                 <Button className="btn-fill" variant="contained">
                   Newest Fist
                 </Button>
@@ -242,7 +242,7 @@ const Index = (props) => {
                 <div className="row">
                   <div className="col-md-10 col-12">
                     <div className="question-content">
-                      <Link id="abs" to={"/detailapproval/" + question.id}>
+                      <Link id="abs" to={"/approval/" + question.id}>
                         <h5 className="question-title">{title}</h5>
                       </Link>
                       <p className="question-des">{content}</p>

@@ -1,9 +1,8 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import QuestionApprovalCard from "../../components/QuestionApprovalCard";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
-// import QuestionManager from "../../components/QuestionManager/index";
-//import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
+import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
 const Index = () => {
   return (
     <div>
@@ -12,9 +11,11 @@ const Index = () => {
           <HeaderAsideNavbar></HeaderAsideNavbar>
         </div>
         <div className="col-md-10">
-          <Switch>
-            <Route path="/approval" component={QuestionApprovalCard} />
-          </Switch>
+          <Route exact path="/approval" component={QuestionApprovalCard} />
+          <Route
+            path="/approval/:id"
+            component={QuestionApprovalDetail}
+          ></Route>
         </div>
       </div>
     </div>

@@ -87,85 +87,78 @@ function Index() {
   };
   return (
     <div>
-      <div className="row">
-        <div className="col-md-2">
-          <HeaderAsideNavbar></HeaderAsideNavbar>
+      <div className="qs-header">
+        <div className="search-bar">
+          {" "}
+          <SearchBar></SearchBar>{" "}
         </div>
-        <div className="col-md-10">
-          <div className="qs-header">
-            <div className="search-bar">
+        <div className="user">
+          <div className="username">admin</div>
+
+          <img
+            className="avt"
+            src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
+            alt="user"
+          />
+        </div>{" "}
+        <div className="question-h">PENDING POST</div>
+        <div className="question-time"> Ask 5 month ago</div>
+      </div>
+      <div className="question-detail">
+        <hr />
+        <h4 className="question-title">{question.title}</h4>
+        <div className="question-des">
+          <p>{question.content}</p>
+          <div className="user">
+            <div className="question-time-detail">
               {" "}
-              <SearchBar></SearchBar>{" "}
+              asked Jun 26 '15 at 17:38{" "}
             </div>
-            <div className="user">
-              <div className="username">admin</div>
+            <div className="username">User 1</div>
 
-              <img
-                className="avt"
-                src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
-                alt="user"
-              />
-            </div>{" "}
-            <div className="question-h">PENDING POST</div>
-            <div className="question-time"> Ask 5 month ago</div>
-          </div>
-          <div className="question-detail">
-            <hr />
-            <h4 className="question-title">{question.title}</h4>
-            <div className="question-des">
-              <p>{question.content}</p>
-              <div className="user">
-                <div className="question-time-detail">
-                  {" "}
-                  asked Jun 26 '15 at 17:38{" "}
-                </div>
-                <div className="username">User 1</div>
-
-                <img
-                  className="avt"
-                  src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
-                  alt="user"
-                />
-              </div>{" "}
-            </div>
-          </div>
-          <div className="other-btn">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClickOpenApproval}
-              style={{
-                marginRight: "10px",
-                padding: "10px",
-                outline: "none",
-              }}
-            >
-              Approve
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleClickOpenDecline}
-              style={{
-                marginRight: "10px",
-                padding: "10px",
-                outline: "none",
-              }}
-            >
-              Decline
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleClickOpenFeedBack}
-              style={{
-                marginRight: "10px",
-                padding: "10px",
-                outline: "none",
-              }}
-            >
-              Decline post an give feedback
-            </Button>
-          </div>
+            <img
+              className="avt"
+              src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
+              alt="user"
+            />
+          </div>{" "}
         </div>
+      </div>
+      <div className="other-btn">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClickOpenApproval}
+          style={{
+            marginRight: "10px",
+            padding: "10px",
+            outline: "none",
+          }}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleClickOpenDecline}
+          style={{
+            marginRight: "10px",
+            padding: "10px",
+            outline: "none",
+          }}
+        >
+          Decline
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleClickOpenFeedBack}
+          style={{
+            marginRight: "10px",
+            padding: "10px",
+            outline: "none",
+          }}
+        >
+          Decline post an give feedback
+        </Button>
       </div>
       <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">

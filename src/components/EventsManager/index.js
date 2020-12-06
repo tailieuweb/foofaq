@@ -96,10 +96,17 @@ function EventManager(props) {
   return (
     <div>
       <h1>Events</h1>
+
       <SearchBar
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       />
+      <Link to={"/forms/event"}>
+        <Button variant="contained" color="primary">
+          {" "}
+          ADD{" "}
+        </Button>
+      </Link>
       <TableContainer className={classes.tablePa} component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableH

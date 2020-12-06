@@ -16,10 +16,10 @@ import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 import CategoryTag from "./components/CategoryCard";
 import NavigationBar from "./components/NavigationBar";
-import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
+//import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
-import CategoriesManager from "./components/CategoriesManager";
+// import CategoriesManager from "./components/CategoriesManager";
 import Managers from "./pages/QuestionManager";
 // import CategoriesForm from "./components/FormManager/Categories";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
@@ -43,20 +43,13 @@ ReactDOM.render(
           <Route exact path="/" component={QuestionList}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/approval" component={QuestionApproval}></Route>
-          <Route
-            path="/manager/categories"
-            component={CategoriesManager}
-          ></Route>
+         
           {/* <Route path="/category" component={CategoryTag}></Route> */}
           <Route path="/navigation" component={NavigationBar}></Route>
-          <Route
-            path="/detailapproval/:id"
-            component={QuestionApprovalDetail}
-          ></Route>
           <Route path="/form" component={QuestionCreateForm}></Route>
           <Route path="/category" component={QuestionCategoryList}></Route>
-          <Route path="/manager/question" component={Managers}></Route>
-          <Route path="/forms/event" component={FormManager}></Route>
+          <Route path="/manager/" component={Managers}></Route>
+          <Route path="/forms/" component={FormManager}></Route>
         </Switch>
       </Router>
     </Provider>

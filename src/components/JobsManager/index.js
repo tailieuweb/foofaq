@@ -14,7 +14,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Link from "../../common/CustomLink";
 // import QuestionApprovalCard from "../../components/QuestionApprovalCard";
 // import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
-// import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/SearchBar";
 import { deleteJob, getJobs, pagJobs } from "../../helpers";
 
 const useStyles = makeStyles({
@@ -100,6 +100,18 @@ function JobsManager(props) {
   return (
     <div>
       <h1>JOBS</h1>
+
+      <SearchBar
+        handleChangeSearch={handleChangeSearch}
+        handleSearch={handleSearch}
+      />
+      <Link to={"/forms/job/"}>
+        <Button variant="contained" color="primary">
+          {" "}
+          ADD{" "}
+        </Button>
+      </Link>
+
       <TableContainer className={classes.tablePa} component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableH
