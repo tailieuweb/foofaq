@@ -18,7 +18,7 @@ const UserSchema = new Schema({
 		unique: true,
 		required: true
 	},
-	hashed_password: {
+	password: {
 		type: String,
 	},
 	email: {
@@ -46,47 +46,7 @@ const UserSchema = new Schema({
 	},
 	salt: { type: String }
 });
-//Hash password
-UserSchema
-	.virtual('password')
-	.set(function (password) {
 
-		if (this.authType !== "local")
-			next();
-		// create a temporarity variable called _password
-		this._password = password;
-		// generate salt
-		this.salt = this.makeSalt();
-		// encryptPassword
-		this.hashed_password = this.encryptPassword(password);
-
-	})
-	.get(function () {
-		return this._password;
-	});
-
-
-UserSchema.methods = {
-	authenticate: function (plainText) {
-		return this.encryptPassword(plainText) === this.hashed_password;
-	},
-
-	encryptPassword: function (password) {
-		if (!password) return '';
-		try {
-			return crypto
-				.createHmac('sha1', this.salt)
-				.update(password)
-				.digest('hex');
-		} catch (err) {
-			return '';
-		}
-	},
-
-	makeSalt: function () {
-		return bcrypt.genSalt(10);
-	}
-};
 //Hash password
 UserSchema.pre("save", async function (next) {
 	try {

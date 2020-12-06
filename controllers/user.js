@@ -52,17 +52,19 @@ const secret = async (req, res, next) => {
 };
 
 const signUp = async (req, res, next) => {
-	const username = req.body;
-
+	const {username} = req.body;
 	// Check if there is a user with the same user
 
-	const foundUser = await User.findOne(username);
+	const foundUser = await User.findOne({username});
+
 	if (foundUser)
+	{
 		return res.status(403).json({
 			error: {
 				message: "Username is already in use.",
 			},
 		});
+	}
 
 	// Create a new user
 	const newUser = new User(req.body);
@@ -88,25 +90,38 @@ const signIn = async (req, res, next) => {
 		username,
 		authType,
 	});
-	if (!user) {
+
+	if (!user) 
+	{
 		return res.status(400).json({
 			error: "User with that username does not exist. Please signup.",
 		});
 	}
-	if (!user.isValidPassword(password)) {
-		return res.status(400).json({
-			error: "Username and password do not match.",
-		});
+	else
+	{
+		user.isValidPassword(password).then(result => 
+		{
+			if(!result)
+			{
+				return res.status(400).json({
+					error: "Username and password do not match.",
+				});
+			}
+			else
+			{
+				const loginToken = encodedToken(user._id);
+				res.cookie("token", loginToken, {
+					expiresIn: "1d",
+				});
+				return res.status(200).json({
+					success: true,
+					token: loginToken,
+					user: user,
+				});
+			}
+		})
 	}
-	const loginToken = encodedToken(user._id);
-	res.cookie("token", loginToken, {
-		expiresIn: "1d",
-	});
-	return res.status(200).json({
-		success: true,
-		token: loginToken,
-		user: user,
-	});
+
 };
 
 //Login with SNS user
