@@ -9,12 +9,7 @@ const expressJwt = require("express-jwt");
 
 const encodedToken = (userID) => {
 	return JWT.sign(
-		{
-			iss: "Huy Tue",
-			_id: userID,
-			iat: new Date().getTime(),
-			exp: new Date().setDate(new Date().getDate() + 1),
-		},
+		{ _id: userID._id },
 		JWT_SECRET
 	);
 };
@@ -35,24 +30,11 @@ const index = async (req, res, next) => {
 	});
 };
 
-const newUser = (req, res, next) => {
+const newUser = async (req, res, next) => {
 	const newUser = new User(req.body);
-	controllers.save(User, newUser);
+	await controllers.save(User, newUser);
 	return res.status(201).json({
 		user: newUser,
-	});
-};
-
-const replaceUser = async (req, res, next) => {
-	// enforce new user to old user
-	const { userID } = req.params;
-	const newUser = req.body;
-
-	const result = await controllers(User, userID, newUser);
-
-	return res.status(200).json({
-		success: true,
-		user: result,
 	});
 };
 
@@ -70,27 +52,80 @@ const secret = async (req, res, next) => {
 };
 
 const signUp = async (req, res, next) => {
-	const { email } = req.body;
-
+	const {username} = req.body;
 	// Check if there is a user with the same user
-	const foundUser = await User.findOne({ email });
+
+	const foundUser = await User.findOne({username});
+
 	if (foundUser)
-		return res
-			.status(403)
-			.json({ error: { message: "Email is already in use." } });
+	{
+		return res.status(403).json({
+			error: {
+				message: "Username is already in use.",
+			},
+		});
+	}
 
 	// Create a new user
 	const newUser = new User(req.body);
-	controllers.save(User, newUser);
+
+	await controllers.save(User, newUser);
 
 	// Encode a token
 	const token = encodedToken(newUser._id);
-
-	res.setHeader("Authorization", token);
-	return res.status(201).json({ success: true });
+	res.cookie("token", token, {
+		expiresIn: "1d",
+	});
+	// res.setHeader("Authorization", token);
+	return res.status(201).json({
+		success: true,
+	});
 };
 
+//Login with normal user
 const signIn = async (req, res, next) => {
+	const { username, password } = req.body;
+	const authType = "local";
+	const user = await controllers.findOne(User, {
+		username,
+		authType,
+	});
+
+	if (!user) 
+	{
+		return res.status(400).json({
+			error: "User with that username does not exist. Please signup.",
+		});
+	}
+	else
+	{
+		user.isValidPassword(password).then(result => 
+		{
+			if(!result)
+			{
+				return res.status(400).json({
+					error: "Username and password do not match.",
+				});
+			}
+			else
+			{
+				const loginToken = encodedToken(user._id);
+				res.cookie("token", loginToken, {
+					expiresIn: "1d",
+				});
+				return res.status(200).json({
+					success: true,
+					token: loginToken,
+					user: user,
+				});
+			}
+		})
+	}
+
+};
+
+//Login with SNS user
+const signInSNS = async (req, res, next) => {
 	const { authID, authType } = req.body;
 	// Check if there is a user with the same user
 	const foundUser = await controllers.findOne(User, {
@@ -100,12 +135,15 @@ const signIn = async (req, res, next) => {
 
 	if (foundUser) {
 		console.log("login");
-		let token = encodedToken(foundUser._id);
-		res.setHeader("Authorization", token);
+		const loginToken = encodedToken(foundUser._id);
+		res.cookie("token", loginToken, {
+			expiresIn: "1d",
+		});
+		// res.setHeader("Authorization", loginToken);
 		return res.status(200).json({
 			success: true,
 			user: foundUser,
-			token: token,
+			token: loginToken,
 		});
 	}
 	next();
@@ -115,13 +153,15 @@ const signIn = async (req, res, next) => {
 	await controllers.save(User, newUser);
 
 	// Encode a token
-	let token = encodedToken(newUser._id);
-
-	res.setHeader("Authorization", token);
+	const loginToken = encodedToken(newUser._id);
+	res.cookie("token", loginToken, {
+		expiresIn: "1d",
+	});
+	// res.setHeader("Authorization", loginToken);
 	return res.status(201).json({
 		success: true,
 		user: newUser,
-		token: token,
+		token: loginToken,
 	});
 };
 
@@ -131,15 +171,16 @@ const updateUser = async (req, res, next) => {
 	try {
 		const result = await controllers.findByIdAndUpdate(User, userID, newUser);
 		return res.status(200).json({
-			success: true
-		})
+			success: true,
+		});
 	} catch (error) {
 		return res.status(500).json({
-			error: { message: "Update user failed" }
+			error: {
+				message: "Update user failed",
+			},
 		});
 	}
-}
-
+};
 
 const deleteUser = async (req, res, next) => {
 	const { userID } = req.params;
@@ -150,25 +191,26 @@ const deleteUser = async (req, res, next) => {
 		});
 	} catch (error) {
 		return res.status(500).json({
-			error: { message: "Delete user failed" }
+			error: {
+				message: "Delete user failed",
+			},
 		});
 	}
-
 };
 
 requireSignin = expressJwt({
 	secret: JWT_SECRET,
-	algorithms: ["HS256"],
-});
+	algorithms: ['HS256'],
+})
 
 module.exports = {
 	getUser,
 	index,
 	newUser,
-	replaceUser,
 	secret,
 	signOut,
 	signIn,
+	signInSNS,
 	signUp,
 	updateUser,
 	deleteUser,

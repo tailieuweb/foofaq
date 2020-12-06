@@ -4,6 +4,12 @@ const router = express.Router();
 const UserController = require('../controllers/user')
 // const { validateBody, validateParam, schemas } = require('../helpers/routerHelpers')
 
+//Use password backage
+const passport = require('passport');
+const User = require('../models/user');
+
+// -----------------------------------------------------------------------
+
 //Route get all user
 router.get('/', UserController.index)
 //Route create user
@@ -11,8 +17,6 @@ router.post('/', UserController.newUser)
 
 //Route get detail a user
 router.get('/:userID', UserController.getUser)
-//Route relace user
-router.put('/:userID', UserController.replaceUser)
 //Route update user
 router.patch('/:userID', UserController.updateUser)
 //Route delete user
@@ -20,7 +24,9 @@ router.delete('/:userID', UserController.deleteUser)
 // Route register
 router.post('/signup', UserController.signUp)
 // Route login
-router.post('/signin', UserController.signIn)
+router.post('/signin', UserController.signIn);
+// Route login sns
+router.post('/signinsns', UserController.signInSNS)
 // Route logout
 router.post('/signout', UserController.signOut)
 // Route secret
