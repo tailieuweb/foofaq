@@ -144,8 +144,7 @@ const signInSNS = async (req, res, next) => {
 		authType: authType,
 	});
 
-	if (foundUser) 
-	{
+	if (foundUser) {
 		const loginToken = encodedToken(foundUser._id);
 		res.cookie("token", loginToken, {
 			expiresIn: "1d",
@@ -156,12 +155,10 @@ const signInSNS = async (req, res, next) => {
 			user: foundUser,
 			token: loginToken,
 		});
-	}
-	else
-	{
+	} else {
 		// Create a new user
 		const newUser = new User(req.body);
- 
+
 		await controllers.save(User, newUser);
 
 		// Encode a token
@@ -198,12 +195,13 @@ const updateUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
 	const { userID } = req.params;
 	try {
-		await controllers.remove(User, userID);
-		return res.status(200).json({
-			success: true,
-		});
-	} catch (error) {
-		return res.status(500).json({
+		const user = await controllers.remove(User, userID);
+		if (!user) throw Error("User not found!");
+		{
+			res.status(200).json({ success: true });
+		}
+	} catch (err) {
+		res.status(403).json({
 			error: {
 				message: "Delete user failed",
 			},
