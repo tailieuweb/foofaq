@@ -11,6 +11,7 @@ function QuestionCreateForm() {
       <NavigationBar></NavigationBar>
       <Route exact path="/form/" component={QuestionForm}></Route>{" "}
       <Route path="/form/:id" component={QuestionForm}></Route>{" "}
+      
     </div>
   );
 }

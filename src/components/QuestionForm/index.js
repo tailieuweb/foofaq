@@ -152,6 +152,7 @@ function QuestionForm() {
   //   const response = await axios.get();
   //   return response.data;
   // }
+
   useEffect(async () => {
     const result = await axios(
       `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${id}`
@@ -159,7 +160,20 @@ function QuestionForm() {
 
     setQuestion(result.data);
   }, []);
-  console.log("question: " + question.title);
+
+  // const sampleMarkup = `${question.id}`;
+  // const blocksFromHTML = convertFromHTML(sampleMarkup);
+  // const state = ContentState.createFromBlockArray(
+  //   blocksFromHTML.contentBlocks,
+  //   blocksFromHTML.entityMap
+  // );
+  const [editorStates, setEdittorStates] = useState(
+    EditorState.createWithContent(
+      ContentState.createFromBlockArray(convertFromHTML(`Hehehehe`))
+    )
+  );
+
+  console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -185,11 +199,9 @@ function QuestionForm() {
           </label>
           <div className="aroundEditorQuestion" id="aroundEditorQuestion">
             <Editor
-              editorState={editorState}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               onEditorStateChange={setEditorState}
-              // defaultValue={question.content}
             />
           </div>
           <div className="form-group">

@@ -1,14 +1,24 @@
-import React, { useState } from "react";
-import { Route } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import QuestionApprovalCard from "../../components/QuestionApprovalCard";
-import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
-const index = () => {
+import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+// import QuestionManager from "../../components/QuestionManager/index";
+//import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
+const Index = () => {
   return (
     <div>
-      <QuestionApprovalCard></QuestionApprovalCard>
-      <Route path="/detailapproval" component={QuestionApprovalDetail}></Route>
+      <div class="row">
+        <div className="col-md-2">
+          <HeaderAsideNavbar></HeaderAsideNavbar>
+        </div>
+        <div className="col-md-10">
+          <Switch>
+            <Route path="/approval" component={QuestionApprovalCard} />
+          </Switch>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default index;
+export default Index;

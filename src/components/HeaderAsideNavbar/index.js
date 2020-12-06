@@ -5,8 +5,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import Link from "../../common/CustomLink";
+import "./index.scss";
 function Index(props) {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
@@ -19,27 +21,45 @@ function Index(props) {
         }}
       >
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem
-            button
-            selected={selectedIndex === 0}
-            onClick={(event) => handleListItemClick(event, 0)}
+          <Link
+            style={{
+              width: "100%",
+              textDecoration: "none",
+              color: "#000000b8",
+            }}
+            to="/question/manager"
           >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
+            <ListItem
+              button
+              selected={selectedIndex === 0}
+              onClick={(event) => handleListItemClick(event, 0)}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
 
-          <ListItem
-            button
-            selected={selectedIndex === 1}
-            onClick={(event) => handleListItemClick(event, 1)}
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+          </Link>
+          <Link
+            style={{
+              width: "100%",
+              textDecoration: "none",
+              color: "#000000b8",
+            }}
+            to="/question/approval"
           >
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Approval" />
-          </ListItem>
+            <ListItem
+              button
+              selected={selectedIndex === 1}
+              onClick={(event) => handleListItemClick(event, 1)}
+            >
+              <ListItemIcon>
+                <DraftsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Approval" />
+            </ListItem>
+          </Link>
         </List>
       </div>
     </div>

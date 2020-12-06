@@ -2,20 +2,34 @@ import React, { useState, useEffect } from "react";
 import HeaderAsideNavbar from "../HeaderAsideNavbar";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 import "./index.scss";
 
 //api
-import { questionApprovalDetail, approveQuestion } from "../../helpers";
+import {
+  questionApprovalDetail,
+  approveQuestion,
+  declineQuestion,
+} from "../../helpers";
 
 import { useParams } from "react-router-dom";
 import { DialogDecline, DialogFeedback } from "../Dialog";
 function Index() {
+  const [open, setOpen] = React.useState(false);
+
   const [decline, setDecline] = useState(false);
   const [feedback, setFeedback] = useState(false);
   const [question, setQuestion] = useState("");
   const { id } = useParams();
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
   useEffect(() => {
     (async () => {
       const questionData = await questionApprovalDetail(id);
@@ -29,7 +43,15 @@ function Index() {
   let status = true;
 
   const handleClickOpenApproval = () => {
-    approveQuestion(id, status);
+    approveQuestion(id, status)
+      .then(function (response) {
+        setOpen(true);
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
   const handleClickOpenFeedBack = () => {
     setFeedback(true);
@@ -40,6 +62,28 @@ function Index() {
   };
   const handleCloseDecline = () => {
     setDecline(false);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(id)
+      .then(function (response) {
+        setDecline(false);
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
+  const handleOpenFeedBack = () => {
+    declineQuestion(id)
+      .then(function (response) {
+        setFeedback(false);
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
   return (
     <div>
@@ -123,13 +167,20 @@ function Index() {
           </div>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
       <DialogDecline
         handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={handleOpentDecline}
         decline={decline}
       ></DialogDecline>
       <DialogFeedback
-      feedback={feedback}
-      handleFeedBack={handleFeedBack}
+        feedback={feedback}
+        handleFeedBack={handleFeedBack}
+        handleOpenFeedBack={handleOpenFeedBack}
       ></DialogFeedback>
     </div>
   );
