@@ -144,8 +144,8 @@ const signInSNS = async (req, res, next) => {
 		authType: authType,
 	});
 
-	if (foundUser) {
-		console.log("login");
+	if (foundUser) 
+	{
 		const loginToken = encodedToken(foundUser._id);
 		res.cookie("token", loginToken, {
 			expiresIn: "1d",
@@ -157,23 +157,25 @@ const signInSNS = async (req, res, next) => {
 			token: loginToken,
 		});
 	}
-	next();
-	// Create a new user
-	console.log("regist");
-	const newUser = new User(req.body);
-	await controllers.save(User, newUser);
+	else
+	{
+		// Create a new user
+		const newUser = new User(req.body);
+ 
+		await controllers.save(User, newUser);
 
-	// Encode a token
-	const loginToken = encodedToken(newUser._id);
-	res.cookie("token", loginToken, {
-		expiresIn: "1d",
-	});
-	// res.setHeader("Authorization", loginToken);
-	return res.status(201).json({
-		success: true,
-		user: newUser,
-		token: loginToken,
-	});
+		// Encode a token
+		const loginToken = encodedToken(newUser._id);
+		res.cookie("token", loginToken, {
+			expiresIn: "1d",
+		});
+		// res.setHeader("Authorization", loginToken);
+		return res.status(201).json({
+			success: true,
+			user: newUser,
+			token: loginToken,
+		});
+	}
 };
 
 const updateUser = async (req, res, next) => {
