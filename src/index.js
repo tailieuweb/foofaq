@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import Login from "./pages/Login";
 
 import "./index.scss";
+import "./components/ProfileUser/Form.scss"
 
 import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
@@ -21,6 +22,7 @@ import QuestionCreateForm from "./pages/QuestionCreateForm";
 
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
+import Form from "./components/ProfileUser/Form";
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -34,19 +36,20 @@ ReactDOM.render(
         <Switch>
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
-          <Route exact path="/login" component={Login}></Route>
+          {/* <Route exact path="/login" component={Login}></Route>
           <Route exact path="/list" component={QuestionList}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/approval" component={QuestionApproval}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/category" component={CategoryTag}></Route>
-          <Route path="/navigation" component={NavigationBar}></Route>
-          <Route
+          <Route path="/navigation" component={NavigationBar}></Route> */}
+          <Route path="/" component={Form}></Route>
+          {/* <Route
             path="/detailapproval/:id"
             component={QuestionApprovalDetail}
           ></Route>
           <Route path="/" component={QuestionCreateForm}></Route>
-          <Route path="/category" component={QuestionCategoryList}></Route>
+          <Route path="/category" component={QuestionCategoryList}></Route> */}
         </Switch>
       </Router>
     </Provider>
