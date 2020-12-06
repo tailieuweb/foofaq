@@ -9,18 +9,28 @@ const expressJwt = require("express-jwt");
 
 const encodedToken = (userID) => {
 	return JWT.sign(
-		{ _id: userID._id },
+		{
+			_id: userID._id,
+		},
 		JWT_SECRET
 	);
 };
 
 const getUser = async (req, res, next) => {
 	const { userID } = req.params;
+
 	const user = await controllers.findById(User, userID);
-	console.log(user);
-	return await res.status(200).json({
-		user,
-	});
+	if (user) {
+		return await res.status(200).json({
+			user,
+		});
+	} else {
+		return res.status(403).json({
+			error: {
+				message: "Username does not exist.",
+			},
+		});
+	}
 };
 
 const index = async (req, res, next) => {
@@ -31,11 +41,19 @@ const index = async (req, res, next) => {
 };
 
 const newUser = async (req, res, next) => {
-	const newUser = new User(req.body);
-	await controllers.save(User, newUser);
-	return res.status(201).json({
-		user: newUser,
-	});
+	try {
+		const newUser = new User(req.body);
+		await controllers.save(User, newUser);
+		return res.status(201).json({
+			user: newUser,
+		});
+	} catch (err) {
+		return res.status(403).json({
+			error: {
+				message: "Username is already in use.",
+			},
+		});
+	}
 };
 
 const signOut = async (req, res) => {
@@ -52,13 +70,14 @@ const secret = async (req, res, next) => {
 };
 
 const signUp = async (req, res, next) => {
-	const {username} = req.body;
+	const { username } = req.body;
 	// Check if there is a user with the same user
 
-	const foundUser = await User.findOne({username});
+	const foundUser = await User.findOne({
+		username,
+	});
 
-	if (foundUser)
-	{
+	if (foundUser) {
 		return res.status(403).json({
 			error: {
 				message: "Username is already in use.",
@@ -91,24 +110,17 @@ const signIn = async (req, res, next) => {
 		authType,
 	});
 
-	if (!user) 
-	{
+	if (!user) {
 		return res.status(400).json({
 			error: "User with that username does not exist. Please signup.",
 		});
-	}
-	else
-	{
-		user.isValidPassword(password).then(result => 
-		{
-			if(!result)
-			{
+	} else {
+		user.isValidPassword(password).then((result) => {
+			if (!result) {
 				return res.status(400).json({
 					error: "Username and password do not match.",
 				});
-			}
-			else
-			{
+			} else {
 				const loginToken = encodedToken(user._id);
 				res.cookie("token", loginToken, {
 					expiresIn: "1d",
@@ -119,9 +131,8 @@ const signIn = async (req, res, next) => {
 					user: user,
 				});
 			}
-		})
+		});
 	}
-
 };
 
 //Login with SNS user
@@ -200,8 +211,8 @@ const deleteUser = async (req, res, next) => {
 
 requireSignin = expressJwt({
 	secret: JWT_SECRET,
-	algorithms: ['HS256'],
-})
+	algorithms: ["HS256"],
+});
 
 module.exports = {
 	getUser,
