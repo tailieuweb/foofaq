@@ -10,6 +10,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
 	authID: {
 		type: String,
+		unique: true,
 		default: null
 	},
 	username: {

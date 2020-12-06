@@ -32,6 +32,7 @@ DB.connect(optionsMongoDB)
 const app = express();
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
+const tagRoute = require("./routes/tag");
 
 // Middlewares
 app.use(morgan("dev"));
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 // Routes
 app.use("/users", userRoute);
 app.use("/question", questionRoute);
+app.use("/tag", tagRoute);
 
 // Routes
 app.get("/", (req, res, next) => {
