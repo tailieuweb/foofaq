@@ -25,11 +25,7 @@ export const DialogDecline = (props) => {
         <Button onClick={props.handleCloseDecline} color="primary">
           Disagree
         </Button>
-        <Button
-          onClick={props.handleClickOpenDecline }
-          color="primary"
-          autoFocus
-        >
+        <Button onClick={props.handleOpentDecline} color="primary" autoFocus>
           Decline
         </Button>
       </DialogActions>
@@ -62,7 +58,7 @@ export const DialogFeedback = (props) => {
         <Button onClick={props.handleFeedBack} color="primary">
           Cancel
         </Button>
-        <Button onClick={props.handleFeedBack} color="primary">
+        <Button onClick={props.handleOpenFeedBack} color="primary">
           Feedback
         </Button>
       </DialogActions>

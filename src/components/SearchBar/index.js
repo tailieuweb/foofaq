@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./index.scss";
-import axios from "axios";
-import CategoryCard from "../CategoryCard";
-import { Grid, makeStyles } from "@material-ui/core";
 
 function SearchBar(props) {
   return (
