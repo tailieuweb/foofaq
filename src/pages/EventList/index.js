@@ -71,7 +71,7 @@ export default function ComplexGrid() {
           </Paper>
         ))
       ) : (
-        <label>Failed</label>
+        <label></label>
       )}
     </div>
   );
