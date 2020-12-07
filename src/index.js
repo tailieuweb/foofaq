@@ -25,7 +25,7 @@ import Managers from "./pages/QuestionManager";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
-import EventList from "./pages/EventList"
+// import EventList from "./pages/EventList"
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -49,7 +49,7 @@ ReactDOM.render(
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
-          <Route path="/events" component={EventList}></Route>
+          {/* <Route path="/events" component={EventList}></Route> */}
         </Switch>
       </Router>
     </Provider>
