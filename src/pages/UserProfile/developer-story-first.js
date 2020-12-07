@@ -51,6 +51,7 @@ export default function ImageAvatars() {
   const [user, setUser] = useState({});
 
   const displaynameEl1 = React.useRef(null);
+  const titleE1 = React.useRef(null);
   const fullnameEl1 = React.useRef(null);
   const ImgavatarEl1 = React.useRef(null);
 
@@ -79,6 +80,7 @@ export default function ImageAvatars() {
         displayname: displaynameEl1.current.value,
         fullname: fullnameEl1.current.value,
         avatar: ImgavatarEl1.current.value,
+        title: titleE1.current.value,
       }),
     }).then((response) => {
       console.log(response);
@@ -165,6 +167,7 @@ export default function ImageAvatars() {
                     id="inputTitle"
                     placeholder="What? you current position?"
                     defaultValue={user.title}
+                    ref={titleE1}
                   />
                 </div>
                 <div className="form-row">
