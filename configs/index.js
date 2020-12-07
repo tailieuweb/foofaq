@@ -14,6 +14,7 @@ module.exports = {
   github: {
     CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET
-  }
+  },
+  DB_TYPE: "mongo"
 
 }

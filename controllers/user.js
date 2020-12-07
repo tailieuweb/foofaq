@@ -1,7 +1,7 @@
 const { Controller } = require("../orm/database");
-const User = require("../models/user");
-const controllers = new Controller("mongo");
+const controllers = new Controller();
 
+const User = require("../models/user");
 const { JWT_SECRET } = require("../configs");
 
 const JWT = require("jsonwebtoken");
