@@ -1,0 +1,514 @@
+{
+	"info": {
+		"_postman_id": "5492c72a-ff25-4a88-82a8-6226f114c4f6",
+		"name": "API_FAQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[User]: Signout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/signout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"signout"
+					]
+				},
+				"description": "Đăng xuất người dùng"
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"xuantri2000000\",\n\t\"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Sign SNS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authID\": \"fb_id.99999999\",\r\n    \"email\": \"binhan1@gmail.com\",\r\n    \"username\": \"binhan1@gmail.com\",\r\n    \"firstName\": \"Tran\",\r\n    \"lastName\": \"An\",\r\n    \"authType\" : \"facebook\",\r\n    \"password\" : \"\",\r\n    \"image\" : \"https://lh3.google.com/u/0/ogw/ADGmqu-4_zWaiZzki-JoCBdtDPOqAdThBWh1GdIlHoON=s32-c-mo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/signinsns",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"signinsns"
+					]
+				},
+				"description": "FAQ"
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Update user",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Binh\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/5fca42a27cd71e0ec758f70d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"5fca42a27cd71e0ec758f70d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Iphone X\",\n\t\"image\": \"https://loremflickr.com/320/240\",\n\t\"description\": \"new 35 iphone\",\n\t\"price\": 35000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users"
+					]
+				},
+				"description": "Lấy danh sách người dùng"
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Create new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Huytue34343\",\n    \"password\": \"123456\",\n    \"email\": \"tue@gmail.com\",\n    \"firstName\": \"Huy\",\n    \"lastName\": \"Tue\",\n    \"image\": \"https://png.pngtree.com/png-vector/20190623/ourlarge/pngtree-accountavataruser--flat-color-icon--vector-icon-banner-templ-png-image_1491720.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"signup"
+					]
+				},
+				"description": "Tạo một người dùng"
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Get detail users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Iphone X\",\n\t\"image\": \"https://loremflickr.com/320/240\",\n\t\"description\": \"new 35 iphone\",\n\t\"price\": 35000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/5fcccdaee934810a2e127d37",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"5fcccdaee934810a2e127d37"
+					]
+				},
+				"description": "Lấy chi tiết người dùng"
+			},
+			"response": []
+		},
+		{
+			"name": "[User]: Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/5fcccdaee934810a2e127d37",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"5fcccdaee934810a2e127d37"
+					]
+				},
+				"description": "Xóa một người dùng"
+			},
+			"response": []
+		},
+		{
+			"name": "[Question]: Create question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" :\"cau hoi so 3\",\r\n    \"content\" : \"khong co gi het\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/question/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"question",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Question]: Delete question",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/question/delete/5fcb0d2c80695a16046264ab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"question",
+						"delete",
+						"5fcb0d2c80695a16046264ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Question]: Detail question",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/question/detail/5fcd7cc86adf47154c8bc001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"question",
+						"detail",
+						"5fcd7cc86adf47154c8bc001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Question] : Get all question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/question",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"question"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Question] : Update question",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"cau hoi so 2\",\r\n    \"content\" : \"khong co gi het\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/question/edit/5fcd7cc86adf47154c8bc001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"question",
+						"edit",
+						"5fcd7cc86adf47154c8bc001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Tag] Create Tag",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tagID\": \"123\",\r\n    \"tagName\": \"javascript\",\r\n    \"tagDescription\": \"kasdjasdkasdjassakjfsajkhfs skafhkashfsajhfkjsah kjshdjksahdjkash djksah\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/tag/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tag",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Tag]  Get all Tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Tag] Get detail Tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/tag/detail/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tag",
+						"detail",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Tag] deleteTag",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/tag/delete/5fcbb6259945e71dfcbcf4c4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tag",
+						"delete",
+						"5fcbb6259945e71dfcbcf4c4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Tag] editTag",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tagName\": \"javascript\",\r\n    \"tagDescription\": \"kasdjasdkasdjassakjfsajkhfs skafhkashfsajhfkjsah kjshdjksahdjkash djksah\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/tag/delete/5fcbbccc1739f71e0034a494",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tag",
+						"delete",
+						"5fcbbccc1739f71e0034a494"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

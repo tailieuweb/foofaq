@@ -15,6 +15,8 @@ const UserSchema = new Schema({
 	},
 	username: {
 		type: String,
+		// unique: true,
+		required: true
 	},
 	password: {
 		type: String,
@@ -23,6 +25,7 @@ const UserSchema = new Schema({
 		type: String,
 		lowercase: true,
 		unique: false,
+		default: null
 	},
 	firstName: {
 		type: String,
@@ -41,8 +44,8 @@ const UserSchema = new Schema({
 		type: String,
 		default: null
 	},
+	salt: { type: String }
 });
-
 
 //Hash password
 UserSchema.pre("save", async function (next) {
