@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 //Create Schema
 const Schema = mongoose.Schema;
 
-//Initiate TagSchema
-
+//Create Collection Tag and data fields
 const TagSchema = new Schema({
     tagID: {
         type: String,

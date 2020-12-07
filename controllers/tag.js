@@ -2,6 +2,7 @@ const { Controller } = require("../orm/database");
 const Tag = require("../models/tag");
 const controllers = new Controller("mongo");
 
+//Create Tag
 const createTag = (req, res) => {
     console.log(req.body)
     const newTag = new Tag(req.body);
@@ -10,7 +11,7 @@ const createTag = (req, res) => {
 		newTag
 	});
 }
-
+//Get all Tag
 const getAllTags = async (req, res) => {
     const tag = await controllers.find(Tag);
 	return res.status(200).json({
@@ -18,6 +19,7 @@ const getAllTags = async (req, res) => {
 	});
 }
 
+//Edit tag
 const editTag = async (req, res) => {
     try{
         const tag = await Tag.findByIdAndUpdate(req.params.id, {
@@ -32,7 +34,7 @@ const editTag = async (req, res) => {
         return res.status(400).json({ msg: err })
     }
 }
-
+// Delete tag
 const deleleTag = async (req, res) => {
     try { 
         const tag = await Tag.findByIdAndDelete(req.params.id);
@@ -42,7 +44,7 @@ const deleleTag = async (req, res) => {
         }
     }catch(err) { res.status(400).json({ msg: err})}
 }
-
+//Get detail tag
 const detailTag = async (req, res) => {
     try {
         const tag = await Tag.findById(req.params.id);

@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 //Use hash password
 const bcrypt = require("bcryptjs");
 
-//Initiate UserSchema
+//Create Collection User and data fields
 const UserSchema = new Schema({
 	authID: {
 		type: String,

@@ -16,6 +16,7 @@ const encodedToken = (userID) => {
 	);
 };
 
+// Get User 
 const getUser = async (req, res, next) => {
 	const { userID } = req.params;
 
@@ -33,13 +34,14 @@ const getUser = async (req, res, next) => {
 	}
 };
 
+// Get all user
 const index = async (req, res, next) => {
 	const users = await controllers.find(User);
 	return res.status(200).json({
 		users,
 	});
 };
-
+// Create new user
 const newUser = async (req, res, next) => {
 	try {
 		const newUser = new User(req.body);
@@ -55,7 +57,7 @@ const newUser = async (req, res, next) => {
 		});
 	}
 };
-
+// Logout
 const signOut = async (req, res) => {
 	res.clearCookie("token");
 	res.json({
@@ -63,12 +65,14 @@ const signOut = async (req, res) => {
 	});
 };
 
+
 const secret = async (req, res, next) => {
 	return res.status(200).json({
 		message: "You have access to secret page",
 	});
 };
 
+// Signup
 const signUp = async (req, res, next) => {
 	const { username } = req.body;
 	// Check if there is a user with the same user
@@ -176,6 +180,7 @@ const signInSNS = async (req, res, next) => {
 	}
 };
 
+//Update user 
 const updateUser = async (req, res, next) => {
 	const { userID } = req.params;
 	const newUser = req.body;
@@ -192,7 +197,7 @@ const updateUser = async (req, res, next) => {
 		});
 	}
 };
-
+//Delete user
 const deleteUser = async (req, res, next) => {
 	const { userID } = req.params;
 	try {
@@ -209,7 +214,7 @@ const deleteUser = async (req, res, next) => {
 		});
 	}
 };
-
+//Token confirmation
 requireSignin = expressJwt({
 	secret: JWT_SECRET,
 	algorithms: ["HS256"],
