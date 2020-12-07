@@ -196,7 +196,13 @@ export default function NavigationBar() {
             Home
           </Button>
           <Button variant="text" color="inherit">
+            Question
+          </Button>
+          <Button variant="text" color="inherit">
             Categories
+          </Button>
+          <Button variant="text" color="inherit">
+            Jobs
           </Button>
           <div className={classes.search} disabled={true}>
             <div className={classes.searchIcon}>

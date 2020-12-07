@@ -8,6 +8,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 // components
 import QuestionCard from "../../components/QuestionCard";
+import AdvancedFilter from "../../components/AdvancedFilter";
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +58,18 @@ const QuestionList = () => {
     }
   }, [questionsRaw]);
 
+  const handleSearch = (params) => {
+    (async () => {
+      const res = await axios.get(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=1`
+      );
+      setQuestionsRaw(res.data);
+    })();
+  };
+
   return (
     <Container maxWidth="lg">
+      <AdvancedFilter handleSearch={handleSearch} />
       {questions ? (
         questions.map((question) => (
           <QuestionCard

@@ -43,9 +43,7 @@ ReactDOM.render(
           <Route exact path="/" component={QuestionList}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/approval" component={QuestionApproval}></Route>
-         
-          {/* <Route path="/category" component={CategoryTag}></Route> */}
-          <Route path="/navigation" component={NavigationBar}></Route>
+
           <Route path="/form" component={QuestionCreateForm}></Route>
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
