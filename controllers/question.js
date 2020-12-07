@@ -48,7 +48,7 @@ const editQuestion = async function (req, res) {
     });
     if (!question) throw Error("Something went wrong while updating!");
     {
-      res.status(200).json({ success: true });
+      res.status(200).json({ success: true, question });
     }
   } catch (err) {
     res.status(400).json({ msg: err });
