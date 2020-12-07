@@ -1,0 +1,29 @@
+.makeStyles-root-1 {
+    width: 100%;
+    background-color: #fff;
+}
+.fa-exclamation:before {
+    content: "\f12a";
+    color: red;
+}
+.item-btn{
+
+    display: inline-block;
+    margin-bottom: .5rem;
+    background: rgba(206, 201, 201, 0.527);
+    position: relative;
+    padding: 10px 50px 10px 50px;
+    margin: 1px;
+    cursor: pointer;
+}
+
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+}
+.alert-info{
+    background-color: white;
+}
