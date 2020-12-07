@@ -75,6 +75,7 @@ const QuestionCard = ({ question }) => {
     createdAt,
     categories,
     answers,
+    asker,
   } = question;
 
   return (
