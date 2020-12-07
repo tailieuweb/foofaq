@@ -174,7 +174,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"Huytue8533\",\n    \"password\": \"123456\",\n    \"email\": \"tue@gmail.com\",\n    \"firstName\": \"Huy\",\n    \"lastName\": \"Tue\",\n    \"image\": \"https://png.pngtree.com/png-vector/20190623/ourlarge/pngtree-accountavataruser--flat-color-icon--vector-icon-banner-templ-png-image_1491720.jpg\"\n}",
+					"raw": "{\n    \"username\": \"Huytue34343\",\n    \"password\": \"123456\",\n    \"email\": \"tue@gmail.com\",\n    \"firstName\": \"Huy\",\n    \"lastName\": \"Tue\",\n    \"image\": \"https://png.pngtree.com/png-vector/20190623/ourlarge/pngtree-accountavataruser--flat-color-icon--vector-icon-banner-templ-png-image_1491720.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -182,14 +182,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/users",
+					"raw": "http://localhost:8000/users/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"users"
+						"users",
+						"signup"
 					]
 				},
 				"description": "Tạo một người dùng"

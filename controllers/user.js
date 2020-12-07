@@ -98,6 +98,7 @@ const signUp = async (req, res, next) => {
 	// res.setHeader("Authorization", token);
 	return res.status(201).json({
 		success: true,
+		user: newUser
 	});
 };
 
