@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { EditorState, convertToRaw } from "draft-js";
+import React, { useState, useEffect } from "react";
+import {
+  EditorState,
+  convertToRaw,
+  ContentState,
+  convertFromHTML,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import axios from "axios";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
-import SaveIcon from "@material-ui/icons/Save";
+
+import { useParams } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -17,6 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
+
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -61,9 +68,9 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-function QuestionForm({ id }) {
+function QuestionForm() {
   const [open, setOpen] = React.useState(false);
-
+  const [question, setQuestion] = useState([]);
   const handleClose = () => {
     setOpen(false);
   };
@@ -79,9 +86,8 @@ function QuestionForm({ id }) {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
-
-  //Truong hop POST k co gia tri id (id duoc truyen null)
-  if (id === null) {
+  const { id } = useParams();
+  if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
       questionPost();
@@ -112,107 +118,131 @@ function QuestionForm({ id }) {
 
   //Truong hop id co gia tri => PUT
   else {
+    handleSubmit = (event) => {
+      event.preventDefault();
+      questionPut(id);
+    };
+    const questionPut = (id) => {
+      axios
+        .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
+          title: title,
+          tag: tag,
+          content: content,
+        })
+        .then(function (response) {
+          // handle success
+          console.log("Successfully");
+          setTitle("");
+          setTag("");
+          console.log("POST Successfully");
+          setNofi("POST Successfully");
+          setOpen(true);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          console.log(error);
+          setNofi("POST Failed");
+          setOpen(true);
+        });
+    };
   }
 
-  async function getQuestion() {
-    const response = await axios.get(
-      "https://5fc48ee536bc790016343a0b.mockapi.io/questions/12"
+  // async function getQuestion() {
+  //   const response = await axios.get();
+  //   return response.data;
+  // }
+
+  useEffect(async () => {
+    const result = await axios(
+      `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${id}`
     );
-    return response.data;
-  }
 
-  const questionPut = () => {
-    axios
-      .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/12", {
-        title: title,
-        tag: tag,
-        content: content,
-      })
-      .then(function (response) {
-        // handle success
-        console.log("Successfully");
-        setTitle("");
-        setTag("");
-        console.log("POST Successfully");
-        setNofi("POST Successfully");
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        console.log(error);
-        setNofi("POST Failed");
-        setOpen(true);
-      });
-  };
+    setQuestion(result.data);
+  }, []);
+
+  // const sampleMarkup = `${question.id}`;
+  // const blocksFromHTML = convertFromHTML(sampleMarkup);
+  // const state = ContentState.createFromBlockArray(
+  //   blocksFromHTML.contentBlocks,
+  //   blocksFromHTML.entityMap
+  // );
+  const [editorStates, setEdittorStates] = useState(
+    EditorState.createWithContent(
+      ContentState.createFromBlockArray(convertFromHTML(`Hehehehe`))
+    )
+  );
+
+  console.log("question: " + question.content);
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="questionForm">
-        <div className="form-group">
-          <label htmlFor="questionTitle">
-            <b>Tiêu đề</b>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="questionForm">
+          <div className="form-group">
+            <label htmlFor="questionTitle">
+              <b>Tiêu đề</b>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="questionTitle"
+              aria-describedby="questionTitle"
+              placeholder="Nhập tiêu đề câu hỏi..."
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              defaultValue={question.title}
+            />
+          </div>
+          <label htmlFor="aroundEditorQuestion">
+            <b>Nội dung</b>
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="questionTitle"
-            aria-describedby="questionTitle"
-            placeholder="Nhập tiêu đề câu hỏi..."
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
+          <div className="aroundEditorQuestion" id="aroundEditorQuestion">
+            <Editor
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={setEditorState}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="questionTag">
+              <b>Thẻ</b>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="questionTag"
+              aria-describedby="questionTag"
+              placeholder="Nhập thẻ liên quan đến câu hỏi..."
+              defaultValue={question.tag}
+              onChange={(e) => {
+                setTag(e.target.value);
+              }}
+            />
+          </div>
+          <div className="aroundBtnQuestion">
+            <input type="submit" className="btn btn-success" value="Đăng" />
+          </div>
         </div>
-        <label htmlFor="aroundEditorQuestion">
-          <b>Nội dung</b>
-        </label>
-        <div className="aroundEditorQuestion" id="aroundEditorQuestion">
-          <Editor
-            editorState={editorState}
-            wrapperClassName="demo-wrapper"
-            editorClassName="demo-editor"
-            onEditorStateChange={setEditorState}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="questionTag">
-            <b>Thẻ</b>
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="questionTag"
-            aria-describedby="questionTag"
-            placeholder="Nhập thẻ liên quan đến câu hỏi..."
-            value={tag}
-            onChange={(e) => {
-              setTag(e.target.value);
-            }}
-          />
-        </div>
-        <div className="aroundBtnQuestion">
-          <input type="submit" className="btn btn-success" value="Đăng" />
-        </div>
-      </div>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Post Successfully
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>{nofi}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </form>
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            Post Successfully
+          </DialogTitle>
+          <DialogContent dividers>
+            <Typography gutterBottom>{nofi}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose} color="primary">
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </form>
+    </div>
   );
 }
 
