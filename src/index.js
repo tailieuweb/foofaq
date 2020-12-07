@@ -14,7 +14,7 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
-import CategoryTag from "./components/CategoryCard";
+
 import NavigationBar from "./components/NavigationBar";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";

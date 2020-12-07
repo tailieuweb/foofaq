@@ -2,17 +2,18 @@
 import React from "react";
 
 //import component
-import NavigationBar from "../../components/NavigationBar";
+import PageLayout from "../../common/PageLayout";
 import QuestionForm from "../../components/QuestionForm";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
 function QuestionCreateForm() {
   return (
-    <div>
-      <NavigationBar></NavigationBar>
-      <Route exact path="/form/" component={QuestionForm}></Route>{" "}
-      <Route path="/form/:id" component={QuestionForm}></Route>{" "}
-      
-    </div>
+    <PageLayout>
+      <Switch>
+        <Route exact path="/form/" component={QuestionForm}></Route>{" "}
+        <Route path="/form/:id" component={QuestionForm}></Route>{" "}
+      </Switch>
+    </PageLayout>
   );
 }
 
