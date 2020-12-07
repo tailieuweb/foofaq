@@ -74,7 +74,7 @@ const signUp = async (req, res, next) => {
 	// Check if there is a user with the same user
 
 	const foundUser = await controllers.findOne(User, {
-		username,
+		username
 	});
 
 	if (foundUser) {
@@ -98,6 +98,7 @@ const signUp = async (req, res, next) => {
 	// res.setHeader("Authorization", token);
 	return res.status(201).json({
 		success: true,
+		user: newUser
 	});
 };
 

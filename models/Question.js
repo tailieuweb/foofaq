@@ -15,4 +15,4 @@ const QuestionSchema = new Schema({
         default: Date.now
     }
 });
-module.exports = mongoose.model("Question", QuestionSchema);
+module.exports = mongoose.model("Question",QuestionSchema);
