@@ -17,6 +17,7 @@ import QuestionDetail from "./pages/QuestionDetail";
 
 import NavigationBar from "./components/NavigationBar";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
+import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
 // import CategoriesManager from "./components/CategoriesManager";
 import Managers from "./pages/QuestionManager";
