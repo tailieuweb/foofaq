@@ -1,8 +1,6 @@
 //hook call api:
 import React, { useState, useEffect } from "react";
-//
 import { API_ONE_USERSTORY } from "../../helpers/index";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -13,9 +11,7 @@ import Container from "@material-ui/core/Container";
 // import Imgavatar from "../../images/stack.png";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import "./developer-story-first.scss";
 
 const index = makeStyles((theme) => ({
@@ -54,7 +50,10 @@ export default function ImageAvatars() {
   const titleE1 = React.useRef(null);
   const fullnameEl1 = React.useRef(null);
   const ImgavatarEl1 = React.useRef(null);
-
+  const liveE1 = React.useRef(null);
+  const twiterE1 = React.useRef(null);
+  const WebsiteE1 = React.useRef(null);
+  const GitHubE1 = React.useRef(null);
   //Method: Get
   useEffect(() => {
     fetch(`${API_ONE_USERSTORY}`, {
@@ -81,10 +80,16 @@ export default function ImageAvatars() {
         fullname: fullnameEl1.current.value,
         avatar: ImgavatarEl1.current.value,
         title: titleE1.current.value,
+        live: liveE1.current.value,
+        twiter: twiterE1.current.value,
+        Website: WebsiteE1.current.value,
+        GitHub: GitHubE1.current.value,
+        
       }),
     }).then((response) => {
       console.log(response);
     });
+    alert('Update Successfully');
   };
   return (
     <div className="alert alert-info container">
@@ -178,6 +183,7 @@ export default function ImageAvatars() {
                       id="inputDisplay"
                       placeholder="Curent Location"
                       defaultValue={user.live}
+                      ref={liveE1}
                     />
                   </div>
                   <div className="form-group col-md-6">
@@ -198,6 +204,7 @@ export default function ImageAvatars() {
                         id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.twiter}
+                        ref={twiterE1}
                       />
                     </div>
                   </div>
@@ -222,6 +229,7 @@ export default function ImageAvatars() {
                         id="inlineFormInputGroupUsername2"
                         placeholder="http://example.org/"
                         defaultValue={user.Website}
+                        ref={WebsiteE1}
                       />
                     </div>
                   </div>
@@ -243,58 +251,9 @@ export default function ImageAvatars() {
                         id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.GitHub}
+                        ref={GitHubE1}
                       />
                     </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <label className="block">
-                    Pick the network sites you want to display
-                  </label>
-                  <div className="network-site">
-                    <label className="item-btn">
-                      <span className="favicon-wrapper">
-                        <div
-                          className="favicon favicon-stackexchangemeta"
-                          title="Meta Stack Exchange"
-                        />
-                      </span>
-                      <span className="site-info">
-                        <span
-                          className="community-name"
-                          title="Meta Stack Exchange"
-                        >
-                          Meta Stack Exchange
-                          <span className="rep">1</span>
-                        </span>
-                      </span>
-                      <input
-                        type="checkbox"
-                        name="SelectedSEAccounts"
-                        defaultValue="meta.stackexchange.com"
-                      />
-                      <div className="check" />
-                    </label>
-                    <label className="item-btn">
-                      <span className="favicon-wrapper">
-                        <div
-                          className="favicon favicon-stackoverflow"
-                          title="Stack Overflow"
-                        />
-                      </span>
-                      <span className="site-info">
-                        <span className="community-name" title="Stack Overflow">
-                          Stack overflow
-                          <span className="rep">1</span>
-                        </span>
-                      </span>
-                      <input
-                        type="checkbox"
-                        name="SelectedSEAccounts"
-                        defaultValue="stackoverflow.com"
-                      />
-                      <div className="check" />
-                    </label>
                   </div>
                 </div>
                 <div>
