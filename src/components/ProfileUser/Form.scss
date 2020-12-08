@@ -59,6 +59,10 @@
   }
   ul >li a:hover{
     text-decoration: none;
+    cursor: pointer;
+  }
+  .alert:hover{
+    background-color: #61dafb;
   }
   .alert img{
     width:30%;
@@ -110,7 +114,8 @@
       margin-left: 24%;
   }
   .activehide{
-    display: none;
+    opacity: 0;
+    margin-bottom: -120px;
   }
   .card:hover{
     cursor: pointer;

@@ -9,7 +9,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 // components
 import QuestionCard from "../../components/QuestionCard";
 import AdvancedFilter from "../../components/AdvancedFilter";
-
+import "../../pages/QuestionList/index.scss";
 // styles
 const useStyles = makeStyles((theme) => ({
   skeletion: {

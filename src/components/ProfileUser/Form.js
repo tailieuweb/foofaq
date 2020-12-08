@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import user from '../../images/user.png';
-cdcd 
+import user from '../../images/user.png'
 export default class Form extends Component {
 
     render() {
@@ -8,7 +7,7 @@ export default class Form extends Component {
             <div>
                   {/* START FORM */}
       <div className="container text-center full">
-        <div className="alert alert-info">
+        <div className="alert">
           <img width="100%" src={user} alt="" />
           <div className="name">User Name</div>
           <p className="text-one">Lorem ipsum dolor sit amet consectetur adipisicing elit </p>

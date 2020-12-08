@@ -3,4 +3,4 @@ $(document).ready(function(){
         $(".nenxanh").toggle();
         $(".showhide").toggleClass("activehide");
     });
-})
+});
