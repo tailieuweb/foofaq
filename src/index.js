@@ -15,7 +15,7 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
-import NavigationBar from "./components/NavigationBar";
+import EventList from "./pages/EventList";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
@@ -25,7 +25,7 @@ import Managers from "./pages/QuestionManager";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
-// import EventList from "./pages/EventList"
+
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -37,8 +37,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <Switch>
-          {/* <Route exact path="/login" component={Login}></Route>
-          <Route path="/" component={QuestionList}></Route> */}
+          <Route exact path="/login" component={Login}></Route>
 
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/" component={QuestionList}></Route>
@@ -49,7 +48,7 @@ ReactDOM.render(
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
-          {/* <Route path="/events" component={EventList}></Route> */}
+          <Route path="/events" component={EventList}></Route>
         </Switch>
       </Router>
     </Provider>
