@@ -1,16 +1,13 @@
+
 const { Controller } = require("../orm/database");
 const controllers = new Controller("mongo");
 const Question = require('../models/question');
-const { createValidation, editValidation } = require('../validation/validation');
+
 
 
 
 // Create Question
 const createQuestion = async function (req, res) {
-  //checking value input
-  // const { error } = createValidation(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  //create new User
   const question = new Question({
     title: req.body.title,
     content: req.body.content,
@@ -38,10 +35,8 @@ const getQuestion = async function (req, res) {
 
 //Edit Question
 const editQuestion = async function (req, res) {
-  //checking value input
-  // const { error } = editValidation(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
   try {
+    //Search by id and edit
     const question = await controllers.findByIdAndUpdate(Question, req.params.id, {
       title: req.body.title,
       content: req.body.content,
@@ -79,6 +74,7 @@ const detailQuestion = async function (req, res) {
     res.status(400).json({ msg: err });
   }
 }
+
 module.exports = {
   createQuestion,
   getQuestion,

@@ -1,9 +1,13 @@
 module.exports = {
+  //Token secret connecting the environment variable
   JWT_SECRET: process.env.JWT_SECRET,
+
+  //Mongoose ​​connected environment variable
   mongoDB: {
     host: process.env.DATABASE_CLOUD,
     type: 'mongo',
   },
+  //MySQL ​​connected environment variable
   mySQL: {
     host: 'localhost',
     user: process.env.USER_MYSQL,
@@ -11,10 +15,12 @@ module.exports = {
     database: process.env.DATABASE_MYSQL,
     type: 'mysql'
   },
+  //Github ​​connected environment variable
   github: {
     CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET
   },
+  //MongoDB environment variable
   DB_TYPE: "mongo"
 
 }

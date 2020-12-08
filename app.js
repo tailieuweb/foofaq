@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const passport = require("passport");
 const { Database } = require('./orm/database');
 
+// Local MongoDb connection
 var optionsMongoDB = {
 	host: 'mongodb://localhost:27017/faq',
 	type: 'mongo'
@@ -16,6 +17,7 @@ DB.connect(optionsMongoDB)
 
 
 const app = express();
+
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 const tagRoute = require("./routes/tag");

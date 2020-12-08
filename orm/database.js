@@ -3,11 +3,11 @@ const { MySQL } = require('./mysql')
 const { DB_TYPE } = require("../configs");
 // Class for creating multi inheritance.
 class multi {
-	// Inherit method to create base classes.
+	//Inherit method to create base classes.
 	static inherit(..._bases) {
 		class classes {
 
-			// The base classes
+			//The base classes
 			get base() { return _bases; }
 
 			constructor(..._args) {
@@ -40,7 +40,7 @@ class multi {
 		}
 	}
 }
-
+//Multimodal connection
 class Database extends multi.inherit(MongoDB, MySQL) {
 	constructor() {
 		super()
@@ -54,35 +54,40 @@ class Database extends multi.inherit(MongoDB, MySQL) {
 		}
 	}
 }
-
+//Controller inheritance
 class Controller extends multi.inherit(MongoDB, MySQL) {
 	constructor() {
 		super();
 		this.type = DB_TYPE;
 	}
+	//Object search function
 	find(Model) {
 		if (this.type === 'mongo') {
 			return super.find(Model);
 		}
 	}
-
+	//Save function
 	save(Model, data) {
 		if (this.type === 'mongo')
 			return super.save(Model, data);
 	}
+	//Search by ID
 	findById(Model, id) {
 		if (this.type === 'mongo')
 			return super.findById(Model, id)
 
 	}
+	//Search by object
 	findOne(Model, fields) {
 		if (this.type === 'mongo')
 			return super.findOne(Model, fields)
 	}
+	//Search by id and update
 	findByIdAndUpdate(Model, id, data) {
 		if (this.type === 'mongo')
 			return super.findByIdAndUpdate(Model, id, data)
 	}
+	//Search by id and delete
 	remove(Model, id) {
 		if (this.type === 'mongo')
 			return super.remove(Model, id)

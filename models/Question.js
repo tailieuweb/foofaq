@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Create Collection Question and data fields
 const QuestionSchema = new Schema({
     title: {
         type: String,
