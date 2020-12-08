@@ -20,6 +20,8 @@ import CategoriesGridView from "./components/CategoriesGridView";
 
 import EventsGridViewManager from "./components/EventsGridViewManager";
 import EventList from "./pages/EventList";
+import JobsGridViewManager from "./components/JobsGridViewManager";
+import JobsGridView from "./components/JobsGridView";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
@@ -60,6 +62,8 @@ ReactDOM.render(
             path="/categories-manager"
             component={CategoriesGridViewManager}
           ></Route>
+          <Route path="/jobmanger" component={JobsGridViewManager}></Route>
+          <Route path="/jobgrid" component={JobsGridView}></Route>
         </Switch>
       </Router>
     </Provider>
