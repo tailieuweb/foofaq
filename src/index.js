@@ -17,7 +17,9 @@ import UserProfileNavbar from "./pages/UserProfile/index";
 
 
 
-import Modal from "./pages/UserProfile/Modal";
+
+
+
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -33,8 +35,7 @@ ReactDOM.render(
           <Route exact path="/login" component={Login}></Route>
           <Route path="/question-list" component={QuestionList}></Route>
           <Route path="/userprofile" component={UserProfileNavbar}></Route>
-
-
+        
         
           {/* <Route exact path="/" component={Modal} /> */}
 
