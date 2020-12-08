@@ -14,7 +14,7 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 // user
 import UserProfileNavbar from "./pages/UserProfile/index";
-
+import FormUser from "./components/FormUser/index";
 
 
 
@@ -35,7 +35,7 @@ ReactDOM.render(
           <Route exact path="/login" component={Login}></Route>
           <Route path="/question-list" component={QuestionList}></Route>
           <Route path="/userprofile" component={UserProfileNavbar}></Route>
-        
+          <Route path="/list-user" component={FormUser}></Route>
         
           {/* <Route exact path="/" component={Modal} /> */}
 
