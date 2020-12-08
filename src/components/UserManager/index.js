@@ -18,11 +18,7 @@ import SearchBar from "../../components/SearchBar";
 
 // import QuestionManager from "../../components/QuestionManager/index";
 // import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
-import {
-  getAllQuestions,
-  declineQuestion,
-  getAllQuesiton,
-} from "../../helpers";
+import { getAllUser,getUserLimit, declineUser } from "../../helpers/userAPI";
 
 const useStyles = makeStyles({
   table: {
@@ -60,14 +56,13 @@ function Index(props) {
 
   useEffect(() => {
     (async () => {
-      const questionData = await getAllQuesiton();
-      console.log("dau tien:",questionData);
+      const questionData = await getAllUser();
       setPagQuestion(questionData);
     })();
   }, []);
   useEffect(() => {
     (async () => {
-      const questionData = await getAllQuestions(key, page, perPage);
+      const questionData = await getUserLimit(key, page, perPage);
       setQuestion(questionData);
     })();
   }, [key, page, perPage]);
@@ -82,7 +77,7 @@ function Index(props) {
   const DeleteQuestion = (id) => {
     var answer = window.confirm("you definitely want to delete ");
     if (answer) {
-      declineQuestion(id)
+      declineUser(id)
         .then(function (response) {
           // handle success
           console.log("Successfully");
@@ -107,7 +102,7 @@ function Index(props) {
 
   return (
     <div>
-      <h1> Questions </h1>
+      <h1> User Manager </h1>
       <SearchBar
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
@@ -122,15 +117,16 @@ function Index(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableH
             tt_id="#ID"
-            tt_title="TITLE"
+            tt_title="USERNAME"
             tt_update="UPDATE"
             tt_delete="DELETE"
           ></TableH>
           {questions.map((question) => (
             <TableB
+              key={question.id}
               key_id={question.id}
               id={question.id}
-              title={question.title}
+              title={question.user_name}
               update={
                 <Link to={"/form/" + question.id}>
                   <Button variant="contained" color="primary">

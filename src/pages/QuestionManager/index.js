@@ -5,6 +5,7 @@ import JobsManager from "../../components/JobsManager";
 import EventsManager from "../../components/EventsManager";
 import CategoriesManager from "../../components/CategoriesManager";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import UserManager from '../../components/UserManager/index';
 
 function Manager(props) {
   return (
@@ -19,6 +20,7 @@ function Manager(props) {
           <Route path="/manager/questions" component={QuestionManager} />
           <Route path="/manager/jobs" component={JobsManager} />
           <Route path="/manager/events" component={EventsManager} />
+          <Route path="/manager/user" component={UserManager} />
           {/* <QuestionManager />
       <JobsManager />
       <EventsManager /> */}

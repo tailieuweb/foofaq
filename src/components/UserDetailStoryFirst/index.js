@@ -258,7 +258,7 @@ export default function ImageAvatars() {
                 </div>
                 <div>
                   <br />
-                  <div className="alert alert-primary">
+                  <div className="alert">
                     <ButtonGroup
                       orientation="vertical"
                       color="primary"

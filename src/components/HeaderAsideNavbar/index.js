@@ -5,6 +5,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from '@material-ui/icons/People';
 
 //icon
 import WorkIcon from "@material-ui/icons/Work";
@@ -137,6 +138,27 @@ function Index(props) {
                 <DraftsIcon />
               </ListItemIcon>
               <ListItemText primary="Approval" />
+            </ListItem>
+          </Link>
+
+          {/* User */}
+          <Link
+            style={{
+              width: "100%",
+              textDecoration: "none",
+              color: "#000000b8",
+            }}
+            to="/manager/user"
+          >
+            <ListItem
+              button
+              selected={selectedIndex === 6}
+              onClick={(event) => handleListItemClick(event, 6)}
+            >
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="User" />
             </ListItem>
           </Link>
         </List>
