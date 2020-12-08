@@ -16,6 +16,8 @@ import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
 import EventsGridViewManager from "./components/EventsGridViewManager";
+import JobsGridViewManager from "./components/JobsGridViewManager";
+import JobsGridView from "./components/JobsGridView";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
@@ -51,6 +53,8 @@ ReactDOM.render(
           <Route path="/forms/" component={FormManager}></Route>
           {/* <Route path="/events" component={EventList}></Route> */}
           <Route path="/griddemo" component={EventsGridViewManager}></Route>
+          <Route path="/jobmanger" component={JobsGridViewManager}></Route>
+          <Route path="/jobgrid" component={JobsGridView}></Route>
         </Switch>
       </Router>
     </Provider>
