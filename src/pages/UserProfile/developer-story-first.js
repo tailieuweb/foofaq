@@ -14,6 +14,7 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./developer-story-first.scss";
 
+import Modal from "../UserProfile/Modal";
 const index = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -89,7 +90,7 @@ export default function ImageAvatars() {
     }).then((response) => {
       console.log(response);
     });
-    alert('Update Successfully');
+  
   };
   return (
     <div className="alert alert-info container">
@@ -265,7 +266,8 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="contained"
                     >
-                      <Button onClick={HandleSubmit}>Save</Button>
+                      {/* <Button onClick={HandleSubmit}>Save</Button> */}
+                     <Modal button="Save" title="Thông Báo" name="Update Successfully" onClick={() => HandleSubmit()}/>
                     </ButtonGroup>
                     <ButtonGroup
                       orientation="vertical"
@@ -273,7 +275,8 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="text"
                     >
-                      <Button>Cancel</Button>
+                      {/* <Button>Cancel</Button> */}
+                      <Modal button="Cancel" title="Thông Báo" name="No update"/>
                     </ButtonGroup>
                   </div>
                 </div>

@@ -14,11 +14,10 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 // user
 import UserProfileNavbar from "./pages/UserProfile/index";
-import Contacts from "./components/ContactUser/Contacts";
-import AddContact from "./components/ContactUser/AddContact";
-import EditContact from "./components/ContactUser/EditContact";
-import Navbar from "./components/Elements/Navbar";
 
+
+
+import Modal from "./pages/UserProfile/Modal";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -36,9 +35,9 @@ ReactDOM.render(
           <Route path="/userprofile" component={UserProfileNavbar}></Route>
 
 
-          <Route exact path="/" component={Contacts}></Route>
-          <Route exact path="/contacts/add" component={AddContact}></Route>
-          <Route exact path="/contacts/edit/:id" component={EditContact} />
+        
+          {/* <Route exact path="/" component={Modal} /> */}
+
         </Switch>
       </Router>
     </Provider>
