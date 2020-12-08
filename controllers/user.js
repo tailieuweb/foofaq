@@ -7,6 +7,8 @@ const { JWT_SECRET } = require("../configs");
 const JWT = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
+const {response} = require("../orm/response");
+
 const encodedToken = (userID) => {
 	return JWT.sign(
 		{
@@ -116,25 +118,22 @@ const signIn = async (req, res, next) => {
 	});
 
 	if (!user) {
-		return res.status(400).json({
-			error: "User with that username does not exist. Please signup.",
-		});
+		response(res, 400, "User with that username does not exist. Please signup.");
 	} else {
 		user.isValidPassword(password).then((result) => {
 			if (!result) {
-				return res.status(400).json({
-					error: "Username and password do not match.",
-				});
+				response(res, 400, "Username and password do not match.");
 			} else {
 				const loginToken = encodedToken(user._id);
 				res.cookie("token", loginToken, {
 					expiresIn: "1d",
 				});
-				return res.status(200).json({
-					success: true,
-					token: loginToken,
-					user: user,
-				});
+				let options = {
+					sucess : true,
+					token : loginToken,
+					user : user
+				}
+				response(res, 200, "Login sucessfully", options);
 			}
 		});
 	}
