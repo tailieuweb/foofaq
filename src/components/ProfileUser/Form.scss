@@ -62,7 +62,8 @@
     cursor: pointer;
   }
   .alert:hover{
-    background-color: #61dafb;
+    background-color: #61dafb54;
+    transition: 0.9s;
   }
   .alert img{
     width:30%;
@@ -74,6 +75,11 @@
     position: absolute;
     top: 6px;
     right: 6px;
+    opacity: 0;
+  }
+  .alert .show-button{
+    opacity: 1;
+    transition: 0.9s;
   }
   .alert .name{
     color: black;
