@@ -15,7 +15,7 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
-import NavigationBar from "./components/NavigationBar";
+import EventsGridViewManager from "./components/EventsGridViewManager";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
@@ -48,6 +48,7 @@ ReactDOM.render(
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
+          <Route path="/griddemo" component={EventsGridViewManager}></Route>
         </Switch>
       </Router>
     </Provider>
