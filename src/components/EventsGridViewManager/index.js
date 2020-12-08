@@ -1,14 +1,29 @@
-import React from "react";
-
+import React,{useState,useEffect} from "react";
 import Button from "@material-ui/core/Button";
-
-import EventsGridView from "../EventsGridView";
+import { DataGrid } from "@material-ui/data-grid";
+import axios from "axios";
+import "./index.scss";
+import Link from "../../common/CustomLink";
+// import EventsGridView from "../EventsGridView";
 
 let columns = [
+  { field: 'id'},
+  // { field: 'createdAt', width: 210 },
+  { field: 'name', width: 200 },
+  { field: 'imageUri', width: 110,
+    renderCell: (params) => (
+      <strong>
+        <div className="aroundImageEvents">
+        <img src={params.value} alt="hehe"/>
+        </div>
+      </strong>
+    ), },
+  // { field: 'date', width: 210 },
+  { field: 'description', width: 500 },
+  // { field: 'place', width: 150 },
   {
-    field: "date",
-    headerName: "Action",
-    width: 300,
+    field: "Action",
+    width: 200,
     renderCell: (params) => (
       <strong>
         <Button variant="contained" color="primary" size="small">
@@ -24,7 +39,7 @@ let columns = [
         </Button>
       </strong>
     ),
-  },
+  }
 ];
 
 // let rows = [
@@ -42,8 +57,27 @@ let columns = [
 //   },
 // ];
 
-function EventsGridViewManager() {
-  return <EventsGridView extraColumns={columns} />;
-}
 
+function EventsGridViewManager() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+  (async () => {
+    const categoryData = await axios.get('https://5fc9a56e3c1c220016440eab.mockapi.io/events')
+    setData(categoryData.data);
+  })();
+}, []);
+let rows = data;
+  console.log(data);
+  return (
+    <div style={{ height: 600, width: "100%" }}>
+      <DataGrid rows={rows} columns={columns}
+      pageSize={6}
+      rowsPerPageOptions={[5, 10, 20]}
+      pagination
+      {...rows}
+         rowHeight={80}
+      />
+    </div>
+  )
+}
 export default EventsGridViewManager;
