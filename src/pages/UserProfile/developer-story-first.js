@@ -85,12 +85,10 @@ export default function ImageAvatars() {
         twiter: twiterE1.current.value,
         Website: WebsiteE1.current.value,
         GitHub: GitHubE1.current.value,
-        
       }),
     }).then((response) => {
       console.log(response);
     });
-  
   };
   return (
     <div className="alert alert-info container">
@@ -107,7 +105,6 @@ export default function ImageAvatars() {
               <input
                 accept="image/*"
                 className={classes.input}
-                id="contained-button-file"
                 multiple
                 type="file"
                 ref={ImgavatarEl1}
@@ -117,12 +114,7 @@ export default function ImageAvatars() {
                   Upload
                 </Button>
               </label>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="icon-button-file"
-                type="file"
-              />
+              <input accept="image/*" className={classes.input} type="file" />
               <label htmlFor="icon-button-file">
                 <IconButton
                   color="primary"
@@ -141,7 +133,6 @@ export default function ImageAvatars() {
                     <label htmlFor="inputDisplay">Display name</label>
                     <input
                       className="form-control"
-                      id="inputDisplay"
                       defaultValue={user.displayname}
                       ref={displaynameEl1}
                     />
@@ -154,7 +145,6 @@ export default function ImageAvatars() {
                     <label htmlFor="inputFullname">Full name</label>
                     <input
                       className="form-control"
-                      id="inputFullname"
                       defaultValue={user.fullname}
                       ref={fullnameEl1}
                     />
@@ -170,7 +160,6 @@ export default function ImageAvatars() {
                   <input
                     type="text"
                     className="form-control"
-                    id="inputTitle"
                     placeholder="What? you current position?"
                     defaultValue={user.title}
                     ref={titleE1}
@@ -181,7 +170,6 @@ export default function ImageAvatars() {
                     <label htmlFor="inputDisplay">Where you live</label>
                     <input
                       className="form-control"
-                      id="inputDisplay"
                       placeholder="Curent Location"
                       defaultValue={user.live}
                       ref={liveE1}
@@ -202,7 +190,6 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
-                        id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.twiter}
                         ref={twiterE1}
@@ -227,7 +214,6 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
-                        id="inlineFormInputGroupUsername2"
                         placeholder="http://example.org/"
                         defaultValue={user.Website}
                         ref={WebsiteE1}
@@ -249,7 +235,6 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
-                        id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.GitHub}
                         ref={GitHubE1}
@@ -266,8 +251,12 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="contained"
                     >
-                      {/* <Button onClick={HandleSubmit}>Save</Button> */}
-                     <Modal button="Save" title="Thông Báo" name="Update Successfully" onClick={() => HandleSubmit()}/>
+                      <Modal
+                        button="Save"
+                        title="Thông Báo"
+                        name="Update Successfully"
+                        onClick={() => HandleSubmit()}
+                      />
                     </ButtonGroup>
                     <ButtonGroup
                       orientation="vertical"
@@ -275,8 +264,11 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="text"
                     >
-                      {/* <Button>Cancel</Button> */}
-                      <Modal button="Cancel" title="Thông Báo" name="No update"/>
+                      <Modal
+                        button="Cancel"
+                        title="Thông Báo"
+                        name="No update"
+                      />
                     </ButtonGroup>
                   </div>
                 </div>
