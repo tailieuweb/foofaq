@@ -3,8 +3,8 @@ import CategoryCard from "../../components/CategoryCard";
 import axios from "axios";
 
 //components
+import PageLayout from "../../common/PageLayout";
 import { Grid, makeStyles, Paper, Container } from "@material-ui/core";
-import NavigationBar from "../../components/NavigationBar/";
 import NavTag from "../../components/NavigationBar/NavTag";
 import SearchBar from "../../components/SearchBar";
 
@@ -43,10 +43,7 @@ function CategoryList() {
   };
 
   return (
-    <>
-      <NavigationBar />
-      <NavTag />
-      <Container maxWidth="lg">
+    <PageLayout outsideContainer={<NavTag />}>
         <SearchBar
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
@@ -75,8 +72,7 @@ function CategoryList() {
             </Grid>
           )}
         </Grid>
-      </Container>
-    </>
+    </PageLayout>
   );
 }
 

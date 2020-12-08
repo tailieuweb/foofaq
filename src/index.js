@@ -14,13 +14,18 @@ import reducer from "./reducers/index";
 import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
-import CategoryTag from "./components/CategoryCard";
-import NavigationBar from "./components/NavigationBar";
-import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
-import QuestionCreateForm from "./pages/QuestionCreateForm";
 
+import NavigationBar from "./components/NavigationBar";
+//import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
+import QuestionCreateForm from "./pages/QuestionCreateForm";
+// import QuestionApprovalCard from "./components/QuestionApprovalCard";
+// import CategoriesManager from "./components/CategoriesManager";
+import Managers from "./pages/QuestionManager";
+// import CategoriesForm from "./components/FormManager/Categories";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
+import FormManager from "./pages/FormManager";
+// import EventList from "./pages/EventList"
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -34,19 +39,17 @@ ReactDOM.render(
         <Switch>
           {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route> */}
+
           <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/list" component={QuestionList}></Route>
+          <Route exact path="/" component={QuestionList}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/approval" component={QuestionApproval}></Route>
-          <Route path="/detail" component={QuestionDetail}></Route>
-          <Route path="/category" component={CategoryTag}></Route>
-          <Route path="/navigation" component={NavigationBar}></Route>
-          <Route
-            path="/detailapproval/:id"
-            component={QuestionApprovalDetail}
-          ></Route>
-          <Route path="/" component={QuestionCreateForm}></Route>
+
+          <Route path="/form" component={QuestionCreateForm}></Route>
           <Route path="/category" component={QuestionCategoryList}></Route>
+          <Route path="/manager/" component={Managers}></Route>
+          <Route path="/forms/" component={FormManager}></Route>
+          {/* <Route path="/events" component={EventList}></Route> */}
         </Switch>
       </Router>
     </Provider>
