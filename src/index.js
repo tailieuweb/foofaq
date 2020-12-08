@@ -15,6 +15,9 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
+import CategoriesGridViewManager from "./components/CategoriesGridViewManager";
+import CategoriesGridView from "./components/CategoriesGridView";
+
 import EventsGridViewManager from "./components/EventsGridViewManager";
 import EventList from "./pages/EventList";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
@@ -52,6 +55,11 @@ ReactDOM.render(
           {/* <Route path="/events" component={EventList}></Route> */}
           <Route path="/griddemo" component={EventsGridViewManager}></Route>
           <Route path="/events" component={EventList}></Route>
+          <Route path="/categories" component={CategoriesGridView}></Route>
+          <Route
+            path="/categories-manager"
+            component={CategoriesGridViewManager}
+          ></Route>
         </Switch>
       </Router>
     </Provider>
