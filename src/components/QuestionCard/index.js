@@ -2,10 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 
-// components
+// MUI components
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Chip from "@material-ui/core/Chip";
@@ -14,6 +13,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+
+// components
+import Link from "../../common/CustomLink";
 
 // icons
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -37,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
+  },
+  title: {
+    fontSize: "1.8rem",
   },
   chips: {
     display: "flex",
@@ -64,10 +69,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionCard = ({ question }) => {
+const QuestionCard = ({ question, increasePoint, decreasePoint }) => {
   const classes = useStyles();
 
   const {
+    id,
     title,
     content,
     point,
@@ -83,13 +89,13 @@ const QuestionCard = ({ question }) => {
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item className={classes.vote}>
-            <IconButton aria-label="upvote">
+            <IconButton aria-label="upvote" onClick={() => increasePoint(id)}>
               <ArrowDropUpIcon />
             </IconButton>
             <Typography gutterBottom variant="h4">
               {point}
             </Typography>
-            <IconButton aria-label="downvote">
+            <IconButton aria-label="downvote" onClick={() => decreasePoint(id)}>
               <ArrowDropDownIcon />
             </IconButton>
           </Grid>
@@ -97,7 +103,7 @@ const QuestionCard = ({ question }) => {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Link gutterBottom variant="h5">
+                <Link className={classes.title} to={`questions/${id}`}>
                   {title}
                 </Link>
                 <Typography variant="body2" color="textSecondary">
