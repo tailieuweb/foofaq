@@ -5,30 +5,21 @@ import moment from "moment";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
 import "./index.scss";
-
+import { DataGrid } from "@material-ui/data-grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import CheckIcon from "@material-ui/icons/Check";
-import CloseIcon from "@material-ui/icons/Close";
 import { green } from "@material-ui/core/colors";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
+
 import Link from "../../common/CustomLink";
-//
-import Pagination from "@material-ui/lab/Pagination";
 
 //
+import TextField from "@material-ui/core/TextField";
+
 import { DialogDecline } from "../Dialog";
 
 //
-import {
-  allQuestion,
-  getQuestions,
-  approveQuestion,
-  declineQuestion,
-} from "../../helpers";
+import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -66,30 +57,36 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     color: "red",
   },
+  textField: {
+    marginBottom: "50px",
+  },
 }));
 
 const Index = (props) => {
   const classes = useStyles();
+
   const [open, setOpen] = useState(false);
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
 
   const [decline, setDecline] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [all, setAll] = useState([]);
-
+  // const [all, setAll] = useState([]);
+  // fillter Date
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
   let perPage = 5;
-
-  let count = Number(all.length) / perPage;
+  // const [dateQuestion, setDateQuestion] = useState("");
+  // let count = Number(all.length) / perPage;
   let status = true;
-  let title, content;
+  //let title, content;
+  // const [newest, setNewest] = useState("");
+  // const [oldest, setOldest] = useState("");
+  const [statusA, setStatusA] = useState("status=false");
 
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       setOpen(false);
@@ -100,14 +97,9 @@ const Index = (props) => {
   const handleClickOpenDecline = (id) => {
     setDecline(false);
   };
+  const handleOpentDecline = () => {};
 
-  const handleClickDecline = (id) => {
-    if (window.confirm("Decline ?")) {
-      declineQuestion(id);
-    } else {
-      return;
-    }
-  };
+  const handleClickDecline = (id) => {};
   const handleCloseDecline = () => {
     setDecline(false);
   };
@@ -117,28 +109,133 @@ const Index = (props) => {
     setOpen(true);
   };
   //get question
+  // const handleSortOldest = () => {
+  //   setOldest("=createdAt");
+  //   setNewest("");
+  // };
+  // const handleSortNewest = () => {
+  //   setOldest("");
+  //   setNewest("createdAt");
+  // };
   useEffect(() => {
     (async () => {
-      const questionData = await getQuestions(page, perPage, key);
+      const questionData = await getQuestions(key, statusA);
       setQuestions(questionData);
     })();
-  }, [page, perPage, key]);
+  }, [key, statusA]);
 
   // searchBar
-
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
   };
   const handleSearch = () => {
-    setKey(keyword);
+    if (keyword !== "") {
+      setKey(keyword);
+      setStatusA("");
+    } else {
+      setKey("");
+      setStatusA("status=false");
+    }
   };
 
-  useEffect(() => {
-    (async () => {
-      const questionData = await allQuestion();
-      setAll(questionData);
-    })();
-  }, []);
+  let dateTo = moment(to).valueOf();
+  let dateFrom = moment(from).valueOf();
+
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
+  // questions.map((q) => {
+  //   moment(q.createdAt);
+
+  // if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+  //   console.log(q.title);
+  // } else {
+  //   console.log("ko co gi ");
+  // }
+  // console.log(moment(q.createdAt).valueOf());
+  // });
+  // console.log(questions.createdAt);
+  const handleDate = () => {};
+
+  let columns = [
+    {
+      field: "id",
+      headerName: "#ID",
+      width: 150,
+      renderCell: (params) => <strong>{params.value}</strong>,
+    },
+    {
+      field: "title",
+      headerName: "Title",
+      width: 150,
+      renderCell: (params) => <strong>{params.value}</strong>,
+    },
+
+    {
+      field: "tag",
+      headerName: "Categories",
+      width: 150,
+      renderCell: (params) => <strong>{params.value}</strong>,
+    },
+
+    {
+      field: "createdAt",
+      headerName: "Date",
+      width: 150,
+      renderCell: (params) => <strong>{moment(params.value).fromNow()}</strong>,
+    },
+    {
+      field: "users",
+      headerName: "Author",
+      width: 150,
+      renderCell: (params) => <strong> Black Panther </strong>,
+    },
+
+    {
+      field: "id",
+      headerName: "Action",
+      width: 230,
+
+      renderCell: (params) => (
+        <strong>
+          <Button
+            onClick={() => {
+              handleClickOpenApproval(params.value);
+            }}
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            Approval
+          </Button>
+
+          <Button
+            onClick={() => {
+              handleClickDecline(params.value);
+            }}
+            variant="contained"
+            color="secondary"
+            size="small"
+            style={{ marginLeft: 16 }}
+          >
+            Decline
+          </Button>
+        </strong>
+      ),
+    },
+    {
+      field: "id",
+      headerName: "Internship diary ",
+      width: 150,
+      renderCell: (params) => (
+        <strong>
+          {" "}
+          <Link to={`/detail/${params.value}`}> See detail</Link>{" "}
+        </strong>
+      ),
+    },
+  ];
+
+  let rows = [...questions];
 
   return (
     <div>
@@ -165,131 +262,61 @@ const Index = (props) => {
               <h4> QUESTION APPROVAL</h4>
             </div>
             <div className="col-md-6 col-12">
-              <div className="col-rgt">
-                {" "}
-                <div className="total">Total: {all.length}</div>
-                <Button className="btn-fill" variant="contained">
-                  Newest Fist
-                </Button>
-                <Button className="btn-fill" variant="contained">
-                  Oldest Fist
-                </Button>
+              <div className={classes.fillterDate}>
+                <TextField
+                  id="date"
+                  label="From "
+                  type="date"
+                  defaultValue="2020-12-06"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => {
+                    setFrom(e.target.value);
+                  }}
+                />
+                <TextField
+                  id="date"
+                  label="To "
+                  type="date"
+                  defaultValue="2020-12-07"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => {
+                    setTo(e.target.value);
+                  }}
+                />
+                <Button onClick={handleDate} variant="contained">
+                  Fillter
+                </Button>{" "}
               </div>
             </div>
           </div>
         </div>
-        {questions.map((question) => {
-          if (question.status === false) {
-            title = question.title;
-            content = question.content;
-
-            return (
-              <div className="question-list">
-                <div className="app-dec">
-                  <Button
-                    variant="outlined"
-                    className={classes.buttonr}
-                    onClick={() => {
-                      handleClickOpenApproval(question.id);
-                    }}
-                  >
-                    <CheckIcon className={classes.checkIcon}></CheckIcon>
-                  </Button>
-                  <Button
-                    className={classes.buttonc}
-                    variant="outlined"
-                    onClick={() => {
-                      handleClickDecline(question.id);
-                    }}
-                  >
-                    <CloseIcon
-                      className={classes.closeIcon}
-                      color="action"
-                    ></CloseIcon>
-                  </Button>
-
-                  <Dialog
-                    open={decline}
-                    onClose={handleCloseDecline}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">
-                      {"Are you sure to decline ?"}
-                    </DialogTitle>
-
-                    <DialogActions>
-                      <Button
-                        onClick={() => {
-                          handleCloseDecline();
-                        }}
-                        color="primary"
-                      >
-                        Disagree
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          handleClickOpenDecline(question.id);
-                        }}
-                        color="primary"
-                        autoFocus
-                      >
-                        Decline
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                </div>
-                <div className="row">
-                  <div className="col-md-10 col-12">
-                    <div className="question-content">
-                      <Link id="abs" to={"/approval/" + question.id}>
-                        <h5 className="question-title">{title}</h5>
-                      </Link>
-                      <p className="question-des">{content}</p>
-                    </div>
-                  </div>
-                  <div clasName="col-md-2  col-12">
-                    <div className="user-question">
-                      <div className="question-time">
-                        {" "}
-                        {`asked ${moment(question.createdAt).fromNow()}`}
-                      </div>
-                      <img
-                        className="avt"
-                        src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
-                        alt="user"
-                      />
-                      <div className="username">User 1</div>
-                    </div>
-                  </div>
-                </div>
-
-                <Snackbar
-                  open={open}
-                  autoHideDuration={200}
-                  onClose={handleClose}
-                >
-                  <Alert onClose={handleClose} severity="success">
-                    This is a success message!
-                  </Alert>
-                </Snackbar>
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div className={classes.pag}>
-        <Pagination
-          className={classes.pagechill}
-          count={Math.ceil(count)}
-          variant="outlined"
-          shape="rounded"
-          onChange={handleChange}
-          page={page}
-          siblingCount={1}
-          boundaryCount={1}
-        />
+        <div style={{ height: "400px", width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 20]}
+            pagination
+            {...questions}
+          />
+        </div>
       </div>{" "}
+      <Snackbar open={open} autoHideDuration={200} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
+      {/* <DialogDecline
+        decline={decline}
+        handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={handleOpentDecline}
+      /> */}
     </div>
   );
 };
