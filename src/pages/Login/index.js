@@ -25,7 +25,7 @@ const Login = () => {
 
   const handlerGithubLogin = async (res) => {
     console.log(res);
-    if(res.code){
+    if (res.code) {
       alert("Logged in successfully!");
     }
   };

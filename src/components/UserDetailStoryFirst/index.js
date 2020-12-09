@@ -12,9 +12,8 @@ import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./developer-story-first.scss";
+import "./index.scss";
 
-import Modal from "../UserProfile/Modal";
 const index = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -85,10 +84,12 @@ export default function ImageAvatars() {
         twiter: twiterE1.current.value,
         Website: WebsiteE1.current.value,
         GitHub: GitHubE1.current.value,
+        
       }),
     }).then((response) => {
       console.log(response);
     });
+    alert('Update Successfully');
   };
   return (
     <div className="alert alert-info container">
@@ -105,6 +106,7 @@ export default function ImageAvatars() {
               <input
                 accept="image/*"
                 className={classes.input}
+                id="contained-button-file"
                 multiple
                 type="file"
                 ref={ImgavatarEl1}
@@ -114,7 +116,12 @@ export default function ImageAvatars() {
                   Upload
                 </Button>
               </label>
-              <input accept="image/*" className={classes.input} type="file" />
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+              />
               <label htmlFor="icon-button-file">
                 <IconButton
                   color="primary"
@@ -133,6 +140,7 @@ export default function ImageAvatars() {
                     <label htmlFor="inputDisplay">Display name</label>
                     <input
                       className="form-control"
+                      id="inputDisplay"
                       defaultValue={user.displayname}
                       ref={displaynameEl1}
                     />
@@ -145,6 +153,7 @@ export default function ImageAvatars() {
                     <label htmlFor="inputFullname">Full name</label>
                     <input
                       className="form-control"
+                      id="inputFullname"
                       defaultValue={user.fullname}
                       ref={fullnameEl1}
                     />
@@ -160,6 +169,7 @@ export default function ImageAvatars() {
                   <input
                     type="text"
                     className="form-control"
+                    id="inputTitle"
                     placeholder="What? you current position?"
                     defaultValue={user.title}
                     ref={titleE1}
@@ -170,6 +180,7 @@ export default function ImageAvatars() {
                     <label htmlFor="inputDisplay">Where you live</label>
                     <input
                       className="form-control"
+                      id="inputDisplay"
                       placeholder="Curent Location"
                       defaultValue={user.live}
                       ref={liveE1}
@@ -190,6 +201,7 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
+                        id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.twiter}
                         ref={twiterE1}
@@ -214,6 +226,7 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
+                        id="inlineFormInputGroupUsername2"
                         placeholder="http://example.org/"
                         defaultValue={user.Website}
                         ref={WebsiteE1}
@@ -235,6 +248,7 @@ export default function ImageAvatars() {
                       <input
                         type="text"
                         className="form-control"
+                        id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
                         defaultValue={user.GitHub}
                         ref={GitHubE1}
@@ -244,19 +258,14 @@ export default function ImageAvatars() {
                 </div>
                 <div>
                   <br />
-                  <div className="alert alert-primary">
+                  <div className="alert">
                     <ButtonGroup
                       orientation="vertical"
                       color="primary"
                       aria-label="vertical contained primary button group"
                       variant="contained"
                     >
-                      <Modal
-                        button="Save"
-                        title="Thông Báo"
-                        name="Update Successfully"
-                        onClick={() => HandleSubmit()}
-                      />
+                      <Button onClick={HandleSubmit}>Save</Button>
                     </ButtonGroup>
                     <ButtonGroup
                       orientation="vertical"
@@ -264,11 +273,7 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="text"
                     >
-                      <Modal
-                        button="Cancel"
-                        title="Thông Báo"
-                        name="No update"
-                      />
+                      <Button>Cancel</Button>
                     </ButtonGroup>
                   </div>
                 </div>

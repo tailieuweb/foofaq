@@ -1,12 +1,25 @@
 import React from "react";
-import QuestionApproval from "../../components/QuestionApprovalCard";
-
-const index = () => {
+import { Route } from "react-router-dom";
+import QuestionApprovalCard from "../../components/QuestionApprovalCard";
+import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
+const Index = () => {
   return (
     <div>
-      <QuestionApproval></QuestionApproval>
+      <div class="row">
+        <div className="col-md-2">
+          <HeaderAsideNavbar></HeaderAsideNavbar>
+        </div>
+        <div className="col-md-10">
+          <Route exact path="/approval" component={QuestionApprovalCard} />
+          <Route
+            path="/approval/:id"
+            component={QuestionApprovalDetail}
+          ></Route>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default index;
+export default Index;

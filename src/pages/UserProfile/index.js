@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -9,13 +9,15 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import UserAppBar from "../UserAppBar";
 import ListUserButton from "../../components/UserListButton/index";
-import UserCardSummary from '../UserCardSummary/index';
-import ProfileAvatar from './profile-avatar';
-import DeveloperStoryFirst from './developer-story-first';
+import UserCardSummary from "../UserCardSummary/index";
+import UserDetail from "../../components/UserDetail/index";
+import DeveloperStoryFirst from "../../components/UserDetailStoryFirst/index";
+import UserEditProfile from '../../components/UserEditProfile/index';
+
+
 import "./index.scss";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -90,15 +92,38 @@ export default function UserProfileNavbar() {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          <TabPanel className="Lower-text"  value={value} index={0} dir={theme.direction}>
-            <ProfileAvatar/>
+          <TabPanel
+            className="Lower-text"
+            value={value}
+            index={0}
+            dir={theme.direction}
+          >
+            <UserDetail />
           </TabPanel>
-          <TabPanel className="Lower-text" value={value} index={1} dir={theme.direction}>
-            <ListUserButton/>
-            <UserCardSummary/>
+          <TabPanel
+            className="Lower-text"
+            value={value}
+            index={1}
+            dir={theme.direction}
+          >
+            <ListUserButton />
+            <UserCardSummary />
           </TabPanel>
-          <TabPanel className="Lower-text" value={value} index={2} dir={theme.direction}>
-            <DeveloperStoryFirst/>
+          <TabPanel
+            className="Lower-text"
+            value={value}
+            index={2}
+            dir={theme.direction}
+          >
+            <DeveloperStoryFirst />
+          </TabPanel>
+          <TabPanel
+            className="Lower-text"
+            value={value}
+            index={3}
+            dir={theme.direction}
+          >
+            <UserEditProfile />
           </TabPanel>
         </SwipeableViews>
       </div>
