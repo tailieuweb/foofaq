@@ -52,7 +52,7 @@ ReactDOM.render(
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
           <Route path="/user-profile" component={UserProfile}></Route>
-          <Route path="/user-aler" component={UserProflieAler}></Route>
+          {/* <Route path="/user-aler" component={UserProflieAler}></Route> */}
           {/* <Route path="/events" component={EventList}></Route> */}
         </Switch>
       </Router>

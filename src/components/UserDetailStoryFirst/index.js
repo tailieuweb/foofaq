@@ -84,12 +84,11 @@ export default function ImageAvatars() {
         twiter: twiterE1.current.value,
         Website: WebsiteE1.current.value,
         GitHub: GitHubE1.current.value,
-        
       }),
     }).then((response) => {
       console.log(response);
     });
-    alert('Update Successfully');
+    alert("Update Successfully");
   };
   return (
     <div className="alert alert-info container">
@@ -212,7 +211,6 @@ export default function ImageAvatars() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="inputDisplay">Website</label>
-
                     <label
                       className="sr-only"
                       htmlFor="inlineFormInputGroupUsername2"
