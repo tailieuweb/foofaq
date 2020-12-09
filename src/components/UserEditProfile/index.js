@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Avatar, Paper, Tabs, Tab, TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,7 +43,7 @@ const Itemhome = (props) => {
                   height: "225px",
                 }}
                 variant="top"
-                src="https://nartc.netlify.app/static/d142aa02b155c81406c2e60dda0d08c3/9d953/health_hack.png"
+                // src="https://nartc.netlify.app/static/d142aa02b155c81406c2e60dda0d08c3/9d953/health_hack.png"
               />
               <Card.Body style={{ padding: "0px" }}>
                 <Button

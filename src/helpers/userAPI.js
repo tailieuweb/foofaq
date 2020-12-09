@@ -21,7 +21,7 @@ export const declineUser = async (id) => {
 
 
 export const AddUser = async (user_email,user_password,id,user_name) => {
-  const user = await axios.post(API_URL_USER_ALL , { user_email,user_password,user_createdAt,id,user_name });
+  const user = await axios.post(API_URL_USER_ALL , { user_email,user_password,id,user_name });
   return user.data;
 };
 
@@ -31,5 +31,10 @@ export const UpdateUser = async (id,user_name,user_password,user_email) => {
     user_email,
     user_password,
   });
+  return user.data;
+};
+//get 1 category
+export const getUser = async (id) => {
+  const user = await axios.get(API_URL_USER_ALL + `users/${id}`);
   return user.data;
 };
