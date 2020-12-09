@@ -155,6 +155,16 @@ function QuestionGridViewManager() {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       ></SearchBar>
+      <Link to={`/form/`}>
+        <Button
+          style={{ margin: "50px" }}
+          variant="contained"
+          color="primary"
+          size="small"
+        >
+          Add question
+        </Button>
+      </Link>
       <div style={{ height: "400px", width: "100%" }}>
         <DataGrid
           rows={rows}

@@ -49,7 +49,7 @@ ReactDOM.render(
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
-          <Route path="/griddemo" component={QuestionGridViewManager}></Route>
+          {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
         </Switch>
       </Router>
     </Provider>

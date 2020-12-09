@@ -1,5 +1,5 @@
 import React from "react";
-import QuestionManager from "../../components/QuestionManager";
+import QuestionGridViewManager from "../../components/QuestionGridViewManager";
 import { Route } from "react-router-dom";
 import JobsManager from "../../components/JobsManager";
 import EventsManager from "../../components/EventsManager";
@@ -16,7 +16,10 @@ function Manager(props) {
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
           <Route path="/manager/categories" component={CategoriesManager} />
-          <Route path="/manager/questions" component={QuestionManager} />
+          <Route
+            path="/manager/questions"
+            component={QuestionGridViewManager}
+          />
           <Route path="/manager/jobs" component={JobsManager} />
           <Route path="/manager/events" component={EventsManager} />
           {/* <QuestionManager />
