@@ -1,8 +1,8 @@
 
 const { Controller } = require("../orm/database");
-const controllers = new Controller("mongo");
+const controllers = new Controller();
 const Question = require('../models/question');
-
+const {response} = require("../orm/response");
 
 
 

@@ -1,4 +1,4 @@
-//require package mongose
+//require package mongoose
 const mongoose = require("mongoose");
 
 //Create Schema
