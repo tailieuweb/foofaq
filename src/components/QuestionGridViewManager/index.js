@@ -159,7 +159,7 @@ function QuestionGridViewManager() {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       ></SearchBar> */}
-      <Link to={`/form/`}>
+      {/* <Link to={`/form/`}>
         <Button
           style={{ margin: "50px" }}
           variant="contained"
@@ -168,7 +168,7 @@ function QuestionGridViewManager() {
         >
           Add question
         </Button>
-      </Link>
+      </Link> */}
       <div style={{ height: "400px", width: "100%" }}>
         <DataGrid
           rows={rows}

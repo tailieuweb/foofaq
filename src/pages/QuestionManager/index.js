@@ -1,6 +1,6 @@
 import React from "react";
 import QuestionGridViewManager from "../../components/QuestionGridViewManager";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 // import JobsManager from "../../components/JobsManager";
 // import EventsManager from "../../components/EventsManager";
 // import CategoriesManager from "../../components/CategoriesManager";
@@ -9,7 +9,7 @@ import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
 import SearchBar from "../../components/SearchBar";
-
+import Button from "@material-ui/core/Button";
 function Manager(props) {
   return (
     <div>
@@ -20,7 +20,16 @@ function Manager(props) {
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
           <SearchBar></SearchBar>
-
+          <Link to={`/form/`}>
+            <Button
+              style={{ margin: "30px" }}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Add
+            </Button>
+          </Link>
           <Route
             path="/manager/categories"
             component={CategoriesGridViewManager}
