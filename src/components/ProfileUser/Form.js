@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import user from '../../images/user.png'
-export default class Form extends Component {
+export default function Form () {
 
-    render() {
+   
         return (
             <div>
                   {/* START FORM */}
@@ -77,4 +77,3 @@ export default class Form extends Component {
             </div>
         )
     }
-}
