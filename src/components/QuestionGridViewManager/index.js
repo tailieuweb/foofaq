@@ -87,22 +87,21 @@ function QuestionGridViewManager() {
       },
     },
     {
-      field: "id",
+      field: "action",
       headerName: "Action",
       width: 180,
 
       renderCell: (params) => (
         <strong>
-          <Link to={`/form/${params.value}`}>
-            <Button variant="contained" color="primary" size="small">
-              EDIT
-            </Button>
-          </Link>
+          {/* <Link to={`/form/${params.value}`}>  </Link> */}
+          <Button variant="contained" color="primary" size="small">
+            EDIT
+          </Button>
 
           <Button
-            onClick={() => {
-              handleDeleteQuestion(params.value);
-            }}
+            // onClick={() => {
+            //   handleDeleteQuestion(params.value);
+            // }}
             variant="contained"
             color="secondary"
             size="small"
@@ -114,7 +113,7 @@ function QuestionGridViewManager() {
       ),
     },
     {
-      field: "id",
+      field: "detail",
       headerName: "Internship diary ",
       width: 150,
       renderCell: (params) => (
@@ -127,6 +126,7 @@ function QuestionGridViewManager() {
   ];
 
   const [data, setData] = useState([]);
+  const [rows, setRows] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
 
@@ -136,7 +136,11 @@ function QuestionGridViewManager() {
       setData(question);
     })();
   }, [key]);
-  let rows = [...data];
+
+  useEffect(() => {
+    setRows(data);
+    console.log(data);
+  }, [data]);
 
   const handleDeleteQuestion = (id) => {
     declineQuestion(id);
@@ -151,10 +155,10 @@ function QuestionGridViewManager() {
   };
   return (
     <div>
-      <SearchBar
+      {/* <SearchBar
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
-      ></SearchBar>
+      ></SearchBar> */}
       <Link to={`/form/`}>
         <Button
           style={{ margin: "50px" }}

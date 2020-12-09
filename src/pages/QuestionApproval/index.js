@@ -6,7 +6,7 @@ import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
 const Index = () => {
   return (
     <div>
-      <div class="row">
+      <div className="row">
         <div className="col-md-2">
           <HeaderAsideNavbar></HeaderAsideNavbar>
         </div>

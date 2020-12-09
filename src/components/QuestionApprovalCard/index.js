@@ -88,9 +88,7 @@ const Index = (props) => {
   const [statusA, setStatusA] = useState("status=false");
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      setOpen(false);
-    }
+    setOpen(false);
   };
 
   //decline
@@ -105,7 +103,7 @@ const Index = (props) => {
   };
   //approve
   const handleClickOpenApproval = (id) => {
-    approveQuestion(id, status);
+    // approveQuestion(id, status);
     setOpen(true);
   };
   //get question
@@ -191,7 +189,7 @@ const Index = (props) => {
     },
 
     {
-      field: "id",
+      field: "action",
       headerName: "Action",
       width: 230,
 
@@ -199,7 +197,7 @@ const Index = (props) => {
         <strong>
           <Button
             onClick={() => {
-              handleClickOpenApproval(params.value);
+              handleClickOpenApproval();
             }}
             variant="contained"
             color="primary"
@@ -210,7 +208,7 @@ const Index = (props) => {
 
           <Button
             onClick={() => {
-              handleClickDecline(params.value);
+              handleClickDecline();
             }}
             variant="contained"
             color="secondary"
@@ -223,13 +221,13 @@ const Index = (props) => {
       ),
     },
     {
-      field: "id",
+      field: "detail",
       headerName: "Internship diary ",
       width: 150,
       renderCell: (params) => (
         <strong>
           {" "}
-          <Link to={`/detail/${params.value}`}> See detail</Link>{" "}
+          <Link to={`/detail/`}> See detail</Link>{" "}
         </strong>
       ),
     },
@@ -238,86 +236,88 @@ const Index = (props) => {
   let rows = [...questions];
 
   return (
-    <div>
-      <div className="searchBar">
-        <SearchBar
-          handleChangeSearch={handleChangeSearch}
-          handleSearch={handleSearch}
-        />{" "}
-      </div>
-      <div className="infoadmin">
-        <div className="user">
-          <img
-            className="avt"
-            src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
-            alt="user"
-          />
-          <div className="adminname">Admin 1</div>
+    <>
+      <div>
+        <div className="searchBar">
+          <SearchBar
+            handleChangeSearch={handleChangeSearch}
+            handleSearch={handleSearch}
+          />{" "}
         </div>
-      </div>
-      <div className="contentApproval">
-        <div className="header-approve">
-          <div className="row">
-            <div className="col-md-6 col-12">
-              <h4> QUESTION APPROVAL</h4>
-            </div>
-            <div className="col-md-6 col-12">
-              <div className={classes.fillterDate}>
-                <TextField
-                  id="date"
-                  label="From "
-                  type="date"
-                  defaultValue="2020-12-06"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => {
-                    setFrom(e.target.value);
-                  }}
-                />
-                <TextField
-                  id="date"
-                  label="To "
-                  type="date"
-                  defaultValue="2020-12-07"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => {
-                    setTo(e.target.value);
-                  }}
-                />
-                <Button onClick={handleDate} variant="contained">
-                  Fillter
-                </Button>{" "}
+        <div className="infoadmin">
+          <div className="user">
+            <img
+              className="avt"
+              src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+              alt="user"
+            />
+            <div className="adminname">Admin 1</div>
+          </div>
+        </div>
+        <div className="contentApproval">
+          <div className="header-approve">
+            <div className="row">
+              <div className="col-md-6 col-12">
+                <h4> QUESTION APPROVAL</h4>
+              </div>
+              <div className="col-md-6 col-12">
+                <div className={classes.fillterDate}>
+                  <TextField
+                    id="date"
+                    label="From "
+                    type="date"
+                    defaultValue="2020-12-06"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => {
+                      setFrom(e.target.value);
+                    }}
+                  />
+                  <TextField
+                    id="date"
+                    label="To "
+                    type="date"
+                    defaultValue="2020-12-07"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => {
+                      setTo(e.target.value);
+                    }}
+                  />
+                  <Button onClick={handleDate} variant="contained">
+                    Fillter
+                  </Button>{" "}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div style={{ height: "400px", width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5, 10, 20]}
-            pagination
-            {...questions}
-          />
-        </div>
-      </div>{" "}
-      <Snackbar open={open} autoHideDuration={200} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
-      {/* <DialogDecline
+          <div style={{ height: "400px", width: "100%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5, 10, 20]}
+              pagination
+              {...questions}
+            />
+          </div>
+        </div>{" "}
+        {/* <DialogDecline
         decline={decline}
         handleCloseDecline={handleCloseDecline}
         handleOpentDecline={handleOpentDecline}
       /> */}
-    </div>
+      </div>
+      <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ import { Route } from "react-router-dom";
 function FormManager(props) {
   return (
     <div>
-      <div class="row">
+      <div className="row">
         <div className="col-md-2">
           <HeaderAsideNavbar></HeaderAsideNavbar>
         </div>
