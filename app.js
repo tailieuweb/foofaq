@@ -6,14 +6,8 @@ const express = require("express");
 const morgan = require("morgan");
 const passport = require("passport");
 const { Database } = require('./orm/database');
+const a = new Database();
 
-// Local MongoDb connection
-var optionsMongoDB = {
-	host: 'mongodb://localhost:27017/faq',
-	type: 'mongo'
-}
-const DB = new Database()
-DB.connect(optionsMongoDB)
 
 
 const app = express();
