@@ -6,25 +6,26 @@ const { response } = require("../orm/response");
 
 // Create Question
 const createQuestion = async function (req, res) {
-  controllers.findById(Tag, req.body.tag)
+  controllers
+    .findById(Tag, req.body.tag)
     .then((tag) => {
-      if(!tag){
+      if (!tag) {
         return res.status(404).json({
-          message: "Tag not found"
-        })
+          message: "Tag not found",
+        });
       }
       const question = new Question({
         title: req.body.title,
         content: req.body.content,
         tag: req.body.tag,
       });
-      return  controllers.save(Question,question);
+      return controllers.save(Question, question);
     })
     .then((result) => {
       res.status(201).json({
         createQuestion: {
-          result: result
-        }
+          result: result,
+        },
       });
     })
     .catch((err) => {
@@ -36,14 +37,12 @@ const createQuestion = async function (req, res) {
 
 //Get Question
 const getQuestion = async function (req, res) {
-  controllers.find(Question)
-    .then((docs) => {
+  controllers
+    .find(Question)
+    .populate("Tag")
+    .then((question) => {
       res.status(200).json({
-        question: docs.map((doc) => {
-          return {
-            doc: doc
-          };
-        }),
+        question: question,
       });
     })
     .catch((err) => {
@@ -63,11 +62,12 @@ const editQuestion = async function (req, res) {
       {
         title: req.body.title,
         content: req.body.content,
+        tag: req.body.tag
       }
     );
     if (!question) throw Error("Something went wrong while updating!");
     {
-      res.status(200).json({ success: true, question });
+      res.status(200).json({ success: true });
     }
   } catch (err) {
     res.status(400).json({ msg: err });
