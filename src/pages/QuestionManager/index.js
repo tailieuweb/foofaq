@@ -8,8 +8,8 @@ import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
-import SearchBar from "../../components/SearchBar";
-import Button from "@material-ui/core/Button";
+// import SearchBar from "../../components/SearchBar";
+// import Button from "@material-ui/core/Button";
 function Manager(props) {
   return (
     <div>
@@ -19,7 +19,7 @@ function Manager(props) {
         </div>
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
-          <SearchBar></SearchBar>
+          {/* <SearchBar></SearchBar>
           <Link to={`/form/`}>
             <Button
               style={{ margin: "30px" }}
@@ -29,7 +29,7 @@ function Manager(props) {
             >
               Add
             </Button>
-          </Link>
+          </Link> */}
           <Route
             path="/manager/categories"
             component={CategoriesGridViewManager}
