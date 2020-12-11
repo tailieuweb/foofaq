@@ -6,44 +6,51 @@ const { response } = require("../orm/response");
 
 // Create Question
 const createQuestion = async function (req, res) {
-
-    const question = new Question({
-      title: req.body.title,
-      content: req.body.content,
-      tag: req.body.tag
-    });
-    question.save()
-    .then(result =>{
-      res.status(201).json({result});
+  controllers.findById(Tag, req.body.tag)
+    .then((tag) => {
+      if(!tag){
+        return res.status(404).json({
+          message: "Tag not found"
+        })
+      }
+      const question = new Question({
+        title: req.body.title,
+        content: req.body.content,
+        tag: req.body.tag,
+      });
+      return  controllers.save(Question,question);
     })
-    .catch(err =>{
+    .then((result) => {
+      res.status(201).json({
+        createQuestion: {
+          result: result
+        }
+      });
+    })
+    .catch((err) => {
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 };
 
 //Get Question
 const getQuestion = async function (req, res) {
-  Question.find()
-  .then(docs => {
-    res.status(200).json(docs);
-  })
-  .catch(err=>{
-    res.status(500).json({
-      error: err
+  controllers.find(Question)
+    .then((docs) => {
+      res.status(200).json({
+        question: docs.map((doc) => {
+          return {
+            doc: doc
+          };
+        }),
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
     });
-  });
- 
-  // try {
-  //   const question = await controllers.find(Question);
-  //   if (!question) throw Error("No items!");
-  //   {
-  //     res.status(200).json(question);
-  //   }
-  // } catch (err) {
-  //   res.status(400).json({ message: err });
-  // }
 };
 
 //Edit Question
