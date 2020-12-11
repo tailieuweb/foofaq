@@ -57,9 +57,13 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     color: "red",
   },
-  textField: {
-    marginBottom: "50px",
+  fillterDate: {
+    marginBottom: "50px ",
+    textAlign: "right",
+    marginRight: "50px",
   },
+  textField: { marginRight: "30px" },
+  btnDate: { marginTop: "15px" },
 }));
 
 const Index = (props) => {
@@ -92,19 +96,31 @@ const Index = (props) => {
   };
 
   //decline
-  const handleClickOpenDecline = (id) => {
+
+  const handleOpentDecline = (id) => {
+    // declineQuestion(id);
+    console.log(id);
     setDecline(false);
   };
-  const handleOpentDecline = () => {};
 
-  const handleClickDecline = (id) => {};
+  const handleClickDecline = (id) => {
+    setDecline(true);
+  };
   const handleCloseDecline = () => {
     setDecline(false);
   };
   //approve
   const handleClickOpenApproval = (id) => {
-    // approveQuestion(id, status);
-    setOpen(true);
+    approveQuestion(id, status)
+      .then(function (response) {
+        // handle success
+        console.log("Successfully");
+        setOpen(true);
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+      });
   };
   //get question
   // const handleSortOldest = () => {
@@ -158,12 +174,18 @@ const Index = (props) => {
     {
       field: "id",
       headerName: "#ID",
-      width: 150,
+      width: 70,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
     {
       field: "title",
       headerName: "Title",
+      width: 150,
+      renderCell: (params) => <strong>{params.value}</strong>,
+    },
+    {
+      field: "content",
+      headerName: "Content",
       width: 150,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
@@ -194,43 +216,45 @@ const Index = (props) => {
       width: 230,
 
       renderCell: (params) => (
-        <strong>
-          <Button
-            onClick={() => {
-              handleClickOpenApproval();
-            }}
-            variant="contained"
-            color="primary"
-            size="small"
-          >
-            Approval
-          </Button>
+        <>
+          <strong>
+            <Button
+              onClick={() => {
+                handleClickOpenApproval(params.getValue("id"));
+              }}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Approval
+            </Button>
 
-          <Button
-            onClick={() => {
-              handleClickDecline();
-            }}
-            variant="contained"
-            color="secondary"
-            size="small"
-            style={{ marginLeft: 16 }}
-          >
-            Decline
-          </Button>
-        </strong>
+            <Button
+              onClick={() => {
+                handleClickDecline(params.getValue("id"));
+              }}
+              variant="contained"
+              color="secondary"
+              size="small"
+              style={{ marginLeft: 16 }}
+            >
+              Decline
+            </Button>
+          </strong>
+        </>
       ),
     },
-    {
-      field: "detail",
-      headerName: "Internship diary ",
-      width: 150,
-      renderCell: (params) => (
-        <strong>
-          {" "}
-          <Link to={`/detail/`}> See detail</Link>{" "}
-        </strong>
-      ),
-    },
+    // {
+    //   field: "detail",
+    //   headerName: "Internship diary ",
+    //   width: 150,
+    //   renderCell: (params) => (
+    //     <strong>
+    //       {" "}
+    //       <Link to={`/detail/${params.getValue("id")}`}> See detail</Link>{" "}
+    //     </strong>
+    //   ),
+    // },
   ];
 
   let rows = [...questions];
@@ -288,7 +312,11 @@ const Index = (props) => {
                       setTo(e.target.value);
                     }}
                   />
-                  <Button onClick={handleDate} variant="contained">
+                  <Button
+                    className={classes.btnDate}
+                    onClick={handleDate}
+                    variant="contained"
+                  >
                     Fillter
                   </Button>{" "}
                 </div>
@@ -306,17 +334,19 @@ const Index = (props) => {
             />
           </div>
         </div>{" "}
-        {/* <DialogDecline
-        decline={decline}
-        handleCloseDecline={handleCloseDecline}
-        handleOpentDecline={handleOpentDecline}
-      /> */}
       </div>
       <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           This is a success message!
         </Alert>
       </Snackbar>
+      <DialogDecline
+        decline={decline}
+        handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={() => {
+          handleOpentDecline();
+        }}
+      />
     </>
   );
 };

@@ -9,11 +9,13 @@ import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
 
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
-import SearchBar from "../../components/SearchBar";
-import Button from "@material-ui/core/Button";
+// import SearchBar from "../../components/SearchBar";
+// import Button from "@material-ui/core/Button";
 import CategoriesManager from "../../components/CategoriesManager";
 import QuestionManager from "../../components/QuestionManager";
 
+// import SearchBar from "../../components/SearchBar";
+// import Button from "@material-ui/core/Button";
 function Manager(props) {
   return (
     <div>
@@ -27,6 +29,8 @@ function Manager(props) {
           <Route path="/manager/questions" component={QuestionManager} />
           {/* <SearchBar></SearchBar> */}
           {/* <Link to={`/form/`}>
+          {/* <SearchBar></SearchBar>
+          <Link to={`/form/`}>
             <Button
               style={{ margin: "30px" }}
               variant="contained"
