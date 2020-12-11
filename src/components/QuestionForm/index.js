@@ -24,6 +24,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
 
+import CategoriesInput from "../CategoriesInput";
+
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -208,7 +210,7 @@ function QuestionForm() {
             <label htmlFor="questionTag">
               <b>Thẻ</b>
             </label>
-            <input
+            {/* <input
               type="text"
               className="form-control"
               id="questionTag"
@@ -218,13 +220,15 @@ function QuestionForm() {
               onChange={(e) => {
                 setTag(e.target.value);
               }}
-            />
+            /> */}
+            <CategoriesInput/>
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Đăng" />
           </div>
         </div>
-        <Dialog
+      </form>
+      <Dialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}
@@ -241,7 +245,6 @@ function QuestionForm() {
             </Button>
           </DialogActions>
         </Dialog>
-      </form>
     </div>
   );
 }

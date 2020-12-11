@@ -5,6 +5,8 @@ import JobsManager from "../../components/JobsManager";
 import EventsManager from "../../components/EventsManager";
 import CategoriesManager from "../../components/CategoriesManager";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import JobsGridViewManager from "../../components/JobsGridViewManager";
+import EventsGridViewManager from "../../components/EventsGridViewManager";
 
 function Manager(props) {
   return (
@@ -17,8 +19,8 @@ function Manager(props) {
           {/* <CategoriesManager /> */}
           <Route path="/manager/categories" component={CategoriesManager} />
           <Route path="/manager/questions" component={QuestionManager} />
-          <Route path="/manager/jobs" component={JobsManager} />
-          <Route path="/manager/events" component={EventsManager} />
+          <Route path="/manager/jobs" component={JobsGridViewManager} />
+          <Route path="/manager/events" component={EventsGridViewManager} />
           {/* <QuestionManager />
       <JobsManager />
       <EventsManager /> */}
