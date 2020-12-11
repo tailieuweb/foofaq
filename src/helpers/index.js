@@ -83,11 +83,17 @@ export const AddCategory = async (name, description) => {
   const user = await axios.post(API_URL + "categories", { name, description });
   return user.data;
 };
-//Job
-
+//Jobs
 export const getJobs = async (keyword, page, perPage) => {
   const res = await axios.get(
     API_URL_NEW + `jobs?search=${keyword}&page=${page}&limit=${perPage}`
+  );
+  return res.data;
+};
+
+export const getJobsSearch = async (keyword) => {
+  const res = await axios.get(
+    API_URL_NEW + `jobs?search=${keyword}`
   );
   return res.data;
 };
@@ -152,6 +158,12 @@ export const updateJobs = async (
 export const getEvents = async (keyword, page, perPage) => {
   const res = await axios.get(
     API_URL_NEW + `events?search=${keyword}&page=${page}&limit=${perPage}`
+  );
+  return res.data;
+};
+export const getEventsSearch = async (keyword) => {
+  const res = await axios.get(
+    API_URL_NEW + `events?search=${keyword}`
   );
   return res.data;
 };

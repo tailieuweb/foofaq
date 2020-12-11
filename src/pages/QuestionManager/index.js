@@ -7,9 +7,13 @@ import { Route, Link } from "react-router-dom";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
+
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
 import SearchBar from "../../components/SearchBar";
 import Button from "@material-ui/core/Button";
+import CategoriesManager from "../../components/CategoriesManager";
+import QuestionManager from "../../components/QuestionManager";
+
 function Manager(props) {
   return (
     <div>
@@ -19,8 +23,10 @@ function Manager(props) {
         </div>
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
-          <SearchBar></SearchBar>
-          <Link to={`/form/`}>
+          <Route path="/manager/categories" component={CategoriesManager} />
+          <Route path="/manager/questions" component={QuestionManager} />
+          {/* <SearchBar></SearchBar> */}
+          {/* <Link to={`/form/`}>
             <Button
               style={{ margin: "30px" }}
               variant="contained"
@@ -29,7 +35,7 @@ function Manager(props) {
             >
               Add
             </Button>
-          </Link>
+          </Link> */}
           <Route
             path="/manager/categories"
             component={CategoriesGridViewManager}
