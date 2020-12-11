@@ -29,7 +29,7 @@ const QuestionList = () => {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        "https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=1&limit=1"
+        "https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=1&limit=3"
       );
       setQuestionsRaw(res.data);
     })();
@@ -79,7 +79,7 @@ const QuestionList = () => {
   const handleSearch = (params) => {
     (async () => {
       const res = await axios.get(
-        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=1`
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=3`
       );
       setQuestionsRaw(res.data);
     })();
