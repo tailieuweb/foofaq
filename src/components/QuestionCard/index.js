@@ -82,6 +82,8 @@ const QuestionCard = ({ question, increasePoint, decreasePoint }) => {
     categories,
     answers,
     asker,
+    voteUp,
+    voteDown,
   } = question;
 
   return (
@@ -89,13 +91,21 @@ const QuestionCard = ({ question, increasePoint, decreasePoint }) => {
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item className={classes.vote}>
-            <IconButton aria-label="upvote" onClick={() => increasePoint(id)}>
+            <IconButton
+              aria-label="upvote"
+              disabled={voteUp}
+              onClick={() => increasePoint(id)}
+            >
               <ArrowDropUpIcon />
             </IconButton>
             <Typography gutterBottom variant="h4">
               {point}
             </Typography>
-            <IconButton aria-label="downvote" onClick={() => decreasePoint(id)}>
+            <IconButton
+              aria-label="downvote"
+              disabled={voteDown}
+              onClick={() => decreasePoint(id)}
+            >
               <ArrowDropDownIcon />
             </IconButton>
           </Grid>
