@@ -10,6 +10,7 @@ function QuestionCreateForm() {
   return (
     <PageLayout>
       <Switch>
+        
         <Route exact path="/form/" component={QuestionForm}></Route>{" "}
         <Route path="/form/:id" component={QuestionForm}></Route>{" "}
       </Switch>

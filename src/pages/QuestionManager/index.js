@@ -16,6 +16,7 @@ function Manager(props) {
         </div>
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
+          
           <Route path="/manager/categories" component={CategoriesManager} />
           <Route path="/manager/questions" component={QuestionManager} />
           <Route path="/manager/jobs" component={JobsManager} />

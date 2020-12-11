@@ -3,7 +3,7 @@ import CategoriesForm from "../../components/FormManager/Categories";
 import JobsForm from "../../components/FormManager/Jobs";
 import EventFrom from "../../components/FormManager/Event";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
-
+import UserForm from "../../components/FormManager/User"
 import { Route } from "react-router-dom";
 
 function FormManager(props) {
@@ -18,6 +18,11 @@ function FormManager(props) {
             exact
             path="/forms/categories/"
             component={CategoriesForm}
+          ></Route>
+          <Route
+            exact
+            path="/forms/adduser/"
+            component={UserForm}
           ></Route>
           <Route
             path="/forms/categories/:id"
