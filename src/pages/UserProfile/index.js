@@ -1,132 +1,65 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import UserAppBar from "../UserAppBar";
-import ListUserButton from "../../components/UserListButton/index";
-import UserCardSummary from "../UserCardSummary/index";
-import UserDetail from "../../components/UserDetail/index";
-import DeveloperStoryFirst from "../../components/UserDetailStoryFirst/index";
-import UserEditProfile from '../../components/UserEditProfile/index';
-
-
+import { Router, Switch, Route, Link } from "react-router-dom";
+import ProfileNavbar from "../../components/UserNavbar/index";
+import ProfileContent from "../../components/UserProfileContent/index";
+import UserDetailStoryFirst from "../../components/UserDetailStoryFirst/index";
+import UserEditProfile from "../../components/UserEditProfile/index";
+import UserProfile from "../../components/UserProfile/index";
+import { getOneUser } from "../../helpers/userAPI";
 import "./index.scss";
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+function Profile() {
+  const [user, setUser] = useState({});
+  useEffect(async () => {
+    const data = await getOneUser();
+    console.log("data user: ", data);
+    setUser(data);
+  }, []);
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <div id="content" className="content content-full-width">
+            {/* begin profile */}
+            <div className="profile">
+              <div className="profile-header">
+                {/* BEGIN profile-header-cover */}
+                <div className="profile-header-cover" />
+                {/* END profile-header-cover */}
+                {/* BEGIN profile-header-content */}
+                <div className="profile-header-content">
+                  {/* BEGIN profile-header-img */}
+                  <div className="profile-header-img">
+                    <img src={user.user_avatar} alt="" />
+                  </div>
+                  {/* END profile-header-img */}
+                  {/* BEGIN profile-header-info */}
+                  <div className="profile-header-info">
+                    <h4 className="m-t-10 m-b-5">{user.user_name}</h4>
+                    <p className="m-b-10">{user.user_title}</p>
+                    <Link to="/user-profile/editprofile" className="btn btn-sm btn-info mb-2">
+                      Edit Profile
+                    </Link>
+                  </div>
+                  {/* END profile-header-info */}
+                </div>
+                {/* END profile-header-content */}
+                {/* BEGIN profile-header-tab */}
+                <ProfileNavbar />
+                {/* END profile-header-tab */}
+              </div>
+            </div>
+            {/* end profile */}
+            {/* begin profile-content */}
+            <Route path="/user-profile/profile" component={UserProfile}></Route>
+            <Route path="/user-profile/activity" component={ProfileContent}></Route>
+            <Route path="/user-profile/developer-story" component={UserDetailStoryFirst}></Route>
+            <Route path="/user-profile/editprofile" component={UserEditProfile}></Route>
+
+            {/* end profile-content */}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-  },
-}));
-
-export default function UserProfileNavbar() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-
-  return (
-    <React.Fragment>
-      <UserAppBar />
-      <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="full width tabs example"
-          >
-            <Tab label="Profile" {...a11yProps(0)} />
-            <Tab label="Activity" {...a11yProps(1)} />
-            <Tab label="Developer Story" {...a11yProps(2)} />
-            <Tab label="Edit Profile" {...a11yProps(3)} />
-          </Tabs>
-        </AppBar>
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={handleChangeIndex}
-        >
-          <TabPanel
-            className="Lower-text"
-            value={value}
-            index={0}
-            dir={theme.direction}
-          >
-            <UserDetail />
-          </TabPanel>
-          <TabPanel
-            className="Lower-text"
-            value={value}
-            index={1}
-            dir={theme.direction}
-          >
-            <ListUserButton />
-            <UserCardSummary />
-          </TabPanel>
-          <TabPanel
-            className="Lower-text"
-            value={value}
-            index={2}
-            dir={theme.direction}
-          >
-            <DeveloperStoryFirst />
-          </TabPanel>
-          <TabPanel
-            className="Lower-text"
-            value={value}
-            index={3}
-            dir={theme.direction}
-          >
-            <UserEditProfile />
-          </TabPanel>
-        </SwipeableViews>
-      </div>
-    </React.Fragment>
-  );
-}
+export default Profile;

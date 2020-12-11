@@ -84,12 +84,11 @@ export default function ImageAvatars() {
         twiter: twiterE1.current.value,
         Website: WebsiteE1.current.value,
         GitHub: GitHubE1.current.value,
-        
       }),
     }).then((response) => {
       console.log(response);
     });
-    alert('Update Successfully');
+    alert("Update Successfully");
   };
   return (
     <div className="alert alert-info container">
@@ -97,41 +96,6 @@ export default function ImageAvatars() {
         <CssBaseline />
         <Container>
           <Typography component="div">
-            <div className={classes.root}>
-              <Avatar
-                alt="Remy Sharp"
-                src={user.avatar}
-                className={classes.large}
-              />
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                multiple
-                type="file"
-                ref={ImgavatarEl1}
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="black" component="span">
-                  Upload
-                </Button>
-              </label>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="icon-button-file"
-                type="file"
-              />
-              <label htmlFor="icon-button-file">
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
-                >
-                  <PhotoCamera />
-                </IconButton>
-              </label>
-            </div>
             <div>
               <br />
               <form>
