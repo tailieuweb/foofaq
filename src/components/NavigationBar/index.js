@@ -9,7 +9,8 @@ import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined"
 import AddBoxOutlinedIcon from "@material-ui/icons/AddBoxOutlined";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-//components
+//components mui
+import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Badge,
@@ -17,7 +18,6 @@ import {
   fade,
   IconButton,
   InputBase,
-  makeStyles,
   Menu,
   MenuItem,
   Toolbar,

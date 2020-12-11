@@ -46,13 +46,19 @@ export const declineQuestion = async (id) => {
   return user.data;
 };
 
-//get categories
+//get categories by key, pagination
 export const getCategories = async (keyword, page, perPage) => {
   const question = await axios.get(
     API_URL + `categories?search=${keyword}&page=${page}&limit=${perPage}  `
   );
   return question.data;
 };
+//get category by key
+export const searchCategory = async (keyword) => {
+  const category = await axios.get(API_URL + `categories?search=${keyword}`);
+  return category.data;
+};
+//get all category
 export const pagCategories = async () => {
   const question = await axios.get(API_URL + `categories`);
   return question.data;
@@ -68,7 +74,6 @@ export const DeleteCategory = async (id) => {
   return user.data;
 };
 //categories upadate
-
 export const UpdateCategory = async (id, name, description) => {
   const user = await axios.put(API_URL + "categories/" + id, {
     name,

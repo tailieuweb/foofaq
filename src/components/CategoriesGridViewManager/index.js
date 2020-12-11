@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import CategoriesGridView from "../CategoriesGridView";
 import { DeleteCategory, UpdateCategory } from "../../helpers";
@@ -36,5 +36,14 @@ let columns = [
 ];
 
 export default function CategoriesGridViewManager() {
-  return <CategoriesGridView extraColumns={columns} />;
+  return (
+    <>
+      <Link to="/forms/categories">
+        <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
+          Add Category
+        </Button>
+      </Link>
+      <CategoriesGridView extraColumns={columns} />
+    </>
+  );
 }

@@ -19,8 +19,8 @@ function Manager(props) {
         </div>
         <div className="col-md-10">
           {/* <CategoriesManager /> */}
-          <SearchBar></SearchBar>
-          <Link to={`/form/`}>
+          {/* <SearchBar></SearchBar> */}
+          {/* <Link to={`/form/`}>
             <Button
               style={{ margin: "30px" }}
               variant="contained"
@@ -29,7 +29,7 @@ function Manager(props) {
             >
               Add
             </Button>
-          </Link>
+          </Link> */}
           <Route
             path="/manager/categories"
             component={CategoriesGridViewManager}
