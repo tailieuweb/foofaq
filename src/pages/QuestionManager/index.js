@@ -11,6 +11,9 @@ import EventsGridViewManager from "../../components/EventsGridViewManager";
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
 import SearchBar from "../../components/SearchBar";
 import Button from "@material-ui/core/Button";
+import CategoriesManager from "../../components/CategoriesManager";
+import QuestionManager from "../../components/QuestionManager";
+
 function Manager(props) {
   return (
     <div>
