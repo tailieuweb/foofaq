@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link, NavLink } from "react-router-dom";
 import "./index.scss";
 
 const index = makeStyles((theme) => ({
@@ -88,7 +89,7 @@ export default function ImageAvatars() {
     }).then((response) => {
       console.log(response);
     });
-    alert("Update Successfully");
+    
   };
   return (
     <div className="alert alert-info container">
@@ -263,7 +264,17 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="contained"
                     >
-                      <Button onClick={HandleSubmit}>Save</Button>
+                      {/* <Button onClick={HandleSubmit} Link>
+                        Save
+                      </Button> */}
+                      <Link
+                        to={`/Edit-Profile`}
+                        type="submit"
+                        className="btn btn-primary"
+                        Link
+                      >
+                        Save
+                      </Link>
                     </ButtonGroup>
                     <ButtonGroup
                       orientation="vertical"

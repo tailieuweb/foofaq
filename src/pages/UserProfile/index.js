@@ -15,6 +15,7 @@ import DeveloperStoryFirst from "../../components/UserDetailStoryFirst/index";
 import UserEditProfile from '../../components/UserEditProfile/index';
 
 
+
 import "./index.scss";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
