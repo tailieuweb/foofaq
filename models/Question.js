@@ -12,6 +12,11 @@ const QuestionSchema = new Schema(
       type: String,
       required: true,
     },
+    tag: {
+      type: Array,
+      ref: "Tag",
+      required:true
+    },
     date: {
       type: Date,
       default: Date.now,
@@ -19,4 +24,7 @@ const QuestionSchema = new Schema(
   },
   { timestamps: true }
 );
+
+
+
 module.exports = mongoose.model("Question", QuestionSchema);
