@@ -32,6 +32,7 @@ import Managers from "./pages/QuestionManager";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
 
+import QuestionGridViewManager from "./components/QuestionGridViewManager";
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -39,34 +40,32 @@ const composeEnhancers =
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path="/login" component={Login}></Route>
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route exact path="/login" component={Login}></Route>
 
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/" component={QuestionList}></Route>
-          <Route path="/detail" component={QuestionDetail}></Route>
-          <Route path="/approval" component={QuestionApproval}></Route>
+        <Route exact path="/" component={QuestionList}></Route>
+        <Route path="/detail" component={QuestionDetail}></Route>
+        <Route path="/approval" component={QuestionApproval}></Route>
 
-          <Route path="/form" component={QuestionCreateForm}></Route>
-          <Route path="/category" component={QuestionCategoryList}></Route>
-          <Route path="/manager/" component={Managers}></Route>
-          <Route path="/forms/" component={FormManager}></Route>
-          {/* <Route path="/events" component={EventList}></Route> */}
-          <Route path="/griddemo" component={EventsGridViewManager}></Route>
-          <Route path="/events" component={EventList}></Route>
-          <Route path="/categories" component={CategoriesGridView}></Route>
-          <Route
-            path="/categories-manager"
-            component={CategoriesGridViewManager}
-          ></Route>
-          <Route path="/jobmanger" component={JobsGridViewManager}></Route>
-          <Route path="/jobgrid" component={JobsGridView}></Route>
-        </Switch>
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+        <Route path="/form" component={QuestionCreateForm}></Route>
+        <Route path="/category" component={QuestionCategoryList}></Route>
+        <Route path="/manager/" component={Managers}></Route>
+        <Route path="/forms/" component={FormManager}></Route>
+        {/* <Route path="/events" component={EventList}></Route> */}
+        <Route path="/griddemo" component={QuestionGridViewManager}></Route>
+        <Route path="/events" component={EventList}></Route>
+        <Route path="/categories" component={CategoriesGridView}></Route>
+        <Route
+          path="/categories-manager"
+          component={CategoriesGridViewManager}
+        ></Route>
+        <Route path="/jobmanger" component={JobsGridViewManager}></Route>
+        <Route path="/jobgrid" component={JobsGridView}></Route>
+        {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
+      </Switch>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );

@@ -1,17 +1,20 @@
 import React from "react";
-import QuestionManager from "../../components/QuestionManager";
-import { Route } from "react-router-dom";
-import JobsManager from "../../components/JobsManager";
-import EventsManager from "../../components/EventsManager";
-import CategoriesManager from "../../components/CategoriesManager";
+import QuestionGridViewManager from "../../components/QuestionGridViewManager";
+import { Route, Link } from "react-router-dom";
+// import JobsManager from "../../components/JobsManager";
+// import EventsManager from "../../components/EventsManager";
+// import CategoriesManager from "../../components/CategoriesManager";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
 
+import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
+import SearchBar from "../../components/SearchBar";
+import Button from "@material-ui/core/Button";
 function Manager(props) {
   return (
     <div>
-      <div class="row">
+      <div className="row">
         <div className="col-md-2">
           <HeaderAsideNavbar></HeaderAsideNavbar>
         </div>
@@ -19,6 +22,25 @@ function Manager(props) {
           {/* <CategoriesManager /> */}
           <Route path="/manager/categories" component={CategoriesManager} />
           <Route path="/manager/questions" component={QuestionManager} />
+          <SearchBar></SearchBar>
+          <Link to={`/form/`}>
+            <Button
+              style={{ margin: "30px" }}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Add
+            </Button>
+          </Link>
+          <Route
+            path="/manager/categories"
+            component={CategoriesGridViewManager}
+          />
+          <Route
+            path="/manager/questions"
+            component={QuestionGridViewManager}
+          />
           <Route path="/manager/jobs" component={JobsGridViewManager} />
           <Route path="/manager/events" component={EventsGridViewManager} />
           {/* <QuestionManager />

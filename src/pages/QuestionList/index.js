@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
+// layout
+import PageLayout from "../../common/PageLayout";
+
 //  MUI components
-import Container from "@material-ui/core/Container";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 // components
@@ -26,7 +28,7 @@ const QuestionList = () => {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        "https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=1&limit=1"
+        "https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=1&limit=2"
       );
       setQuestionsRaw(res.data);
     })();
@@ -67,8 +69,36 @@ const QuestionList = () => {
     })();
   };
 
+  const increasePoint = (id) => {
+    const question = questions.find((item) => item.id === id);
+    const index = questions.indexOf(question);
+
+    setQuestions([
+      ...questions.slice(0, index),
+      {
+        ...question,
+        point: question.point + 1,
+      },
+      ...questions.slice(index + 1),
+    ]);
+  };
+
+  const decreasePoint = (id) => {
+    const question = questions.find((item) => item.id === id);
+    const index = questions.indexOf(question);
+
+    setQuestions([
+      ...questions.slice(0, index),
+      {
+        ...question,
+        point: question.point - 1,
+      },
+      ...questions.slice(index + 1),
+    ]);
+  };
+
   return (
-    <Container maxWidth="lg">
+    <PageLayout maxWidth="lg">
       <AdvancedFilter handleSearch={handleSearch} />
       {questions ? (
         questions.map((question) => (
@@ -76,6 +106,8 @@ const QuestionList = () => {
             key={question.id}
             className={classes.skeletion}
             question={question}
+            increasePoint={increasePoint}
+            decreasePoint={decreasePoint}
           />
         ))
       ) : (
@@ -112,7 +144,7 @@ const QuestionList = () => {
           />
         </>
       )}
-    </Container>
+    </PageLayout>
   );
 };
 
