@@ -7,7 +7,7 @@ const { JWT_SECRET } = require("../configs");
 const JWT = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
-const {response} = require("../orm/response");
+const { response } = require("../orm/response");
 
 const encodedToken = (userID) => {
 	return JWT.sign(
@@ -129,9 +129,9 @@ const signIn = async (req, res, next) => {
 					expiresIn: "1d",
 				});
 				let options = {
-					sucess : true,
-					token : loginToken,
-					user : user
+					sucess: true,
+					token: loginToken,
+					user: user
 				}
 				response(res, 200, "Login sucessfully", options);
 			}
@@ -219,6 +219,27 @@ requireSignin = expressJwt({
 	algorithms: ["HS256"],
 });
 
+//Check premision login
+const isAuth = (req, res, next) => {
+	let user = req.profile && req.auth && req.profile._id == req.auth._id;
+	if (!user) {
+		return res.status(403).json({
+			error: "Access denied"
+		});
+	}
+	next();
+};
+
+//Check premision Admin
+const isAdmin = (req, res, next) => {
+	if (req.profile.role === 0) {
+		return res.status(400).json({
+			error: 'Admin resource ! Access denied'
+		})
+	}
+	next();
+};
+
 module.exports = {
 	getUser,
 	index,
@@ -231,4 +252,6 @@ module.exports = {
 	updateUser,
 	deleteUser,
 	requireSignin,
+	isAuth,
+	isAdmin
 };

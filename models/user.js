@@ -44,7 +44,11 @@ const UserSchema = new Schema({
 		type: String,
 		default: null
 	},
-	salt: { type: String }
+	salt: { type: String },
+	role: {
+		type: Number,
+		default: 0
+	},
 });
 
 //Hash password
