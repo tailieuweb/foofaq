@@ -27,6 +27,7 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "express-promise-router": "^4.0.1",
+    "express-validator": "^6.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",
     "morgan": "^1.10.0",

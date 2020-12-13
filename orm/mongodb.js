@@ -7,7 +7,6 @@ class MongoDB {
 	//Connection MongoDB
 	connect() {
 		if (!isConnected) {
-			console.log("ddd")
 			mongoose
 				.connect(mongoDB.host, {
 					useCreateIndex: true,
