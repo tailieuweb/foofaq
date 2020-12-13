@@ -4,16 +4,14 @@ module.exports = {
 
   //Mongoose ​​connected environment variable
   mongoDB: {
-    host: process.env.DATABASE_CLOUD,
-    type: 'mongo',
+    host: process.env.DATABASE_LOCAL
   },
   //MySQL ​​connected environment variable
   mySQL: {
     host: 'localhost',
     user: process.env.USER_MYSQL,
     password: process.env.PASSWORD,
-    database: process.env.DATABASE_MYSQL,
-    type: 'mysql'
+    database: process.env.DATABASE_MYSQL
   },
   //Github ​​connected environment variable
   github: {
@@ -21,6 +19,5 @@ module.exports = {
     CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET
   },
   //MongoDB environment variable
-  DB_TYPE: "mongo"
-
+  DB_TYPE: process.env.DATABASE_TYPE
 }

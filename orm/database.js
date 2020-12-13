@@ -1,96 +1,58 @@
 const { MongoDB } = require('./mongodb')
 const { MySQL } = require('./mysql')
 const { DB_TYPE } = require("../configs");
-// Class for creating multi inheritance.
-class multi {
-	//Inherit method to create base classes.
-	static inherit(..._bases) {
-		class classes {
 
-			//The base classes
-			get base() { return _bases; }
-
-			constructor(..._args) {
-				var index = 0;
-
-				for (let b of this.base) {
-					let obj = new b(_args[index++]);
-					multi.copy(this, obj);
-				}
-			}
-
-		}
-
-		// Copy over properties and methods
-		for (let base of _bases) {
-			multi.copy(classes, base);
-			multi.copy(classes.prototype, base.prototype);
-		}
-
-		return classes;
-	}
-
-	// Copies the properties from one class to another
-	static copy(_target, _source) {
-		for (let key of Reflect.ownKeys(_source)) {
-			if (key !== "constructor" && key !== "prototype" && key !== "name") {
-				let desc = Object.getOwnPropertyDescriptor(_source, key);
-				Object.defineProperty(_target, key, desc);
-			}
-		}
-	}
+//Check type database
+//Return class use
+let DB;
+switch (DB_TYPE) {
+	case 'mongo':
+		DB = MongoDB
+		break;
+	case 'mysql':
+		DB = MySQL
+		break;
+	default:
+		break;
 }
-//Multimodal connection
-class Database extends multi.inherit(MongoDB, MySQL) {
+
+//Connection Database
+class Database extends DB {
 	constructor() {
 		super()
+		super.connect();
 	}
-	connect(options) {
-		if (options.type === "mongo") {
-			super.connectMongoDB(options);
-		}
-		if (options.type === "mysql") {
-			super.connectMySQL(options);
-		}
-	}
+
 }
-//Controller inheritance
-class Controller extends multi.inherit(MongoDB, MySQL) {
+//Controller Database
+class Controller extends Database {
 	constructor() {
 		super();
-		this.type = DB_TYPE;
 	}
 	//Object search function
 	find(Model) {
-		if (this.type === 'mongo') {
-			return super.find(Model);
-		}
+		return super.find(Model);
 	}
 	//Save function
 	save(Model, data) {
-		if (this.type === 'mongo')
-			return super.save(Model, data);
+		return super.save(Model, data);
 	}
 	//Search by ID
 	findById(Model, id) {
-		if (this.type === 'mongo')
-			return super.findById(Model, id)
+		return super.findById(Model, id)
 
 	}
 	//Search by object
 	findOne(Model, fields) {
-		if (this.type === 'mongo')
-			return super.findOne(Model, fields)
+		return super.findOne(Model, fields)
 	}
 	//Search by id and update
 	findByIdAndUpdate(Model, id, data) {
-		if (this.type === 'mongo')
-			return super.findByIdAndUpdate(Model, id, data)
+		return super.findByIdAndUpdate(Model, id, data)
 	}
 	//Search by id and delete
 	remove(Model, id) {
-		if (this.type === 'mongo')
-			return super.remove(Model, id)
+		return super.remove(Model, id)
 	}
 }
 

@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router();
 // const router = require('express-promise-router')()
 const UserController = require('../controllers/user')
-// const { validateBody, validateParam, schemas } = require('../helpers/routerHelpers')
 
-//Use password backage
-const passport = require('passport');
-const User = require('../models/user');
+// Validations
+const { runValidation } = require('../validations');
+const { userSignupValidator, userSigninValidator } = require('../validations/auth');
 
 // -----------------------------------------------------------------------
 
@@ -22,7 +21,7 @@ router.patch('/:userID', UserController.updateUser)
 //Route delete user
 router.delete('/:userID', UserController.deleteUser)
 // Route register
-router.post('/signup', UserController.signUp)
+router.post('/signup', userSignupValidator, runValidation, UserController.signUp)
 // Route login
 router.post('/signin', UserController.signIn);
 // Route login sns

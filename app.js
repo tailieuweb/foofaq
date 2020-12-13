@@ -4,25 +4,20 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
-const passport = require("passport");
-const { Database } = require('./orm/database');
-
-// Local MongoDb connection
-var optionsMongoDB = {
-	host: 'mongodb://localhost:27017/faq',
-	type: 'mongo'
-}
-const DB = new Database()
-DB.connect(optionsMongoDB)
-
-
+const path = require('path');
 const app = express();
+const fs = require("fs");
 
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 const tagRoute = require("./routes/tag");
 
 // Middlewares
+const accessLogStream = fs.createWriteStream(
+	path.join(__dirname, 'info.log'), { flags: 'a' }
+);
+morgan.token("timed", "A new :method request for :url was received. " + "It took :total-time[2] milliseconds to be resolved")
+app.use(morgan('common', { stream: accessLogStream }));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
@@ -58,6 +53,18 @@ app.use((err, req, res, next) => {
 	});
 });
 
+app.use((req, res, next) => {
+	logger.info(req.body);
+	let oldSend = res.send;
+	res.send = function (data) {
+		logger.info(JSON.parse(data));
+		oldSend.apply(res, arguments);
+	}
+	next();
+})
+
 // Start the server
 const port = app.get("port") || 8000;
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+app.listen(port, () => {
+	console.log(`Server is listening on port ${port}`)
+});

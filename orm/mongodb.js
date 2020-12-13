@@ -1,20 +1,26 @@
 const mongoose = require("mongoose");
+const { mongoDB } = require("../configs");
+let isConnected = false;
 class MongoDB {
 	constructor() {
-		this.type = "mongo"
 	}
 	//Connection MongoDB
-	connectMongoDB(options) {
-		mongoose
-			.connect(options.host, {
-				useCreateIndex: true,
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-			})
-			.then(() => console.log("✅ Connected database from mongodb."))
-			.catch((error) =>
-				console.error(`❌ Connect database is failed with error which is ${error}`)
-			);
+	connect() {
+		if (!isConnected) {
+			mongoose
+				.connect(mongoDB.host, {
+					useCreateIndex: true,
+					useNewUrlParser: true,
+					useUnifiedTopology: true,
+				})
+				.then(() => console.log("✅ Connected database from mongodb."))
+				.catch((error) =>
+					console.error(`❌ Connect database is failed with error which is ${error}`)
+				);
+			isConnected = true
+		} else {
+			return;
+		}
 	}
 	//Object search
 	find(Model) {
