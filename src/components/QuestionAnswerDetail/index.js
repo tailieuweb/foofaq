@@ -10,8 +10,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "2% auto",
     flexGrow: 1,
     maxWidth: "89.5%",
     width: "89.5%",
