@@ -46,7 +46,8 @@ ReactDOM.render(
         <Route exact path="/login" component={Login}></Route>
 
         <Route exact path="/" component={QuestionList}></Route>
-        <Route path="/detail" component={QuestionDetail}></Route>
+        {/* <Route path="/detail" component={QuestionDetail}></Route> */}
+        <Route path="/questions/:id" component={QuestionDetail}></Route>
         <Route path="/approval" component={QuestionApproval}></Route>
 
         <Route path="/form" component={QuestionCreateForm}></Route>

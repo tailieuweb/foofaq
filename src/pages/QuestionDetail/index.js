@@ -1,5 +1,5 @@
 //import react
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //import style
 import "./index.scss";
@@ -16,10 +16,16 @@ import AnswerForm from "../../components/AnswerForm";
 import NavigationBar from "../../components/NavigationBar";
 import { Grid } from "@material-ui/core";
 
+//APIS
+import { getQuesitonById, getAnswers } from "../../helpers";
+
 //style
 const useStyles = makeStyles((theme) => ({
+  questionInfo: {
+    margin: "5%",
+  },
   answerDetail: {
-    margin: "0px",
+    margin: "5%",
     border: "1px solid #ced4da",
     width: "89.5%",
     borderRadius: " 15px",
@@ -27,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   answersText: {
     position: "absolute",
-    top: "-10%",
+    top: "-5%",
     left: "1%",
     backgroundColor: "#28a745",
     color: "#fff",
@@ -36,8 +42,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionDetail = () => {
+const QuestionDetail = (props) => {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  let id = props.match.params.id;
+
+  useEffect(() => {
+    (async () => {
+      const question = await getQuesitonById(id);
+      setData(question);
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      const answersData = await getAnswers(id);
+      setAnswers(answersData);
+    })();
+  }, [id]);
+
   return (
     <div>
       <div className="Nav">
@@ -45,14 +69,11 @@ const QuestionDetail = () => {
           <NavigationBar />
         </Paper>
       </div>
-      <QuestionInfoDetail />
+      <QuestionInfoDetail question={data} className={classes.questionInfo} />
       <Grid container spacing={3}>
-        <Grid item xs={2}>
-          <Paper></Paper>
-        </Grid>
-        <Grid item xs={10}>
-          <Grid container>
-            <Grid item className={classes.answerDetail}>
+        <Grid item xs={12}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} className={classes.answerDetail}>
               <Typography
                 className={classes.answersText}
                 variant="subtitle1"
@@ -60,9 +81,15 @@ const QuestionDetail = () => {
               >
                 Answers
               </Typography>
-              <QuestionAnswerDetail />
+              {answers !== null ? (
+                answers.map((answer) => (
+                  <QuestionAnswerDetail key={answer.id} answer={answer} />
+                ))
+              ) : (
+                <div />
+              )}
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
               <AnswerForm />
             </Grid>
           </Grid>

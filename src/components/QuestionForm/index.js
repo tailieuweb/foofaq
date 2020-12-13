@@ -26,6 +26,9 @@ import draftToMarkdown from "draftjs-to-markdown";
 
 import CategoriesInput from "../CategoriesInput";
 
+//APIS
+import { getQuesitonById } from "../../helpers";
+
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -41,6 +44,7 @@ const styles = (theme) => ({
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
+
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -80,15 +84,33 @@ function QuestionForm() {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  let content = draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+  useEffect(() => {
+    setEdittorStates(
+      EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          convertFromHTML(`${question.content}`)
+        )
+      )
+    );
+  }, [question.content]);
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+
+  let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
 
   const [nofi, setNofi] = useState("");
   let handleSubmit = (event) => {
     event.preventDefault();
   };
   const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const result = await getQuesitonById(id);
+      setQuestion(result);
+    })();
+  }, [id]);
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
@@ -155,27 +177,14 @@ function QuestionForm() {
   //   return response.data;
   // }
 
-  useEffect(async () => {
-    const result = await axios(
-      `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${id}`
-    );
-
-    setQuestion(result.data);
-  }, []);
-
   // const sampleMarkup = `${question.id}`;
   // const blocksFromHTML = convertFromHTML(sampleMarkup);
   // const state = ContentState.createFromBlockArray(
   //   blocksFromHTML.contentBlocks,
   //   blocksFromHTML.entityMap
   // );
-  const [editorStates, setEdittorStates] = useState(
-    EditorState.createWithContent(
-      ContentState.createFromBlockArray(convertFromHTML(`Hehehehe`))
-    )
-  );
 
-  console.log("question: " + question.content);
+  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -201,9 +210,10 @@ function QuestionForm() {
           </label>
           <div className="aroundEditorQuestion" id="aroundEditorQuestion">
             <Editor
+              editorState={editorStates}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              onEditorStateChange={setEditorState}
+              onEditorStateChange={setEdittorStates}
             />
           </div>
           <div className="form-group">
@@ -221,7 +231,7 @@ function QuestionForm() {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput/>
+            <CategoriesInput />
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Đăng" />
@@ -229,22 +239,22 @@ function QuestionForm() {
         </div>
       </form>
       <Dialog
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            Post Successfully
-          </DialogTitle>
-          <DialogContent dividers>
-            <Typography gutterBottom>{nofi}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Post Successfully
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>{nofi}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
