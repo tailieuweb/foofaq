@@ -101,7 +101,7 @@ const UserForm = () => {
             title="Password"
             label="PassWord"
             style={{ margin: 8 }}
-            placeholder="Password..."
+            placeholder="password..."
             fullWidth
             margin="normal"
             InputLabelProps={{

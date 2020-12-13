@@ -97,7 +97,7 @@ export default function ImageAvatars() {
         <CssBaseline />
         <Container>
           <Typography component="div">
-            <div className={classes.root}>
+            {/* <div className={classes.root}>
               <Avatar
                 alt="Remy Sharp"
                 src={user.avatar}
@@ -131,7 +131,7 @@ export default function ImageAvatars() {
                   <PhotoCamera />
                 </IconButton>
               </label>
-            </div>
+            </div> */}
             <div>
               <br />
               <form>

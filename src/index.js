@@ -27,7 +27,7 @@ import QuestionCategoryList from "./pages/QuestionCategoryList";
 import UserProflieAler from "./components/UserProflieAler/index";
 import FormManager from "./pages/FormManager";
 // import EventList from "./pages/EventList"
-import UserProfile from './pages/UserProfile/index';
+import UserProfile from "./pages/UserProfile/index";
 import UserForm from "./components/FormManager/User";
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -52,10 +52,9 @@ ReactDOM.render(
           <Route path="/category" component={QuestionCategoryList}></Route>
           <Route path="/manager/" component={Managers}></Route>
           <Route path="/forms/" component={FormManager}></Route>
-          
-         
+
           <Route path="/user-profile" component={UserProfile}></Route>
-          
+
           {/* <Route path="/user-aler" component={UserProflieAler}></Route> */}
           {/* <Route path="/events" component={EventList}></Route> */}
         </Switch>
