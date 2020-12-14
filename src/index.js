@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
+import CategoryEdit from "./pages/CategoryEdit";
 
 // imports pages
 
@@ -24,7 +25,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/forms/categories/4" component={CategoryEdit}></Route>
         
       </Switch>
     </Router>
