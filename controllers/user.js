@@ -9,10 +9,11 @@ const expressJwt = require("express-jwt");
 
 const { response } = require("../orm/response");
 
-const encodedToken = (userID) => {
+const encodedToken = (user) => {
 	return JWT.sign(
 		{
-			_id: userID._id,
+			_id: user._id,
+			role : user.role
 		},
 		JWT_SECRET
 	);
@@ -124,7 +125,7 @@ const signIn = async (req, res, next) => {
 			if (!result) {
 				response(res, 400, "Username and password do not match.");
 			} else {
-				const loginToken = encodedToken(user._id);
+				const loginToken = encodedToken(user);
 				res.cookie("token", loginToken, {
 					expiresIn: "1d",
 				});
@@ -208,7 +209,7 @@ const deleteUser = async (req, res, next) => {
 	} catch (err) {
 		res.status(403).json({
 			error: {
-				message: "Delete user failed",
+				message: err.message,
 			},
 		});
 	}
@@ -217,11 +218,12 @@ const deleteUser = async (req, res, next) => {
 requireSignin = expressJwt({
 	secret: JWT_SECRET,
 	algorithms: ["HS256"],
+	userProperty : "auth"
 });
 
 //Check premision login
 const isAuth = (req, res, next) => {
-	let user = req.profile && req.auth && req.profile._id == req.auth._id;
+	let user = controllers.findOne(User, req.auth._id) && req.auth.role == 1;
 	if (!user) {
 		return res.status(403).json({
 			error: "Access denied"
