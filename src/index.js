@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
+import QuestionCreateForm from "./pages/QuestionCreateForm";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/form/1" component={QuestionCreateForm}></Route>
         
       </Switch>
     </Router>
