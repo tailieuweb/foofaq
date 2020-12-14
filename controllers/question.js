@@ -3,9 +3,17 @@ const controllers = new Controller();
 const Question = require("../models/question");
 const Tag = require("../models/tag");
 const { response } = require("../orm/response");
+const {validationResult} = require('express-validator');
+
 
 // Create Question
 const createQuestion = async function (req, res) {
+  //An error is generated when entering a value
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ errors: errors.array() });
+    return;
+  }
   controllers
     .findById(Tag, req.body.tag)
     .then((tag) => {
@@ -54,6 +62,14 @@ const getQuestion = async function (req, res) {
 
 //Edit Question
 const editQuestion = async function (req, res) {
+
+  //An error is generated when entering a value
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ errors: errors.array() });
+    return;
+  }
+  
   try {
     //Search by id and edit
     const question = await controllers.findByIdAndUpdate(

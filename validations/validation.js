@@ -1,22 +1,25 @@
-const Joi = require('@hapi/joi');
+const { check } = require('express-validator');
 
-
-//check create question
-const createValidation = data => {
-    const schema = {
-        title: Joi.string().min(6).required(),
-        content: Joi.string().required()
-    };
-    return Joi.validate(data,schema);
+const validateCreteQuestion = () => {
+    return [
+        check('title','Title does not empty').not().isEmpty(),
+        check('title','Title more than 6 characters').isLength({min: 6}),
+        check('content','Content does not empty').not().isEmpty(),
+        check('content','Content more than 6 characters').isLength({min: 6}),
+        check('tag','Tag does not empty').not().isEmpty(),
+    ]
 }
-
-// check edit question
-const editValidation = data => {
-    const schema = {
-        title: Joi.string().min(6).required(),
-        content: Joi.string().required()
-    };
-    return Joi.validate(data,schema);
+const validateEditQuestion = () => {
+    return [
+        check('title','Title does not empty').not().isEmpty(),
+        check('title','Title more than 6 characters').isLength({min: 6}),
+        check('content','Content does not empty').not().isEmpty(),
+        check('content','Content more than 6 characters').isLength({min: 6}),
+        check('tag','Tag does not empty').not().isEmpty(),
+    ]
 }
-module.exports.createValidation = createValidation;
-module.exports.editValidation = editValidation;
+const validate = {
+    validateCreteQuestion: validateCreteQuestion,
+    validateEditQuestion: validateEditQuestion
+}
+module.exports = { validate }
