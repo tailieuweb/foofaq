@@ -34,7 +34,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route exact path="/login" component={Login}></Route>
+          {/* <Route exact path="/login" component={Login}></Route>
           <Route path="/" component={QuestionList}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/list" component={QuestionList}></Route>
@@ -42,14 +42,14 @@ ReactDOM.render(
           <Route path="/approval" component={QuestionApproval}></Route>
           <Route path="/detail" component={QuestionDetail}></Route>
           <Route path="/category" component={CategoryTag}></Route>
-          <Route path="/navigation" component={NavigationBar}></Route>
+          <Route path="/navigation" component={NavigationBar}></Route> */}
           <Route path="/form" component={Form}></Route>
-          <Route
+          {/* <Route
             path="/detailapproval/:id"
             component={QuestionApprovalDetail}
           ></Route>
           <Route path="/" component={QuestionCreateForm}></Route>
-          <Route path="/category" component={QuestionCategoryList}></Route>
+          <Route path="/category" component={QuestionCategoryList}></Route> */}
         </Switch>
       </Router>
     </Provider>

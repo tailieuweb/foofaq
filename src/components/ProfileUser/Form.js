@@ -1,19 +1,27 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from "react";
 import user from '../../images/user.png'
+import {getUserOne} from '../../helpers/index'
 export default function Form () {
-
+  const [users, setUsers] = useState([]);
+  //get question
+  useEffect(() => {
+    (async () => {
+      const usersData = await getUserOne();
+      setUsers(usersData);
+    })();
+  }, []);
    
         return (
             <div>
                   {/* START FORM */}
       <div className="container text-center full">
         <div className="alert">
-          <img width="100%" src={user} alt="" />
-          <div className="name">User Name</div>
+          <img width="100%" src={users.avatar} alt="" />
+          <div className="name">{users.name}</div>
           <p className="text-one">Lorem ipsum dolor sit amet consectetur adipisicing elit </p>
           <ul>
             <li>
-              <a href><i className="fas fa-map-marker-alt" /><span> Location</span></a>
+              <a href><i className="fas fa-map-marker-alt" /><span> {users.local}</span></a>
             </li>
             <li>
               <a href><i className="fas fa-blog" /><span>Personal site</span></a>
