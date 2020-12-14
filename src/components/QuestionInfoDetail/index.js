@@ -31,6 +31,9 @@ import PersonAvatar from "../../images/Person-Avatar.png";
 
 //style
 const useStyles = makeStyles((theme) => ({
+  questionDetail: {
+    maxWidth: "89,5%",
+  },
   buttonEdit: {
     float: "right",
   },
@@ -70,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionInfoDetail = () => {
+const QuestionInfoDetail = (props) => {
   //use state
   const [editMode, setEditMode] = React.useState(true);
 
@@ -89,7 +92,7 @@ const QuestionInfoDetail = () => {
             name: <br />
             Date:
             <Typography variant="body2" color="textSecondary" component="p">
-              September 14, 2016
+              {props.question.createdAt}
             </Typography>{" "}
             <br />
             Votes: <br />
@@ -107,7 +110,7 @@ const QuestionInfoDetail = () => {
           <Grid item xs={2}>
             <UserInfo />
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.questionDetail}>
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
               <Grid container spacing={3}>
@@ -116,7 +119,7 @@ const QuestionInfoDetail = () => {
                     <ArrowDropUpIcon />
                   </IconButton>
                   <Typography gutterBottom variant="h4">
-                    0
+                    {props.question.point}
                   </Typography>
                   <IconButton aria-label="downvote">
                     <ArrowDropDownIcon />
@@ -124,18 +127,14 @@ const QuestionInfoDetail = () => {
                 </Grid>
                 <Grid item xs={11}>
                   <Link gutterBottom variant="h5">
-                    How to use classes to “control dreams”?
+                    {props.question.title}
                   </Link>
                   <Typography variant="body2" color="textSecondary">
-                    Background I have been playing around with Deep Dream and
-                    Inceptionism, using the Caffe framework to visualize layers
-                    of GoogLeNet, an architecture built for the Imagenet
-                    project, a large visual...
+                    {props.question.content}
                   </Typography>
                   {/* categories */}
                   <div className={classes.chips}>
-                    <Chip label="JavaScript" clickable />
-                    <Chip label="ReactJS" clickable />
+                    <Chip label={props.question.tag} clickable />
                   </div>
                   <Grid container spacing={2} className={classes.footerCard}>
                     {/* views */}
@@ -146,7 +145,7 @@ const QuestionInfoDetail = () => {
                         startIcon={<VisibilityIcon />}
                         className={classes.buttonView}
                       >
-                        69k Views
+                        {props.question.views}
                       </Button>
                       <Button
                         variant="outlined"
@@ -190,14 +189,6 @@ const QuestionInfoDetail = () => {
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
               <QuestionForm />
-              {/* <Button
-                variant="outlined"
-                color="primary"
-                className={classes.buttonSave}
-                onClick={changeMode}
-              >
-                Save <SaveIcon />{" "}
-              </Button> */}
             </Paper>
           </Grid>
         </Grid>

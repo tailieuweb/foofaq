@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import AsyncSelect from 'react-select/async';
-import axios from "axios";
+import AsyncSelect from "react-select/async";
+// import axios from "axios";
 
 class CategoriesInput extends PureComponent{
     state = { categories: [] }
@@ -30,6 +30,5 @@ class CategoriesInput extends PureComponent{
         )
     }
 }
-
 
 export default CategoriesInput;
