@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { pagJobs } from "../../helpers";
+import { pagJobs, getJobsSearch } from "../../helpers";
+import SearchBar from "../../components/SearchBar";
+import Link from "../../common/CustomLink";
+import Button from "@material-ui/core/Button";
 
 export default function JobsGridView({ extraColumns, extraRows }) {
   const [jobs, setJobs] = useState([]);
+  const [key, setKey] = useState("");
+  const [keyword, setKeyword] = useState("");
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const jobData = await pagJobs();
+  //     setJobs(jobData);
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {
-      const jobData = await pagJobs();
+      const jobData = await getJobsSearch(keyword);
       setJobs(jobData);
     })();
-  }, []);
+  }, [keyword]);
+
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
 
   let columns = [
     {
@@ -78,6 +97,20 @@ export default function JobsGridView({ extraColumns, extraRows }) {
 
   return (
     <div style={{ height: "400px", width: "100%" }}>
+      <h1>Jobs</h1>
+      <SearchBar
+        handleChangeSearch={handleChangeSearch}
+        handleSearch={handleSearch}
+      />
+      <br/>
+      <Link to={"/forms/event"}>
+        <Button variant="contained" color="primary">
+          {" "}
+          ADD{" "}
+        </Button>
+      </Link>
+      <br/>
+      <br/>
       <DataGrid
         rows={rows}
         columns={columns}

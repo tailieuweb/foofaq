@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
+    maxWidth: 800,
+    margin: "1rem auto",
   },
 }));
 
@@ -29,6 +31,7 @@ const AdvancedFilter = ({ handleSearch }) => {
 
   const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
+  const [categories, setCategories] = useState([]);
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -42,6 +45,7 @@ const AdvancedFilter = ({ handleSearch }) => {
     let params = '';
     if (filter !== 'all') params += `filterBy=${filter}&`;
     params += `sortBy=${sortBy}`;
+    if (categories.length) params += `categories=${categories}`;
     alert(params);
     handleSearch(params);
   }

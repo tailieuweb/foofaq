@@ -1,4 +1,7 @@
 import React from "react";
+
+import Link from "../../common/CustomLink";
+
 //icons
 import { AccountCircle } from "@material-ui/icons";
 import SearchIcon from "@material-ui/icons/Search";
@@ -23,6 +26,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -41,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
+    marginRight: "1rem",
   },
   search: {
     position: "relative",
@@ -88,6 +93,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     [theme.breakpoints.up("md")]: {
       display: "none",
+    },
+  },
+  button: {
+    margin: "0 1rem",
+  },
+  link: {
+    color: "#fff",
+    "&:hover": {
+      textDecoration: "none",
+      color: "#888",
     },
   },
 }));
@@ -187,22 +202,30 @@ export default function NavigationBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h5" noWrap>
-            Q&A
-          </Typography>
+          <Link to="/" className={classes.link}>
+            <Typography className={classes.title} variant="h5" noWrap>
+              Q&A
+            </Typography>
+          </Link>
 
-          <Button variant="text" color="inherit">
-            Home
-          </Button>
-          <Button variant="text" color="inherit">
-            Question
-          </Button>
-          <Button variant="text" color="inherit">
-            Categories
-          </Button>
-          <Button variant="text" color="inherit">
-            Jobs
-          </Button>
+          <Link to="/categories" className={classes.link}>
+            <Button variant="text" color="inherit" className={classes.button}>
+              Categories
+            </Button>
+          </Link>
+
+          <Link to="/jobs" className={classes.link}>
+            <Button variant="text" color="inherit" className={classes.button}>
+              Jobs
+            </Button>
+          </Link>
+
+          <Link to="/events" className={classes.link}>
+            <Button variant="text" color="inherit" className={classes.button}>
+              Events
+            </Button>
+          </Link>
+
           <div className={classes.search} disabled={true}>
             <div className={classes.searchIcon}>
               <SearchIcon />

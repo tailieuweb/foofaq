@@ -45,7 +45,6 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/login" component={Login}></Route>
 
-        <Route exact path="/login" component={Login}></Route>
         <Route exact path="/" component={QuestionList}></Route>
         <Route path="/detail" component={QuestionDetail}></Route>
         <Route path="/approval" component={QuestionApproval}></Route>

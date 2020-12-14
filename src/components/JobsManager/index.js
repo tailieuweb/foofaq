@@ -80,7 +80,7 @@ function JobsManager(props) {
   };
 
   const DeleteJobId = (id) => {
-    var answer = window.confirm("you definitely want to delete ");
+    var answer = window.confirm("You definitely want to delete ");
     if (answer) {
       deleteJob(id)
         .then(function (response) {
