@@ -44,34 +44,34 @@ function CategoryList() {
 
   return (
     <PageLayout outsideContainer={<NavTag />}>
-        <SearchBar
-          handleChangeSearch={handleChangeSearch}
-          handleSearch={handleSearch}
-        />
-        <Grid container className={classes.root} spacing={2}>
-          {categories ? (
-            categories.map((category) => (
-              <Grid item xs={3} key={category.id}>
-                <CategoryCard category={category} className={classes.root} />
-              </Grid>
-            ))
-          ) : (
-            <Grid container spacing={3} className={classes.root}>
-              <Grid item xs={3}>
-                <Paper className={classes.paper}></Paper>
-              </Grid>
-              <Grid item xs={3}>
-                <Paper className={classes.paper}></Paper>
-              </Grid>
-              <Grid item xs={3}>
-                <Paper className={classes.paper}></Paper>
-              </Grid>
-              <Grid item xs={3}>
-                <Paper className={classes.paper}></Paper>
-              </Grid>
+      <SearchBar
+        handleChangeSearch={handleChangeSearch}
+        handleSearch={handleSearch}
+      />
+      <Grid container className={classes.root} spacing={2}>
+        {categories ? (
+          categories.map((category) => (
+            <Grid item xs={3} key={category.id}>
+              <CategoryCard category={category} className={classes.root} />
             </Grid>
-          )}
-        </Grid>
+          ))
+        ) : (
+          <Grid container spacing={3} className={classes.root}>
+            <Grid item xs={3}>
+              <Paper className={classes.paper}></Paper>
+            </Grid>
+            <Grid item xs={3}>
+              <Paper className={classes.paper}></Paper>
+            </Grid>
+            <Grid item xs={3}>
+              <Paper className={classes.paper}></Paper>
+            </Grid>
+            <Grid item xs={3}>
+              <Paper className={classes.paper}></Paper>
+            </Grid>
+          </Grid>
+        )}
+      </Grid>
     </PageLayout>
   );
 }

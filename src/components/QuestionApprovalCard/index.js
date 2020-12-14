@@ -11,8 +11,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { green } from "@material-ui/core/colors";
 
-import Link from "../../common/CustomLink";
-
 //
 import TextField from "@material-ui/core/TextField";
 
@@ -122,15 +120,7 @@ const Index = (props) => {
         setOpen(false);
       });
   };
-  //get question
-  // const handleSortOldest = () => {
-  //   setOldest("=createdAt");
-  //   setNewest("");
-  // };
-  // const handleSortNewest = () => {
-  //   setOldest("");
-  //   setNewest("createdAt");
-  // };
+
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
@@ -164,7 +154,9 @@ const Index = (props) => {
       dateQuestion = moment(q.createdAt).valueOf();
 
       if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-        console.log(questions);
+        console.log(q.title);
+      } else {
+        return console.log("Khong biet");
       }
     });
   };
@@ -173,7 +165,6 @@ const Index = (props) => {
   };
   const [rows, setRows] = useState([]);
   // let rows = [...questions];
-
   useEffect(() => {
     setRows(questions);
   }, [questions]);

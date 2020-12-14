@@ -32,7 +32,15 @@ export const allQuestion = async () => {
 };
 
 export const getAllQuesiton = async (keyword) => {
-  const question = await axios.get(API_URL + `questions?search=${keyword}`);
+  const question = await axios.get(
+    API_URL + `questions?search=${keyword}&page=1&limit=3`
+  );
+  return question.data;
+};
+export const getCategoriesInQuestion = async (id) => {
+  const question = await axios.get(
+    API_URL + `questions?questions/${id}/categories`
+  );
   return question.data;
 };
 

@@ -4,9 +4,9 @@ import Button from "@material-ui/core/Button";
 import Link from "../../common/CustomLink";
 import {
   getAllQuesiton,
-  getAnswer,
+  // getAnswer,
   declineQuestion,
-  pagCategories,
+  // pagCategories,
 } from "../../helpers";
 import SearchBar from "../SearchBar";
 import moment from "moment";
@@ -27,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
 function QuestionGridViewManager() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [answers, setAnswers] = useState([]);
 
-  const [data, setData] = useState([]);
+  const [questionsRaw, setQuestionsRaw] = useState([]);
+  const [questions, setQuestions] = useState([]);
+
   const [rows, setRows] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
@@ -44,49 +45,53 @@ function QuestionGridViewManager() {
 
   useEffect(() => {
     (async () => {
-      const question = await getAllQuesiton(key);
-      setData(question);
+      const res = await getAllQuesiton(key);
+      setQuestionsRaw(res);
     })();
   }, [key]);
-  // console.log(data);
 
-  // useEffect(() => {
-  //   data.map((d) => {
-  //     const answer = getAnswer(d.id);
-  //     setAnswers(answer);
-  //     console.log(d.id);
-  //   });
-  // }, [data]);
-  // useEffect(() => {
-  //   const answer = getAnswer(1);
-  //   setAnswers(answer);
-  // }, []);
-  // const [id, setId] = useState("");
-  // data.map((d) => {
-  //   setId(d.id);
-  // });
-  const tempAnswers = [];
   useEffect(() => {
-    (async () => {
-      data.map((d) => {
-        const answer = getAnswer(d.id);
-        tempAnswers.push(answer);
+    if (questionsRaw) {
+      const questionProcessed = [];
+      questionsRaw.map((question, index) => {
+        const resCategories = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`
+        );
+        const resAnswers = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/answers`
+        );
+        // for test
+        // const resCategories = null;
+        // const resAnswers = null;
+
+        axios.all([resCategories, resAnswers]).then(
+          axios.spread((...res) => {
+            question.categories = res[0].data;
+            question.answers = res[1].data;
+
+            // for test
+            // question.categories = ['javascript', 'react'];
+            // question.answers = [1, 2, 3, 4, 5];
+
+            // question.voteUp =
+            //   Cookies.get(`voteUp-${question.id}`) === "true" ? true : false;
+            // question.voteDown =
+            //   Cookies.get(`voteDown-${question.id}`) === "true" ? true : false;
+
+            questionProcessed.push(question);
+            if (index === questionsRaw.length - 1) {
+              setQuestions(questionProcessed);
+            }
+          })
+        );
+        return null;
       });
-    })();
-    setAnswers(tempAnswers);
-  }, [data]);
-  const tempLength = [];
-  console.log(answers);
-
-  answers.map((a) =>
-    a.then(function (data) {
-      console.log(data[0]);
-    })
-  );
+    }
+  }, [questionsRaw]);
 
   useEffect(() => {
-    setRows(data);
-  }, [data]);
+    setRows(questions);
+  }, [questions]);
 
   const handleDeleteQuestion = (id) => {
     declineQuestion(id)
@@ -129,10 +134,12 @@ function QuestionGridViewManager() {
     },
 
     {
-      field: "tag",
+      field: "categories",
       headerName: "Categories",
       width: 150,
-      renderCell: (params) => <strong>{params.value}</strong>,
+      renderCell: (params) => (
+        <strong>{params.value.map((v) => v.name + ",")}</strong>
+      ),
     },
     {
       field: "point",
@@ -152,7 +159,7 @@ function QuestionGridViewManager() {
       width: 150,
       renderCell: (params) => (
         <>
-          <strong>{}</strong>
+          <strong>{params.value.length}</strong>
         </>
       ),
     },
@@ -292,7 +299,7 @@ function QuestionGridViewManager() {
             pageSize={5}
             rowsPerPageOptions={[5, 10, 20]}
             pagination
-            {...data}
+            {...questionsRaw}
           />
         </div>
       </div>
