@@ -68,6 +68,7 @@ const Index = (props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [openDecline, setOpenDeline] = useState(false);
 
   // const [page, setPage] = useState(1);
 
@@ -101,10 +102,20 @@ const Index = (props) => {
     setIdRaw(id);
   };
   const handleOpentDecline = () => {
-    declineQuestion(idRaw);
-    setDecline(false);
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        setOpenDeline(true);
+        console.log("Delete Succecs");
+        setDecline(false);
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+        console.log("err");
+      });
   };
-  console.log(idRaw);
   const handleCloseDecline = () => {
     setDecline(false);
   };
@@ -115,7 +126,7 @@ const Index = (props) => {
         // handle success
         console.log("Successfully");
         setOpen(true);
-        // window.location.reload();
+        //window.location.reload();
       })
       .catch(function (error) {
         setOpen(false);
@@ -335,6 +346,15 @@ const Index = (props) => {
       <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           This is a success message!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openDecline}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Delete success
         </Alert>
       </Snackbar>
       <DialogDecline
