@@ -10,11 +10,11 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "2% auto",
     flexGrow: 1,
-    maxWidth: 800,
-    display: "flex",
+    maxWidth: "89.5%",
+    width: "89.5%",
+    display: "block",
     "& > *": {
       margin: theme.spacing(1),
     },
@@ -31,11 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard() {
+export default function MediaCard({ answer }) {
   const classes = useStyles();
+  const { content } = answer;
   function FormRow() {
     return (
-      <React.Fragment>
+      <Grid container spacing={1}>
         <Grid item xs={1}>
           <Grid item className={classes.vote}>
             <IconButton aria-label="upvote">
@@ -63,23 +64,18 @@ export default function MediaCard() {
         <Grid item xs={8}>
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              {content}
             </Typography>
           </CardContent>
         </Grid>
-      </React.Fragment>
+      </Grid>
     );
   }
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Paper elevation={3}>
-          <Grid container item xs={12} spacing={3}>
-            <FormRow />
-          </Grid>
-        </Paper>
-      </Grid>
+      <Paper elevation={3}>
+        <FormRow />
+      </Paper>
     </div>
   );
 }

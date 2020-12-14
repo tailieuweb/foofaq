@@ -36,6 +36,11 @@ export const getAllQuesiton = async (keyword) => {
   return question.data;
 };
 
+export const getQuesitonById = async (id) => {
+  const question = await axios.get(API_URL + `questions/${id}`);
+  return question.data;
+};
+
 export const approveQuestion = async (id, status) => {
   const quetionApproval = await axios.put(API_URL + `questions/${id}`, {
     status: status,
@@ -200,4 +205,17 @@ export const updateEvent = async (id, name, image, date, description) => {
     description,
   });
   return res.data;
+};
+
+export const getAnswers = async (questionId) => {
+  const answers = await axios.get(API_URL + `questions/${questionId}/answers`);
+  return answers.data;
+};
+
+export const addAnswers = async (questionId, content) => {
+  const answer = await axios.post(API_URL + `questions/${questionId}/answers`, {
+    questionId,
+    content,
+  });
+  return answer.data;
 };

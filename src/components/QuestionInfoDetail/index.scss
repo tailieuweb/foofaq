@@ -1,7 +1,7 @@
 .Question {
   display: block;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 5%;
   position: relative;
   .Box-Question {
     margin: 10px;
@@ -9,6 +9,7 @@
     display: block;
     max-width: 100%;
     border-radius: 10px;
+    width: 89.5%;
 
     .Question-Title {
       font-size: 25px;
