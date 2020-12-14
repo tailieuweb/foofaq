@@ -1,0 +1,140 @@
+.fb-login-btn,
+.gg-login-btn, 
+.git-login-btn {
+  display: flex;
+  align-items: center;
+
+  font-size: 1.2rem;
+
+  background: transparent;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+
+  width: 180px;
+  height: 50px;
+
+  margin: 12px 0;
+  padding: 0.5rem;
+
+  line-height: 46px;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+
+    // box-shadow: inset -2px -2px 4px #eee, inset 2px 2px 4px #adbfd5 !important;
+  }
+
+  span.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2rem;
+    height: 2rem;
+
+    position: relative;
+
+    background-color: #fff;
+    border-radius: 4px;
+
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    
+    span.icon {
+      display: inline-block;
+      width: 1.3rem;
+      height: 1.3rem;
+
+      line-height: 1.3rem;
+  
+      background-size: cover;
+    }
+  }
+
+  span.text {
+    display: block;
+
+    width: 70px;
+
+    margin: 0 auto;
+  }
+}
+
+.gg-login-btn {
+  color: #fff;
+
+  background-color: rgb(253,17,17);
+  box-shadow: 0 10px 20px rgba(253,17,17, 0.5) !important;
+}
+
+.fb-login-btn {
+  color: #fff;
+
+  background-color: rgb(0,53,244);
+  box-shadow: 0 10px 20px rgba(0,53,244, 0.5) !important;
+}
+
+.git-login-btn {
+  color: #fff;
+
+  background-color:#9312FF;
+  box-shadow: 0 10px 20px #d890f0 !important;
+}
+
+.LoginContainer {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+
+  .LoginWrapper {
+    height: 500px;
+    width: 650px;
+
+    display: flex;
+
+    background: #fff;
+    box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12);
+
+    border-radius: 4px;
+
+    .LeftSection {
+      width: 40%;
+
+      background-image: url("https://i.pinimg.com/564x/3c/e5/f6/3ce5f6f5ee9dba8cfb2445cbe94eae10.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .RightSection {
+      width: 60%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .LoginTitle {
+        font-size: 2.8rem;
+        font-weight: bolder;
+        line-height: 4rem;
+      }
+
+      .ButtonGroup {
+        display: flex;
+
+        margin: 1em 0;
+
+        button {
+          margin: 0 0.5em;
+        }
+      }
+    }
+  }
+}
