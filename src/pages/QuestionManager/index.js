@@ -11,8 +11,8 @@ import EventsGridViewManager from "../../components/EventsGridViewManager";
 import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
 // import SearchBar from "../../components/SearchBar";
 // import Button from "@material-ui/core/Button";
-import CategoriesManager from "../../components/CategoriesManager";
-import QuestionManager from "../../components/QuestionManager";
+// import CategoriesManager from "../../components/CategoriesManager";
+// import QuestionManager from "../../components/QuestionManager";
 
 // import SearchBar from "../../components/SearchBar";
 // import Button from "@material-ui/core/Button";
@@ -24,22 +24,6 @@ function Manager(props) {
           <HeaderAsideNavbar></HeaderAsideNavbar>
         </div>
         <div className="col-md-10">
-          {/* <CategoriesManager /> */}
-          <Route path="/manager/categories" component={CategoriesManager} />
-          <Route path="/manager/questions" component={QuestionManager} />
-          {/* <SearchBar></SearchBar> */}
-          {/* <Link to={`/form/`}>
-          {/* <SearchBar></SearchBar>
-          <Link to={`/form/`}>
-            <Button
-              style={{ margin: "30px" }}
-              variant="contained"
-              color="primary"
-              size="small"
-            >
-              Add
-            </Button>
-          </Link> */}
           <Route
             path="/manager/categories"
             component={CategoriesGridViewManager}

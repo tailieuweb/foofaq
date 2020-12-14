@@ -155,20 +155,28 @@ const Index = (props) => {
   let dateTo = moment(to).valueOf();
   let dateFrom = moment(from).valueOf();
 
-  // console.log("to: " + dateTo);
-  // console.log("from: " + dateFrom);
-  // questions.map((q) => {
-  //   moment(q.createdAt);
+  // console.log("to: " + to);
+  // console.log("from: " + from);
+  // console.log("- " + to - from);
+  let dateQuestion;
+  const date = () => {
+    questions.map((q) => {
+      dateQuestion = moment(q.createdAt).valueOf();
 
-  // if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-  //   console.log(q.title);
-  // } else {
-  //   console.log("ko co gi ");
-  // }
-  // console.log(moment(q.createdAt).valueOf());
-  // });
-  // console.log(questions.createdAt);
-  const handleDate = () => {};
+      if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+        console.log(questions);
+      }
+    });
+  };
+  const handleDate = () => {
+    date();
+  };
+  const [rows, setRows] = useState([]);
+  // let rows = [...questions];
+
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
 
   let columns = [
     {
@@ -256,8 +264,6 @@ const Index = (props) => {
     //   ),
     // },
   ];
-
-  let rows = [...questions];
 
   return (
     <>

@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Button from "@material-ui/core/Button";
 import Link from "../../common/CustomLink";
-import { getAllQuesiton, declineQuestion } from "../../helpers";
+import {
+  getAllQuesiton,
+  getAnswer,
+  declineQuestion,
+  pagCategories,
+} from "../../helpers";
 import SearchBar from "../SearchBar";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
-
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   fillterDate: {
     marginBottom: "50px ",
@@ -21,7 +26,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 function QuestionGridViewManager() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [answers, setAnswers] = useState([]);
+
+  const [data, setData] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [key, setKey] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -30,6 +41,71 @@ function QuestionGridViewManager() {
 
     setOpen(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      const question = await getAllQuesiton(key);
+      setData(question);
+    })();
+  }, [key]);
+  // console.log(data);
+
+  // useEffect(() => {
+  //   data.map((d) => {
+  //     const answer = getAnswer(d.id);
+  //     setAnswers(answer);
+  //     console.log(d.id);
+  //   });
+  // }, [data]);
+  // useEffect(() => {
+  //   const answer = getAnswer(1);
+  //   setAnswers(answer);
+  // }, []);
+  // const [id, setId] = useState("");
+  // data.map((d) => {
+  //   setId(d.id);
+  // });
+  const tempAnswers = [];
+  useEffect(() => {
+    (async () => {
+      data.map((d) => {
+        const answer = getAnswer(d.id);
+        tempAnswers.push(answer);
+      });
+    })();
+    setAnswers(tempAnswers);
+  }, [data]);
+  const tempLength = [];
+  console.log(answers);
+
+  answers.map((a) =>
+    a.then(function (data) {
+      console.log(data[0]);
+    })
+  );
+
+  useEffect(() => {
+    setRows(data);
+  }, [data]);
+
+  const handleDeleteQuestion = (id) => {
+    declineQuestion(id)
+      .then(function (response) {
+        setOpen(true);
+      })
+      .catch(function (error) {
+        // setOpen(false);
+      });
+  };
+  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
+  //   rows = extraRows ? [...rows, ...extraRows] : rows;
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
+
   let columns = [
     {
       field: "id",
@@ -74,7 +150,11 @@ function QuestionGridViewManager() {
       field: "answers",
       headerName: "Answers",
       width: 150,
-      renderCell: (params) => <strong>5</strong>,
+      renderCell: (params) => (
+        <>
+          <strong>{}</strong>
+        </>
+      ),
     },
     {
       field: "createdAt",
@@ -156,40 +236,6 @@ function QuestionGridViewManager() {
     // },
   ];
 
-  const [data, setData] = useState([]);
-  const [rows, setRows] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [key, setKey] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const question = await getAllQuesiton(key);
-      setData(question);
-    })();
-  }, [key]);
-
-  useEffect(() => {
-    setRows(data);
-    console.log(data);
-  }, [data]);
-
-  const handleDeleteQuestion = (id) => {
-    declineQuestion(id)
-      .then(function (response) {
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // setOpen(false);
-      });
-  };
-  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
-  //   rows = extraRows ? [...rows, ...extraRows] : rows;
-  const handleChangeSearch = (e) => {
-    setKeyword(e.target.value);
-  };
-  const handleSearch = () => {
-    setKey(keyword);
-  };
   return (
     <>
       <div>

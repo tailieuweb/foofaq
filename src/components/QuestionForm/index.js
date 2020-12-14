@@ -171,10 +171,11 @@ function QuestionForm() {
   // );
   const [editorStates, setEdittorStates] = useState(
     EditorState.createWithContent(
-      ContentState.createFromBlockArray(convertFromHTML(`Hehehehe`))
+      ContentState.createFromBlockArray(
+        convertFromHTML(`+ ${question.content}`)
+      )
     )
   );
-
   console.log("question: " + question.content);
   return (
     <div>
@@ -204,6 +205,7 @@ function QuestionForm() {
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               onEditorStateChange={setEditorState}
+              defaultEditorState={editorStates}
             />
           </div>
           <div className="form-group">
@@ -221,7 +223,7 @@ function QuestionForm() {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput/>
+            <CategoriesInput />
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Đăng" />
@@ -229,22 +231,22 @@ function QuestionForm() {
         </div>
       </form>
       <Dialog
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            Post Successfully
-          </DialogTitle>
-          <DialogContent dividers>
-            <Typography gutterBottom>{nofi}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Post Successfully
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>{nofi}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

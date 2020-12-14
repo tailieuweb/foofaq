@@ -27,8 +27,6 @@ import QuestionCreateForm from "./pages/QuestionCreateForm";
 // import QuestionApprovalCard from "./components/QuestionApprovalCard";
 // import CategoriesManager from "./components/CategoriesManager";
 import Managers from "./pages/QuestionManager";
-// import CategoriesForm from "./components/FormManager/Categories";
-// import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
 
@@ -57,12 +55,12 @@ ReactDOM.render(
         <Route path="/griddemo" component={QuestionGridViewManager}></Route>
         <Route path="/events" component={EventList}></Route>
         <Route path="/categories" component={CategoriesGridView}></Route>
-        <Route
+        {/* <Route
           path="/categories-manager"
           component={CategoriesGridViewManager}
         ></Route>
         <Route path="/jobmanger" component={JobsGridViewManager}></Route>
-        <Route path="/jobgrid" component={JobsGridView}></Route>
+        <Route path="/jobgrid" component={JobsGridView}></Route> */}
         {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
       </Switch>
     </Router>

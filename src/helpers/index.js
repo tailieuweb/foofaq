@@ -20,6 +20,11 @@ export const getAllQuestions = async (keyword, page, perPage) => {
   );
   return question.data;
 };
+
+export const getAnswer = async (id) => {
+  const question = await axios.get(API_URL + `questions/${id}/answers`);
+  return question.data;
+};
 //get all question status=false
 export const allQuestion = async () => {
   const question = await axios.get(API_URL + `questions?status=false`);
@@ -62,6 +67,7 @@ export const getCategory = async (id) => {
   const question = await axios.get(API_URL + `categories/${id}`);
   return question.data;
 };
+
 //categories delete
 export const DeleteCategory = async (id) => {
   const user = await axios.delete(API_URL + "categories/" + id);
@@ -92,9 +98,7 @@ export const getJobs = async (keyword, page, perPage) => {
 };
 
 export const getJobsSearch = async (keyword) => {
-  const res = await axios.get(
-    API_URL_NEW + `jobs?search=${keyword}`
-  );
+  const res = await axios.get(API_URL_NEW + `jobs?search=${keyword}`);
   return res.data;
 };
 //GET ALL JOBS FOR PAGINATION
@@ -162,9 +166,7 @@ export const getEvents = async (keyword, page, perPage) => {
   return res.data;
 };
 export const getEventsSearch = async (keyword) => {
-  const res = await axios.get(
-    API_URL_NEW + `events?search=${keyword}`
-  );
+  const res = await axios.get(API_URL_NEW + `events?search=${keyword}`);
   return res.data;
 };
 //getAllEvent
