@@ -10,7 +10,7 @@ import "./index.scss";
 
 import reducer from "./reducers/index";
 import FormManager from "./pages/FormManager";
-import CategoriesForm from "./pages/CategoryEdit";
+import CategoriesForm from "./pages/CategoryAdd";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
