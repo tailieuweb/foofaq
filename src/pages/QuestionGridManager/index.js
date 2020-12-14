@@ -1,12 +1,14 @@
 import React from "react";
 import QuestionGridViewManager from "../../components/QuestionGridViewManager";
 import { Route } from "react-router-dom";
-
+import PageLayoutManager from "../../common/PageLayoutManager";
 function QuestionGridManager(props) {
   return (
-    <div>
-      <Route path="/manager/questions" component={QuestionGridViewManager} />
-    </div>
+    <>
+      <PageLayoutManager>
+        <QuestionGridViewManager />
+      </PageLayoutManager>
+    </>
   );
 }
 
