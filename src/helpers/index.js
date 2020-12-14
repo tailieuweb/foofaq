@@ -81,7 +81,13 @@ export const UpdateCategory = async (id, name, description) => {
   });
   return user.data;
 };
-
+//search
+export const searchCategory = async (keyword) => {
+  const question = await axios.get(
+    API_URL + `categories?search=${keyword}`
+  );
+  return question.data;
+};
 //categories post
 
 export const AddCategory = async (name, description) => {
