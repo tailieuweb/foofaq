@@ -15,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
+import { DialogDecline } from "../Dialog";
+
 const useStyles = makeStyles((theme) => ({
   fillterDate: {
     marginBottom: "50px ",
@@ -27,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 function QuestionGridViewManager() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [idRaw, setIdRaw] = useState("");
+  const [decline, setDecline] = useState(false);
 
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -93,15 +97,15 @@ function QuestionGridViewManager() {
     setRows(questions);
   }, [questions]);
 
-  const handleDeleteQuestion = (id) => {
-    declineQuestion(id)
-      .then(function (response) {
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // setOpen(false);
-      });
-  };
+  // const handleDeleteQuestion = (id) => {
+  //   declineQuestion(id)
+  //     .then(function (response) {
+  //       setOpen(true);
+  //     })
+  //     .catch(function (error) {
+  //       // setOpen(false);
+  //     });
+  // };
   //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
   //   rows = extraRows ? [...rows, ...extraRows] : rows;
   const handleChangeSearch = (e) => {
@@ -109,6 +113,33 @@ function QuestionGridViewManager() {
   };
   const handleSearch = () => {
     setKey(keyword);
+  };
+
+  //delete
+
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        console.log("Successfully");
+        setDecline(false);
+        setOpen(true);
+        window.location.reload();
+
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        console.log("ERR");
+        setOpen(false);
+      });
+  };
+  console.log(idRaw);
+  const handleCloseDecline = () => {
+    setDecline(false);
   };
 
   let columns = [
@@ -218,7 +249,7 @@ function QuestionGridViewManager() {
           </Link>
           <Button
             onClick={() => {
-              handleDeleteQuestion(params.getValue("id"));
+              handleClickDecline(params.getValue("id"));
             }}
             variant="contained"
             color="secondary"
@@ -308,6 +339,13 @@ function QuestionGridViewManager() {
           Delete success
         </Alert>
       </Snackbar>
+      <DialogDecline
+        decline={decline}
+        handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={() => {
+          handleOpentDecline();
+        }}
+      />
     </>
   );
 }
