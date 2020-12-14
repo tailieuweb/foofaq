@@ -17,9 +17,9 @@ router.post('/', UserController.newUser)
 //Route get detail a user
 router.get('/:userID', UserController.getUser)
 //Route update user
-router.patch('/:userID', UserController.updateUser)
+router.patch('/:userID', UserController.isAuth, UserController.updateUser)
 //Route delete user
-router.delete('/:userID', UserController.deleteUser)
+router.delete('/:userID', UserController.isAuth, UserController.deleteUser)
 // Route register
 router.post('/signup', userSignupValidator, runValidation, UserController.signUp)
 // Route login
