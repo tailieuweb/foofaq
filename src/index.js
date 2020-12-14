@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
+import EventList from "./pages/EventList";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,9 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="" component={}></Route>
-        
+        <Route exact path="/events" component={EventList}></Route>
       </Switch>
     </Router>
   </Provider>,
