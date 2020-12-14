@@ -23,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/events-add" component={EventsAdd}></Route>
+        <Route exact path="/forms/event/" component={EventsAdd}></Route>
       </Switch>
     </Router>
   </Provider>,
