@@ -9,7 +9,7 @@ import { deleteEvent, getEventsSearch } from "../../helpers";
 
 //components
 import SearchBar from "../../components/SearchBar";
-import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import PageLayoutManager from "../../common/PageLayoutManager";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
@@ -17,7 +17,7 @@ import Alert from "@material-ui/lab/Alert";
 function EventsGridViewManager() {
   const [eventData, setEventData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
   const [keyword, setKeyword] = useState("");
 
   // useEffect(() => {
@@ -45,7 +45,7 @@ function EventsGridViewManager() {
     setKeyword(e.target.value);
   };
   const handleSearch = () => {
-    setKey(keyword);
+    setKeyword(keyword);
   };
 
   const DeleteEvent = (id) => {
@@ -87,7 +87,7 @@ function EventsGridViewManager() {
     },
     { field: "description", headerName: "Description", width: 500 },
     {
-      field: "id",
+      field: "action",
       headerName: "Action",
       width: 200,
       renderCell: (params) => (
@@ -114,43 +114,38 @@ function EventsGridViewManager() {
   ];
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-md-2">
-          <HeaderAsideNavbar></HeaderAsideNavbar>
-        </div>
-        <div className="col-md-10" style={{ height: 600, width: "100%" }}>
-          <h1>Events</h1>
-          <SearchBar
-            handleChangeSearch={handleChangeSearch}
-            handleSearch={handleSearch}
-          />
-          <br />
-          <Link to={"/forms/event"}>
-            <Button variant="contained" color="primary">
-              {" "}
-              ADD{" "}
-            </Button>
-          </Link>
-          <br />
-          <br />
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={6}
-            rowsPerPageOptions={[5, 10, 20]}
-            pagination
-            {...rows}
-            rowHeight={80}
-          />
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Delete success!
-            </Alert>
-          </Snackbar>
-        </div>
+    <PageLayoutManager>
+      <div style={{ height: 600, width: "100%" }}>
+        <h1>Events</h1>
+        <SearchBar
+          handleChangeSearch={handleChangeSearch}
+          handleSearch={handleSearch}
+        />
+        <br />
+        <Link to={"/forms/event"}>
+          <Button variant="contained" color="primary">
+            {" "}
+            ADD{" "}
+          </Button>
+        </Link>
+        <br />
+        <br />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={6}
+          rowsPerPageOptions={[5, 10, 20]}
+          pagination
+          {...rows}
+          rowHeight={80}
+        />
       </div>
-    </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Delete success!
+        </Alert>
+      </Snackbar>
+    </PageLayoutManager>
   );
 }
 
