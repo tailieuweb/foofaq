@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
+import JobEdit from "./pages/FormManager";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/forms/job/7" component={JobEdit}></Route>
         
       </Switch>
     </Router>
