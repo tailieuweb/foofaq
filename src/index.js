@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
+import EventsGridViewManager from "./pages/EventsGridViewManager";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,9 +23,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="" component={}></Route>
-        
+        <Route
+          path="/manager/events/"
+          component={EventsGridViewManager}
+        ></Route>
       </Switch>
     </Router>
   </Provider>,
