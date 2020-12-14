@@ -84,6 +84,7 @@ const Index = (props) => {
   // const [dateQuestion, setDateQuestion] = useState("");
   // let count = Number(all.length) / perPage;
   let status = true;
+  const [idRaw, setIdRaw] = useState("");
   //let title, content;
   // const [newest, setNewest] = useState("");
   // const [oldest, setOldest] = useState("");
@@ -95,15 +96,15 @@ const Index = (props) => {
 
   //decline
 
-  const handleOpentDecline = (id) => {
-    // declineQuestion(id);
-    console.log(id);
-    setDecline(false);
-  };
-
   const handleClickDecline = (id) => {
     setDecline(true);
+    setIdRaw(id);
   };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw);
+    setDecline(false);
+  };
+  console.log(idRaw);
   const handleCloseDecline = () => {
     setDecline(false);
   };
@@ -141,7 +142,6 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
-
   let dateTo = moment(to).valueOf();
   let dateFrom = moment(from).valueOf();
 
