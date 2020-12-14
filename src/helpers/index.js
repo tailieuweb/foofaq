@@ -175,7 +175,7 @@ export const pagEnvent = async () => {
 };
 
 export const getEvent = async (id) => {
-  const res = await axios.get(API_URL_NEW + "events/" + id);
+  const res = await axios.get(API_URL_NEW + `events/${id}`);
   return res.data;
 };
 export const deleteEvent = async (id) => {
