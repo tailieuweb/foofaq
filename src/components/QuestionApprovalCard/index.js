@@ -123,10 +123,10 @@ const Index = (props) => {
   const handleClickOpenApproval = (id) => {
     approveQuestion(id, status)
       .then(function (response) {
-        // handle success
-        console.log("Successfully");
         setOpen(true);
-        //window.location.reload();
+        console.log("Successfully");
+
+        window.location.reload();
       })
       .catch(function (error) {
         setOpen(false);
