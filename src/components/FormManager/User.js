@@ -30,6 +30,7 @@ const UserForm = () => {
   const [user_email, setEmail] = useState("");
   const [user_password, setPassword] = useState("");
   let { id } = useParams();
+
   let handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -37,43 +38,81 @@ const UserForm = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
   useEffect(() => {
     (async () => {
-      const questionData = await getUser(id);
-      setUser(questionData);
+      const user = await getUser(id);
+      setUser(user);
     })();
   }, []);
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
-      AddUser(user_name, user_password,user_email)
-        .then(function (response) {
-          setOpen(true);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
+      AddUser(user_email, user_password, id, user_name).then(function (response) {
+        setOpen(true);
+        window.location.reload();
+      }).catch(function (error) {
+        console.log(error);
+      });
     };
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
-      UpdateUser(id, user_name, user_email,user_password)
-        .then(function (response) {
-          setOpen(true);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
+      UpdateUser(id, user_email, user_password, user_name).then(function (response) {
+        setOpen(true);
+        window.location.reload();
+      }).catch(function (error) {
+        console.log(error);
+      });
     };
   }
   console.log(user.user_name);
+
+  // let handleSubmit = (event) => {
+  //   event.preventDefault();
+  // };
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+
+  //   setOpen(false);
+  // };
+  // useEffect(() => {
+  //   (async () => {
+  //     const questionData = await getUser(id);
+  //     setUser(questionData);
+  //   })();
+  // }, []);
+  // if (id === undefined) {
+  //   handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     AddUser(user_name, user_password,user_email)
+  //       .then(function (response) {
+  //         setOpen(true);
+  //         window.location.reload();
+  //       })
+  //       .catch(function (error) {
+  //         // handle error
+  //         console.log(error);
+  //       });
+  //   };
+  // } else {
+  //   handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     UpdateUser(id, user_name, user_email,user_password)
+  //       .then(function (response) {
+  //         setOpen(true);
+  //         window.location.reload();
+  //       })
+  //       .catch(function (error) {
+  //         // handle error
+  //         console.log(error);
+  //       });
+  //   };
+  // }
+  // console.log(user.user_name);
   return (
     <div>
       <h1> User Form</h1>
@@ -81,7 +120,6 @@ const UserForm = () => {
       <div className={classes.root}>
         <form>
           <TextField
-            
             label="Name"
             style={{ margin: 8 }}
             placeholder="Name..."
@@ -97,7 +135,6 @@ const UserForm = () => {
             variant="outlined"
           />
           <TextField
-          
             title="Password"
             label="PassWord"
             style={{ margin: 8 }}
@@ -114,8 +151,6 @@ const UserForm = () => {
             variant="outlined"
           />
           <TextField
-           
-            
             label="Email"
             style={{ margin: 8 }}
             placeholder="Email..."
