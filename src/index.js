@@ -31,7 +31,7 @@ import Managers from "./pages/QuestionManager";
 // import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
-
+import JobsGridViewPage from "./pages/JobsGridViewPage";
 import QuestionGridViewManager from "./components/QuestionGridViewManager";
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -65,6 +65,7 @@ ReactDOM.render(
         <Route path="/jobmanger" component={JobsGridViewManager}></Route>
         <Route path="/jobgrid" component={JobsGridView}></Route>
         {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
+        <Route exact path="/jobs" component={JobsGridViewPage}></Route>
       </Switch>
     </Router>
   </Provider>,
