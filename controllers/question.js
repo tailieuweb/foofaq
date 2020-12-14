@@ -78,7 +78,7 @@ const editQuestion = async function (req, res) {
 const deleteQuestion = async function (req, res) {
   try {
     const question = await controllers.remove(Question, req.params.id);
-    if (!question) throw Error("Not post found!");
+    if (!question) throw Error("Question not found!");
     {
       res.status(200).json({ success: true });
     }
