@@ -3,10 +3,10 @@ import AsyncSelect from 'react-select/async';
 import axios from "axios";
 
 class CategoriesInput extends PureComponent{
-    state = { selectedUser: [] }
-     onChange = selectedUser => {
+    state = { categories: [] }
+     onChange = categories => {
         this.setState({
-            selectedUser: selectedUser || []
+            categories: categories || []
         });
         console.log(this.state)
     }
@@ -16,13 +16,12 @@ class CategoriesInput extends PureComponent{
         const json = await res.json()
         callback(json.map(i => ({ label: i.name, value: i.id })))
     }
-
     render(){
         return(
             <div>
                 <AsyncSelect
                     isMulti
-                    value={this.state.selectedUser}
+                    value={this.state.categories}
                     onChange={this.onChange}
                     placeholder={'Input...'}
                     loadOptions={this.loadOptions}
