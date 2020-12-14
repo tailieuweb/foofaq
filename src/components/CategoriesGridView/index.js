@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-
-import { pagCategories } from "../../helpers";
+import { searchCategory } from "../../helpers";
+import SearchBar from "../SearchBar";
 
 export default function CategoriesGridView({ extraColumns, extraRows }) {
   let columns = [
@@ -14,40 +14,61 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
     {
       field: "name",
       headerName: "Name",
-      width: 150,
+      width: 350,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
     {
       field: "description",
       headerName: "Description",
-      width: 150,
+      width: 450,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
   ];
 
   const [data, setData] = useState([]);
+  const [key, setKey] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const categoryData = await pagCategories();
+      const categoryData = await searchCategory(key);
       setData(categoryData);
+      console.log(key);
     })();
-  }, []);
-  let rows = [...data];
+  }, [key]);
+
+  useEffect(() => {
+    setRows(data);
+    console.log(data);
+  }, [data]);
+
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
 
   columns = extraColumns ? [...columns, ...extraColumns] : columns;
-  rows = extraRows ? [...rows, ...extraRows] : rows;
+  // rows = extraRows ? [...rows, ...extraRows] : rows;
 
   return (
-    <div style={{ height: "400px", width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
-        pagination
-        {...data}
+    <>
+      <SearchBar
+        handleChangeSearch={handleChangeSearch}
+        handleSearch={handleSearch}
       />
-    </div>
+      <div style={{ height: "400px", width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5, 10, 20]}
+          pagination
+          {...data}
+        />
+      </div>
+    </>
   );
 }
