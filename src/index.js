@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
+import JobsGridViewManager from "./pages/JobsGridViewManager";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/" component={JobsGridViewManager}></Route>
         
       </Switch>
     </Router>
