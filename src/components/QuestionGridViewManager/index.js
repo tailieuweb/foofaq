@@ -137,7 +137,6 @@ function QuestionGridViewManager() {
         setOpen(false);
       });
   };
-  console.log(idRaw);
   const handleCloseDecline = () => {
     setDecline(false);
   };
