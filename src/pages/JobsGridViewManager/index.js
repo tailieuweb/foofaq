@@ -16,7 +16,7 @@ export default function JobsGridViewManager() {
     }
     setOpen(false);
   };
-  
+
   const DeleteJobId = (id) => {
     var answer = window.confirm("You definitely want to delete ");
     if (answer) {
@@ -45,17 +45,15 @@ export default function JobsGridViewManager() {
       renderCell: (params) => (
         <strong>
           <Link to={"/forms/job/" + params.value}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              
-            }}
-          >
-            UPDATE
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={() => {}}
+            >
+              UPDATE
+            </Button>
           </Link>
           <Button
             variant="contained"
@@ -64,7 +62,7 @@ export default function JobsGridViewManager() {
             style={{ marginLeft: 16 }}
             onClick={() => {
               DeleteJobId(params.value);
-          }}
+            }}
           >
             DELETE
           </Button>
@@ -74,20 +72,13 @@ export default function JobsGridViewManager() {
   ];
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-md-2">
-          <PageLayoutManager></PageLayoutManager>
-        </div>
-        <div className="col-md-10">
-          <JobsGridView extraColumns={columns} />
-          <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Delete success!
-            </Alert>
-          </Snackbar>
-        </div>
-      </div>
-    </div>
+    <PageLayoutManager>
+      <JobsGridView extraColumns={columns} />
+      <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Delete success!
+        </Alert>
+      </Snackbar>
+    </PageLayoutManager>
   );
 }

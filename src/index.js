@@ -23,9 +23,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="/" component={JobsGridViewManager}></Route>
-        
+        <Route
+          exact
+          path="/manager/jobs"
+          component={JobsGridViewManager}
+        ></Route>
       </Switch>
     </Router>
   </Provider>,
