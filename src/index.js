@@ -26,9 +26,9 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        {/* <Route path="/form/" component={QuestionManager}></Route>
+        <Route path="/form/" component={QuestionManager}></Route>
         <Route path="/manager/" component={Managers}></Route>
-        <Route path="/forms/" component={FormManager}></Route> */}
+        <Route path="/forms/" component={FormManager}></Route>
         <Route path="/user-story/" component={UserDetailStoryFirst}></Route>
         
       </Switch>
