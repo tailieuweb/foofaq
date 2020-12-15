@@ -86,15 +86,15 @@ function QuestionForm() {
 
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  useEffect(() => {
-    setEdittorStates(
-      EditorState.createWithContent(
-        ContentState.createFromBlockArray(
-          convertFromHTML(`${question.content}`)
-        )
-      )
-    );
-  }, [question.content]);
+  // useEffect(() => {
+  //   setEdittorStates(
+  //     EditorState.createWithContent(
+  //       ContentState.createFromBlockArray(
+  //         convertFromHTML(`${question.content}`)
+  //       )
+  //     )
+  //   );
+  // }, [question.content]);
   const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
 
   let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
@@ -105,72 +105,72 @@ function QuestionForm() {
   };
   const { id } = useParams();
 
-  useEffect(() => {
-    (async () => {
-      const result = await getQuesitonById(id);
-      setQuestion(result);
-    })();
-  }, [id]);
-  if (id === undefined) {
-    handleSubmit = (event) => {
-      event.preventDefault();
-      questionPost();
-    };
-    const questionPost = () => {
-      axios
-        .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
-          title: title,
-          tag: tag,
-          content: content,
-        })
-        .then(function (response) {
-          // handle success
-          setTitle("");
-          setTag("");
-          console.log("POST Successfully");
-          setNofi("POST Successfully");
-          setOpen(true);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          setNofi("POST Failed");
-          setOpen(true);
-        });
-    };
-  }
+  // useEffect(() => {
+  //   (async () => {
+  //     const result = await getQuesitonById(id);
+  //     setQuestion(result);
+  //   })();
+  // }, [id]);
+  // if (id === undefined) {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    questionPost();
+  };
+  const questionPost = () => {
+    axios
+      .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
+        title: title,
+        tag: tag,
+        content: content,
+      })
+      .then(function (response) {
+        // handle success
+        setTitle("");
+        setTag("");
+        console.log("POST Successfully");
+        setNofi("POST Successfully");
+        setOpen(true);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        setNofi("POST Failed");
+        setOpen(true);
+      });
+  };
+  // }
 
   //Truong hop id co gia tri => PUT
-  else {
-    handleSubmit = (event) => {
-      event.preventDefault();
-      questionPut(id);
-    };
-    const questionPut = (id) => {
-      axios
-        .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
-          title: title,
-          tag: tag,
-          content: content,
-        })
-        .then(function (response) {
-          // handle success
-          console.log("Successfully");
-          setTitle("");
-          setTag("");
-          console.log("POST Successfully");
-          setNofi("POST Successfully");
-          setOpen(true);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          console.log(error);
-          setNofi("POST Failed");
-          setOpen(true);
-        });
-    };
-  }
+  // else {
+  //   handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     questionPut(id);
+  //   };
+  //   const questionPut = (id) => {
+  //     axios
+  //       .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
+  //         title: title,
+  //         tag: tag,
+  //         content: content,
+  //       })
+  //       .then(function (response) {
+  //         // handle success
+  //         console.log("Successfully");
+  //         setTitle("");
+  //         setTag("");
+  //         console.log("POST Successfully");
+  //         setNofi("POST Successfully");
+  //         setOpen(true);
+  //       })
+  //       .catch(function (error) {
+  //         // handle error
+  //         console.log(error);
+  //         console.log(error);
+  //         setNofi("POST Failed");
+  //         setOpen(true);
+  //       });
+  //   };
+  // }
 
   // async function getQuestion() {
   //   const response = await axios.get();
@@ -202,7 +202,7 @@ function QuestionForm() {
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              defaultValue={question.title}
+              // defaultValue={question.title}
             />
           </div>
           <label htmlFor="aroundEditorQuestion">
