@@ -8,6 +8,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 // components
 import QuestionCard from "../../components/QuestionCard";
+import UserPagination from "../../components/UserPagination/index";
 
 // styles
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ const QuestionList = () => {
           />
         </>
       )}
+      <UserPagination totalPage={1} />
     </Container>
   );
 };
