@@ -15,6 +15,8 @@ import QuestionManager from "./pages/QuestionManager";
 import Managers from "./pages/QuestionManager";
 import FormManager from "./pages/FormManager";
 import UserDetailStoryFirst from "./components/UserDetailStoryFirst/index";
+import UserList from "./components/UserList/index";
+
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -30,6 +32,10 @@ ReactDOM.render(
         <Route path="/manager/" component={Managers}></Route>
         <Route path="/forms/" component={FormManager}></Route>
         <Route path="/user-story/" component={UserDetailStoryFirst}></Route>
+        <Route path="/user-list/" component={UserList}></Route>
+      
+      
+        
         
       </Switch>
     </Router>

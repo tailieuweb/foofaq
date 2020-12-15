@@ -69,52 +69,9 @@ const UserForm = () => {
   }
   console.log(user.user_name);
 
-  // let handleSubmit = (event) => {
-  //   event.preventDefault();
-  // };
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
-  // useEffect(() => {
-  //   (async () => {
-  //     const questionData = await getUser(id);
-  //     setUser(questionData);
-  //   })();
-  // }, []);
-  // if (id === undefined) {
-  //   handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     AddUser(user_name, user_password,user_email)
-  //       .then(function (response) {
-  //         setOpen(true);
-  //         window.location.reload();
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   };
-  // } else {
-  //   handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     UpdateUser(id, user_name, user_email,user_password)
-  //       .then(function (response) {
-  //         setOpen(true);
-  //         window.location.reload();
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   };
-  // }
-  // console.log(user.user_name);
   return (
     <div>
+      {/* Form Add user */}
       <h1> User Form</h1>
 
       <div className={classes.root}>
