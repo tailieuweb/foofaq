@@ -88,11 +88,7 @@ const CategoriesForm = () => {
           className="form-control"
           style={{ margin: 8 }}
           placeholder="Name..."
-          fullWidth
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -106,11 +102,7 @@ const CategoriesForm = () => {
           className="form-control"
           style={{ margin: 8 }}
           placeholder="Description..."
-          fullWidth
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
           onChange={(e) => {
             setDes(e.target.value);
           }}
