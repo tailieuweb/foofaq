@@ -226,6 +226,12 @@ export default function NavigationBar() {
             </Button>
           </Link>
 
+          <Link to="/user-story" className={classes.link}>
+            <Button variant="text" color="inherit" className={classes.button}>
+              Users
+            </Button>
+          </Link>
+
           <div className={classes.search} disabled={true}>
             <div className={classes.searchIcon}>
               <SearchIcon />

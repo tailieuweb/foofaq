@@ -11,8 +11,10 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-
-
+import QuestionManager from "./pages/QuestionManager";
+import Managers from "./pages/QuestionManager";
+import FormManager from "./pages/FormManager";
+import UserDetailStoryFirst from "./components/UserDetailStoryFirst/index";
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -24,7 +26,10 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        {/* <Route path="/form/" component={QuestionManager}></Route>
+        <Route path="/manager/" component={Managers}></Route>
+        <Route path="/forms/" component={FormManager}></Route> */}
+        <Route path="/user-story/" component={UserDetailStoryFirst}></Route>
         
       </Switch>
     </Router>

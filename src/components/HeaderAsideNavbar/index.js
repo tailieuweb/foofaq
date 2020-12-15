@@ -12,6 +12,7 @@ import EventIcon from "@material-ui/icons/Event";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "../../common/CustomLink";
+import PeopleIcon from '@material-ui/icons/People';
 import "./index.scss";
 function Index(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -30,7 +31,7 @@ function Index(props) {
         }}
       >
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem
+          {/* <ListItem
             button
             selected={selectedIndex === 0}
             onClick={(event) => handleListItemClick(event, 0)}
@@ -40,9 +41,9 @@ function Index(props) {
             </ListItemIcon>
 
             <ListItemText primary="Dashboard" />
-          </ListItem>
+          </ListItem> */}
 
-          <Link
+          {/* <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -60,8 +61,8 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Jobs" />
             </ListItem>
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -79,9 +80,9 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Events" />
             </ListItem>
-          </Link>
+          </Link> */}
 
-          <Link
+          {/* <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -99,8 +100,10 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Questions" />
             </ListItem>
-          </Link>
-          <Link
+          </Link> */}
+
+
+          {/* <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -118,9 +121,9 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Categories" />
             </ListItem>
-          </Link>
+          </Link> */}
 
-          <Link
+          {/* <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -137,6 +140,28 @@ function Index(props) {
                 <DraftsIcon />
               </ListItemIcon>
               <ListItemText primary="Approval" />
+            </ListItem>
+          </Link> */}
+
+
+           {/* User */}
+           <Link
+            style={{
+              width: "100%",
+              textDecoration: "none",
+              color: "#000000b8",
+            }}
+            to="/manager/user"
+          >
+            <ListItem
+              button
+              selected={selectedIndex === 0}
+              onClick={(event) => handleListItemClick(event, 0)}
+            >
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="User" />
             </ListItem>
           </Link>
         </List>
