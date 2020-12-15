@@ -6,6 +6,7 @@ import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { getCategory, AddCategory, UpdateCategory } from "../../helpers";
+import "./index.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -72,64 +73,65 @@ const CategoriesForm = () => {
         });
     };
   }
-  const [names, setNames] = useState("");
-  useEffect(() => {
-    setNames(category.name);
-  }, [category.name]);
+  // const [names, setNames] = useState([]);
+  // useEffect(() => {
+  //   setNames(category.name);
+  // }, [category.name]);
   // console.log(category.name);
   return (
-    <div>
-      <h1> Categories Form</h1>
+    <>
+      <div className="form-edit">
+        <h1> Categories Form</h1>
+        <input
+          id="outlined-full-width"
+          label="Name"
+          className="form-control"
+          style={{ margin: 8 }}
+          placeholder="Name..."
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          defaultValue={category.name}
+          variant="outlined"
+        />
 
-      <div className={classes.root}>
-        <form>
-          <TextField
-            id="outlined-full-width"
-            label="Name"
-            style={{ margin: 8 }}
-            placeholder="Name..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            defaultValue={names}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-full-width"
-            label="Description"
-            style={{ margin: 8 }}
-            placeholder="Description..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setDes(e.target.value);
-            }}
-            variant="outlined"
-          />
-          <Button
-            onClick={handleSubmit}
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Send
-          </Button>
-        </form>
+        <input
+          id="outlined-full-width"
+          label="Description"
+          className="form-control"
+          style={{ margin: 8 }}
+          placeholder="Description..."
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={(e) => {
+            setDes(e.target.value);
+          }}
+          defaultValue={category.description}
+          variant="outlined"
+        />
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+        >
+          Send
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            This is a success message!
+          </Alert>
+        </Snackbar>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
-    </div>
+    </>
   );
 };
 

@@ -13,7 +13,6 @@ import CategoryEdit from "./pages/CategoryEdit";
 
 // imports pages
 
-
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -24,9 +23,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="/forms/categories/4" component={CategoryEdit}></Route>
-        
+        <Route
+          exact
+          path="/forms/categories/:id"
+          component={CategoryEdit}
+        ></Route>
       </Switch>
     </Router>
   </Provider>,

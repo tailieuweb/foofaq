@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import PageLayoutManager from "../../common/PageLayoutManager";
-import CategoriesForm from "../../components/FormManager/Categories";
+import CategoriesForm from "../../components/CategoryForm";
 export default function CategoryEdit() {
   return (
     <>
