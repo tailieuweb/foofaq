@@ -23,7 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
-
+import PageLayout from '../../common/PageLayout/index';
 // import CategoriesInput from "../CategoriesInput";
 
 //APIS
@@ -187,6 +187,7 @@ function QuestionForm() {
   console.log("question: " + question.content);
   return (
     <div>
+      <PageLayout/>
       <form onSubmit={handleSubmit}>
         <div className="questionForm">
           <div className="form-group">

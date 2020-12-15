@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://5fc48ee536bc790016343a0b.mockapi.io/";
 const API_URL_NEW = "https://5fc9a56e3c1c220016440eab.mockapi.io/";
+const API_URL_Userpf ="https://5fc4b01136bc790016343d03.mockapi.io/api/v1/users/20";
 export const getQuestions = async (
   keyword,
 
@@ -13,6 +14,12 @@ export const getQuestions = async (
   return question.data;
 };
 //get all question
+export const getOneUser = async () => {
+  const userone = await axios.get(
+    API_URL_Userpf );
+  return userone.data;
+};
+
 
 export const getAllQuestions = async (keyword, page, perPage) => {
   const question = await axios.get(

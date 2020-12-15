@@ -25,8 +25,8 @@ ReactDOM.render(
     <Router>
       <Switch>
      
-        {/* <Route exact path="/" component={Profile}></Route> */}
-        <Route exact path="" component={Blog}></Route>
+        <Route exact path="/" component={Profile}></Route>
+        <Route exact path="/blog" component={Blog}></Route>
         
       </Switch>
     </Router>

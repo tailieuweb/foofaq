@@ -149,6 +149,11 @@ export default function NavigationBar() {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <AddBoxOutlinedIcon /> Add a question
+    
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <AddBoxOutlinedIcon /> Add a Blog
+    
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <ExitToAppIcon /> Logout
