@@ -32,7 +32,7 @@ function FormManager(props) {
           <Route path="/forms/job/:id" component={JobsForm}></Route>{" "}
           <Route exact path="/forms/event/" component={EventFrom}></Route>{" "}
           <Route path="/forms/event/:id" component={EventFrom}></Route>{" "} */}
-          <Route path="/forms/adduser/:id" component={UserForm}></Route>{" "}
+          <Route path="/forms/update/:id" component={UserForm}></Route>{" "}
         </div>
       </div>
     </div>
