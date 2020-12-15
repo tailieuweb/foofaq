@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 // imports pages
 import Form from "./components/DeveloperStoryAffter"
-import "./components/DeveloperStoryAffter/From.scss";
+import User from "./components/NewUser/index";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -25,6 +25,7 @@ ReactDOM.render(
       <Switch>
 
         <Route exact path="/form-profile" component={Form}></Route>
+        //<Route exact path="/new-user" component={User}></Route>
         
       </Switch>
     </Router>

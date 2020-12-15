@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import {getUserOne} from '../../helpers/index'
 import PageLayout from '../../common/PageLayout/index';
+import "./From.scss";
 export default function Form () {
 
   
