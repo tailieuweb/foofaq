@@ -9,9 +9,9 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
+import EditUserProfile from "./components/EditUserProfile";
 
 // imports pages
-
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,9 +23,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="" component={}></Route>
-        
+        <Route
+          exact
+          path="/EditUserProfile"
+          component={EditUserProfile}
+        ></Route>
       </Switch>
     </Router>
   </Provider>,
