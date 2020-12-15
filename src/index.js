@@ -5,7 +5,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PageLayout from './common/PageLayout/index';
 import PageLayoutManager from './common/PageLayoutManager/index';
-import UserProfileActivity from "./pages/UserProfileActivity/index";
+import UserListAnswer from "./pages/UserListAnswer/index";
 
 import thunk from "redux-thunk";
 
@@ -27,7 +27,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <PageLayout>
-        <Route exact path="/" component={UserProfileActivity}></Route>
+        <Route  path="/" component={UserListAnswer}></Route>
         </PageLayout>
       </Switch>
     </Router>
