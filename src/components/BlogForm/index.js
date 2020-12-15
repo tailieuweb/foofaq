@@ -24,7 +24,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
 
-import CategoriesInput from "../CategoriesInput";
+// import CategoriesInput from "../CategoriesInput";
 
 //APIS
 import { getQuesitonById } from "../../helpers";
@@ -172,25 +172,26 @@ function QuestionForm() {
     };
   }
 
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
+  async function getQuestion() {
+    const response = await axios.get();
+    return response.data;
+  }
 
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
+  const sampleMarkup = `${question.id}`;
+  const blocksFromHTML = convertFromHTML(sampleMarkup);
+  const state = ContentState.createFromBlockArray(
+    blocksFromHTML.contentBlocks,
+    blocksFromHTML.entityMap
+  );
 
-  // console.log("question: " + question.content);
+  console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="questionForm">
           <div className="form-group">
             <label htmlFor="questionTitle">
+              <h1 >Form tạo bài viết mới</h1>
               <b>Tiêu đề</b>
             </label>
             <input
@@ -198,7 +199,7 @@ function QuestionForm() {
               className="form-control"
               id="questionTitle"
               aria-describedby="questionTitle"
-              placeholder="Nhập tiêu đề câu hỏi..."
+              placeholder="Nhập tiêu đề ..."
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -217,9 +218,9 @@ function QuestionForm() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="questionTag">
+            {/* <label htmlFor="questionTag">
               <b>Thẻ</b>
-            </label>
+            </label> */}
             {/* <input
               type="text"
               className="form-control"
@@ -231,11 +232,12 @@ function QuestionForm() {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput />
+            {/* <CategoriesInput /> */}
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Đăng" />
           </div>
+          
         </div>
       </form>
       <Dialog

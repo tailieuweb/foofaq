@@ -9,9 +9,10 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
-
+import Blog from "./components/BlogForm/index"
 // imports pages
 
+import Profile from './components/Components/Profile/profile';
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,8 +24,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-
-        <Route exact path="" component={}></Route>
+     
+        {/* <Route exact path="/" component={Profile}></Route> */}
+        <Route exact path="" component={Blog}></Route>
         
       </Switch>
     </Router>
