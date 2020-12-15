@@ -79,8 +79,8 @@ const CategoriesForm = () => {
   // }, [category.name]);
   // console.log(category.name);
   return (
-    <>
-      <div className="form-edit">
+    <div>
+      <div className="form-edit mr-auto ml-auto">
         <h1> Categories Form</h1>
         <input
           id="outlined-full-width"
@@ -100,7 +100,7 @@ const CategoriesForm = () => {
           variant="outlined"
         />
 
-        <input
+        <textarea
           id="outlined-full-width"
           label="Description"
           className="form-control"
@@ -131,7 +131,7 @@ const CategoriesForm = () => {
           </Alert>
         </Snackbar>
       </div>
-    </>
+    </div>
   );
 };
 
