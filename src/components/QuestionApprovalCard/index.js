@@ -345,7 +345,7 @@ const Index = (props) => {
       </div>
       <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          This is a success message!
+          Approval success!
         </Alert>
       </Snackbar>
       <Snackbar
@@ -354,15 +354,13 @@ const Index = (props) => {
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="error">
-          Delete success
+          Decline Success
         </Alert>
       </Snackbar>
       <DialogDecline
         decline={decline}
         handleCloseDecline={handleCloseDecline}
-        handleOpentDecline={() => {
-          handleOpentDecline();
-        }}
+        handleOpentDecline={handleOpentDecline}
       />
     </>
   );
