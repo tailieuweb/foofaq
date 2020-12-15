@@ -2,6 +2,14 @@ import axios from "axios";
 
 const API_URL = "https://5fc48ee536bc790016343a0b.mockapi.io/";
 const API_URL_NEW = "https://5fc9a56e3c1c220016440eab.mockapi.io/";
+const API_USERS = "https://5fd6c88eea55c4001604235c.mockapi.io/project-demo/users/1";
+
+export const getUserOne = async () => {
+  const users = await axios.get(
+    API_USERS);
+  return users.data;
+};
+
 export const getQuestions = async (
   keyword,
 

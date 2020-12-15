@@ -9,9 +9,9 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
-
 // imports pages
-
+import Form from "./components/DeveloperStoryAffter"
+import "./components/DeveloperStoryAffter/From.scss";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/form-profile" component={Form}></Route>
         
       </Switch>
     </Router>
