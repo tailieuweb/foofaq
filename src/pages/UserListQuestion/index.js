@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Router, Switch, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -6,8 +7,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import UserProfileActivity from "../../components/UserProfileActivity/index";
 import ListUserButtonTags from '../../components/UserListButtonTags/index';
+import UserProfileListQuestion from '../../components/UserProfileListQuestion/index';
 import "./index.scss";
 
 function TabPanel(props) {
@@ -73,8 +74,7 @@ export default function UserProfileNavbar() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Profile" {...a11yProps(0)} />
-          <Tab label="Activity" {...a11yProps(1)} />
+          <Tab label="Activity" {...a11yProps(0)} />
           <Tab label="Developer Story" {...a11yProps(2)} />
           <Tab label="Edit Profile" {...a11yProps(3)} />
         </Tabs>
@@ -89,16 +89,8 @@ export default function UserProfileNavbar() {
             index={0}
             dir={theme.direction}
           >
-            detail
-          </TabPanel>
-          <TabPanel
-            className="Lower-text"
-            value={value}
-            index={1}
-            dir={theme.direction}
-          >
             <ListUserButtonTags />
-            <UserProfileActivity />
+            <Route path="/questions" component={UserProfileListQuestion}></Route>
           </TabPanel>
           <TabPanel
             className="Lower-text"
