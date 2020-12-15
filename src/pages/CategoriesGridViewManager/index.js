@@ -39,11 +39,6 @@ export default function CategoriesGridViewManager() {
   return (
     <>
       <PageLayoutManager>
-        <Link to="/forms/categories">
-          <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
-            Add Category
-          </Button>
-        </Link>
         <CategoriesGridView extraColumns={columns} />
       </PageLayoutManager>
     </>

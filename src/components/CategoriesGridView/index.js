@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { searchCategory } from "../../helpers";
 import SearchBar from "../SearchBar";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 export default function CategoriesGridView({ extraColumns, extraRows }) {
   let columns = [
@@ -55,11 +57,16 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
 
   return (
     <>
-      <SearchBar
-        handleChangeSearch={handleChangeSearch}
-        handleSearch={handleSearch}
-      />
       <div style={{ height: "400px", width: "100%" }}>
+        <SearchBar
+          handleChangeSearch={handleChangeSearch}
+          handleSearch={handleSearch}
+        />
+        <Link to="/forms/categories">
+          <Button variant="contained" color="primary" style={{ margin: 20 }}>
+            Add Category
+          </Button>
+        </Link>
         <DataGrid
           rows={rows}
           columns={columns}
