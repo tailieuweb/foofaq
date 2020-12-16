@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 // import Imgavatar from "../../images/stack.png";
 // import IconButton from "@material-ui/core/IconButton";
 // import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import UserSaveStory from "./UserSaveStory/index";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, NavLink } from "react-router-dom";
 import "./index.scss";
@@ -47,11 +48,11 @@ const index = makeStyles((theme) => ({
 export default function ImageAvatars() {
   const classes = index();
   const [user, setUser] = useState({});
-
+  const [userSave, setUserSave] = useState(false);
   const displaynameEl1 = React.useRef(null);
   const titleE1 = React.useRef(null);
   const fullnameEl1 = React.useRef(null);
-  const ImgavatarEl1 = React.useRef(null);
+
   const liveE1 = React.useRef(null);
   const twiterE1 = React.useRef(null);
   const WebsiteE1 = React.useRef(null);
@@ -88,52 +89,18 @@ export default function ImageAvatars() {
         GitHub: GitHubE1.current.value,
       }),
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
+      setUserSave(true);
     });
   };
   return (
     <PageLayout>
-    <div className="alert alert-info container">
-     
+      <div className="alert alert-info container">
+       
         <React.Fragment>
           <CssBaseline />
           <Container>
             <Typography component="div">
-              {/* <div className={classes.root}>
-              <Avatar
-                alt="Remy Sharp"
-                src={user.avatar}
-                className={classes.large}
-              />
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                multiple
-                type="file"
-                ref={ImgavatarEl1}
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="black" component="span">
-                  Upload
-                </Button>
-              </label>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="icon-button-file"
-                type="file"
-              />
-              <label htmlFor="icon-button-file">
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
-                >
-                  <PhotoCamera />
-                </IconButton>
-              </label>
-            </div> */}
               <div>
                 <br />
                 <form>
@@ -294,8 +261,8 @@ export default function ImageAvatars() {
             </Typography>
           </Container>
         </React.Fragment>
-   
-    </div>
+        {userSave ? <UserSaveStory /> : null}
+      </div>
     </PageLayout>
   );
 }

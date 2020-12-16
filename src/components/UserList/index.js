@@ -14,26 +14,24 @@ function ListUser(props) {
   };
   return (
     <div className="container">
-        <h1>Users</h1>
+      <h1>Users</h1>
       <div className="file-content">
-      
         <SearchBar
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
         ></SearchBar>
 
         <div className="section-list">
-          
-            <ButtonGroup
-              disableElevation
-              aria-label="small outlined button group"
-            >
-              <Button>Reputation</Button>
-              <Button>New users</Button>
-              <Button>Voter</Button>
-              <Button>Editors</Button>
-              <Button>Moderator</Button>
-            </ButtonGroup>
+          <ButtonGroup
+            disableElevation
+            aria-label="small outlined button group"
+          >
+            <Button>Reputation</Button>
+            <Button>New users</Button>
+            <Button>Voter</Button>
+            <Button>Editors</Button>
+            <Button>Moderator</Button>
+          </ButtonGroup>
         </div>
       </div>
     </div>
