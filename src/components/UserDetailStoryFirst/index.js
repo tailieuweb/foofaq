@@ -2,15 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { API_ONE_USERSTORY } from "../../helpers/index";
 import { makeStyles } from "@material-ui/core/styles";
-// import Avatar from "@material-ui/core/Avatar";
+
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-// import Imgavatar from "../../images/stack.png";
-// import IconButton from "@material-ui/core/IconButton";
-// import PhotoCamera from "@material-ui/icons/PhotoCamera";
+
 import UserSaveStory from "./UserSaveStory/index";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, NavLink } from "react-router-dom";
@@ -96,7 +94,6 @@ export default function ImageAvatars() {
   return (
     <PageLayout>
       <div className="alert alert-info container">
-       
         <React.Fragment>
           <CssBaseline />
           <Container>
@@ -233,10 +230,10 @@ export default function ImageAvatars() {
                         aria-label="vertical contained primary button group"
                         variant="contained"
                       >
-                        {/* <Button onClick={HandleSubmit} Link>
+                        <Button onClick={HandleSubmit} Link>
                         Save
-                      </Button> */}
-                        <Link
+                      </Button>
+                        {/* <Link
                           to={`/Edit-Profile`}
                           type="submit"
                           className="btn btn-primary"
@@ -244,7 +241,7 @@ export default function ImageAvatars() {
                           Link
                         >
                           Save
-                        </Link>
+                        </Link> */}
                       </ButtonGroup>
                       <ButtonGroup
                         orientation="vertical"

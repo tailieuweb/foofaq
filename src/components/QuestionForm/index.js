@@ -172,19 +172,6 @@ function QuestionForm() {
     };
   }
 
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
-
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-
-  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -220,17 +207,6 @@ function QuestionForm() {
             <label htmlFor="questionTag">
               <b>Thẻ</b>
             </label>
-            {/* <input
-              type="text"
-              className="form-control"
-              id="questionTag"
-              aria-describedby="questionTag"
-              placeholder="Nhập thẻ liên quan đến câu hỏi..."
-              defaultValue={question.tag}
-              onChange={(e) => {
-                setTag(e.target.value);
-              }}
-            /> */}
             <CategoriesInput />
           </div>
           <div className="aroundBtnQuestion">
