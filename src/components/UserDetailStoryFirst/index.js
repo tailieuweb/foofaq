@@ -96,7 +96,6 @@ export default function ImageAvatars() {
   return (
     <PageLayout>
       <div className="alert alert-info container">
-       
         <React.Fragment>
           <CssBaseline />
           <Container>
@@ -261,8 +260,9 @@ export default function ImageAvatars() {
             </Typography>
           </Container>
         </React.Fragment>
-        {userSave ? <UserSaveStory /> : null}
       </div>
+
+    <div className="container">{userSave ? <UserSaveStory /> : null}</div>  
     </PageLayout>
   );
 }
