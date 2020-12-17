@@ -29,6 +29,8 @@ import CategoriesInput from "../CategoriesInput";
 //APIS
 import { getQuesitonById } from "../../helpers";
 
+export const listCategories = [];
+
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -120,7 +122,7 @@ function QuestionForm() {
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
-          tag: tag,
+          tag: listCategories,
           content: content,
         })
         .then(function (response) {
@@ -150,7 +152,7 @@ function QuestionForm() {
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
-          tag: tag,
+          tag: listCategories,
           content: content,
         })
         .then(function (response) {

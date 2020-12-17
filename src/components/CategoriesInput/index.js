@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import AsyncSelect from "react-select/async";
 // import axios from "axios";
+import { listCategories } from "../QuestionForm";
 
 class CategoriesInput extends PureComponent{
     state = { categories: [] }
@@ -8,7 +9,9 @@ class CategoriesInput extends PureComponent{
         this.setState({
             categories: categories || []
         });
-        console.log(this.state)
+        listCategories.splice();
+        listCategories.push(this.state.categories);
+        console.log(listCategories);
     }
 
     loadOptions = async (inputText, callback) => {
