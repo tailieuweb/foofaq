@@ -5,6 +5,7 @@ import Link from "../../common/CustomLink";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import { deleteJob } from "../../helpers";
+import "./index.scss";
 
 export default function JobsGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -73,6 +74,14 @@ export default function JobsGridViewManager() {
 
   return (
     <div>
+      <div className="aroundAddJob">
+      <Link to={"/forms/job/"}>
+        <Button variant="contained" color="primary">
+          {" "}
+          ADD{" "}
+        </Button>
+      </Link>
+      </div>
       <JobsGridView extraColumns={columns} />
       <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
