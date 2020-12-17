@@ -25,9 +25,12 @@ import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
 
 import CategoriesInput from "../CategoriesInput";
+import Link from "../../common/CustomLink";
 
 //APIS
 import { getQuesitonById } from "../../helpers";
+
+export const listCategories = [];
 
 const styles = (theme) => ({
   root: {
@@ -120,7 +123,7 @@ function QuestionForm() {
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
-          tag: tag,
+          tag: listCategories,
           content: content,
         })
         .then(function (response) {
@@ -150,14 +153,11 @@ function QuestionForm() {
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
-          tag: tag,
+          tag: listCategories,
           content: content,
         })
         .then(function (response) {
           // handle success
-          console.log("Successfully");
-          setTitle("");
-          setTag("");
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
@@ -191,22 +191,23 @@ function QuestionForm() {
         <div className="questionForm">
           <div className="form-group">
             <label htmlFor="questionTitle">
-              <b>Tiêu đề</b>
+              <b>Title</b>
             </label>
             <input
               type="text"
               className="form-control"
               id="questionTitle"
               aria-describedby="questionTitle"
-              placeholder="Nhập tiêu đề câu hỏi..."
+              placeholder="Input title question..."
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              defaultValue={question.title}
+              defaultValue={question.title} 
+              required
             />
           </div>
           <label htmlFor="aroundEditorQuestion">
-            <b>Nội dung</b>
+            <b>Content</b>
           </label>
           <div className="aroundEditorQuestion" id="aroundEditorQuestion">
             <Editor
@@ -214,11 +215,12 @@ function QuestionForm() {
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               onEditorStateChange={setEdittorStates}
+              placeholder="Input content question..."
             />
           </div>
           <div className="form-group">
             <label htmlFor="questionTag">
-              <b>Thẻ</b>
+              <b>Tag</b>
             </label>
             {/* <input
               type="text"
@@ -234,7 +236,7 @@ function QuestionForm() {
             <CategoriesInput />
           </div>
           <div className="aroundBtnQuestion">
-            <input type="submit" className="btn btn-success" value="Đăng" />
+            <input type="submit" className="btn btn-success" value="Send" />
           </div>
         </div>
       </form>
@@ -250,9 +252,11 @@ function QuestionForm() {
           <Typography gutterBottom>{nofi}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            OK
-          </Button>
+          <Link to={"/"}>
+            <Button autoFocus onClick={handleClose} color="primary">
+              OK
+            </Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </div>
