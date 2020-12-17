@@ -211,6 +211,23 @@ export const getAnswers = async (questionId) => {
   return answers.data;
 };
 
+export const getAnswer = async (questionId, answerId) => {
+  const answers = await axios.get(
+    API_URL + `questions/${questionId}/answers/${answerId}`
+  );
+  return answers.data;
+};
+export const updateAnswer = async (questionId, answerId, content) => {
+  const answers = await axios.put(
+    API_URL + `questions/${questionId}/answers/${answerId}`,
+    {
+      questionId,
+      content,
+    }
+  );
+  return answers.data;
+};
+
 export const addAnswers = async (questionId, content) => {
   const answer = await axios.post(API_URL + `questions/${questionId}/answers`, {
     questionId,

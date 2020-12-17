@@ -73,9 +73,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionInfoDetail = (props) => {
+const QuestionInfoDetail = ({
+  question,
+  increaseVote,
+  decreaseVote,
+  answersCount,
+}) => {
   //use state
   const [editMode, setEditMode] = React.useState(true);
+  const {
+    title,
+    content,
+    point,
+    views,
+    tag,
+    createdAt,
+    voteUp,
+    voteDown,
+  } = question;
 
   // change Mode function
   function changeMode() {
@@ -92,7 +107,7 @@ const QuestionInfoDetail = (props) => {
             name: <br />
             Date:
             <Typography variant="body2" color="textSecondary" component="p">
-              {props.question.createdAt}
+              {createdAt}
             </Typography>{" "}
             <br />
             Votes: <br />
@@ -115,26 +130,34 @@ const QuestionInfoDetail = (props) => {
             <Paper className="Box-Question" elevation={3}>
               <Grid container spacing={3}>
                 <Grid item className={classes.vote}>
-                  <IconButton aria-label="upvote">
+                  <IconButton
+                    aria-label="upvote"
+                    disabled={voteUp}
+                    onClick={increaseVote}
+                  >
                     <ArrowDropUpIcon />
                   </IconButton>
                   <Typography gutterBottom variant="h4">
-                    {props.question.point}
+                    {point}
                   </Typography>
-                  <IconButton aria-label="downvote">
+                  <IconButton
+                    aria-label="downvote"
+                    disabled={voteDown}
+                    onClick={decreaseVote}
+                  >
                     <ArrowDropDownIcon />
                   </IconButton>
                 </Grid>
                 <Grid item xs={11}>
                   <Link gutterBottom variant="h5">
-                    {props.question.title}
+                    {title}
                   </Link>
                   <Typography variant="body2" color="textSecondary">
-                    {props.question.content}
+                    {content}
                   </Typography>
                   {/* categories */}
                   <div className={classes.chips}>
-                    <Chip label={props.question.tag} clickable />
+                    <Chip label={tag} clickable />
                   </div>
                   <Grid container spacing={2} className={classes.footerCard}>
                     {/* views */}
@@ -145,7 +168,7 @@ const QuestionInfoDetail = (props) => {
                         startIcon={<VisibilityIcon />}
                         className={classes.buttonView}
                       >
-                        {props.question.views}
+                        {views}
                       </Button>
                       <Button
                         variant="outlined"
@@ -153,7 +176,7 @@ const QuestionInfoDetail = (props) => {
                         startIcon={<QuestionAnswerIcon />}
                         className={classes.buttonView}
                       >
-                        96k Answer
+                        {answersCount} ANSWERS
                       </Button>
                     </Grid>
                     {/* user */}

@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 //Editor
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  convertToRaw,
+  ContentState,
+  convertFromHTML,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToMarkdown from "draftjs-to-markdown";
 
+//components
+import PageLayout from "../../common/PageLayout";
+
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-//style
-import "./index.scss";
 
 //materia UI
 import Snackbar from "@material-ui/core/Snackbar";
@@ -19,33 +25,33 @@ import MuiAlert from "@material-ui/lab/Alert";
 import SaveIcon from "@material-ui/icons/Save";
 
 //APIS
-import { addAnswers } from "../../helpers";
+import { getAnswer, updateAnswer } from "../../helpers";
 
 //create SnackBar to alert
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function AnswerForm() {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
+function AnswerEdit(props) {
+  const history = useHistory();
+  const [editorState, setEdittorState] = useState(EditorState.createEmpty());
+  const [answer, setAnswer] = useState([]);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const { id } = useParams();
+  const questionId = props.match.params.qId;
+  const answerID = props.match.params.id;
 
   let content = draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (content.length !== 1) {
+    if (content !== 1) {
       try {
-        addAnswers(id, content).then(function (reponse) {
-          setEditorState(EditorState.createEmpty());
+        updateAnswer(questionId, answerID, content).then(function (reponse) {
           setOpenSuccess(true);
           console.log(content);
-          window.location.reload();
+          history.replace(`/questions/${questionId}`);
         });
       } catch (error) {
         setErrorText(error + "");
@@ -57,6 +63,21 @@ function AnswerForm() {
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      const data = await getAnswer(questionId, answerID);
+      setAnswer(data);
+    })();
+  }, [questionId, answerID]);
+
+  useEffect(() => {
+    setEdittorState(
+      EditorState.createWithContent(
+        ContentState.createFromBlockArray(convertFromHTML(`${answer.content}`))
+      )
+    );
+  }, [answer.content]);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -65,16 +86,8 @@ function AnswerForm() {
     setOpenError(false);
   };
 
-  // onSubmit = (event) => {
-  //   event.preventDefault();
-  //   const answerPost = await addAnswers()
-  // }
-
-  // answerPost = () => {
-  //   axios.post("https://5fc48ee536bc790016343a0b.mockapi.io/",{questionID, date, content})
-  // }
   return (
-    <div>
+    <PageLayout>
       <form onSubmit={handleSubmit}>
         <div className="answerForm">
           <span className="btn btn-success answerText">Your Answers</span>
@@ -83,7 +96,7 @@ function AnswerForm() {
               editorState={editorState}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              onEditorStateChange={setEditorState}
+              onEditorStateChange={setEdittorState}
             />
           </div>
           <div className="aroundBtnAnswer">
@@ -107,8 +120,8 @@ function AnswerForm() {
           {errorText}
         </Alert>
       </Snackbar>
-    </div>
+    </PageLayout>
   );
 }
 
-export default AnswerForm;
+export default AnswerEdit;
