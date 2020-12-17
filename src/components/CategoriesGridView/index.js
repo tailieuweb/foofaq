@@ -57,16 +57,16 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
 
   return (
     <>
+      <SearchBar
+        handleChangeSearch={handleChangeSearch}
+        handleSearch={handleSearch}
+      />
+      <Link to="/forms/categories">
+        <Button variant="contained" color="primary" style={{ margin: 20 }}>
+          Add Category
+        </Button>
+      </Link>{" "}
       <div style={{ height: "400px", width: "100%" }}>
-        <SearchBar
-          handleChangeSearch={handleChangeSearch}
-          handleSearch={handleSearch}
-        />
-        <Link to="/forms/categories">
-          <Button variant="contained" color="primary" style={{ margin: 20 }}>
-            Add Category
-          </Button>
-        </Link>
         <DataGrid
           rows={rows}
           columns={columns}
