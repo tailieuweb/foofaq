@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Icon from "@material-ui/core/Icon";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
+// import { makeStyles } from "@material-ui/core/styles";
+// import TextField from "@material-ui/core/TextField";
+// import Icon from "@material-ui/core/Icon";
+// import Snackbar from "@material-ui/core/Snackbar";
+// import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import "./Jos.scss";
@@ -19,11 +19,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 
 import Link from "../../common/CustomLink";
-
-//APIS
-import { getQuesitonById } from "../../helpers";
-
-export const listCategories = [];
 
 const styles = (theme) => ({
   root: {

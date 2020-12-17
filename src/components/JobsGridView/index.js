@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { pagJobs, getJobsSearch } from "../../helpers";
 import SearchBar from "../../components/SearchBar";
-import Link from "../../common/CustomLink";
-import Button from "@material-ui/core/Button";
+// import Link from "../../common/CustomLink";
+// import Button from "@material-ui/core/Button";
 
 export default function JobsGridView({ extraColumns, extraRows }) {
   const [jobs, setJobs] = useState([]);
