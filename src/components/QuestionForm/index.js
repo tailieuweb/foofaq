@@ -161,6 +161,7 @@ function QuestionForm() {
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
+          window.location.reload();
         })
         .catch(function (error) {
           // handle error
@@ -202,7 +203,7 @@ function QuestionForm() {
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              defaultValue={question.title} 
+              defaultValue={question.title}
               required
             />
           </div>
@@ -252,7 +253,7 @@ function QuestionForm() {
           <Typography gutterBottom>{nofi}</Typography>
         </DialogContent>
         <DialogActions>
-          <Link to={"/"}>
+          <Link to={`/questions/${id}`}>
             <Button autoFocus onClick={handleClose} color="primary">
               OK
             </Button>
