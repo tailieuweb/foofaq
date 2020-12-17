@@ -30,7 +30,10 @@ import Link from "../../common/CustomLink";
 //APIS
 import { getQuesitonById } from "../../helpers";
 
-export const listCategories = [];
+// export const listCategories = [];
+
+import { pagCategories,getQuestionForCate } from "../../helpers";
+
 
 const styles = (theme) => ({
   root: {
@@ -80,6 +83,52 @@ const DialogActions = withStyles((theme) => ({
 function QuestionForm() {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
+  //change
+  const [cagtegories,setCategories]=useState([]);
+  const [textCate,setTextCate] = useState([]);
+
+  //get categories 
+useEffect(()=>{
+  (async () => {
+      const result = await pagCategories();
+      setCategories(result);
+    })();
+},[])
+
+//get question để lấy id cuối 
+useEffect(()=>{
+  (async () => {
+      const result = await getQuestionForCate();
+      setQuestion(result);
+    })();
+},[])
+
+//lấy id cuối
+const [idTest,setIdTest]=useState([]);
+  useEffect(()=>{
+    question.map((q)=>{
+        console.log(q.id);
+     setIdTest(q);
+    }) 
+  },[question])
+  const [idCate,setIdCate] = useState(null);
+useEffect(()=>{
+  setIdCate(parseInt(idTest.id)+1);
+// id +1 ;
+},[idTest])
+console.log(idCate);
+console.log(idTest);
+
+const handleAuto = () =>{
+  textCate.map((tx)=>{
+      axios
+      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/${idCate}/categories`, {
+          questionId: idCate,
+          name: tx.name
+      })
+  })
+}
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -106,6 +155,7 @@ function QuestionForm() {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -114,6 +164,7 @@ function QuestionForm() {
       setQuestion(result);
     })();
   }, [id]);
+
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
@@ -123,10 +174,12 @@ function QuestionForm() {
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
-          tag: listCategories,
+          // tag: listCategories,
           content: content,
         })
         .then(function (response) {
+          // post thành công r post tiếp categories
+          handleAuto();
           // handle success
           setTitle("");
           setTag("");
@@ -153,7 +206,7 @@ function QuestionForm() {
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
-          tag: listCategories,
+          // tag: listCategories,
           content: content,
         })
         .then(function (response) {
@@ -234,7 +287,7 @@ function QuestionForm() {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput />
+            <CategoriesInput listCategories = {cagtegories} handleAuto = {handleAuto} setTextCate = {setTextCate}/>
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Send" />
