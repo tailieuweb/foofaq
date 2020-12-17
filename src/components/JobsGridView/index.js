@@ -102,12 +102,6 @@ export default function JobsGridView({ extraColumns, extraRows }) {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       />
-      <Link to={"/forms/event"}>
-        <Button variant="contained" color="primary">
-          {" "}
-          ADD{" "}
-        </Button>
-      </Link>
       <br/>
       <br/>
       <DataGrid

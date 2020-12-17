@@ -9,7 +9,70 @@ import Button from "@material-ui/core/Button";
 import "./Jos.scss";
 import { getJob, addJobs, updateJobs } from "../../helpers";
 
+import { withStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Typography from "@material-ui/core/Typography";
+
+import Link from "../../common/CustomLink";
+
+//APIS
+import { getQuesitonById } from "../../helpers";
+
+export const listCategories = [];
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+
 function Jobs(props) {
+  const [nofi, setNofi] = useState("");
   const [open, setOpen] = React.useState(false);
   // name, description, type, area, company, experience, role
   const [job, setJob] = useState([]);
@@ -25,13 +88,18 @@ function Jobs(props) {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
 
+  //   setOpen(false);
+  // };
+
+  const handleClose = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     (async () => {
       const questionData = await getJob(id);
@@ -45,24 +113,30 @@ function Jobs(props) {
         .then(function (response) {
           setOpen(true);
           //window.location.reload();
+          setNofi("Successfully");
         })
         .catch(function (error) {
           // handle error
           console.log(error);
+          setOpen(true);
+          setNofi("Failed");
         });
     };
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
       updateJobs(id, name, description, type, area, company, experience, role)
-        .then(function (response) {
-          setOpen(true);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
+      .then(function (response) {
+        setOpen(true);
+        //window.location.reload();
+        setNofi("Successfully");
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        setOpen(true);
+        setNofi("Failed");
+      });
     };
   }
   return (
@@ -178,11 +252,32 @@ function Jobs(props) {
         </li>
       </ul>
 
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           This is a success message!
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
+
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Notification
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>{nofi}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Link to={"/manager/jobs"}>
+            <Button autoFocus onClick={handleClose} color="primary">
+              OK
+            </Button>
+          </Link>
+        </DialogActions>
+      </Dialog>
+      
     </div>
   );
 }
