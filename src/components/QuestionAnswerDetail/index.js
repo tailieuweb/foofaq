@@ -8,6 +8,9 @@ import Paper from "@material-ui/core/Paper";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "2% auto",
@@ -29,11 +32,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     height: 30,
   },
+  buttonEdit: {
+    float: "right",
+    position: "relative",
+    right: "2%",
+    bottom: "43px",
+    display: "block",
+  },
 }));
 
 export default function MediaCard({ answer }) {
   const classes = useStyles();
-  const { content } = answer;
+  const { id, createdAt, content } = answer;
   function FormRow() {
     return (
       <Grid container spacing={1}>
@@ -57,7 +67,7 @@ export default function MediaCard({ answer }) {
               Lizard
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              September 14, 2016
+              {createdAt}
             </Typography>
           </CardContent>
         </Grid>
@@ -75,6 +85,13 @@ export default function MediaCard({ answer }) {
     <div className={classes.root}>
       <Paper elevation={3}>
         <FormRow />
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.buttonEdit}
+        >
+          Edit <EditIcon />
+        </Button>
       </Paper>
     </div>
   );
