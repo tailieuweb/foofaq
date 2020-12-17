@@ -18,6 +18,7 @@ import QuestionDetail from "./pages/QuestionDetail";
 import CategoriesGridViewManager from "./components/CategoriesGridViewManager";
 import CategoriesGridView from "./components/CategoriesGridView";
 
+import AnswerEdit from "./pages/AnswerEdit";
 import EventsGridViewManager from "./components/EventsGridViewManager";
 import EventList from "./pages/EventList";
 import JobsGridViewManager from "./components/JobsGridViewManager";
@@ -66,6 +67,7 @@ ReactDOM.render(
         <Route path="/jobgrid" component={JobsGridView}></Route>
         {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
         <Route exact path="/jobs" component={JobsGridViewPage}></Route>
+        <Route path="/answer/edit/:qId/:id" component={AnswerEdit}></Route>
       </Switch>
     </Router>
   </Provider>,

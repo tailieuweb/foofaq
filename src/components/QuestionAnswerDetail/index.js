@@ -10,6 +10,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import Link from "../../common/CustomLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaCard({ answer }) {
   const classes = useStyles();
-  const { id, createdAt, content } = answer;
+  const { id, questionId, createdAt, content } = answer;
+
   function FormRow() {
     return (
       <Grid container spacing={1}>
@@ -85,13 +87,15 @@ export default function MediaCard({ answer }) {
     <div className={classes.root}>
       <Paper elevation={3}>
         <FormRow />
-        <Button
-          variant="outlined"
-          color="primary"
-          className={classes.buttonEdit}
-        >
-          Edit <EditIcon />
-        </Button>
+        <Link to={`/answer/edit/${questionId}/${id}`}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.buttonEdit}
+          >
+            Edit <EditIcon />
+          </Button>
+        </Link>
       </Paper>
     </div>
   );
