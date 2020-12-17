@@ -45,6 +45,7 @@ function AnswerForm() {
           setEditorState(EditorState.createEmpty());
           setOpenSuccess(true);
           console.log(content);
+          window.location.reload();
         });
       } catch (error) {
         setErrorText(error + "");
