@@ -104,6 +104,16 @@ function Events(props) {
     setOpen(false);
   };
 
+  const checkValueEmpty = () => {
+    if(name.length == "" || description.length == "")
+    {
+      return true;
+    }
+    else{
+      return false
+    }
+  }
+
   useEffect(() => {
     (async () => {
       const eventData = await getEvent(id);
@@ -112,6 +122,11 @@ function Events(props) {
   }, []);
   if (id === undefined) {
     handleSubmit = (event) => {
+      if(checkValueEmpty() == true){
+        setOpen(true);
+        setNofi("Failed");
+      }
+      else{
       event.preventDefault();
       addEvent(name, image, date, description)
       .then(function (response) {
@@ -126,8 +141,14 @@ function Events(props) {
         setNofi("Failed");
       });
     };
+  }
   } else {
     handleSubmit = (event) => {
+      if(checkValueEmpty() == true){
+        setOpen(true);
+        setNofi("Failed");
+      }
+      else{
       event.preventDefault();
       updateEvent(id, name, image, date, description)
       .then(function (response) {
@@ -142,6 +163,7 @@ function Events(props) {
         setNofi("Failed");
       });
     };
+  }
   }
   console.log(event.name);
   return (
@@ -187,7 +209,8 @@ function Events(props) {
             type="file"
             onChange={(e) => {
               setImage(e.target.value);
-            }}
+            }} 
+            required
           />
           <label htmlFor="icon-button-file">
             <IconButton
@@ -211,7 +234,8 @@ function Events(props) {
             defaultValue={event.description}
             onChange={(e) => {
               setDescription(e.target.value);
-            }}
+            }} 
+            required
           />
         </li>
         <li>
