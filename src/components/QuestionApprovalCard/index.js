@@ -139,7 +139,6 @@ const Index = (props) => {
       setQuestions(questionData);
     })();
   }, [key, statusA]);
-
   // searchBar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
@@ -189,6 +188,7 @@ const Index = (props) => {
       setQuestions(questionData);
     })();
   };
+
   let columns = [
     {
       field: "id",
