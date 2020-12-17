@@ -15,7 +15,7 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
-import CategoriesGridViewManager from "./components/CategoriesGridViewManager";
+import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
 import CategoriesGridView from "./components/CategoriesGridView";
 
 import EventsGridViewManager from "./components/EventsGridViewManager";
