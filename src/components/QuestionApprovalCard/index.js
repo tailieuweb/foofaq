@@ -153,33 +153,42 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
-  let dateTo = moment(to).valueOf();
-  let dateFrom = moment(from).valueOf();
-
-  // console.log("to: " + to);
-  // console.log("from: " + from);
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
   // console.log("- " + to - from);
-  let dateQuestion;
+  // dateQuestion;
+  let dateProcessed = [];
   const date = () => {
     questions.map((q) => {
-      dateQuestion = moment(q.createdAt).valueOf();
+      const dateQuestion = moment(q.createdAt).valueOf();
 
       if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-        console.log(q.title);
-      } else {
-        return console.log("Khong biet");
+        dateProcessed.push(q);
+        console.log(dateProcessed);
+        setQuestions(dateProcessed);
       }
     });
   };
+
+  //console.log(dateQ);
   const handleDate = () => {
     date();
   };
-  const [rows, setRows] = useState([]);
-  // let rows = [...questions];
-  useEffect(() => {
-    setRows(questions);
-  }, [questions]);
+  // console.log(questions);
+  //const [rows, setRows] = useState([]);
+  let rows = [...questions];
 
+  // useEffect(() => {
+  //   setRows(questions);
+  // }, [questions]);
+  const unFillter = () => {
+    (async () => {
+      const questionData = await getQuestions(key, statusA);
+      setQuestions(questionData);
+    })();
+  };
   let columns = [
     {
       field: "id",
@@ -204,7 +213,7 @@ const Index = (props) => {
       field: "tag",
       headerName: "Categories",
       width: 150,
-      renderCell: (params) => <strong>{params.value}</strong>,
+      renderCell: (params) => <strong></strong>,
     },
 
     {
@@ -267,6 +276,7 @@ const Index = (props) => {
     // },
   ];
 
+  // console.log(columns);
   return (
     <>
       <div>
@@ -326,6 +336,13 @@ const Index = (props) => {
                     variant="contained"
                   >
                     Fillter
+                  </Button>{" "}
+                  <Button
+                    className={classes.btnDate}
+                    onClick={unFillter}
+                    variant="contained"
+                  >
+                    UnFillter
                   </Button>{" "}
                 </div>
               </div>
