@@ -7,9 +7,9 @@ class CategoriesInput extends PureComponent{
     state = { categories: [] }
      onChange = categories => {
         this.setState({
-            categories: categories || []
+            categories: categories
         });
-        listCategories.splice();
+        listCategories.splice(1, 1);
         listCategories.push(this.state.categories);
         console.log(listCategories);
     }
