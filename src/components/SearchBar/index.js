@@ -4,7 +4,7 @@ import "./index.scss";
 
 function SearchBar(props) {
   return (
-    <div className="search-container" style={{margin: 20}}>
+    <div className="search-container" style={{margin: 10}}>
       <input
         type="text"
         id="search-bar"

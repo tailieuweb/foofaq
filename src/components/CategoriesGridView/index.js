@@ -5,6 +5,8 @@ import { searchCategory } from "../../helpers";
 //components
 import PageLayout from "../../common/PageLayout";
 import SearchBar from "../SearchBar";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 export default function CategoriesGridView({ extraColumns, extraRows }) {
   let columns = [
@@ -57,11 +59,13 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
   // rows = extraRows ? [...rows, ...extraRows] : rows;
 
   return (
-    <PageLayout>
-      <SearchBar
-        handleChangeSearch={handleChangeSearch}
-        handleSearch={handleSearch}
-      />
+    <PageLayout>   
+      <div className="search-bar" style={{marginBottom: "55px"}}>
+        <SearchBar
+          handleChangeSearch={handleChangeSearch}
+          handleSearch={handleSearch}
+        />
+      </div>
       <div style={{ height: "400px", width: "100%" }}>
         <DataGrid
           rows={rows}

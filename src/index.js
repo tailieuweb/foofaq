@@ -15,7 +15,7 @@ import QuestionList from "./pages/QuestionList";
 import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
-import CategoriesGridViewManager from "./components/CategoriesGridViewManager";
+import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
 import CategoriesGridView from "./components/CategoriesGridView";
 
 import AnswerEdit from "./pages/AnswerEdit";
@@ -52,13 +52,12 @@ ReactDOM.render(
         <Route path="/approval" component={QuestionApproval}></Route>
 
         <Route path="/form" component={QuestionCreateForm}></Route>
-        <Route path="/category" component={QuestionCategoryList}></Route>
+        <Route path="/categories" component={QuestionCategoryList}></Route>
         <Route path="/manager/" component={Managers}></Route>
         <Route path="/forms/" component={FormManager}></Route>
         {/* <Route path="/events" component={EventList}></Route> */}
         <Route path="/griddemo" component={QuestionGridViewManager}></Route>
         <Route path="/events" component={EventList}></Route>
-        <Route path="/categories" component={CategoriesGridView}></Route>
         <Route
           path="/categories-manager"
           component={CategoriesGridViewManager}
