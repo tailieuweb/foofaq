@@ -52,6 +52,7 @@ const QuestionDetail = (props) => {
   const classes = useStyles();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
+  // const [categories, setCategories] = useState([]);
   let id = props.match.params.id;
 
   useEffect(() => {
@@ -68,6 +69,7 @@ const QuestionDetail = (props) => {
     })();
   }, [id]);
 
+  // console.log(categories);
   let answersCount = 0;
 
   if (answers.length) {

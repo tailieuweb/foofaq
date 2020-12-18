@@ -1,7 +1,8 @@
 //import react
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useParams } from "react-router-dom";
 
 //import style
 import "./index.scss";
@@ -28,6 +29,9 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
 //images
 import PersonAvatar from "../../images/Person-Avatar.png";
+
+//APIS
+import { getAllCategories } from "../../helpers";
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -79,18 +83,25 @@ const QuestionInfoDetail = ({
   decreaseVote,
   answersCount,
 }) => {
+  let { id } = useParams();
   //use state
   const [editMode, setEditMode] = React.useState(true);
+  const [categories, setCategories] = useState([]);
   const {
     title,
     content,
     point,
     views,
-    tag,
     createdAt,
     voteUp,
     voteDown,
   } = question;
+  useEffect(() => {
+    (async () => {
+      const categoriesData = await getAllCategories(id);
+      setCategories(categoriesData);
+    })();
+  }, [id]);
 
   // change Mode function
   function changeMode() {
@@ -157,7 +168,13 @@ const QuestionInfoDetail = ({
                   </Typography>
                   {/* categories */}
                   <div className={classes.chips}>
-                    <Chip label={tag} clickable />
+                    {categories ? (
+                      categories.map((item) => (
+                        <Chip label={item.name} clickable key={item.id} />
+                      ))
+                    ) : (
+                      <Chip label={null} clickable />
+                    )}
                   </div>
                   <Grid container spacing={2} className={classes.footerCard}>
                     {/* views */}
