@@ -21,10 +21,10 @@ export const getAllQuestions = async (keyword, page, perPage) => {
   return question.data;
 };
 
-export const getAnswer = async (id) => {
-  const question = await axios.get(API_URL + `questions/${id}/answers`);
-  return question.data;
-};
+// export const getAnswer = async (id) => {
+//   const question = await axios.get(API_URL + `questions/${id}/answers`);
+//   return question.data;
+// };
 //get all question status=false
 export const allQuestion = async () => {
   const question = await axios.get(API_URL + `questions?status=false`);
