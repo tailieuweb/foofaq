@@ -257,6 +257,7 @@ export default function MediaCard(props) {
             <Button
               variant="outlined"
               color="secondary"
+              disabled={item.exact}
               className={classes.buttonEdit}
               onClick={() => exactlyAnswer(item.id)}
             >

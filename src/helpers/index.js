@@ -211,17 +211,21 @@ export const updateEvent = async (id, name, image, date, description) => {
   return res.data;
 };
 
+//get all answer
 export const getAnswers = async (questionId) => {
   const answers = await axios.get(API_URL + `questions/${questionId}/answers`);
   return answers.data;
 };
 
+//get answer by id
 export const getAnswer = async (questionId, answerId) => {
   const answers = await axios.get(
     API_URL + `questions/${questionId}/answers/${answerId}`
   );
   return answers.data;
 };
+
+//update answer
 export const updateAnswer = async (questionId, answerId, content) => {
   const answers = await axios.put(
     API_URL + `questions/${questionId}/answers/${answerId}`,
@@ -233,10 +237,17 @@ export const updateAnswer = async (questionId, answerId, content) => {
   return answers.data;
 };
 
+//add answer
 export const addAnswers = async (questionId, content) => {
   const answer = await axios.post(API_URL + `questions/${questionId}/answers`, {
     questionId,
     content,
   });
   return answer.data;
+};
+
+//get all categories
+export const getAllCategories = async (id) => {
+  const categories = await axios.get(API_URL + `questions/${id}/categories  `);
+  return categories.data;
 };

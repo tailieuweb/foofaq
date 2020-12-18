@@ -78,6 +78,7 @@ const QuestionInfoDetail = ({
   increaseVote,
   decreaseVote,
   answersCount,
+  categories,
 }) => {
   //use state
   const [editMode, setEditMode] = React.useState(true);
@@ -91,6 +92,7 @@ const QuestionInfoDetail = ({
     voteUp,
     voteDown,
   } = question;
+  // const { name } = categories;
 
   // change Mode function
   function changeMode() {
@@ -157,7 +159,13 @@ const QuestionInfoDetail = ({
                   </Typography>
                   {/* categories */}
                   <div className={classes.chips}>
-                    <Chip label={tag} clickable />
+                    {categories ? (
+                      categories.map((item) => (
+                        <Chip label={item.name} clickable key={item.id} />
+                      ))
+                    ) : (
+                      <Chip label={null} clickable />
+                    )}
                   </div>
                   <Grid container spacing={2} className={classes.footerCard}>
                     {/* views */}
