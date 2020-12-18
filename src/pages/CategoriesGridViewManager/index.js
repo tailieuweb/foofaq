@@ -1,12 +1,18 @@
 import { React, useState } from "react";
-import CategoriesGridView from "../../components/CategoriesGridView";
-import { DeleteCategory, UpdateCategory } from "../../helpers";
 import { Link } from "react-router-dom";
-import PageLayoutManager from "../../common/PageLayoutManager";
 
-import Button from "@material-ui/core/Button";
+//components
+import CategoriesGridView from "../../components/CategoriesGridView";
+import PageLayoutManager from "../../common/PageLayoutManager";
+import { DeleteCategory, UpdateCategory } from "../../helpers";
+
+//components mui
+import Button from "@material-ui/core/Button"; 
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+
+//styles
+import "./index.scss";
 
 export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -66,15 +72,19 @@ export default function CategoriesGridViewManager() {
     },
   ];
   return (
-    <>
-      <PageLayoutManager>
-        <CategoriesGridView extraColumns={columns} />
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+    <PageLayoutManager>
+    
+      <Link to="/forms/categories">
+        <Button variant="contained" color="primary" className="btn-add" >
+          Add Category
+        </Button>
+      </Link>
+      <CategoriesGridView extraColumns={columns} />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Delete success!
         </Alert>
       </Snackbar>
-      </PageLayoutManager>
-    </>
+    </PageLayoutManager>
   );
 }

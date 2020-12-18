@@ -10,6 +10,7 @@ function SearchBar(props) {
         id="search-bar"
         placeholder="Search..."
         onChange={props.handleChangeSearch}
+        style={{marginBottom: "10px"}}
       />
       <button onClick={props.handleSearch} className="btn-search">
         <SearchIcon className="search-icon"></SearchIcon>
