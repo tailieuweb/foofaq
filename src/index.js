@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
+import NewUser from "./components/ListNewUser/index"
 
 // imports pages
 
@@ -24,7 +25,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="" component={}></Route>
+        <Route exact path="/new-user" component={NewUser}></Route>
         
       </Switch>
     </Router>
