@@ -185,6 +185,8 @@ function QuestionForm() {
   //   blocksFromHTML.entityMap
   // );
 
+  console.log("question: " + question.content);
+
   // console.log("question: " + question.content);
   return (
     <div>
@@ -215,6 +217,7 @@ function QuestionForm() {
               editorState={editorStates}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
+              defaultEditorState={editorStates}
               onEditorStateChange={setEdittorStates}
               placeholder="Input content question..."
             />

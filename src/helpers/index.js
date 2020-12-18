@@ -20,6 +20,11 @@ export const getAllQuestions = async (keyword, page, perPage) => {
   );
   return question.data;
 };
+
+export const getAnswer = async (id) => {
+  const question = await axios.get(API_URL + `questions/${id}/answers`);
+  return question.data;
+};
 //get all question status=false
 export const allQuestion = async () => {
   const question = await axios.get(API_URL + `questions?status=false`);
@@ -27,7 +32,15 @@ export const allQuestion = async () => {
 };
 
 export const getAllQuesiton = async (keyword) => {
-  const question = await axios.get(API_URL + `questions?search=${keyword}`);
+  const question = await axios.get(
+    API_URL + `questions?search=${keyword}&page=1&limit=3`
+  );
+  return question.data;
+};
+export const getCategoriesInQuestion = async (id) => {
+  const question = await axios.get(
+    API_URL + `questions?questions/${id}/categories`
+  );
   return question.data;
 };
 
@@ -73,6 +86,7 @@ export const getCategory = async (id) => {
   const question = await axios.get(API_URL + `categories/${id}`);
   return question.data;
 };
+
 //categories delete
 export const DeleteCategory = async (id) => {
   const user = await axios.delete(API_URL + "categories/" + id);

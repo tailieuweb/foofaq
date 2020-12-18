@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Button from "@material-ui/core/Button";
 import Link from "../../common/CustomLink";
-import { getAllQuesiton, declineQuestion } from "../../helpers";
+import {
+  getAllQuesiton,
+  // getAnswer,
+  declineQuestion,
+  // pagCategories,
+} from "../../helpers";
 import SearchBar from "../SearchBar";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import axios from "axios";
+import { DialogDecline } from "../Dialog";
 
 const useStyles = makeStyles((theme) => ({
   fillterDate: {
@@ -21,7 +28,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 function QuestionGridViewManager() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [idRaw, setIdRaw] = useState("");
+  const [decline, setDecline] = useState(false);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+
+  const [questionsRaw, setQuestionsRaw] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [questionDate, setQuestionDate] = useState([]);
+  const [openDate, setOpenDate] = useState(false);
+
+  const [rows, setRows] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [key, setKey] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -30,6 +50,142 @@ function QuestionGridViewManager() {
 
     setOpen(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllQuesiton(key);
+      setQuestionsRaw(res);
+    })();
+  }, [key]);
+
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
+  useEffect(() => {
+    if (questionsRaw) {
+      const questionProcessed = [];
+      questionsRaw.map((question, index) => {
+        const resCategories = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`
+        );
+        const resAnswers = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/answers`
+        );
+        // for test
+        // const resCategories = null;
+        // const resAnswers = null;
+
+        axios.all([resCategories, resAnswers]).then(
+          axios.spread((...res) => {
+            question.categories = res[0].data;
+            question.answers = res[1].data;
+
+            // for test
+            // question.categories = ['javascript', 'react'];
+            // question.answers = [1, 2, 3, 4, 5];
+
+            // question.voteUp =
+            //   Cookies.get(`voteUp-${question.id}`) === "true" ? true : false;
+            // question.voteDown =
+            //   Cookies.get(`voteDown-${question.id}`) === "true" ? true : false;
+
+            questionProcessed.push(question);
+            if (index === questionsRaw.length - 1) {
+              setQuestions(questionProcessed);
+            }
+          })
+        );
+        return null;
+      });
+    }
+  }, [questionsRaw]);
+
+  // const handleDeleteQuestion = (id) => {
+  //   declineQuestion(id)
+  //     .then(function (response) {
+  //       setOpen(true);
+  //     })
+  //     .catch(function (error) {
+  //       // setOpen(false);
+  //     });
+  // };
+  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
+  //   rows = extraRows ? [...rows, ...extraRows] : rows;
+
+  //delete
+
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        console.log("Successfully");
+        setDecline(false);
+        setOpen(true);
+        window.location.reload();
+
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        console.log("ERR");
+        setOpen(false);
+      });
+  };
+  const handleCloseDecline = () => {
+    setDecline(false);
+  };
+
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
+  // console.log("- " + to - from);
+  // dateQuestion;
+  let dateProcessed = [];
+  const date = () => {
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
+
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
+  };
+
+  //console.log(dateQ);
+  const handleDate = () => {
+    date();
+  };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenDate(false);
+  };
+  const unFillter = () => {
+    setRows(questions);
+  };
+
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
   let columns = [
     {
       field: "id",
@@ -53,10 +209,12 @@ function QuestionGridViewManager() {
     },
 
     {
-      field: "tag",
+      field: "categories",
       headerName: "Categories",
       width: 150,
-      renderCell: (params) => <strong>{params.value}</strong>,
+      renderCell: (params) => (
+        <strong>{params.value.map((v) => v.name + ",")}</strong>
+      ),
     },
     {
       field: "point",
@@ -74,7 +232,11 @@ function QuestionGridViewManager() {
       field: "answers",
       headerName: "Answers",
       width: 150,
-      renderCell: (params) => <strong>5</strong>,
+      renderCell: (params) => (
+        <>
+          <strong>{params.value.length}</strong>
+        </>
+      ),
     },
     {
       field: "createdAt",
@@ -131,7 +293,7 @@ function QuestionGridViewManager() {
           </Link>
           <Button
             onClick={() => {
-              handleDeleteQuestion(params.getValue("id"));
+              handleClickDecline(params.getValue("id"));
             }}
             variant="contained"
             color="secondary"
@@ -156,40 +318,6 @@ function QuestionGridViewManager() {
     // },
   ];
 
-  const [data, setData] = useState([]);
-  const [rows, setRows] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [key, setKey] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const question = await getAllQuesiton(key);
-      setData(question);
-    })();
-  }, [key]);
-
-  useEffect(() => {
-    setRows(data);
-    console.log(data);
-  }, [data]);
-
-  const handleDeleteQuestion = (id) => {
-    declineQuestion(id)
-      .then(function (response) {
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // setOpen(false);
-      });
-  };
-  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
-  //   rows = extraRows ? [...rows, ...extraRows] : rows;
-  const handleChangeSearch = (e) => {
-    setKeyword(e.target.value);
-  };
-  const handleSearch = () => {
-    setKey(keyword);
-  };
   return (
     <>
       <div>
@@ -218,9 +346,9 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setFrom(e.target.value);
-            // }}
+            onChange={(e) => {
+              setFrom(e.target.value);
+            }}
           />
           <TextField
             id="date"
@@ -231,12 +359,23 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setTo(e.target.value);
-            // }}
+            onChange={(e) => {
+              setTo(e.target.value);
+            }}
           />
-          <Button className={classes.btnDate} variant="contained">
+          <Button
+            className={classes.btnDate}
+            onClick={handleDate}
+            variant="contained"
+          >
             Fillter
+          </Button>{" "}
+          <Button
+            className={classes.btnDate}
+            onClick={unFillter}
+            variant="contained"
+          >
+            UnFillter
           </Button>{" "}
         </div>
         <div style={{ height: "400px", width: "100%" }}>
@@ -246,7 +385,7 @@ function QuestionGridViewManager() {
             pageSize={5}
             rowsPerPageOptions={[5, 10, 20]}
             pagination
-            {...data}
+            {...questionsRaw}
           />
         </div>
       </div>
@@ -255,6 +394,22 @@ function QuestionGridViewManager() {
           Delete success
         </Alert>
       </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
+        </Alert>
+      </Snackbar>
+      <DialogDecline
+        decline={decline}
+        handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={() => {
+          handleOpentDecline();
+        }}
+      />
     </>
   );
 }
