@@ -17,6 +17,8 @@ import TextField from "@material-ui/core/TextField";
 import { DialogDecline } from "../Dialog";
 
 //
+import axios from "axios";
+
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -74,6 +76,7 @@ const Index = (props) => {
 
   const [decline, setDecline] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [questionsRaw, setQuestionsRaw] = useState([]);
   // const [all, setAll] = useState([]);
   // fillter Date
   const [from, setFrom] = useState("");
@@ -81,18 +84,21 @@ const Index = (props) => {
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-  let perPage = 5;
+  //let perPage = 5;
   // const [dateQuestion, setDateQuestion] = useState("");
   // let count = Number(all.length) / perPage;
   let status = true;
   const [idRaw, setIdRaw] = useState("");
   //let title, content;
   // const [newest, setNewest] = useState("");
+  const [rows, setRows] = useState([]);
+
   // const [oldest, setOldest] = useState("");
   const [statusA, setStatusA] = useState("status=false");
-
+  const [openDate, setOpenDate] = useState(false);
   const handleClose = (event, reason) => {
     setOpen(false);
+    setOpenDeline(false);
   };
 
   //decline
@@ -136,9 +142,32 @@ const Index = (props) => {
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
-      setQuestions(questionData);
+      setQuestionsRaw(questionData);
     })();
   }, [key, statusA]);
+  useEffect(() => {
+    if (questionsRaw) {
+      const questionProcessed = [];
+      questionsRaw.map((question, index) => {
+        const resCategories = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`
+        );
+
+        axios.all([resCategories]).then(
+          axios.spread((...res) => {
+            question.categories = res[0].data;
+
+            questionProcessed.push(question);
+            if (index === questionsRaw.length - 1) {
+              setQuestions(questionProcessed);
+            }
+          })
+        );
+        return null;
+      });
+    }
+  }, [questionsRaw]);
+
   // searchBar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
@@ -160,32 +189,42 @@ const Index = (props) => {
   // dateQuestion;
   let dateProcessed = [];
   const date = () => {
-    questions.map((q) => {
-      const dateQuestion = moment(q.createdAt).valueOf();
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
 
-      if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-        dateProcessed.push(q);
-        console.log(dateProcessed);
-        setQuestions(dateProcessed);
-      }
-    });
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
   };
 
   //console.log(dateQ);
   const handleDate = () => {
     date();
   };
-  // console.log(questions);
-  //const [rows, setRows] = useState([]);
-  let rows = [...questions];
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-  // useEffect(() => {
-  //   setRows(questions);
-  // }, [questions]);
+    setOpenDate(false);
+  };
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
   const unFillter = () => {
     (async () => {
-      const questionData = await getQuestions(key, statusA);
-      setQuestions(questionData);
+      setRows(questions);
     })();
   };
 
@@ -210,10 +249,12 @@ const Index = (props) => {
     },
 
     {
-      field: "tag",
+      field: "categories",
       headerName: "Categories",
       width: 150,
-      renderCell: (params) => <strong></strong>,
+      renderCell: (params) => (
+        <strong>{params.value.map((cate) => cate.name + " ")}</strong>
+      ),
     },
 
     {
@@ -360,11 +401,12 @@ const Index = (props) => {
           </div>
         </div>{" "}
       </div>
-      <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Approval success!
         </Alert>
       </Snackbar>
+
       <Snackbar
         open={openDecline}
         autoHideDuration={6000}
@@ -372,6 +414,15 @@ const Index = (props) => {
       >
         <Alert onClose={handleClose} severity="error">
           Decline Success
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
         </Alert>
       </Snackbar>
       <DialogDecline
