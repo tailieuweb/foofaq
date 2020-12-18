@@ -50,13 +50,12 @@ ReactDOM.render(
         <Route path="/approval" component={QuestionApproval}></Route>
 
         <Route path="/form" component={QuestionCreateForm}></Route>
-        <Route path="/category" component={QuestionCategoryList}></Route>
+        <Route path="/categories" component={QuestionCategoryList}></Route>
         <Route path="/manager/" component={Managers}></Route>
         <Route path="/forms/" component={FormManager}></Route>
         {/* <Route path="/events" component={EventList}></Route> */}
         <Route path="/griddemo" component={QuestionGridViewManager}></Route>
         <Route path="/events" component={EventList}></Route>
-        <Route path="/categories" component={CategoriesGridView}></Route>
         <Route
           path="/categories-manager"
           component={CategoriesGridViewManager}
