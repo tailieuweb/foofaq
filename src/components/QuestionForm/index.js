@@ -83,6 +83,7 @@ const DialogActions = withStyles((theme) => ({
 function QuestionForm() {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
+  const [questionGetLastId, setQuestions] = useState([]);
   //change
   const [cagtegories,setCategories]=useState([]);
   const [textCate,setTextCate] = useState([]);
@@ -99,31 +100,52 @@ useEffect(()=>{
 useEffect(()=>{
   (async () => {
       const result = await getQuestionForCate();
-      setQuestion(result);
+      setQuestions(result);
     })();
 },[])
 
 //lấy id cuối
-const [idTest,setIdTest]=useState([]);
+const [idTest,setIdTest] = useState([]);
   useEffect(()=>{
-    question.map((q)=>{
+    questionGetLastId.map((q)=>{
         console.log(q.id);
-     setIdTest(q);
+        setIdTest(q);
     }) 
-  },[question])
+  },[questionGetLastId])
   const [idCate,setIdCate] = useState(null);
 useEffect(()=>{
   setIdCate(parseInt(idTest.id)+1);
 // id +1 ;
 },[idTest])
-console.log(idCate);
-console.log(idTest);
+// console.log(idCate);
+// console.log(idTest);
 
 const handleAuto = () =>{
-  textCate.map((tx)=>{
+  if(idCate <= 1){
+    textCate.map((tx)=>{
+      axios
+      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/1/categories`, {
+          questionId: idCate,
+          name: tx.name
+      })
+    })
+  }
+  else{
+    textCate.map((tx)=>{
       axios
       .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/${idCate}/categories`, {
           questionId: idCate,
+          name: tx.name
+      })
+    })
+  }
+}
+
+const handleEditAutoComplete = () =>{
+  textCate.map((tx)=>{
+      axios
+      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`, {
+          questionId: question.id,
           name: tx.name
       })
   })
@@ -157,7 +179,7 @@ const handleAuto = () =>{
   };
 
   const { id } = useParams();
-
+  
   useEffect(() => {
     (async () => {
       const result = await getQuesitonById(id);
@@ -169,6 +191,7 @@ const handleAuto = () =>{
     handleSubmit = (event) => {
       event.preventDefault();
       questionPost();
+      console.log(idCate)
     };
     const questionPost = () => {
       axios
@@ -210,15 +233,15 @@ const handleAuto = () =>{
           content: content,
         })
         .then(function (response) {
+          handleEditAutoComplete();
           // handle success
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
           console.log(error);
           setNofi("POST Failed");
           setOpen(true);
@@ -287,7 +310,7 @@ const handleAuto = () =>{
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput listCategories = {cagtegories} handleAuto = {handleAuto} setTextCate = {setTextCate}/>
+            <CategoriesInput listCategories = {cagtegories} setTextCate = {setTextCate}/>
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Send" />

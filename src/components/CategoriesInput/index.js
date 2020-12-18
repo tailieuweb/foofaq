@@ -3,7 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 // import axios from "axios";
 
 // import { pagCategories,getQuestionForCate } from "../../helpers";
@@ -12,7 +13,7 @@ import React from 'react';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-function CategoriesInput({listCategories, handleAuto, setTextCate}){
+function CategoriesInput({listCategories, setTextCate, arr}){
 
 // const [cagtegories,setCategories]=useState([]);
 // const [textCate,setTextCate] = useState([]);
@@ -61,11 +62,13 @@ function CategoriesInput({listCategories, handleAuto, setTextCate}){
 //         })
 //     })
 // }
+
 return (
     <>
     <Autocomplete
     onChange={(event,value) => setTextCate(value)}
     multiple
+    // defaultValue = {[]}
     id="checkboxes-tags-demo"
     // options = mảng
     options={listCategories}
@@ -86,8 +89,7 @@ return (
     renderInput={(params) => (
       <TextField {...params} variant="outlined" label="Checkboxes" placeholder="Favorites" />
     )}
-  />
-  <button onClick={handleAuto}>Submit</button>
+  /> 
   </>
 )
 }
