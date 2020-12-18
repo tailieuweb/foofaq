@@ -37,6 +37,7 @@ function QuestionGridViewManager() {
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [questionDate, setQuestionDate] = useState([]);
+  const [openDate, setOpenDate] = useState(false);
 
   const [rows, setRows] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -148,20 +149,34 @@ function QuestionGridViewManager() {
   // dateQuestion;
   let dateProcessed = [];
   const date = () => {
-    questions.map((q) => {
-      const dateQuestion = moment(q.createdAt).valueOf();
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
 
-      if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-        dateProcessed.push(q);
-        console.log(dateProcessed);
-        setRows(dateProcessed);
-      }
-    });
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
   };
 
   //console.log(dateQ);
   const handleDate = () => {
     date();
+  };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenDate(false);
   };
   const unFillter = () => {
     setRows(questions);
@@ -377,6 +392,15 @@ function QuestionGridViewManager() {
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
           Delete success
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
         </Alert>
       </Snackbar>
       <DialogDecline
