@@ -20,7 +20,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { Grid } from "@material-ui/core";
 
 //APIS
-import { getQuesitonById, getAnswers, getAllCategories } from "../../helpers";
+import { getQuesitonById, getAnswers } from "../../helpers";
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +52,7 @@ const QuestionDetail = (props) => {
   const classes = useStyles();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   let id = props.match.params.id;
 
   useEffect(() => {
@@ -68,14 +68,8 @@ const QuestionDetail = (props) => {
       setAnswers(answersData);
     })();
   }, [id]);
-  useEffect(() => {
-    (async () => {
-      const categoriesData = await getAllCategories(id);
-      setCategories(categoriesData);
-    })();
-  }, [id]);
 
-  console.log(categories);
+  // console.log(categories);
   let answersCount = 0;
 
   if (answers.length) {
@@ -152,7 +146,6 @@ const QuestionDetail = (props) => {
         className={classes.questionInfo}
         increaseVote={increaseVote}
         decreaseVote={decreaseVote}
-        categories={categories}
       />
       <Grid container spacing={3}>
         <Grid item xs={12}>
