@@ -1,10 +1,17 @@
 import { React, useState } from "react";
+import { Link } from "react-router-dom";
+
+//components
 import CategoriesGridView from "../../components/CategoriesGridView";
 import { DeleteCategory, UpdateCategory } from "../../helpers";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+
+//components mui
+import Button from "@material-ui/core/Button"; 
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+
+//styles
+import "./index.scss";
 
 export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -66,7 +73,7 @@ export default function CategoriesGridViewManager() {
   return (
     <>
       <Link to="/forms/categories">
-        <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
+        <Button variant="contained" color="primary" className="btn-add" >
           Add Category
         </Button>
       </Link>
