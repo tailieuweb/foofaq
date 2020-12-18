@@ -1,7 +1,8 @@
 //import react
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useParams } from "react-router-dom";
 
 //import style
 import "./index.scss";
@@ -28,6 +29,9 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
 //images
 import PersonAvatar from "../../images/Person-Avatar.png";
+
+//APIS
+import { getAllCategories } from "../../helpers";
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -78,21 +82,26 @@ const QuestionInfoDetail = ({
   increaseVote,
   decreaseVote,
   answersCount,
-  categories,
 }) => {
+  let { id } = useParams();
   //use state
   const [editMode, setEditMode] = React.useState(true);
+  const [categories, setCategories] = useState([]);
   const {
     title,
     content,
     point,
     views,
-    tag,
     createdAt,
     voteUp,
     voteDown,
   } = question;
-  // const { name } = categories;
+  useEffect(() => {
+    (async () => {
+      const categoriesData = await getAllCategories(id);
+      setCategories(categoriesData);
+    })();
+  }, [id]);
 
   // change Mode function
   function changeMode() {
