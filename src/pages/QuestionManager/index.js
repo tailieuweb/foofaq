@@ -8,7 +8,7 @@ import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
 import EventsGridViewManager from "../../components/EventsGridViewManager";
 
-import CategoriesGridViewManager from "../../components/CategoriesGridViewManager";
+import CategoriesGridViewManager from "../CategoriesGridViewManager";
 // import SearchBar from "../../components/SearchBar";
 // import Button from "@material-ui/core/Button";
 // import CategoriesManager from "../../components/CategoriesManager";
