@@ -31,9 +31,12 @@ function QuestionGridViewManager() {
   const [open, setOpen] = useState(false);
   const [idRaw, setIdRaw] = useState("");
   const [decline, setDecline] = useState(false);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [questionDate, setQuestionDate] = useState([]);
 
   const [rows, setRows] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -93,10 +96,6 @@ function QuestionGridViewManager() {
     }
   }, [questionsRaw]);
 
-  useEffect(() => {
-    setRows(questions);
-  }, [questions]);
-
   // const handleDeleteQuestion = (id) => {
   //   declineQuestion(id)
   //     .then(function (response) {
@@ -140,6 +139,37 @@ function QuestionGridViewManager() {
   const handleCloseDecline = () => {
     setDecline(false);
   };
+
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
+  // console.log("- " + to - from);
+  // dateQuestion;
+  let dateProcessed = [];
+  const date = () => {
+    questions.map((q) => {
+      const dateQuestion = moment(q.createdAt).valueOf();
+
+      if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+        dateProcessed.push(q);
+        console.log(dateProcessed);
+        setRows(dateProcessed);
+      }
+    });
+  };
+
+  //console.log(dateQ);
+  const handleDate = () => {
+    date();
+  };
+  const unFillter = () => {
+    setRows(questions);
+  };
+
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
 
   let columns = [
     {
@@ -301,9 +331,9 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setFrom(e.target.value);
-            // }}
+            onChange={(e) => {
+              setFrom(e.target.value);
+            }}
           />
           <TextField
             id="date"
@@ -314,12 +344,23 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setTo(e.target.value);
-            // }}
+            onChange={(e) => {
+              setTo(e.target.value);
+            }}
           />
-          <Button className={classes.btnDate} variant="contained">
+          <Button
+            className={classes.btnDate}
+            onClick={handleDate}
+            variant="contained"
+          >
             Fillter
+          </Button>{" "}
+          <Button
+            className={classes.btnDate}
+            onClick={unFillter}
+            variant="contained"
+          >
+            UnFillter
           </Button>{" "}
         </div>
         <div style={{ height: "400px", width: "100%" }}>
