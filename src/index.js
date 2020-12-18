@@ -16,7 +16,6 @@ import QuestionApproval from "./pages/QuestionApproval";
 import QuestionDetail from "./pages/QuestionDetail";
 
 import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
-import CategoriesGridView from "./components/CategoriesGridView";
 
 import AnswerEdit from "./pages/AnswerEdit";
 import EventsGridViewManager from "./components/EventsGridViewManager";
@@ -56,16 +55,21 @@ ReactDOM.render(
         <Route path="/manager/" component={Managers}></Route>
         <Route path="/forms/" component={FormManager}></Route>
         {/* <Route path="/events" component={EventList}></Route> */}
-        <Route path="/griddemo" component={QuestionGridViewManager}></Route>
+        <Route
+          path="/manager/questions"
+          component={QuestionGridViewManager}
+        ></Route>
         <Route path="/events" component={EventList}></Route>
         <Route
-          path="/categories-manager"
+          path="/manager/categories"
           component={CategoriesGridViewManager}
         ></Route>
-        <Route path="/jobmanger" component={JobsGridViewManager}></Route>
+        <Route path="/manager/jobs" component={JobsGridViewManager}></Route>
+
         <Route path="/jobgrid" component={JobsGridView}></Route>
         {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
         <Route exact path="/jobs" component={JobsGridViewPage}></Route>
+        <Route path="/manager/events" component={EventsGridViewManager}></Route>
         <Route path="/answer/edit/:qId/:id" component={AnswerEdit}></Route>
       </Switch>
     </Router>

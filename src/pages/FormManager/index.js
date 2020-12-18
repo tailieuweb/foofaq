@@ -1,7 +1,7 @@
 import React from "react";
 import CategoriesForm from "../../components/FormManager/Categories";
 import JobsForm from "../../components/FormManager/Jobs";
-import EventFrom from "../../components/FormManager/Event";
+import EventForm from "../../components/FormManager/Event";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 
 import { Route } from "react-router-dom";
@@ -25,8 +25,8 @@ function FormManager(props) {
           ></Route>{" "}
           <Route exact path="/forms/job/" component={JobsForm}></Route>
           <Route path="/forms/job/:id" component={JobsForm}></Route>{" "}
-          <Route exact path="/forms/event/" component={EventFrom}></Route>{" "}
-          <Route path="/forms/event/:id" component={EventFrom}></Route>{" "}
+          <Route exact path="/forms/event/" component={EventForm}></Route>{" "}
+          <Route path="/forms/event/:id" component={EventForm}></Route>{" "}
         </div>
       </div>
     </div>

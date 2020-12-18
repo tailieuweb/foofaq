@@ -6,6 +6,7 @@ import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import { deleteJob } from "../../helpers";
 import "./index.scss";
+import PageLayoutManager from "../../common/PageLayoutManager";
 
 export default function JobsGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -73,7 +74,7 @@ export default function JobsGridViewManager() {
   ];
 
   return (
-    <div>
+    <PageLayoutManager>
       <div className="aroundAddJob">
       <Link to={"/forms/job/"}>
         <Button variant="contained" color="primary">
@@ -88,6 +89,6 @@ export default function JobsGridViewManager() {
           Delete success!
         </Alert>
       </Snackbar>
-    </div>
+    </PageLayoutManager>
   );
 }

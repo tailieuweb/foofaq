@@ -18,28 +18,15 @@ import CategoriesGridViewManager from "../CategoriesGridViewManager";
 // import Button from "@material-ui/core/Button";
 function Manager(props) {
   return (
-    <div>
-      <div className="row">
-        <div className="col-md-2">
-          <HeaderAsideNavbar></HeaderAsideNavbar>
-        </div>
-        <div className="col-md-10">
-          <Route
-            path="/manager/categories"
-            component={CategoriesGridViewManager}
-          />
-          <Route
-            path="/manager/questions"
-            component={QuestionGridViewManager}
-          />
-          <Route path="/manager/jobs" component={JobsGridViewManager} />
-          <Route path="/manager/events" component={EventsGridViewManager} />
-          {/* <QuestionManager />
+    <>
+      <Route path="/manager/categories" component={CategoriesGridViewManager} />
+      <Route path="/manager/questions" component={QuestionGridViewManager} />
+      <Route path="/manager/jobs" component={JobsGridViewManager} />
+      <Route path="/manager/events" component={EventsGridViewManager} />
+      {/* <QuestionManager />
       <JobsManager />
       <EventsManager /> */}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

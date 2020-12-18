@@ -12,6 +12,7 @@ import Alert from "@material-ui/lab/Alert";
 
 //styles
 import "./index.scss";
+import PageLayoutManager from "../../common/PageLayoutManager";
 
 export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -71,7 +72,7 @@ export default function CategoriesGridViewManager() {
     },
   ];
   return (
-    <>
+    <PageLayoutManager>
       <Link to="/forms/categories">
         <Button variant="contained" color="primary" className="btn-add" >
           Add Category
@@ -83,6 +84,6 @@ export default function CategoriesGridViewManager() {
           Delete success!
         </Alert>
       </Snackbar>
-    </>
+    </PageLayoutManager>
   );
 }
