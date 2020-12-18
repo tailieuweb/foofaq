@@ -30,7 +30,7 @@ import Link from "../../common/CustomLink";
 //APIS
 import { getQuesitonById } from "../../helpers";
 
-export const listCategories = [];
+// export const listCategories = [];
 
 const styles = (theme) => ({
   root: {
@@ -77,7 +77,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-function QuestionForm() {
+function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
   const handleClose = () => {
@@ -85,8 +85,8 @@ function QuestionForm() {
   };
 
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState("");
-
+  // const [tag, setTag] = useState("");
+  // console.log(categories);
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
@@ -114,6 +114,10 @@ function QuestionForm() {
       setQuestion(result);
     })();
   }, [id]);
+  useEffect(() => {
+    setTitle(question.title);
+  }, [question.title]);
+
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
@@ -123,13 +127,13 @@ function QuestionForm() {
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
-          tag: listCategories,
+          tag: categories,
           content: content,
         })
         .then(function (response) {
           // handle success
           setTitle("");
-          setTag("");
+          // setTag("");
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
@@ -147,13 +151,14 @@ function QuestionForm() {
   else {
     handleSubmit = (event) => {
       event.preventDefault();
+
       questionPut(id);
     };
     const questionPut = (id) => {
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
-          tag: listCategories,
+          tag: categories,
           content: content,
         })
         .then(function (response) {
@@ -185,7 +190,7 @@ function QuestionForm() {
   //   blocksFromHTML.entityMap
   // );
 
-  console.log("question: " + question.content);
+  // console.log("question: " + question.content);
 
   // console.log("question: " + question.content);
   return (
@@ -237,7 +242,7 @@ function QuestionForm() {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput />
+            <CategoriesInput categories={categories} />
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Send" />
