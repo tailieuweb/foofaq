@@ -18,6 +18,9 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import DoneIcon from "@material-ui/icons/Done";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 //APIS
 import { getAnswers } from "../../helpers";
@@ -51,11 +54,25 @@ const useStyles = makeStyles((theme) => ({
     bottom: "43px",
     display: "block",
   },
+  doneIcon: {
+    width: "100%",
+    height: "50px",
+    color: "green",
+    display: "block",
+    position: "relative",
+    top: "24%",
+  },
 }));
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function MediaCard(props) {
   const classes = useStyles();
   const [answers, setAnswers] = useState([]);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   let { id } = useParams();
   useEffect(() => {
@@ -64,8 +81,6 @@ export default function MediaCard(props) {
       setAnswers(answersData);
     })();
   }, [id]);
-  // const { qID } = props.match.params.id;
-  // console.log(answers);
 
   const increaseVoteAnswer = (id) => {
     const answer = answers.find((item) => item.id === id);
@@ -139,6 +154,38 @@ export default function MediaCard(props) {
       }
     );
   };
+  const exactlyAnswer = (id) => {
+    const answer = answers.find((item) => item.id === id);
+    const index = answers.indexOf(answer);
+    const exists = answers.find((item) => item.exact === true);
+    if (exists) {
+      setErrorText("The correct answer is already exists");
+      setOpenError(true);
+    } else {
+      setAnswers([
+        ...answers.slice(0, index),
+        {
+          ...answer,
+          exact: true,
+        },
+        ...answers.slice(index + 1),
+      ]);
+      axios.put(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${answer.questionId}/answers/${answer.id}`,
+        {
+          exact: true,
+        }
+      );
+      setOpenSuccess(true);
+    }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccess(false);
+    setOpenError(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -146,6 +193,10 @@ export default function MediaCard(props) {
         answers.map((item) => (
           <Paper key={item.id} elevation={3}>
             <Grid container spacing={1}>
+              <Grid item xs={1}>
+                {item.exact ? <DoneIcon className={classes.doneIcon} /> : <></>}
+              </Grid>
+
               <Grid item xs={1}>
                 <Grid item className={classes.vote}>
                   <IconButton
@@ -182,7 +233,7 @@ export default function MediaCard(props) {
                   </Typography>
                 </CardContent>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 <CardContent>
                   <Typography
                     variant="body2"
@@ -203,6 +254,14 @@ export default function MediaCard(props) {
                 Edit <EditIcon />
               </Button>
             </Link>
+            <Button
+              variant="outlined"
+              color="secondary"
+              className={classes.buttonEdit}
+              onClick={() => exactlyAnswer(item.id)}
+            >
+              EXACT <DoneIcon />
+            </Button>
           </Paper>
         ))
       ) : (
@@ -239,6 +298,20 @@ export default function MediaCard(props) {
           />
         </>
       )}
+      <Snackbar
+        open={openSuccess}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {errorText}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
