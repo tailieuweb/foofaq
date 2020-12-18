@@ -58,6 +58,12 @@ function QuestionGridViewManager() {
     })();
   }, [key]);
 
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
   useEffect(() => {
     if (questionsRaw) {
       const questionProcessed = [];
@@ -108,12 +114,6 @@ function QuestionGridViewManager() {
   // };
   //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
   //   rows = extraRows ? [...rows, ...extraRows] : rows;
-  const handleChangeSearch = (e) => {
-    setKeyword(e.target.value);
-  };
-  const handleSearch = () => {
-    setKey(keyword);
-  };
 
   //delete
 
