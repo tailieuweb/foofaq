@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CategoriesForm = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [des, setDes] = useState("");
+  const [notification, setNotification] = useState("");
   let { id } = useParams();
   let history = useHistory();
 
@@ -41,13 +42,13 @@ const CategoriesForm = () => {
     setOpen(false);
   };
 
-  // const checkValueEmpty = () => {
-  //   if (name.length === "" || des.length === "") {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
+  const checkValueEmpty = () => {
+    if (name.length == "" || des.length == "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -58,31 +59,31 @@ const CategoriesForm = () => {
 
   if (id === undefined) {
     handleSubmit = (event) => {
-      event.preventDefault();
-      AddCategory(name, des)
-        .then(function (response) {
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNotification("Add Failed!!");
+      } else {
+        event.preventDefault();
+        AddCategory(name, des).then(function (response) {
           setOpen(true);
+          setNotification("Add Successefully!");
           window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          window.location.reload();
-          console.log(error);
         });
+      }
     };
   } else {
     handleSubmit = (event) => {
-      event.preventDefault();
-      UpdateCategory(id, name, des)
-        .then(function (response) {
-          history.push("/manager/categories");
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNotification("Update Failed!!");
+      } else {
+        event.preventDefault();
+        UpdateCategory(id, name, des).then(function (response) {
           setOpen(true);
-        })
-        .catch(function (error) {
-          // handle error
-          window.location.reload();
-          console.log(error);
+          window.alert("Updated successfully!");
+          history.push("/manager/categories");
         });
+      }
     };
   }
 
@@ -133,7 +134,7 @@ const CategoriesForm = () => {
         </Button>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success">
-            This is a success message!
+            {notification}
           </Alert>
         </Snackbar>
       </div>
