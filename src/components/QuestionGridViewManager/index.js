@@ -15,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
+import { DialogDecline } from "../Dialog";
+
 const useStyles = makeStyles((theme) => ({
   fillterDate: {
     marginBottom: "50px ",
@@ -27,9 +29,15 @@ const useStyles = makeStyles((theme) => ({
 function QuestionGridViewManager() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [idRaw, setIdRaw] = useState("");
+  const [decline, setDecline] = useState(false);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [questionDate, setQuestionDate] = useState([]);
+  const [openDate, setOpenDate] = useState(false);
 
   const [rows, setRows] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -50,6 +58,12 @@ function QuestionGridViewManager() {
     })();
   }, [key]);
 
+  const handleChangeSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleSearch = () => {
+    setKey(keyword);
+  };
   useEffect(() => {
     if (questionsRaw) {
       const questionProcessed = [];
@@ -89,27 +103,88 @@ function QuestionGridViewManager() {
     }
   }, [questionsRaw]);
 
+  // const handleDeleteQuestion = (id) => {
+  //   declineQuestion(id)
+  //     .then(function (response) {
+  //       setOpen(true);
+  //     })
+  //     .catch(function (error) {
+  //       // setOpen(false);
+  //     });
+  // };
+  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
+  //   rows = extraRows ? [...rows, ...extraRows] : rows;
+
+  //delete
+
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        console.log("Successfully");
+        setDecline(false);
+        setOpen(true);
+        window.location.reload();
+
+        // window.location.reload();
+      })
+      .catch(function (error) {
+        console.log("ERR");
+        setOpen(false);
+      });
+  };
+  const handleCloseDecline = () => {
+    setDecline(false);
+  };
+
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
+  // console.log("- " + to - from);
+  // dateQuestion;
+  let dateProcessed = [];
+  const date = () => {
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
+
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
+  };
+
+  //console.log(dateQ);
+  const handleDate = () => {
+    date();
+  };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenDate(false);
+  };
+  const unFillter = () => {
+    setRows(questions);
+  };
+
   useEffect(() => {
     setRows(questions);
   }, [questions]);
-
-  const handleDeleteQuestion = (id) => {
-    declineQuestion(id)
-      .then(function (response) {
-        setOpen(true);
-      })
-      .catch(function (error) {
-        // setOpen(false);
-      });
-  };
-  //   columns = extraColumns ? [...columns, ...extraColumns] : columns;
-  //   rows = extraRows ? [...rows, ...extraRows] : rows;
-  const handleChangeSearch = (e) => {
-    setKeyword(e.target.value);
-  };
-  const handleSearch = () => {
-    setKey(keyword);
-  };
 
   let columns = [
     {
@@ -218,7 +293,7 @@ function QuestionGridViewManager() {
           </Link>
           <Button
             onClick={() => {
-              handleDeleteQuestion(params.getValue("id"));
+              handleClickDecline(params.getValue("id"));
             }}
             variant="contained"
             color="secondary"
@@ -271,9 +346,9 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setFrom(e.target.value);
-            // }}
+            onChange={(e) => {
+              setFrom(e.target.value);
+            }}
           />
           <TextField
             id="date"
@@ -284,12 +359,23 @@ function QuestionGridViewManager() {
             InputLabelProps={{
               shrink: true,
             }}
-            // onChange={(e) => {
-            //   setTo(e.target.value);
-            // }}
+            onChange={(e) => {
+              setTo(e.target.value);
+            }}
           />
-          <Button className={classes.btnDate} variant="contained">
+          <Button
+            className={classes.btnDate}
+            onClick={handleDate}
+            variant="contained"
+          >
             Fillter
+          </Button>{" "}
+          <Button
+            className={classes.btnDate}
+            onClick={unFillter}
+            variant="contained"
+          >
+            UnFillter
           </Button>{" "}
         </div>
         <div style={{ height: "400px", width: "100%" }}>
@@ -308,6 +394,22 @@ function QuestionGridViewManager() {
           Delete success
         </Alert>
       </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
+        </Alert>
+      </Snackbar>
+      <DialogDecline
+        decline={decline}
+        handleCloseDecline={handleCloseDecline}
+        handleOpentDecline={() => {
+          handleOpentDecline();
+        }}
+      />
     </>
   );
 }
