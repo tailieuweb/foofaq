@@ -1,12 +1,12 @@
 import React from "react";
 import QuestionGridViewManager from "../../components/QuestionGridViewManager";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 // import JobsManager from "../../components/JobsManager";
 // import EventsManager from "../../components/EventsManager";
 // import CategoriesManager from "../../components/CategoriesManager";
-import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+// import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
-import EventsGridViewManager from "../../components/EventsGridViewManager";
+import EventsGridViewManager from "../../pages/EventsGridViewManager";
 
 import CategoriesGridViewManager from "../CategoriesGridViewManager";
 // import SearchBar from "../../components/SearchBar";
