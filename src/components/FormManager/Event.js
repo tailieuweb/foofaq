@@ -109,38 +109,38 @@ function Events(props) {
       const eventData = await getEvent(id);
       setEvent(eventData);
     })();
-  }, []);
+  }, [id]);
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
       addEvent(name, image, date, description)
-      .then(function (response) {
-        setOpen(true);
-        //window.location.reload();
-        setNofi("Successfully");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setOpen(true);
-        setNofi("Failed");
-      });
+        .then(function (response) {
+          setOpen(true);
+          //window.location.reload();
+          setNofi("Successfully");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          setOpen(true);
+          setNofi("Failed");
+        });
     };
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
       updateEvent(id, name, image, date, description)
-      .then(function (response) {
-        setOpen(true);
-        //window.location.reload();
-        setNofi("Successfully");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setOpen(true);
-        setNofi("Failed");
-      });
+        .then(function (response) {
+          setOpen(true);
+          //window.location.reload();
+          setNofi("Successfully");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          setOpen(true);
+          setNofi("Failed");
+        });
     };
   }
   console.log(event.name);
@@ -247,7 +247,6 @@ function Events(props) {
           </Link>
         </DialogActions>
       </Dialog>
-
     </div>
   );
 }

@@ -13,15 +13,8 @@ import PageLayoutManager from "../../common/PageLayoutManager";
 function EventsGridViewManager() {
   const [eventData, setEventData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
   const [keyword, setKeyword] = useState("");
-
-  // useEffect(() => {
-  // (async () => {
-  //   const categoryData = await axios.get('https://5fc9a56e3c1c220016440eab.mockapi.io/events')
-  //   setEventData(categoryData.data);
-  // })();
-  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -41,7 +34,7 @@ function EventsGridViewManager() {
     setKeyword(e.target.value);
   };
   const handleSearch = () => {
-    setKey(keyword);
+    setKeyword(keyword);
   };
 
   const DeleteEvent = (id) => {
