@@ -1,7 +1,27 @@
 import axios from "axios";
 
 const API_URL = "https://5fc48ee536bc790016343a0b.mockapi.io/";
+// api nay khong co du lieu (cai nay khog co ko nen su dung nua xem lai dau do)
 const API_URL_NEW = "https://5fc9a56e3c1c220016440eab.mockapi.io/";
+// day chinh la api giup nhan tat ca user
+const API_ALL_NEW_USER ="https://5fdfeca2eca1780017a31013.mockapi.io/newuser";
+const API_NEW_USER ="https://5fdfeca2eca1780017a31013.mockapi.io/newuser/1";
+
+export const getNewUser = async () => {
+  const users = await axios.get(
+    API_ALL_NEW_USER);
+  return users.data;
+};
+// cu phap nay giup ta lay duoc user/perpage
+//https://5fdfeca2eca1780017a31013.mockapi.io/newuser?page=1&limit=10
+export const getAllNewUserPagination = async (page,limit) => {
+  const users = await axios.get(
+    API_ALL_NEW_USER + `?page=${page}&limit=${limit}`
+  );
+  return users.data;
+}
+
+
 export const getQuestions = async (
   keyword,
 
