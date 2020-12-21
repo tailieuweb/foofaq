@@ -81,7 +81,7 @@ function EventsGridViewManager() {
       width: 200,
       renderCell: (params) => (
         <strong>
-          <Link to={"/forms/event/" + params.value}>
+          <Link to={"/forms/event/" + params.getValue("id")}>
             <Button variant="contained" color="primary" size="small">
               Edit
             </Button>
@@ -92,7 +92,7 @@ function EventsGridViewManager() {
             size="small"
             style={{ marginLeft: 16 }}
             onClick={() => {
-              DeleteEvent(params.value);
+              DeleteEvent(params.getValue("id"));
             }}
           >
             Delete

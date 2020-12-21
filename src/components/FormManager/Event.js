@@ -143,7 +143,7 @@ function Events(props) {
         });
     };
   }
-  console.log(event.name);
+  // console.log(event.name);
   return (
     <div>
       <h1>Event Form</h1>
