@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -8,16 +7,9 @@ import Button from "@material-ui/core/Button";
 import Alert from "@material-ui/lab/Alert";
 import Pagination from "@material-ui/lab/Pagination";
 import { TableH, TableB } from "../../components/QuestionTable";
-
 import Snackbar from "@material-ui/core/Snackbar";
-
 import Link from "../../common/CustomLink";
-// import QuestionApprovalCard from "../../components/QuestionApprovalCard";
-import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
 import SearchBar from "../../components/SearchBar";
-
-// import QuestionManager from "../../components/QuestionManager/index";
-// import QuestionApprovalDetail from "../../components/QuetionAprovalDetail";
 import { getAllUser,getUserLimit, declineUser } from "../../helpers/userAPI";
 
 const useStyles = makeStyles({
