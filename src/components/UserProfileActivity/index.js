@@ -27,12 +27,13 @@ const useStyles = makeStyles({
 
 export default function SimpleCard() {
   const classes = useStyles();
+  
   const [user, setUser] = useState({});
-  const bull = <span className={classes.bullet}>•</span>;
   useEffect( async() => {
    const data =  await getOneUser();
    setUser(data);
   }, []);
+
   return (
     <React.Fragment>
       <Card className={classes.root}>
