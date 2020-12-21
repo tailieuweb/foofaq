@@ -15,9 +15,9 @@ const createQuestion = async function (req, res) {
     return;
   }
   controllers
-    .findById(Tag, req.body.tag)
-    .then((tag) => {
-      if (!tag) {
+    .findById(Tag, req.body.tagId)
+    .then((tagId) => {
+      if (!tagId) {
         return res.status(404).json({
           message: "Tag not found",
         });
@@ -25,9 +25,9 @@ const createQuestion = async function (req, res) {
       const question = new Question({
         title: req.body.title,
         content: req.body.content,
-        tag: req.body.tag,
+        tag: req.body.tagId,
       });
-      return controllers.save(Question, question);
+      return controllers.save(Question, question)
     })
     .then((result) => {
       res.status(201).json({
@@ -69,7 +69,6 @@ const editQuestion = async function (req, res) {
     res.status(422).json({ errors: errors.array() });
     return;
   }
-  
   try {
     //Search by id and edit
     const question = await controllers.findByIdAndUpdate(

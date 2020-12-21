@@ -6,7 +6,7 @@ const validateCreteQuestion = () => {
         check('title','Title more than 6 characters').isLength({min: 6}),
         check('content','Content does not empty').not().isEmpty(),
         check('content','Content more than 6 characters').isLength({min: 6}),
-        check('tag','Tag does not empty').not().isEmpty(),
+        check('tagId','Tag does not empty').not().isEmpty(),
     ]
 }
 const validateEditQuestion = () => {
@@ -15,7 +15,7 @@ const validateEditQuestion = () => {
         check('title','Title more than 6 characters').isLength({min: 6}),
         check('content','Content does not empty').not().isEmpty(),
         check('content','Content more than 6 characters').isLength({min: 6}),
-        check('tag','Tag does not empty').not().isEmpty(),
+        check('tagId','Tag does not empty').not().isEmpty(),
     ]
 }
 const validate = {
