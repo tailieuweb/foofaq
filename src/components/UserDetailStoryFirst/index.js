@@ -2,16 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { API_ONE_USERSTORY } from "../../helpers/index";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
 import UserSaveStory from "./UserSaveStory/index";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Link, NavLink } from "react-router-dom";
 import "./index.scss";
 import PageLayout from "../../common/PageLayout/index";
 
@@ -79,7 +76,6 @@ export default function ImageAvatars() {
       body: JSON.stringify({
         displayname: displaynameEl1.current.value,
         fullname: fullnameEl1.current.value,
-        // avatar: ImgavatarEl1.current.value,
         title: titleE1.current.value,
         live: liveE1.current.value,
         twiter: twiterE1.current.value,
@@ -233,15 +229,6 @@ export default function ImageAvatars() {
                         <Button onClick={HandleSubmit} Link>
                         Save
                       </Button>
-                        {/* <Link
-                          to={`/Edit-Profile`}
-                          type="submit"
-                          className="btn btn-primary"
-                          onClick={HandleSubmit}
-                          Link
-                        >
-                          Save
-                        </Link> */}
                       </ButtonGroup>
                       <ButtonGroup
                         orientation="vertical"
