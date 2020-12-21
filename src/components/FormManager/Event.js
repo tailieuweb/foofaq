@@ -17,6 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 
 import Link from "../../common/CustomLink";
+// import { set } from "js-cookie";
 
 const styles = (theme) => ({
   root: {
@@ -102,6 +103,11 @@ function Events(props) {
     setOpen(false);
   };
 
+  useEffect(() => {
+    setName(event.name);
+    setDescription(event.description);
+    setImage(event.image);
+  }, [event]);
   useEffect(() => {
     (async () => {
       const eventData = await getEvent(id);
