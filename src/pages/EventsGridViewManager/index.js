@@ -61,6 +61,7 @@ function EventsGridViewManager() {
   let columns = [
     { field: "id", headerName: "ID" },
     // { field: 'createdAt', width: 210 },
+    { field: "date", headerName: "Date", width: 200 },
     { field: "name", width: 200, headerName: "Name" },
     {
       field: "imageUri",
@@ -75,6 +76,7 @@ function EventsGridViewManager() {
       ),
     },
     { field: "description", headerName: "Description", width: 500 },
+    { field: "place", headerName: "Place", width: 500 },
     {
       field: "action",
       headerName: "Action",
