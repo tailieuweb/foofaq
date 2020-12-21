@@ -244,7 +244,7 @@ function Events(props) {
           <Typography gutterBottom>{nofi}</Typography>
         </DialogContent>
         <DialogActions>
-          <Link to={"/manager/jobs"}>
+          <Link to={"/manager/events"}>
             <Button autoFocus onClick={handleClose} color="primary">
               OK
             </Button>
