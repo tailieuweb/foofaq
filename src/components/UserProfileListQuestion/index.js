@@ -26,9 +26,10 @@ const QuestionList = () => {
       const res = await axios.get(
         "https://5fc4b01136bc790016343d03.mockapi.io/api/v1/users/2"
       );
-      setQuestions(res.data.list_answers);
+      setQuestions(res.data.list_questions);
     })();
   }, []);
+  
   return (
     <Container maxWidth="lg">
       {questions ? (
