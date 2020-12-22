@@ -1,14 +1,17 @@
 import React, { PureComponent } from "react";
 import AsyncSelect from "react-select/async";
 // import axios from "axios";
+// import { listCategories } from "../QuestionForm";
 
 class CategoriesInput extends PureComponent {
-  state = { selectedUser: [] };
-  onChange = (selectedUser) => {
+  state = { categories: this.props.categories };
+  onChange = (categories) => {
     this.setState({
-      selectedUser: selectedUser || [],
+      categories: categories || [],
     });
-    console.log(this.state.selectedUser);
+    // listCategories.splice();
+    // listCategories.push(this.state.categories);
+    // console.log(listCategories);
   };
 
   loadOptions = async (inputText, callback) => {
@@ -18,13 +21,13 @@ class CategoriesInput extends PureComponent {
     const json = await res.json();
     callback(json.map((i) => ({ label: i.name, value: i.id })));
   };
-
   render() {
+    console.log(this.props.categories);
     return (
       <div>
         <AsyncSelect
           isMulti
-          value={this.state.selectedUser}
+          value={this.state.categories}
           onChange={this.onChange}
           placeholder={"Input..."}
           loadOptions={this.loadOptions}

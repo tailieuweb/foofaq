@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { pagJobs, getJobsSearch } from "../../helpers";
 import SearchBar from "../../components/SearchBar";
-import Link from "../../common/CustomLink";
-import Button from "@material-ui/core/Button";
+// import Link from "../../common/CustomLink";
+// import Button from "@material-ui/core/Button";
 
 export default function JobsGridView({ extraColumns, extraRows }) {
   const [jobs, setJobs] = useState([]);
@@ -102,13 +102,6 @@ export default function JobsGridView({ extraColumns, extraRows }) {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       />
-      <br/>
-      <Link to={"/forms/event"}>
-        <Button variant="contained" color="primary">
-          {" "}
-          ADD{" "}
-        </Button>
-      </Link>
       <br/>
       <br/>
       <DataGrid

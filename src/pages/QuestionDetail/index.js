@@ -1,5 +1,7 @@
 //import react
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 //import style
 import "./index.scss";
@@ -8,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 //material
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+// import Skeleton from "@material-ui/lab/Skeleton";
 
 //components
 import QuestionAnswerDetail from "../../components/QuestionAnswerDetail";
@@ -40,18 +43,22 @@ const useStyles = makeStyles((theme) => ({
     padding: "5px 15px",
     borderRadius: "5px",
   },
+  skeletion: {
+    margin: "0.5rem auto",
+  },
 }));
 
 const QuestionDetail = (props) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
+  // const [categories, setCategories] = useState([]);
   let id = props.match.params.id;
 
   useEffect(() => {
     (async () => {
       const question = await getQuesitonById(id);
-      setData(question);
+      setQuestions(question);
     })();
   }, [id]);
 
@@ -62,6 +69,70 @@ const QuestionDetail = (props) => {
     })();
   }, [id]);
 
+  // console.log(categories);
+  let answersCount = 0;
+
+  if (answers.length) {
+    answersCount = parseInt(answers.length);
+  }
+
+  const increaseVote = () => {
+    let voteUpQuestion = false;
+    let voteDownQuestion = false;
+    if (Cookies.get(`voteDownQuestion-${questions.id}`) === "true") {
+      Cookies.remove(`voteDownQuestion-${questions.id}`);
+    } else {
+      Cookies.set(`voteUpQuestion-${questions.id}`, true);
+      voteUpQuestion = true;
+    }
+
+    setQuestions({
+      ...questions,
+      point: questions.point + 1,
+      voteUp: voteUpQuestion,
+      voteDown: voteDownQuestion,
+    });
+    axios
+      .put(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${questions.id}`,
+        {
+          ...questions,
+          point: questions.point + 1,
+          voteUp: voteUpQuestion,
+          voteDown: voteDownQuestion,
+        }
+      )
+      .then(console.log(questions));
+  };
+  const decreaseVote = () => {
+    let voteUpQuestion = false;
+    let voteDownQuestion = false;
+    if (Cookies.get(`voteUpQuestion-${questions.id}`) === "true") {
+      Cookies.remove(`voteUpQuestion-${questions.id}`);
+    } else {
+      Cookies.set(`voteDownQuestion-${questions.id}`, true);
+      voteDownQuestion = true;
+    }
+
+    setQuestions({
+      ...questions,
+      point: questions.point - 1,
+      voteUp: voteUpQuestion,
+      voteDown: voteDownQuestion,
+    });
+    axios
+      .put(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${questions.id}`,
+        {
+          ...questions,
+          point: questions.point - 1,
+          voteUp: voteUpQuestion,
+          voteDown: voteDownQuestion,
+        }
+      )
+      .then(console.log(questions));
+  };
+
   return (
     <div>
       <div className="Nav">
@@ -69,7 +140,13 @@ const QuestionDetail = (props) => {
           <NavigationBar />
         </Paper>
       </div>
-      <QuestionInfoDetail question={data} className={classes.questionInfo} />
+      <QuestionInfoDetail
+        answersCount={answersCount}
+        question={questions}
+        className={classes.questionInfo}
+        increaseVote={increaseVote}
+        decreaseVote={decreaseVote}
+      />
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Grid container spacing={3}>
@@ -81,13 +158,7 @@ const QuestionDetail = (props) => {
               >
                 Answers
               </Typography>
-              {answers !== null ? (
-                answers.map((answer) => (
-                  <QuestionAnswerDetail key={answer.id} answer={answer} />
-                ))
-              ) : (
-                <div />
-              )}
+              <QuestionAnswerDetail />
             </Grid>
             <Grid item xs={12}>
               <AnswerForm />

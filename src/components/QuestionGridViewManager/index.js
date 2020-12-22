@@ -16,6 +16,7 @@ import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
 import { DialogDecline } from "../Dialog";
+import PageLayoutManager from "../../common/PageLayoutManager";
 
 const useStyles = makeStyles((theme) => ({
   fillterDate: {
@@ -307,7 +308,7 @@ function QuestionGridViewManager() {
   ];
 
   return (
-    <>
+    <PageLayoutManager>
       <div>
         <SearchBar
           handleChangeSearch={handleChangeSearch}
@@ -398,7 +399,7 @@ function QuestionGridViewManager() {
           handleOpentDecline();
         }}
       />
-    </>
+    </PageLayoutManager>
   );
 }
 export default QuestionGridViewManager;
