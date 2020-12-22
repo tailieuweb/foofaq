@@ -58,12 +58,10 @@ const QuestionList = () => {
             // question.categories = ['javascript', 'react'];
             // question.answers = [1, 2, 3, 4, 5];
 
-            question.voteUp = Cookies.get(`voteUp-${question.id}`) === 'true'
-              ? true
-              : false;
-            question.voteDown = Cookies.get(`voteDown-${question.id}`) === 'true'
-              ? true
-              : false;
+            question.voteUp =
+              Cookies.get(`voteUp-${question.id}`) === "true" ? true : false;
+            question.voteDown =
+              Cookies.get(`voteDown-${question.id}`) === "true" ? true : false;
 
             questionProcessed.push(question);
             if (index === questionsRaw.length - 1) {
@@ -79,7 +77,7 @@ const QuestionList = () => {
   const handleSearch = (params) => {
     (async () => {
       const res = await axios.get(
-        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=1`
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?${params}&page=1&limit=3`
       );
       setQuestionsRaw(res.data);
     })();
@@ -92,7 +90,7 @@ const QuestionList = () => {
     let voteUp = false;
     let voteDown = false;
 
-    if (Cookies.get(`voteDown-${question.id}`) === 'true') {
+    if (Cookies.get(`voteDown-${question.id}`) === "true") {
       Cookies.remove(`voteDown-${question.id}`);
     } else {
       Cookies.set(`voteUp-${question.id}`, true);
@@ -126,7 +124,7 @@ const QuestionList = () => {
     let voteUp = false;
     let voteDown = false;
 
-    if (Cookies.get(`voteUp-${question.id}`) === 'true') {
+    if (Cookies.get(`voteUp-${question.id}`) === "true") {
       Cookies.remove(`voteUp-${question.id}`);
     } else {
       Cookies.set(`voteDown-${question.id}`, true);
@@ -154,7 +152,7 @@ const QuestionList = () => {
   };
 
   return (
-    <PageLayout maxWidth="lg">
+    <PageLayout>
       <AdvancedFilter handleSearch={handleSearch} />
       {questions ? (
         questions.map((question) => (

@@ -1,7 +1,8 @@
 //import react
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useParams } from "react-router-dom";
 
 //import style
 import "./index.scss";
@@ -29,8 +30,14 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 //images
 import PersonAvatar from "../../images/Person-Avatar.png";
 
+//APIS
+import { getCategoriesQuestion } from "../../helpers";
+
 //style
 const useStyles = makeStyles((theme) => ({
+  questionDetail: {
+    maxWidth: "89,5%",
+  },
   buttonEdit: {
     float: "right",
   },
@@ -70,9 +77,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionInfoDetail = () => {
+const QuestionInfoDetail = ({
+  question,
+  increaseVote,
+  decreaseVote,
+  answersCount,
+}) => {
+  let { id } = useParams();
   //use state
   const [editMode, setEditMode] = React.useState(true);
+  const [categories, setCategories] = useState([]);
+  const {
+    title,
+    content,
+    point,
+    views,
+    createdAt,
+    voteUp,
+    voteDown,
+  } = question;
+  useEffect(() => {
+    (async () => {
+      const categoriesData = await getCategoriesQuestion(id);
+      setCategories(categoriesData);
+    })();
+  }, [id]);
 
   // change Mode function
   function changeMode() {
@@ -89,7 +118,7 @@ const QuestionInfoDetail = () => {
             name: <br />
             Date:
             <Typography variant="body2" color="textSecondary" component="p">
-              September 14, 2016
+              {createdAt}
             </Typography>{" "}
             <br />
             Votes: <br />
@@ -107,35 +136,45 @@ const QuestionInfoDetail = () => {
           <Grid item xs={2}>
             <UserInfo />
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.questionDetail}>
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
               <Grid container spacing={3}>
                 <Grid item className={classes.vote}>
-                  <IconButton aria-label="upvote">
+                  <IconButton
+                    aria-label="upvote"
+                    disabled={voteUp}
+                    onClick={increaseVote}
+                  >
                     <ArrowDropUpIcon />
                   </IconButton>
                   <Typography gutterBottom variant="h4">
-                    0
+                    {point}
                   </Typography>
-                  <IconButton aria-label="downvote">
+                  <IconButton
+                    aria-label="downvote"
+                    disabled={voteDown}
+                    onClick={decreaseVote}
+                  >
                     <ArrowDropDownIcon />
                   </IconButton>
                 </Grid>
                 <Grid item xs={11}>
                   <Link gutterBottom variant="h5">
-                    How to use classes to “control dreams”?
+                    {title}
                   </Link>
                   <Typography variant="body2" color="textSecondary">
-                    Background I have been playing around with Deep Dream and
-                    Inceptionism, using the Caffe framework to visualize layers
-                    of GoogLeNet, an architecture built for the Imagenet
-                    project, a large visual...
+                    {content}
                   </Typography>
                   {/* categories */}
                   <div className={classes.chips}>
-                    <Chip label="JavaScript" clickable />
-                    <Chip label="ReactJS" clickable />
+                    {categories ? (
+                      categories.map((item) => (
+                        <Chip label={item.name} clickable key={item.name} />
+                      ))
+                    ) : (
+                      <Chip label={null} clickable />
+                    )}
                   </div>
                   <Grid container spacing={2} className={classes.footerCard}>
                     {/* views */}
@@ -146,7 +185,7 @@ const QuestionInfoDetail = () => {
                         startIcon={<VisibilityIcon />}
                         className={classes.buttonView}
                       >
-                        69k Views
+                        {views}
                       </Button>
                       <Button
                         variant="outlined"
@@ -154,7 +193,7 @@ const QuestionInfoDetail = () => {
                         startIcon={<QuestionAnswerIcon />}
                         className={classes.buttonView}
                       >
-                        96k Answer
+                        {answersCount} ANSWERS
                       </Button>
                     </Grid>
                     {/* user */}
@@ -189,15 +228,7 @@ const QuestionInfoDetail = () => {
           <Grid item xs={10}>
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
-              <QuestionForm />
-              {/* <Button
-                variant="outlined"
-                color="primary"
-                className={classes.buttonSave}
-                onClick={changeMode}
-              >
-                Save <SaveIcon />{" "}
-              </Button> */}
+              <QuestionForm categories={categories} />
             </Paper>
           </Grid>
         </Grid>

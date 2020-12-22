@@ -11,14 +11,14 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { green } from "@material-ui/core/colors";
 
-import Link from "../../common/CustomLink";
-
 //
 import TextField from "@material-ui/core/TextField";
 
 import { DialogDecline } from "../Dialog";
 
 //
+import axios from "axios";
+
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -57,20 +57,26 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     color: "red",
   },
-  textField: {
-    marginBottom: "50px",
+  fillterDate: {
+    marginBottom: "50px ",
+    textAlign: "right",
+    marginRight: "50px",
   },
+  textField: { marginRight: "30px" },
+  btnDate: { marginTop: "15px" },
 }));
 
 const Index = (props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [openDecline, setOpenDeline] = useState(false);
 
   // const [page, setPage] = useState(1);
 
   const [decline, setDecline] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [questionsRaw, setQuestionsRaw] = useState([]);
   // const [all, setAll] = useState([]);
   // fillter Date
   const [from, setFrom] = useState("");
@@ -78,49 +84,89 @@ const Index = (props) => {
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-  let perPage = 5;
+  //let perPage = 5;
   // const [dateQuestion, setDateQuestion] = useState("");
   // let count = Number(all.length) / perPage;
   let status = true;
+  const [idRaw, setIdRaw] = useState("");
   //let title, content;
   // const [newest, setNewest] = useState("");
+  const [rows, setRows] = useState([]);
+
   // const [oldest, setOldest] = useState("");
   const [statusA, setStatusA] = useState("status=false");
-
+  const [openDate, setOpenDate] = useState(false);
   const handleClose = (event, reason) => {
     setOpen(false);
+    setOpenDeline(false);
   };
 
   //decline
-  const handleClickOpenDecline = (id) => {
-    setDecline(false);
-  };
-  const handleOpentDecline = () => {};
 
-  const handleClickDecline = (id) => {};
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        setOpenDeline(true);
+        console.log("Delete Succecs");
+        setDecline(false);
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+        console.log("err");
+      });
+  };
   const handleCloseDecline = () => {
     setDecline(false);
   };
   //approve
   const handleClickOpenApproval = (id) => {
-    // approveQuestion(id, status);
-    setOpen(true);
+    approveQuestion(id, status)
+      .then(function (response) {
+        setOpen(true);
+        console.log("Successfully");
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+      });
   };
-  //get question
-  // const handleSortOldest = () => {
-  //   setOldest("=createdAt");
-  //   setNewest("");
-  // };
-  // const handleSortNewest = () => {
-  //   setOldest("");
-  //   setNewest("createdAt");
-  // };
+
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
-      setQuestions(questionData);
+      setQuestionsRaw(questionData);
     })();
   }, [key, statusA]);
+  useEffect(() => {
+    if (questionsRaw) {
+      const questionProcessed = [];
+      questionsRaw.map((question, index) => {
+        const resCategories = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`
+        );
+
+        axios.all([resCategories]).then(
+          axios.spread((...res) => {
+            question.categories = res[0].data;
+
+            questionProcessed.push(question);
+            if (index === questionsRaw.length - 1) {
+              setQuestions(questionProcessed);
+            }
+          })
+        );
+        return null;
+      });
+    }
+  }, [questionsRaw]);
 
   // searchBar
   const handleChangeSearch = (e) => {
@@ -135,30 +181,58 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
-
-  let dateTo = moment(to).valueOf();
-  let dateFrom = moment(from).valueOf();
-
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
   // console.log("to: " + dateTo);
   // console.log("from: " + dateFrom);
-  // questions.map((q) => {
-  //   moment(q.createdAt);
+  // console.log("- " + to - from);
+  // dateQuestion;
+  let dateProcessed = [];
+  const date = () => {
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
 
-  // if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-  //   console.log(q.title);
-  // } else {
-  //   console.log("ko co gi ");
-  // }
-  // console.log(moment(q.createdAt).valueOf());
-  // });
-  // console.log(questions.createdAt);
-  const handleDate = () => {};
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
+  };
+
+  //console.log(dateQ);
+  const handleDate = () => {
+    date();
+  };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenDate(false);
+  };
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
+  const unFillter = () => {
+    (async () => {
+      setRows(questions);
+    })();
+  };
 
   let columns = [
     {
       field: "id",
       headerName: "#ID",
-      width: 150,
+      width: 70,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
     {
@@ -167,12 +241,20 @@ const Index = (props) => {
       width: 150,
       renderCell: (params) => <strong>{params.value}</strong>,
     },
-
     {
-      field: "tag",
-      headerName: "Categories",
+      field: "content",
+      headerName: "Content",
       width: 150,
       renderCell: (params) => <strong>{params.value}</strong>,
+    },
+
+    {
+      field: "categories",
+      headerName: "Categories",
+      width: 150,
+      renderCell: (params) => (
+        <strong>{params.value.map((cate) => cate.name + " ")}</strong>
+      ),
     },
 
     {
@@ -194,47 +276,48 @@ const Index = (props) => {
       width: 230,
 
       renderCell: (params) => (
-        <strong>
-          <Button
-            onClick={() => {
-              handleClickOpenApproval();
-            }}
-            variant="contained"
-            color="primary"
-            size="small"
-          >
-            Approval
-          </Button>
+        <>
+          <strong>
+            <Button
+              onClick={() => {
+                handleClickOpenApproval(params.getValue("id"));
+              }}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Approval
+            </Button>
 
-          <Button
-            onClick={() => {
-              handleClickDecline();
-            }}
-            variant="contained"
-            color="secondary"
-            size="small"
-            style={{ marginLeft: 16 }}
-          >
-            Decline
-          </Button>
-        </strong>
+            <Button
+              onClick={() => {
+                handleClickDecline(params.getValue("id"));
+              }}
+              variant="contained"
+              color="secondary"
+              size="small"
+              style={{ marginLeft: 16 }}
+            >
+              Decline
+            </Button>
+          </strong>
+        </>
       ),
     },
-    {
-      field: "detail",
-      headerName: "Internship diary ",
-      width: 150,
-      renderCell: (params) => (
-        <strong>
-          {" "}
-          <Link to={`/detail/`}> See detail</Link>{" "}
-        </strong>
-      ),
-    },
+    // {
+    //   field: "detail",
+    //   headerName: "Internship diary ",
+    //   width: 150,
+    //   renderCell: (params) => (
+    //     <strong>
+    //       {" "}
+    //       <Link to={`/detail/${params.getValue("id")}`}> See detail</Link>{" "}
+    //     </strong>
+    //   ),
+    // },
   ];
 
-  let rows = [...questions];
-
+  // console.log(columns);
   return (
     <>
       <div>
@@ -288,8 +371,19 @@ const Index = (props) => {
                       setTo(e.target.value);
                     }}
                   />
-                  <Button onClick={handleDate} variant="contained">
+                  <Button
+                    className={classes.btnDate}
+                    onClick={handleDate}
+                    variant="contained"
+                  >
                     Fillter
+                  </Button>{" "}
+                  <Button
+                    className={classes.btnDate}
+                    onClick={unFillter}
+                    variant="contained"
+                  >
+                    UnFillter
                   </Button>{" "}
                 </div>
               </div>
@@ -306,17 +400,36 @@ const Index = (props) => {
             />
           </div>
         </div>{" "}
-        {/* <DialogDecline
+      </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Approval success!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openDecline}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Decline Success
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
+        </Alert>
+      </Snackbar>
+      <DialogDecline
         decline={decline}
         handleCloseDecline={handleCloseDecline}
         handleOpentDecline={handleOpentDecline}
-      /> */}
-      </div>
-      <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
+      />
     </>
   );
 };
