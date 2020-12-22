@@ -191,7 +191,7 @@ export default function MediaCard(props) {
     <div className={classes.root}>
       {answers ? (
         answers.map((item) => (
-          <Paper key={item.createdAt} elevation={3}>
+          <Paper key={item.id} elevation={3}>
             <Grid container spacing={1}>
               <Grid item xs={1}>
                 {item.exact ? <DoneIcon className={classes.doneIcon} /> : <></>}
@@ -267,6 +267,24 @@ export default function MediaCard(props) {
         ))
       ) : (
         <>
+          <Skeleton
+            className={classes.skeletion}
+            variant="rect"
+            width={800}
+            height={200}
+          />
+          <Skeleton
+            className={classes.skeletion}
+            variant="rect"
+            width={800}
+            height={200}
+          />
+          <Skeleton
+            className={classes.skeletion}
+            variant="rect"
+            width={800}
+            height={200}
+          />
           <Skeleton
             className={classes.skeletion}
             variant="rect"

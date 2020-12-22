@@ -18,7 +18,7 @@ import QuestionDetail from "./pages/QuestionDetail";
 import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
 
 import AnswerEdit from "./pages/AnswerEdit";
-import EventsGridViewManager from "./pages/EventsGridViewManager";
+import EventsGridViewManager from "./components/EventsGridViewManager";
 import EventList from "./pages/EventList";
 import JobsGridViewManager from "./components/JobsGridViewManager";
 import JobsGridView from "./components/JobsGridView";
