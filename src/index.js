@@ -11,7 +11,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 
 // imports pages
-import QuestionList from "./pages/QuestionList";
+import BolgList from "./pages/BlogList";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/" component={QuestionList}></Route>
+        <Route exact path="/" component={BolgList}></Route>
       </Switch>
     </Router>
   </Provider>,
