@@ -1,7 +1,7 @@
 // Config env
 require("dotenv").config();
 
-const bodyParser = require("body-parser");
+
 const express = require("express");
 const morgan = require("morgan");
 const path = require('path');
@@ -11,6 +11,10 @@ const fs = require("fs");
 const userRoute = require("./routes/user");
 const questionRoute = require("./routes/question");
 const tagRoute = require("./routes/tag");
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middlewares
 const accessLogStream = fs.createWriteStream(

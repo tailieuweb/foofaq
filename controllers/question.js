@@ -3,13 +3,21 @@ const controllers = new Controller();
 const Question = require("../models/question");
 const Tag = require("../models/tag");
 const { response } = require("../orm/response");
+const {validationResult} = require('express-validator');
+
 
 // Create Question
 const createQuestion = async function (req, res) {
+  //An error is generated when entering a value
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ errors: errors.array() });
+    return;
+  }
   controllers
-    .findById(Tag, req.body.tag)
-    .then((tag) => {
-      if (!tag) {
+    .findById(Tag, req.body.tagId)
+    .then((tagId) => {
+      if (!tagId) {
         return res.status(404).json({
           message: "Tag not found",
         });
@@ -17,9 +25,9 @@ const createQuestion = async function (req, res) {
       const question = new Question({
         title: req.body.title,
         content: req.body.content,
-        tag: req.body.tag,
+        tag: req.body.tagId,
       });
-      return controllers.save(Question, question);
+      return controllers.save(Question, question)
     })
     .then((result) => {
       res.status(201).json({
@@ -54,6 +62,13 @@ const getQuestion = async function (req, res) {
 
 //Edit Question
 const editQuestion = async function (req, res) {
+
+  //An error is generated when entering a value
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ errors: errors.array() });
+    return;
+  }
   try {
     //Search by id and edit
     const question = await controllers.findByIdAndUpdate(

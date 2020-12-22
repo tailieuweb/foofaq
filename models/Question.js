@@ -7,17 +7,18 @@ const QuestionSchema = new Schema(
     title: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     content: {
       type: String,
       required: true,
     },
-    tag: {
-      type: Array,
-      ref: "Tag",
-      required:true
-    },
+    tag: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
     date: {
       type: Date,
       default: Date.now,
@@ -25,7 +26,5 @@ const QuestionSchema = new Schema(
   },
   { timestamps: true }
 );
-
-
 
 module.exports = mongoose.model("Question", QuestionSchema);
