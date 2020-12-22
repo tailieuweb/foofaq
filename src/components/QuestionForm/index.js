@@ -80,14 +80,18 @@ const DialogActions = withStyles((theme) => ({
 function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+  const [nofi, setNofi] = useState("");
   const [title, setTitle] = useState("");
-  // const [tag, setTag] = useState("");
-  // console.log(categories);
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const result = await getQuesitonById(id);
+      setQuestion(result);
+    })();
+  }, [id]);
 
   useEffect(() => {
     setEdittorStates(
@@ -97,26 +101,19 @@ function QuestionForm({ categories }) {
         )
       )
     );
-  }, [question.content]);
-  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+  }, [question]);
 
-  let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
-
-  const [nofi, setNofi] = useState("");
-  let handleSubmit = (event) => {
-    event.preventDefault();
-  };
-  const { id } = useParams();
-
-  useEffect(() => {
-    (async () => {
-      const result = await getQuesitonById(id);
-      setQuestion(result);
-    })();
-  }, [id]);
   useEffect(() => {
     setTitle(question.title);
   }, [question.title]);
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   if (id === undefined) {
     handleSubmit = (event) => {
@@ -124,6 +121,10 @@ function QuestionForm({ categories }) {
       questionPost();
     };
     const questionPost = () => {
+      const content = draftToMarkdown(
+        convertToRaw(editorStates.getCurrentContent())
+      );
+
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
@@ -145,16 +146,18 @@ function QuestionForm({ categories }) {
           setOpen(true);
         });
     };
-  }
-
-  //Truong hop id co gia tri => PUT
-  else {
+  } else {
     handleSubmit = (event) => {
       event.preventDefault();
 
       questionPut(id);
     };
+
     const questionPut = (id) => {
+      const content = draftToMarkdown(
+        convertToRaw(editorStates.getCurrentContent())
+      );
+
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
@@ -170,7 +173,7 @@ function QuestionForm({ categories }) {
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
+          // console.log(error);
           console.log(error);
           setNofi("POST Failed");
           setOpen(true);
@@ -178,21 +181,6 @@ function QuestionForm({ categories }) {
     };
   }
 
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
-
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-
-  // console.log("question: " + question.content);
-
-  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>

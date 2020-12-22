@@ -96,11 +96,12 @@ const Index = (props) => {
   };
 
   //decline
-
+  //get id for decline
   const handleClickDecline = (id) => {
     setDecline(true);
     setIdRaw(id);
   };
+  //display dialog decline
   const handleOpentDecline = () => {
     declineQuestion(idRaw)
       .then(function (response) {
@@ -119,6 +120,7 @@ const Index = (props) => {
   const handleCloseDecline = () => {
     setDecline(false);
   };
+
   //approve
   const handleClickOpenApproval = (id) => {
     approveQuestion(id, status)
@@ -132,6 +134,7 @@ const Index = (props) => {
         setOpen(false);
       });
   };
+
   //get questions
   useEffect(() => {
     (async () => {
