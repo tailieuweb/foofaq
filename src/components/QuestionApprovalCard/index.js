@@ -68,34 +68,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = (props) => {
   const classes = useStyles();
-
+  //dialog
   const [open, setOpen] = useState(false);
   const [openDecline, setOpenDeline] = useState(false);
-
-  // const [page, setPage] = useState(1);
-
   const [decline, setDecline] = useState(false);
+  const [openDate, setOpenDate] = useState(false);
+  //get Questions
   const [questions, setQuestions] = useState([]);
   const [questionsRaw, setQuestionsRaw] = useState([]);
-  // const [all, setAll] = useState([]);
   // fillter Date
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-  //let perPage = 5;
-  // const [dateQuestion, setDateQuestion] = useState("");
-  // let count = Number(all.length) / perPage;
-  let status = true;
+
   const [idRaw, setIdRaw] = useState("");
-  //let title, content;
-  // const [newest, setNewest] = useState("");
+  //status
+  const [statusA, setStatusA] = useState("status=false");
+  let status = true;
+  // row in material-ui
   const [rows, setRows] = useState([]);
 
-  // const [oldest, setOldest] = useState("");
-  const [statusA, setStatusA] = useState("status=false");
-  const [openDate, setOpenDate] = useState(false);
   const handleClose = (event, reason) => {
     setOpen(false);
     setOpenDeline(false);
@@ -138,13 +132,14 @@ const Index = (props) => {
         setOpen(false);
       });
   };
-
+  //get questions
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
       setQuestionsRaw(questionData);
     })();
   }, [key, statusA]);
+
   useEffect(() => {
     if (questionsRaw) {
       const questionProcessed = [];
@@ -167,8 +162,7 @@ const Index = (props) => {
       });
     }
   }, [questionsRaw]);
-
-  // searchBar
+  //search bar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
   };
@@ -181,12 +175,9 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
+  // fillter date
   const dateFrom = moment(from).valueOf();
   const dateTo = moment(to).valueOf();
-  // console.log("to: " + dateTo);
-  // console.log("from: " + dateFrom);
-  // console.log("- " + to - from);
-  // dateQuestion;
   let dateProcessed = [];
   const date = () => {
     if (dateFrom < dateTo) {
