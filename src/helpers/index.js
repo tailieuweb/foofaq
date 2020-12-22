@@ -20,6 +20,11 @@ export const getAllQuestions = async (keyword, page, perPage) => {
   );
   return question.data;
 };
+
+// export const getAnswer = async (id) => {
+//   const question = await axios.get(API_URL + `questions/${id}/answers`);
+//   return question.data;
+// };
 //get all question status=false
 export const allQuestion = async () => {
   const question = await axios.get(API_URL + `questions?status=false`);
@@ -31,7 +36,15 @@ export const getQuestionForCate = async () => {
 };
 
 export const getAllQuesiton = async (keyword) => {
-  const question = await axios.get(API_URL + `questions?search=${keyword}`);
+  const question = await axios.get(
+    API_URL + `questions?search=${keyword}&page=1&limit=3`
+  );
+  return question.data;
+};
+export const getCategoriesInQuestion = async (id) => {
+  const question = await axios.get(
+    API_URL + `questions?questions/${id}/categories`
+  );
   return question.data;
 };
 
@@ -77,6 +90,7 @@ export const getCategory = async (id) => {
   const question = await axios.get(API_URL + `categories/${id}`);
   return question.data;
 };
+
 //categories delete
 export const DeleteCategory = async (id) => {
   const user = await axios.delete(API_URL + "categories/" + id);
@@ -210,17 +224,21 @@ export const updateEvent = async (id, name, image, date, description) => {
   return res.data;
 };
 
+//get all answer
 export const getAnswers = async (questionId) => {
   const answers = await axios.get(API_URL + `questions/${questionId}/answers`);
   return answers.data;
 };
 
+//get answer by id
 export const getAnswer = async (questionId, answerId) => {
   const answers = await axios.get(
     API_URL + `questions/${questionId}/answers/${answerId}`
   );
   return answers.data;
 };
+
+//update answer
 export const updateAnswer = async (questionId, answerId, content) => {
   const answers = await axios.put(
     API_URL + `questions/${questionId}/answers/${answerId}`,
@@ -232,10 +250,17 @@ export const updateAnswer = async (questionId, answerId, content) => {
   return answers.data;
 };
 
+//add answer
 export const addAnswers = async (questionId, content) => {
   const answer = await axios.post(API_URL + `questions/${questionId}/answers`, {
     questionId,
     content,
   });
   return answer.data;
+};
+
+//get all categories
+export const getCategoriesQuestion = async (id) => {
+  const categories = await axios.get(API_URL + `questions/${id}/categories  `);
+  return categories.data;
 };

@@ -11,14 +11,14 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { green } from "@material-ui/core/colors";
 
-import Link from "../../common/CustomLink";
-
 //
 import TextField from "@material-ui/core/TextField";
 
 import { DialogDecline } from "../Dialog";
 
 //
+import axios from "axios";
+
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -68,43 +68,53 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = (props) => {
   const classes = useStyles();
-
+  //dialog
   const [open, setOpen] = useState(false);
-
-  // const [page, setPage] = useState(1);
-
+  const [openDecline, setOpenDeline] = useState(false);
   const [decline, setDecline] = useState(false);
+  const [openDate, setOpenDate] = useState(false);
+  //get Questions
   const [questions, setQuestions] = useState([]);
-  // const [all, setAll] = useState([]);
+  const [questionsRaw, setQuestionsRaw] = useState([]);
   // fillter Date
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-  let perPage = 5;
-  // const [dateQuestion, setDateQuestion] = useState("");
-  // let count = Number(all.length) / perPage;
-  let status = true;
-  //let title, content;
-  // const [newest, setNewest] = useState("");
-  // const [oldest, setOldest] = useState("");
+
+  const [idRaw, setIdRaw] = useState("");
+  //status
   const [statusA, setStatusA] = useState("status=false");
+  let status = true;
+  // row in material-ui
+  const [rows, setRows] = useState([]);
 
   const handleClose = (event, reason) => {
     setOpen(false);
+    setOpenDeline(false);
   };
 
   //decline
 
-  const handleOpentDecline = (id) => {
-    // declineQuestion(id);
-    console.log(id);
-    setDecline(false);
-  };
-
   const handleClickDecline = (id) => {
     setDecline(true);
+    setIdRaw(id);
+  };
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        setOpenDeline(true);
+        console.log("Delete Succecs");
+        setDecline(false);
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+        console.log("err");
+      });
   };
   const handleCloseDecline = () => {
     setDecline(false);
@@ -113,32 +123,46 @@ const Index = (props) => {
   const handleClickOpenApproval = (id) => {
     approveQuestion(id, status)
       .then(function (response) {
-        // handle success
-        console.log("Successfully");
         setOpen(true);
-        // window.location.reload();
+        console.log("Successfully");
+
+        window.location.reload();
       })
       .catch(function (error) {
         setOpen(false);
       });
   };
-  //get question
-  // const handleSortOldest = () => {
-  //   setOldest("=createdAt");
-  //   setNewest("");
-  // };
-  // const handleSortNewest = () => {
-  //   setOldest("");
-  //   setNewest("createdAt");
-  // };
+  //get questions
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
-      setQuestions(questionData);
+      setQuestionsRaw(questionData);
     })();
   }, [key, statusA]);
 
-  // searchBar
+  useEffect(() => {
+    if (questionsRaw) {
+      const questionProcessed = [];
+      questionsRaw.map((question, index) => {
+        const resCategories = axios.get(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`
+        );
+
+        axios.all([resCategories]).then(
+          axios.spread((...res) => {
+            question.categories = res[0].data;
+
+            questionProcessed.push(question);
+            if (index === questionsRaw.length - 1) {
+              setQuestions(questionProcessed);
+            }
+          })
+        );
+        return null;
+      });
+    }
+  }, [questionsRaw]);
+  //search bar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
   };
@@ -151,24 +175,49 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
+  // fillter date
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  let dateProcessed = [];
+  const date = () => {
+    if (dateFrom < dateTo) {
+      questions.map((q) => {
+        const dateQuestion = moment(q.createdAt).valueOf();
 
-  let dateTo = moment(to).valueOf();
-  let dateFrom = moment(from).valueOf();
+        if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
+          dateProcessed.push(q);
+          console.log(dateProcessed);
+          setRows(dateProcessed);
+        } else {
+          setRows(dateProcessed);
+        }
+      });
+    } else {
+      setOpenDate(true);
+      return;
+    }
+  };
 
-  // console.log("to: " + dateTo);
-  // console.log("from: " + dateFrom);
-  // questions.map((q) => {
-  //   moment(q.createdAt);
+  //console.log(dateQ);
+  const handleDate = () => {
+    date();
+  };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-  // if (dateQuestion >= dateFrom && dateQuestion <= dateTo) {
-  //   console.log(q.title);
-  // } else {
-  //   console.log("ko co gi ");
-  // }
-  // console.log(moment(q.createdAt).valueOf());
-  // });
-  // console.log(questions.createdAt);
-  const handleDate = () => {};
+    setOpenDate(false);
+  };
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
+  const unFillter = () => {
+    (async () => {
+      setRows(questions);
+    })();
+  };
 
   let columns = [
     {
@@ -191,10 +240,12 @@ const Index = (props) => {
     },
 
     {
-      field: "tag",
+      field: "categories",
       headerName: "Categories",
       width: 150,
-      renderCell: (params) => <strong>{params.value}</strong>,
+      renderCell: (params) => (
+        <strong>{params.value.map((cate) => cate.name + " ")}</strong>
+      ),
     },
 
     {
@@ -257,8 +308,7 @@ const Index = (props) => {
     // },
   ];
 
-  let rows = [...questions];
-
+  // console.log(columns);
   return (
     <>
       <div>
@@ -319,6 +369,13 @@ const Index = (props) => {
                   >
                     Fillter
                   </Button>{" "}
+                  <Button
+                    className={classes.btnDate}
+                    onClick={unFillter}
+                    variant="contained"
+                  >
+                    UnFillter
+                  </Button>{" "}
                 </div>
               </div>
             </div>
@@ -335,17 +392,34 @@ const Index = (props) => {
           </div>
         </div>{" "}
       </div>
-      <Snackbar open={open} autoHideDuration={800} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          This is a success message!
+          Approval success!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openDecline}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Decline Success
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openDate}
+        autoHideDuration={6000}
+        onClose={handleDateClose}
+      >
+        <Alert onClose={handleDateClose} severity="error">
+          Wrong date
         </Alert>
       </Snackbar>
       <DialogDecline
         decline={decline}
         handleCloseDecline={handleCloseDecline}
-        handleOpentDecline={() => {
-          handleOpentDecline();
-        }}
+        handleOpentDecline={handleOpentDecline}
       />
     </>
   );

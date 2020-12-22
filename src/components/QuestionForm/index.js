@@ -28,12 +28,14 @@ import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
 
 //APIS
-import { getQuesitonById } from "../../helpers";
 
 // export const listCategories = [];
 
-import { pagCategories,getQuestionForCate } from "../../helpers";
-
+import {
+  getQuesitonById,
+  pagCategories,
+  getQuestionForCate,
+} from "../../helpers";
 
 const styles = (theme) => ({
   root: {
@@ -80,84 +82,89 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-function QuestionForm() {
+function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
   const [questionGetLastId, setQuestions] = useState([]);
   //change
-  const [cagtegories,setCategories]=useState([]);
-  const [textCate,setTextCate] = useState([]);
+  const [cagtegories, setCategories] = useState([]);
+  const [textCate, setTextCate] = useState([]);
 
-  //get categories 
-useEffect(()=>{
-  (async () => {
+  //get categories
+  useEffect(() => {
+    (async () => {
       const result = await pagCategories();
       setCategories(result);
     })();
-},[])
+  }, []);
 
-//get question để lấy id cuối 
-useEffect(()=>{
-  (async () => {
+  //get question để lấy id cuối
+  useEffect(() => {
+    (async () => {
       const result = await getQuestionForCate();
       setQuestions(result);
     })();
-},[])
+  }, []);
 
-//lấy id cuối
-const [idTest,setIdTest] = useState([]);
-  useEffect(()=>{
-    questionGetLastId.map((q)=>{
-        console.log(q.id);
-        setIdTest(q);
-    }) 
-  },[questionGetLastId])
-  const [idCate,setIdCate] = useState(null);
-useEffect(()=>{
-  setIdCate(parseInt(idTest.id)+1);
-// id +1 ;
-},[idTest])
-// console.log(idCate);
-// console.log(idTest);
+  //lấy id cuối
+  const [idTest, setIdTest] = useState([]);
+  useEffect(() => {
+    questionGetLastId.map((q) => {
+      console.log(q.id);
+      setIdTest(q);
+    });
+  }, [questionGetLastId]);
+  const [idCate, setIdCate] = useState(null);
+  useEffect(() => {
+    setIdCate(parseInt(idTest.id) + 1);
+    // id +1 ;
+  }, [idTest]);
+  // console.log(idCate);
+  // console.log(idTest);
 
-const handleAuto = () =>{
-  if(idCate <= 1){
-    textCate.map((tx)=>{
-      axios
-      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/1/categories`, {
-          questionId: idCate,
-          name: tx.name
-      })
-    })
-  }
-  else{
-    textCate.map((tx)=>{
-      axios
-      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/${idCate}/categories`, {
-          questionId: idCate,
-          name: tx.name
-      })
-    })
-  }
-}
+  const handleAuto = () => {
+    if (idCate <= 1) {
+      textCate.map((tx) => {
+        axios.post(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/1/categories`,
+          {
+            questionId: idCate,
+            name: tx.name,
+          }
+        );
+      });
+    } else {
+      textCate.map((tx) => {
+        axios.post(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${idCate}/categories`,
+          {
+            questionId: idCate,
+            name: tx.name,
+          }
+        );
+      });
+    }
+  };
 
-const handleEditAutoComplete = () =>{
-  textCate.map((tx)=>{
-      axios
-      .post(`https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`, {
+  const handleEditAutoComplete = () => {
+    textCate.map((tx) => {
+      axios.post(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`,
+        {
           questionId: question.id,
-          name: tx.name
-      })
-  })
-}
+          name: tx.name,
+        }
+      );
+    });
+  };
 
   const handleClose = () => {
     setOpen(false);
   };
 
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState("");
-
+  // const [tag, setTag] = useState("");
+  // console.log(categories);
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
@@ -179,7 +186,7 @@ const handleEditAutoComplete = () =>{
   };
 
   const { id } = useParams();
-  
+
   useEffect(() => {
     (async () => {
       const result = await getQuesitonById(id);
@@ -191,7 +198,7 @@ const handleEditAutoComplete = () =>{
     handleSubmit = (event) => {
       event.preventDefault();
       questionPost();
-      console.log(idCate)
+      console.log(idCate);
     };
     const questionPost = () => {
       axios
@@ -205,7 +212,7 @@ const handleEditAutoComplete = () =>{
           handleAuto();
           // handle success
           setTitle("");
-          setTag("");
+          // setTag("");
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
@@ -223,6 +230,7 @@ const handleEditAutoComplete = () =>{
   else {
     handleSubmit = (event) => {
       event.preventDefault();
+
       questionPut(id);
     };
     const questionPut = (id) => {
@@ -262,6 +270,8 @@ const handleEditAutoComplete = () =>{
   // );
 
   // console.log("question: " + question.content);
+
+  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -291,6 +301,7 @@ const handleEditAutoComplete = () =>{
               editorState={editorStates}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
+              defaultEditorState={editorStates}
               onEditorStateChange={setEdittorStates}
               placeholder="Input content question..."
             />
@@ -310,7 +321,10 @@ const handleEditAutoComplete = () =>{
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput listCategories = {cagtegories} setTextCate = {setTextCate}/>
+            <CategoriesInput
+              listCategories={cagtegories}
+              setTextCate={setTextCate}
+            />
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Send" />

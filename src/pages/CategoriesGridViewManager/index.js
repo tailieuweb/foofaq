@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { Button } from "@material-ui/core";
-import JobsGridView from "../JobsGridView";
-import Link from "../../common/CustomLink";
-import Alert from "@material-ui/lab/Alert";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
+
+//components
+import CategoriesGridView from "../../components/CategoriesGridView";
+import { DeleteCategory, UpdateCategory } from "../../helpers";
+
+//components mui
+import Button from "@material-ui/core/Button"; 
 import Snackbar from "@material-ui/core/Snackbar";
-import { deleteJob } from "../../helpers";
+import Alert from "@material-ui/lab/Alert";
+
+//styles
 import "./index.scss";
 import PageLayoutManager from "../../common/PageLayoutManager";
 
-export default function JobsGridViewManager() {
+export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -16,11 +22,11 @@ export default function JobsGridViewManager() {
     }
     setOpen(false);
   };
-  
-  const DeleteJobId = (id) => {
-    var answer = window.confirm("You definitely want to delete ");
+
+  const deleteCategory = (id) => {
+    var answer = window.confirm("Are you sure you want to delete it?");
     if (answer) {
-      deleteJob(id)
+      DeleteCategory(id)
         .then(function (response) {
           // handle success
           console.log("Successfully");
@@ -35,36 +41,29 @@ export default function JobsGridViewManager() {
       return;
     }
   };
-
   let columns = [
     {
-      field: "id",
+      field: "actions",
       headerName: "Actions",
-      headerAlign: "center",
       width: 200,
       renderCell: (params) => (
         <strong>
-          <Link to={"/forms/job/" + params.value}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              
-            }}
-          >
-            UPDATE
-          </Button>
+          <Link to={`/forms/categories/${params.getValue("id")}`}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => UpdateCategory(params.getValue("id"))}
+            >
+              UPDATE
+            </Button>
           </Link>
           <Button
             variant="contained"
             color="secondary"
             size="small"
             style={{ marginLeft: 16 }}
-            onClick={() => {
-              DeleteJobId(params.value);
-          }}
+            onClick={() => deleteCategory(params.getValue("id"))}
           >
             DELETE
           </Button>
@@ -72,19 +71,15 @@ export default function JobsGridViewManager() {
       ),
     },
   ];
-
   return (
     <PageLayoutManager>
-      <div className="aroundAddJob">
-      <Link to={"/forms/job/"}>
-        <Button variant="contained" color="primary">
-          {" "}
-          ADD{" "}
+      <Link to="/forms/categories">
+        <Button variant="contained" color="primary" className="btn-add" >
+          Add Category
         </Button>
       </Link>
-      </div>
-      <JobsGridView extraColumns={columns} />
-      <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
+      <CategoriesGridView extraColumns={columns} />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Delete success!
         </Alert>

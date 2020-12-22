@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 
 import Link from "../../common/CustomLink";
+// import { set } from "js-cookie";
 
 const styles = (theme) => ({
   root: {
@@ -105,65 +104,66 @@ function Events(props) {
   };
 
   const checkValueEmpty = () => {
-    if(name.length == "" || description.length == "")
-    {
+    if (name.length == "" || description.length == "") {
       return true;
+    } else {
+      return false;
     }
-    else{
-      return false
-    }
-  }
+  };
 
+  useEffect(() => {
+    setName(event.name);
+    setDescription(event.description);
+    setImage(event.image);
+  }, [event]);
   useEffect(() => {
     (async () => {
       const eventData = await getEvent(id);
       setEvent(eventData);
     })();
-  }, []);
+  }, [id]);
   if (id === undefined) {
     handleSubmit = (event) => {
-      if(checkValueEmpty() == true){
+      if (checkValueEmpty() == true) {
         setOpen(true);
         setNofi("Failed");
+      } else {
+        event.preventDefault();
+        addEvent(name, image, date, description)
+          .then(function (response) {
+            setOpen(true);
+            //window.location.reload();
+            setNofi("Successfully");
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            setOpen(true);
+            setNofi("Failed");
+          });
       }
-      else{
-      event.preventDefault();
-      addEvent(name, image, date, description)
-      .then(function (response) {
-        setOpen(true);
-        //window.location.reload();
-        setNofi("Successfully");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setOpen(true);
-        setNofi("Failed");
-      });
     };
-  }
   } else {
     handleSubmit = (event) => {
-      if(checkValueEmpty() == true){
+      if (checkValueEmpty() == true) {
         setOpen(true);
         setNofi("Failed");
+      } else {
+        event.preventDefault();
+        updateEvent(id, name, image, date, description)
+          .then(function (response) {
+            setOpen(true);
+            //window.location.reload();
+            setNofi("Successfully");
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            setOpen(true);
+            setNofi("Failed");
+          });
       }
-      else{
-      event.preventDefault();
-      updateEvent(id, name, image, date, description)
-      .then(function (response) {
-        setOpen(true);
-        //window.location.reload();
-        setNofi("Successfully");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setOpen(true);
-        setNofi("Failed");
-      });
     };
-  }
   }
   console.log(event.name);
   return (
@@ -209,7 +209,7 @@ function Events(props) {
             type="file"
             onChange={(e) => {
               setImage(e.target.value);
-            }} 
+            }}
             required
           />
           <label htmlFor="icon-button-file">
@@ -234,7 +234,7 @@ function Events(props) {
             defaultValue={event.description}
             onChange={(e) => {
               setDescription(e.target.value);
-            }} 
+            }}
             required
           />
         </li>
@@ -271,7 +271,6 @@ function Events(props) {
           </Link>
         </DialogActions>
       </Dialog>
-
     </div>
   );
 }
