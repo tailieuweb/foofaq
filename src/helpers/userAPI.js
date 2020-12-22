@@ -36,7 +36,7 @@ export const UpdateUser = async (id,user_name,user_password,user_email) => {
 
 //get 1 user
 export const getUser = async (id) => {
-  const user = await axios.get(API_URL_USER_ALL + `users/${id}`);
+  const user = await axios.get(API_URL_USER_ALL + `${id}`);
   return user.data;
 };
 

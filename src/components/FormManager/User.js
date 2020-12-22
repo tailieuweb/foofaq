@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
@@ -11,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
   },
-  textField: {
+  input: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: "25ch",
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserForm = () => {
+function UserForm(props) {
   const [open, setOpen] = React.useState(false);
 
   const classes = useStyles();
@@ -34,6 +33,7 @@ const UserForm = () => {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -44,39 +44,102 @@ const UserForm = () => {
     (async () => {
       const user = await getUser(id);
       setUser(user);
+      console.log("day ka L ", user);
     })();
   }, []);
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
-      AddUser(user_email, user_password, id, user_name).then(function (response) {
-        setOpen(true);
-        window.location.reload();
-      }).catch(function (error) {
-        console.log(error);
-      });
+      AddUser(id, user_email, user_password, user_name)
+        .then(function (response) {
+          setOpen(true);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
-      UpdateUser(id, user_name, user_password).then(function (response) {
-        setOpen(true);
-        window.location.reload();
-      }).catch(function (error) {
-        console.log(error);
-      });
+      UpdateUser(id, user_name, user_password)
+        .then(function (response) {
+          setOpen(true);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
   }
   console.log(user.user_name);
 
   return (
     <div>
-      {/* Form Add user */}
       <h1> User Form</h1>
 
       <div className={classes.root}>
         <form>
-          <TextField
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Name</label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputName"
+              aria-describedby="emailHelp"
+              placeholder="Name..."
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              defaultValue={user.user_name}
+            />
+            <small id="emailHelp" className="form-text text-muted">
+              We'll never share your name with anyone else.
+            </small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password..."
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              defaultValue={user.user_password}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+             
+              aria-describedby="emailHelp"
+              placeholder="email...."
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              defaultValue={user.user_email}
+              variant="outlined"
+            />
+            <small id="emailHelp" className="form-text text-muted">
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            Send
+          </Button>
+        
+        </form>
+        {/* <form>
+          <input
             label="Name"
             style={{ margin: 8 }}
             placeholder="Name..."
@@ -85,17 +148,19 @@ const UserForm = () => {
             InputLabelProps={{
               shrink: true,
             }}
-            defaultValue={user.user_name}
             onChange={(e) => {
               setName(e.target.value);
             }}
+          
+            defaultValue={user.user_name}
             variant="outlined"
           />
-          <TextField
+          <input
             title="Password"
             label="PassWord"
             style={{ margin: 8 }}
-            placeholder="password..."
+            placeholder="Password..."
+         
             fullWidth
             margin="normal"
             InputLabelProps={{
@@ -107,7 +172,8 @@ const UserForm = () => {
             defaultValue={user.user_password}
             variant="outlined"
           />
-          <TextField
+          
+          <input
             label="Email"
             style={{ margin: 8 }}
             placeholder="Email..."
@@ -130,7 +196,7 @@ const UserForm = () => {
           >
             Send
           </Button>
-        </form>
+        </form> */}
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
@@ -139,6 +205,6 @@ const UserForm = () => {
       </Snackbar>
     </div>
   );
-};
+}
 
 export default UserForm;
