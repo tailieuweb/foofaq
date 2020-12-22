@@ -256,7 +256,7 @@ export const addAnswers = async (questionId, content) => {
 };
 
 //get all categories
-export const getAllCategories = async (id) => {
+export const getCategoriesQuestion = async (id) => {
   const categories = await axios.get(API_URL + `questions/${id}/categories  `);
   return categories.data;
 };
