@@ -31,7 +31,7 @@ function Index(props) {
         }}
       >
         <List component="nav" aria-label="main mailbox folders">
-          {/* <ListItem
+          <ListItem
             button
             selected={selectedIndex === 0}
             onClick={(event) => handleListItemClick(event, 0)}
@@ -41,9 +41,9 @@ function Index(props) {
             </ListItemIcon>
 
             <ListItemText primary="Dashboard" />
-          </ListItem> */}
+          </ListItem>
 
-          {/* <Link
+           <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -61,8 +61,8 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Jobs" />
             </ListItem>
-          </Link> */}
-          {/* <Link
+          </Link> 
+           <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -80,9 +80,9 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Events" />
             </ListItem>
-          </Link> */}
+          </Link> 
 
-          {/* <Link
+           <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -100,10 +100,10 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Questions" />
             </ListItem>
-          </Link> */}
+          </Link> 
 
 
-          {/* <Link
+           <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -121,9 +121,9 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Categories" />
             </ListItem>
-          </Link> */}
+          </Link> 
 
-          {/* <Link
+           <Link
             style={{
               width: "100%",
               textDecoration: "none",
@@ -141,7 +141,7 @@ function Index(props) {
               </ListItemIcon>
               <ListItemText primary="Approval" />
             </ListItem>
-          </Link> */}
+          </Link> 
 
 
            {/* User */}
