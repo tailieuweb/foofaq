@@ -6,16 +6,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PageLayout from './common/PageLayout/index';
 import PageLayoutManager from './common/PageLayoutManager/index';
 import UserProfileActivity from "./pages/UserProfileActivity/index";
-
 import thunk from "redux-thunk";
-
 import "./index.scss";
-
 import reducer from "./reducers/index";
-
-// imports pages
-
-
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||

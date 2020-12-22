@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContainedButtons() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Button variant="contained">Summary</Button>

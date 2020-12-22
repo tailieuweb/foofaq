@@ -28,7 +28,6 @@ function TabPanel(props) {
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
@@ -57,11 +56,9 @@ export default function UserProfileNavbar() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
   return (
     <React.Fragment>
       <div className={classes.root}>
