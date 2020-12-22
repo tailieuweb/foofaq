@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { DataGrid } from "@material-ui/data-grid";
-import axios from "axios";
 import "./index.scss";
 import Link from "../../common/CustomLink";
 // import EventsGridView from "../EventsGridView";
@@ -14,15 +13,8 @@ import PageLayoutManager from "../../common/PageLayoutManager";
 function EventsGridViewManager() {
   const [eventData, setEventData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
   const [keyword, setKeyword] = useState("");
-
-  // useEffect(() => {
-  // (async () => {
-  //   const categoryData = await axios.get('https://5fc9a56e3c1c220016440eab.mockapi.io/events')
-  //   setEventData(categoryData.data);
-  // })();
-  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -42,7 +34,7 @@ function EventsGridViewManager() {
     setKeyword(e.target.value);
   };
   const handleSearch = () => {
-    setKey(keyword);
+    setKeyword(keyword);
   };
 
   const DeleteEvent = (id) => {
@@ -69,6 +61,7 @@ function EventsGridViewManager() {
   let columns = [
     { field: "id", headerName: "ID" },
     // { field: 'createdAt', width: 210 },
+    { field: "date", headerName: "Date", width: 200 },
     { field: "name", width: 200, headerName: "Name" },
     {
       field: "imageUri",
@@ -83,13 +76,14 @@ function EventsGridViewManager() {
       ),
     },
     { field: "description", headerName: "Description", width: 500 },
+    { field: "place", headerName: "Place", width: 500 },
     {
-      field: "id",
+      field: "action",
       headerName: "Action",
       width: 200,
       renderCell: (params) => (
         <strong>
-          <Link to={"/forms/event/" + params.value}>
+          <Link to={"/forms/event/" + params.getValue("id")}>
             <Button variant="contained" color="primary" size="small">
               Edit
             </Button>
@@ -100,7 +94,7 @@ function EventsGridViewManager() {
             size="small"
             style={{ marginLeft: 16 }}
             onClick={() => {
-              DeleteEvent(params.value);
+              DeleteEvent(params.getValue("id"));
             }}
           >
             Delete
@@ -112,36 +106,36 @@ function EventsGridViewManager() {
 
   return (
     <PageLayoutManager>
-    <div style={{ height: 600, width: "100%" }}>
-      <h1>Events</h1>
-      <SearchBar
-        handleChangeSearch={handleChangeSearch}
-        handleSearch={handleSearch}
-      />
-      <br />
-      <Link to={"/forms/event"}>
-        <Button variant="contained" color="primary">
-          {" "}
-          ADD{" "}
-        </Button>
-      </Link>
-      <br />
-      <br />
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={6}
-        rowsPerPageOptions={[5, 10, 20]}
-        pagination
-        {...rows}
-        rowHeight={80}
-      />
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          Delete success!
-        </Alert>
-      </Snackbar>
-    </div>
+      <div style={{ height: 600, width: "100%" }}>
+        <h1>Events</h1>
+        <SearchBar
+          handleChangeSearch={handleChangeSearch}
+          handleSearch={handleSearch}
+        />
+        <br />
+        <Link to={"/forms/event"}>
+          <Button variant="contained" color="primary">
+            {" "}
+            ADD{" "}
+          </Button>
+        </Link>
+        <br />
+        <br />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={6}
+          rowsPerPageOptions={[5, 10, 20]}
+          pagination
+          {...rows}
+          rowHeight={80}
+        />
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            Delete success!
+          </Alert>
+        </Snackbar>
+      </div>
     </PageLayoutManager>
   );
 }
