@@ -31,7 +31,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import PersonAvatar from "../../images/Person-Avatar.png";
 
 //APIS
-import { getCategoriesQuestion } from "../../helpers";
+import { getAllCategories } from "../../helpers";
 
 //style
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +98,7 @@ const QuestionInfoDetail = ({
   } = question;
   useEffect(() => {
     (async () => {
-      const categoriesData = await getCategoriesQuestion(id);
+      const categoriesData = await getAllCategories(id);
       setCategories(categoriesData);
     })();
   }, [id]);
@@ -170,7 +170,7 @@ const QuestionInfoDetail = ({
                   <div className={classes.chips}>
                     {categories ? (
                       categories.map((item) => (
-                        <Chip label={item.name} clickable key={item.name} />
+                        <Chip label={item.name} clickable key={item.id} />
                       ))
                     ) : (
                       <Chip label={null} clickable />
@@ -228,7 +228,7 @@ const QuestionInfoDetail = ({
           <Grid item xs={10}>
             {/* Question Details */}
             <Paper className="Box-Question" elevation={3}>
-              <QuestionForm categories={categories} />
+              <QuestionForm />
             </Paper>
           </Grid>
         </Grid>

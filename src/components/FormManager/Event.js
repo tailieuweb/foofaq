@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,7 +19,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 
 import Link from "../../common/CustomLink";
-// import { set } from "js-cookie";
 
 const styles = (theme) => ({
   root: {
@@ -104,50 +105,45 @@ function Events(props) {
   };
 
   useEffect(() => {
-    setName(event.name);
-    setDescription(event.description);
-    setImage(event.image);
-  }, [event]);
-  useEffect(() => {
     (async () => {
       const eventData = await getEvent(id);
       setEvent(eventData);
     })();
-  }, [id]);
+  }, []);
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
       addEvent(name, image, date, description)
-        .then(function (response) {
-          setOpen(true);
-          //window.location.reload();
-          setNofi("Successfully");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          setOpen(true);
-          setNofi("Failed");
-        });
+      .then(function (response) {
+        setOpen(true);
+        //window.location.reload();
+        setNofi("Successfully");
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        setOpen(true);
+        setNofi("Failed");
+      });
     };
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
       updateEvent(id, name, image, date, description)
-        .then(function (response) {
-          setOpen(true);
-          //window.location.reload();
-          setNofi("Successfully");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          setOpen(true);
-          setNofi("Failed");
-        });
+      .then(function (response) {
+        setOpen(true);
+        //window.location.reload();
+        setNofi("Successfully");
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        setOpen(true);
+        setNofi("Failed");
+      });
     };
   }
-  // console.log(event.name);
+  console.log(event.name);
   return (
     <div>
       <h1>Event Form</h1>
@@ -244,13 +240,14 @@ function Events(props) {
           <Typography gutterBottom>{nofi}</Typography>
         </DialogContent>
         <DialogActions>
-          <Link to={"/manager/events"}>
+          <Link to={"/manager/jobs"}>
             <Button autoFocus onClick={handleClose} color="primary">
               OK
             </Button>
           </Link>
         </DialogActions>
       </Dialog>
+
     </div>
   );
 }
