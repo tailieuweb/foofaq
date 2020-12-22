@@ -80,33 +80,15 @@ const DialogActions = withStyles((theme) => ({
 function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
+  const [nofi, setNofi] = useState("");
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+  const [title, setTitle] = useState("");
+
+  const { id } = useParams();
+
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [title, setTitle] = useState("");
-  // const [tag, setTag] = useState("");
-  // console.log(categories);
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-  useEffect(() => {
-    setEdittorStates(
-      EditorState.createWithContent(
-        ContentState.createFromBlockArray(
-          convertFromHTML(`${question.content}`)
-        )
-      )
-    );
-  }, [question.content]);
-  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
-
-  let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
-
-  const [nofi, setNofi] = useState("");
-  let handleSubmit = (event) => {
-    event.preventDefault();
-  };
-  const { id } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -114,9 +96,23 @@ function QuestionForm({ categories }) {
       setQuestion(result);
     })();
   }, [id]);
+
   useEffect(() => {
     setTitle(question.title);
-  }, [question.title]);
+    setEdittorStates(
+      EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          convertFromHTML(`${question.content}`)
+        )
+      )
+    );
+  }, [question]);
+
+  let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   if (id === undefined) {
     handleSubmit = (event) => {
@@ -145,10 +141,7 @@ function QuestionForm({ categories }) {
           setOpen(true);
         });
     };
-  }
-
-  //Truong hop id co gia tri => PUT
-  else {
+  } else {
     handleSubmit = (event) => {
       event.preventDefault();
 
@@ -177,22 +170,6 @@ function QuestionForm({ categories }) {
         });
     };
   }
-
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
-
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-
-  // console.log("question: " + question.content);
-
-  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
