@@ -11,13 +11,10 @@ const { userSignupValidator, userSigninValidator } = require('../validations/aut
 
 //Route get all user
 router.get('/', UserController.index)
-//Route create user
-router.post('/', UserController.newUser)
-
 //Route get detail a user
 router.get('/:userID', UserController.getUser)
 //Route update user
-router.patch('/:userID', UserController.isAuth, UserController.updateUser)
+router.patch('/:userID', UserController.requireSignin, UserController.isAuth, UserController.updateUser)
 //Route delete user
 router.delete('/:userID', UserController.requireSignin, UserController.isAuth, UserController.deleteUser)
 // Route register
