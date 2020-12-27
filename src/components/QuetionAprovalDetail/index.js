@@ -92,7 +92,7 @@ function Index() {
           {" "}
           <SearchBar></SearchBar>{" "}
         </div>
-        <div className="user">
+        {/* <div className="user">
           <div className="username">admin</div>
 
           <img
@@ -100,7 +100,7 @@ function Index() {
             src="https://lh3.googleusercontent.com/proxy/-p8WnJ_vLGzHF7p71K-I9Lm57Mvc6ex4tCbp-i5rjXi4bgtG6UTUOsTGt9_JM6IjDxZBgICaFwCxjbK2Axw65-6b-Ws2fejNPOEfOKz6LA"
             alt="user"
           />
-        </div>{" "}
+        </div>{" "} */}
         <div className="question-h">PENDING POST</div>
         <div className="question-time"> Ask 5 month ago</div>
       </div>

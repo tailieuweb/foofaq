@@ -16,7 +16,7 @@ export default function JobsGridViewManager() {
     }
     setOpen(false);
   };
-  
+
   const DeleteJobId = (id) => {
     var answer = window.confirm("You definitely want to delete ");
     if (answer) {
@@ -38,24 +38,22 @@ export default function JobsGridViewManager() {
 
   let columns = [
     {
-      field: "id",
+      field: "action",
       headerName: "Actions",
       headerAlign: "center",
       width: 200,
       renderCell: (params) => (
         <strong>
-          <Link to={"/forms/job/" + params.value}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              
-            }}
-          >
-            UPDATE
-          </Button>
+          <Link to={"/forms/job/" + params.getValue("id")}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ marginLeft: 16 }}
+              onClick={() => {}}
+            >
+              UPDATE
+            </Button>
           </Link>
           <Button
             variant="contained"
@@ -63,8 +61,8 @@ export default function JobsGridViewManager() {
             size="small"
             style={{ marginLeft: 16 }}
             onClick={() => {
-              DeleteJobId(params.value);
-          }}
+              DeleteJobId(params.getValue("id"));
+            }}
           >
             DELETE
           </Button>
@@ -76,12 +74,12 @@ export default function JobsGridViewManager() {
   return (
     <PageLayoutManager>
       <div className="aroundAddJob">
-      <Link to={"/forms/job/"}>
-        <Button variant="contained" color="primary">
-          {" "}
-          ADD{" "}
-        </Button>
-      </Link>
+        <Link to={"/forms/job/"}>
+          <Button variant="contained" color="primary">
+            {" "}
+            ADD{" "}
+          </Button>
+        </Link>
       </div>
       <JobsGridView extraColumns={columns} />
       <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>

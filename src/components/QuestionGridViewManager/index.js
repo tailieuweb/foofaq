@@ -37,7 +37,7 @@ function QuestionGridViewManager() {
 
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const [questionDate, setQuestionDate] = useState([]);
+  //const [questionDate, setQuestionDate] = useState([]);
   const [openDate, setOpenDate] = useState(false);
 
   const [rows, setRows] = useState([]);
@@ -58,13 +58,13 @@ function QuestionGridViewManager() {
       setQuestionsRaw(res);
     })();
   }, [key]);
-
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
   };
   const handleSearch = () => {
     setKey(keyword);
   };
+
   useEffect(() => {
     if (questionsRaw) {
       const questionProcessed = [];
@@ -75,23 +75,10 @@ function QuestionGridViewManager() {
         const resAnswers = axios.get(
           `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/answers`
         );
-        // for test
-        // const resCategories = null;
-        // const resAnswers = null;
-
         axios.all([resCategories, resAnswers]).then(
           axios.spread((...res) => {
             question.categories = res[0].data;
             question.answers = res[1].data;
-
-            // for test
-            // question.categories = ['javascript', 'react'];
-            // question.answers = [1, 2, 3, 4, 5];
-
-            // question.voteUp =
-            //   Cookies.get(`voteUp-${question.id}`) === "true" ? true : false;
-            // question.voteDown =
-            //   Cookies.get(`voteDown-${question.id}`) === "true" ? true : false;
 
             questionProcessed.push(question);
             if (index === questionsRaw.length - 1) {
@@ -138,6 +125,7 @@ function QuestionGridViewManager() {
         setOpen(false);
       });
   };
+
   const handleCloseDecline = () => {
     setDecline(false);
   };

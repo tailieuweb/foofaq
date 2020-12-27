@@ -30,6 +30,10 @@ export const allQuestion = async () => {
   const question = await axios.get(API_URL + `questions?status=false`);
   return question.data;
 };
+export const getQuestionForCate = async () => {
+  const question = await axios.get(API_URL + `questions`);
+  return question.data;
+};
 
 export const getAllQuesiton = async (keyword) => {
   const question = await axios.get(
