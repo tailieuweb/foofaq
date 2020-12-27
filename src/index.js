@@ -10,6 +10,8 @@ import "./index.scss";
 
 import reducer from "./reducers/index";
 import EditUserProfile from "./components/EditUserProfile";
+import UpdatePost from "./components/UpdatePost";
+import UserDetail from "./components/UserDetail";
 
 // imports pages
 
@@ -28,6 +30,9 @@ ReactDOM.render(
           path="/EditUserProfile"
           component={EditUserProfile}
         ></Route>
+
+        <Route exact path="/UpdatePost" component={UpdatePost}></Route>
+        <Route exact path="/UserDetail" component={UserDetail}></Route>
       </Switch>
     </Router>
   </Provider>,

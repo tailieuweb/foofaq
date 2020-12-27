@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { getUser } from "../../helpers/index";
-import "./style.css";
+import "./style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Itemhome = (props) => {
+const EditUserProfile = (props) => {
   const [user, setUsers] = useState([]);
 
   useEffect(() => {
@@ -205,4 +205,4 @@ const Itemhome = (props) => {
     </div>
   );
 };
-export default Itemhome;
+export default EditUserProfile;
