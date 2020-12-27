@@ -101,10 +101,26 @@ function Jobs(props) {
       setJob(questionData);
     })();
   }, []);
+
+  const check = () => {
+    if(name.length == "" || description.length == "" || type.length == "" || area.length == "" || company.length == "" || experience.length == "" || role.length == "")
+    {
+      return true;
+    }
+    else{
+      return false
+    }
+  }
+
   if (id === undefined) {
     handleSubmit = (event) => {
-      event.preventDefault();
-      addJobs(name, description, type, area, company, experience, role)
+      if(check() == true){
+        setOpen(true);
+        setNofi("Failed");
+      }
+      else{
+        event.preventDefault();
+        addJobs(name, description, type, area, company, experience, role)
         .then(function (response) {
           setOpen(true);
           //window.location.reload();
@@ -116,23 +132,30 @@ function Jobs(props) {
           setOpen(true);
           setNofi("Failed");
         });
+      }
     };
   } else {
     handleSubmit = (event) => {
-      event.preventDefault();
-      updateJobs(id, name, description, type, area, company, experience, role)
-      .then(function (response) {
-        setOpen(true);
-        //window.location.reload();
-        setNofi("Successfully");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
+      if(check() == true){
         setOpen(true);
         setNofi("Failed");
-      });
-    };
+      }
+      else{
+        event.preventDefault();
+        updateJobs(id, name, description, type, area, company, experience, role)
+        .then(function (response) {
+          setOpen(true);
+          //window.location.reload();
+          setNofi("Successfully");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          setOpen(true);
+          setNofi("Failed");
+        });
+      };
+    }
   }
   return (
     <div>
@@ -143,6 +166,7 @@ function Jobs(props) {
             Jobs Name <span className="required">*</span>
           </label>
           <input
+          required
             type="text"
             name="field1"
             className="field-divided"
@@ -150,7 +174,7 @@ function Jobs(props) {
             defaultValue={job.name}
             onChange={(e) => {
               setName(e.target.value);
-            }}
+            }} 
           />{" "}
         </li>
         <li>
@@ -164,7 +188,7 @@ function Jobs(props) {
             defaultValue={job.type}
             onChange={(e) => {
               setType(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -178,7 +202,7 @@ function Jobs(props) {
             defaultValue={job.area}
             onChange={(e) => {
               setArea(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -192,7 +216,7 @@ function Jobs(props) {
             defaultValue={job.company}
             onChange={(e) => {
               setCompany(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -206,7 +230,7 @@ function Jobs(props) {
             defaultValue={job.experience}
             onChange={(e) => {
               setExperience(e.target.value);
-            }}
+            }} required
           />
         </li>
 
@@ -221,7 +245,8 @@ function Jobs(props) {
             defaultValue={job.role}
             onChange={(e) => {
               setRole(e.target.value);
-            }}
+            }} 
+            required
           />
         </li>
 
@@ -236,7 +261,8 @@ function Jobs(props) {
             defaultValue={job.description}
             onChange={(e) => {
               setDescription(e.target.value);
-            }}
+            }} 
+            required
           />
         </li>
         <li>

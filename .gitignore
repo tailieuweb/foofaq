@@ -24,6 +24,4 @@ yarn-error.log*
 .eslintcache
 /src/provider/login.js
 .eslintcache
-.eslintcache
-.eslintcache
-.eslintcache
+debug.log

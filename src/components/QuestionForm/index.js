@@ -28,9 +28,14 @@ import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
 
 //APIS
-import { getQuesitonById } from "../../helpers";
 
 // export const listCategories = [];
+
+import {
+  getQuesitonById,
+  pagCategories,
+  getQuestionForCate,
+} from "../../helpers";
 
 const styles = (theme) => ({
   root: {
@@ -80,11 +85,78 @@ const DialogActions = withStyles((theme) => ({
 function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
-  const [nofi, setNofi] = useState("");
-  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
-  const [title, setTitle] = useState("");
+  const [questionGetLastId, setQuestions] = useState([]);
+  //change
+  const [cagtegories, setCategories] = useState([]);
+  const [textCate, setTextCate] = useState([]);
 
-  const { id } = useParams();
+  //get categories
+  useEffect(() => {
+    (async () => {
+      const result = await pagCategories();
+      setCategories(result);
+    })();
+  }, []);
+
+  //get question để lấy id cuối
+  useEffect(() => {
+    (async () => {
+      const result = await getQuestionForCate();
+      setQuestions(result);
+    })();
+  }, []);
+
+  //lấy id cuối
+  const [idTest, setIdTest] = useState([]);
+  useEffect(() => {
+    questionGetLastId.map((q) => {
+      console.log(q.id);
+      setIdTest(q);
+    });
+  }, [questionGetLastId]);
+  const [idCate, setIdCate] = useState(null);
+  useEffect(() => {
+    setIdCate(parseInt(idTest.id) + 1);
+    // id +1 ;
+  }, [idTest]);
+  // console.log(idCate);
+  // console.log(idTest);
+
+  const handleAuto = () => {
+    if (idCate <= 1) {
+      textCate.map((tx) => {
+        axios.post(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/1/categories`,
+          {
+            questionId: idCate,
+            name: tx.name,
+          }
+        );
+      });
+    } else {
+      textCate.map((tx) => {
+        axios.post(
+          `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${idCate}/categories`,
+          {
+            questionId: idCate,
+            name: tx.name,
+          }
+        );
+      });
+    }
+  };
+
+  const handleEditAutoComplete = () => {
+    textCate.map((tx) => {
+      axios.post(
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions/${question.id}/categories`,
+        {
+          questionId: question.id,
+          name: tx.name,
+        }
+      );
+    });
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -114,19 +186,31 @@ function QuestionForm({ categories }) {
     event.preventDefault();
   };
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const result = await getQuesitonById(id);
+      setQuestion(result);
+    })();
+  }, [id]);
+
   if (id === undefined) {
     handleSubmit = (event) => {
       event.preventDefault();
       questionPost();
+      console.log(idCate);
     };
     const questionPost = () => {
       axios
         .post("https://5fc48ee536bc790016343a0b.mockapi.io/questions", {
           title: title,
-          tag: categories,
+          // tag: listCategories,
           content: content,
         })
         .then(function (response) {
+          // post thành công r post tiếp categories
+          handleAuto();
           // handle success
           setTitle("");
           // setTag("");
@@ -151,19 +235,19 @@ function QuestionForm({ categories }) {
       axios
         .put("https://5fc48ee536bc790016343a0b.mockapi.io/questions/" + id, {
           title: title,
-          tag: categories,
+          // tag: listCategories,
           content: content,
         })
         .then(function (response) {
+          handleEditAutoComplete();
           // handle success
           console.log("POST Successfully");
           setNofi("POST Successfully");
           setOpen(true);
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
           console.log(error);
           setNofi("POST Failed");
           setOpen(true);
@@ -219,7 +303,10 @@ function QuestionForm({ categories }) {
                 setTag(e.target.value);
               }}
             /> */}
-            <CategoriesInput categories={categories} />
+            <CategoriesInput
+              listCategories={cagtegories}
+              setTextCate={setTextCate}
+            />
           </div>
           <div className="aroundBtnQuestion">
             <input type="submit" className="btn btn-success" value="Send" />
