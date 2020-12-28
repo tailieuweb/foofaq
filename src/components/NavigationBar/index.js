@@ -208,9 +208,9 @@ export default function NavigationBar() {
             </Typography>
           </Link>
 
-          <Link to="/categories" className={classes.link}>
+          <Link to="/profile" className={classes.link}>
             <Button variant="text" color="inherit" className={classes.button}>
-              Categories
+              Profile
             </Button>
           </Link>
 

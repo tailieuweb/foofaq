@@ -5,7 +5,6 @@ import Container from "@material-ui/core/Container";
 
 //import component
 import NavigationBar from "../../components/NavigationBar";
-
 const PageLayout = (props) => {
   return (
     <>

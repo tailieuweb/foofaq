@@ -97,13 +97,14 @@ export default function UserProfileNavbar() {
             <ListUserButtonTags />
             <UserProfileActivity />
           </TabPanel>
+
           <TabPanel
             className="Lower-text"
             value={value}
             index={2}
             dir={theme.direction}
           >
-            developer story
+            developer story  
           </TabPanel>
           <TabPanel
             className="Lower-text"
