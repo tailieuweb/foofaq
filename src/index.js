@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import "./index.scss";
 import reducer from "./reducers/index";
 // imports pages
-import FormManager from "./pages/FormManager";
+
 import Managers from "./pages/QuestionManager";
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router>
       <Switch>
       <Route path="/manager/" component={Managers}></Route>
-        <Route path="/forms/" component={FormManager}></Route>
+       
       </Switch>
     </Router>
   </Provider>,

@@ -16,7 +16,7 @@ function FormManager(props) {
         <div className="col-md-10">
           <Route
             exact
-            path="/forms/adduser/"
+            path="/manager/add-user/"
             component={UserForm}
           ></Route>
         </div>
