@@ -34,16 +34,24 @@ function QuestionGridViewManager() {
   const [decline, setDecline] = useState(false);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-
+  //getQuestion
   const [questionsRaw, setQuestionsRaw] = useState([]);
   const [questions, setQuestions] = useState([]);
   //const [questionDate, setQuestionDate] = useState([]);
   const [openDate, setOpenDate] = useState(false);
-
+  //row gird
   const [rows, setRows] = useState([]);
+  //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-
+  //date
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  // console.log("to: " + dateTo);
+  // console.log("from: " + dateFrom);
+  // console.log("- " + to - from);
+  // dateQuestion;
+  let dateProcessed = [];
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -130,13 +138,7 @@ function QuestionGridViewManager() {
     setDecline(false);
   };
 
-  const dateFrom = moment(from).valueOf();
-  const dateTo = moment(to).valueOf();
-  // console.log("to: " + dateTo);
-  // console.log("from: " + dateFrom);
-  // console.log("- " + to - from);
-  // dateQuestion;
-  let dateProcessed = [];
+  //fillter question with date
   const date = () => {
     if (dateFrom < dateTo) {
       questions.map((q) => {

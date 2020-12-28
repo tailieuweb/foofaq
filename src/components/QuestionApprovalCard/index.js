@@ -89,52 +89,24 @@ const Index = (props) => {
   let status = true;
   // row in material-ui
   const [rows, setRows] = useState([]);
-
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  let dateProcessed = [];
   const handleClose = (event, reason) => {
     setOpen(false);
     setOpenDeline(false);
   };
-
-  //decline
-  //get id for decline
-  const handleClickDecline = (id) => {
-    setDecline(true);
-    setIdRaw(id);
-  };
-  //display dialog decline
-  const handleOpentDecline = () => {
-    declineQuestion(idRaw)
-      .then(function (response) {
-        // handle success
-        setOpenDeline(true);
-        console.log("Delete Succecs");
-        setDecline(false);
-
-        window.location.reload();
-      })
-      .catch(function (error) {
-        setOpen(false);
-        console.log("err");
-      });
-  };
   const handleCloseDecline = () => {
     setDecline(false);
   };
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-  //approve
-  const handleClickOpenApproval = (id) => {
-    approveQuestion(id, status)
-      .then(function (response) {
-        setOpen(true);
-        console.log("Successfully");
-
-        window.location.reload();
-      })
-      .catch(function (error) {
-        setOpen(false);
-      });
+    setOpenDate(false);
   };
-
+  //get question
   //get questions
   useEffect(() => {
     (async () => {
@@ -165,6 +137,48 @@ const Index = (props) => {
       });
     }
   }, [questionsRaw]);
+
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
+  //decline
+  //get id for decline
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  //display dialog decline
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        setOpenDeline(true);
+        console.log("Delete Succecs");
+        setDecline(false);
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+        console.log("err");
+      });
+  };
+
+  //approve
+  const handleClickOpenApproval = (id) => {
+    approveQuestion(id, status)
+      .then(function (response) {
+        console.log("Successfully");
+        setRows([...questions]);
+        setOpen(true);
+        //  window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+      });
+  };
+
   //search bar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
@@ -179,9 +193,7 @@ const Index = (props) => {
     }
   };
   // fillter date
-  const dateFrom = moment(from).valueOf();
-  const dateTo = moment(to).valueOf();
-  let dateProcessed = [];
+
   const date = () => {
     if (dateFrom < dateTo) {
       questions.map((q) => {
@@ -205,16 +217,6 @@ const Index = (props) => {
   const handleDate = () => {
     date();
   };
-  const handleDateClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenDate(false);
-  };
-  useEffect(() => {
-    setRows(questions);
-  }, [questions]);
 
   const unFillter = () => {
     (async () => {
