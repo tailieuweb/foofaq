@@ -1,5 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+
+//style
+import useStyles from "./classes";
+
+//material UI
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -8,28 +12,6 @@ import Paper from "@material-ui/core/Paper";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "2% auto",
-    flexGrow: 1,
-    maxWidth: "89.5%",
-    width: "89.5%",
-    display: "block",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  userAnswerInfo: {
-    backgroundColor: "#D5E8D4",
-  },
-  vote: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    height: 30,
-  },
-}));
 
 export default function MediaCard({ answer }) {
   const classes = useStyles();

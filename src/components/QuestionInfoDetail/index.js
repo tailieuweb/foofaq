@@ -1,10 +1,10 @@
 //import react
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 //import style
 import "./index.scss";
+import useStyles from "./classes";
 
 //components
 import QuestionForm from "../../components/QuestionForm";
@@ -28,50 +28,6 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
 //images
 import PersonAvatar from "../../images/Person-Avatar.png";
-
-//style
-const useStyles = makeStyles((theme) => ({
-  questionDetail: {
-    maxWidth: "89,5%",
-  },
-  buttonEdit: {
-    float: "right",
-  },
-  vote: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: "0.5rem 0.5rem 0 0",
-    },
-  },
-  footerCard: {
-    display: "flex",
-    alignItems: "center",
-    "& > *": {
-      margin: "0.5rem 0.5rem 0 0",
-    },
-    buttonView: {
-      padding: "10px",
-    },
-  },
-  buttonSave: {
-    float: "right",
-    marginRight: "10px",
-  },
-  views: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: "0.5rem 0.5rem 0 0",
-    },
-  },
-}));
 
 const QuestionInfoDetail = (props) => {
   //use state
