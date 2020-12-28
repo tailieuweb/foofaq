@@ -1,0 +1,41 @@
+
+.btn-secondary{
+    background: white;
+    color: black;
+}
+.active{
+    background: #8080806e;
+    color: black;
+}
+.user-image img{
+    width: 65px;
+    height: 60px;
+}
+@media (min-width: 768px)
+{
+    .p-md-5 {
+        padding: 1rem!important;
+    }
+}
+.blog-list{
+    margin-top: 20px;
+}
+.form-search{
+    position: relative;
+}
+.button-search{
+    position: absolute;
+    color: gray;
+    padding-left: 5px;
+}
+.s-input{
+    position: absolute;
+    color: gray;
+    padding-left: 30px;
+}
+.gallery img {
+    width: 112px;
+}
+.gallery div {
+    margin-bottom: 0px;
+}

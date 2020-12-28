@@ -11,6 +11,9 @@ import UserProfileActivity from "./pages/UserProfileActivity/index";
 import ALayout from "./layout/ALayout/index";
 import BLayout from "./layout/BLayout/index";
 import BMain from "./partials/BMain/index";
+import ListNewUser from "./pages/ListNewUser/index";
+import UserDeveloperStoryAfter from "./pages/UserDeveloperStoryAfter/index";
+
 import "./index.scss";
 import reducer from "./reducers/index";
 const composeEnhancers =
@@ -28,10 +31,10 @@ ReactDOM.render(
         <ALayout exact path="/detailUser" component={UserProfileActivity} />
         <ALayout exact path="/edituserprofile" component={UserProfileActivity} />
         <ALayout exact path="/formblog" component={UserProfileActivity} />
-        <ALayout exact path="/listnewuser" component={UserProfileActivity} />
+        <BLayout exact path="/listnewuser" component={ListNewUser} />
         <ALayout exact path="/updatepost" component={UserProfileActivity} />
         <ALayout exact path="/useradd" component={UserProfileActivity} />
-        <ALayout exact path="/userdeveloperstoryafter" component={UserProfileActivity} />
+        <BLayout exact path="/userdeveloperstoryafter" component={UserDeveloperStoryAfter} />
         <ALayout exact path="/userdeveloperstorybefore" component={UserProfileActivity} />
         <ALayout exact path="/useredit" component={UserProfileActivity} />
         <ALayout exact path="/userlistanswer" component={UserProfileActivity} />

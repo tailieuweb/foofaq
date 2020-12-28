@@ -1,0 +1,138 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /*  */
+  *{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .full{
+    width: 600px;
+  }
+  ul{
+    text-align: center;
+    display: inline-block;
+  }
+  ul >li{
+    float: left;
+    padding: 15px;
+  }
+  ul >li a{
+    color: gray;
+  }
+  ul >li a:hover{
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .alert:hover{
+    background-color: #61dafb54;
+    transition: 0.9s;
+  }
+  .alert img{
+    width:30%;
+  }
+  .alert{
+    position: relative;
+  }
+  .alert .nut {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    opacity: 0;
+  }
+  .alert .show-button{
+    opacity: 1;
+    transition: 0.9s;
+  }
+  .alert .name{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 15px 0px 5px 0;
+  }
+  .alert .text-one {
+    margin-bottom: 0px;
+    color: gray;
+  }
+  .alert .text-two {
+    color: gray;
+  }
+  .alert .buttoni{
+    position: absolute;
+  }
+  
+  .alert .buttoni {
+    position: absolute;
+    bottom: 0px;
+    margin-left: -240px;
+  }
+  .button-show{
+    cursor: pointer;
+    color: #61dafb;
+  }
+  
+  .btn-white:hover{
+    background: white;
+  }
+  
+  .nenxanh{
+    display: none;
+      width: 600px;
+      background: #b3d7ff63;
+      padding: 30px;
+  }
+  .activehide{
+    opacity: 0;
+    margin-bottom: -120px;
+  }
+  .card:hover{
+    cursor: pointer;
+    background-color: #007bff0f;
+  }
+  .trai, .form-check{
+    text-align: left;
+    display: block;
+  }
+  
+  .back-button{
+    background: #17a2b88f;
+      padding: 10px;
+      text-align: left;
+  }
