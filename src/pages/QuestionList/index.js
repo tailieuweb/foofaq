@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -14,17 +13,8 @@ import Pagination from "@material-ui/lab/Pagination";
 import QuestionCard from "../../components/QuestionCard";
 import AdvancedFilter from "../../components/AdvancedFilter";
 
-// styles
-const useStyles = makeStyles((theme) => ({
-  skeletion: {
-    margin: "0.5rem auto",
-  },
-  pagination: {
-    margin: "1rem",
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+// classes
+import useStyles from './classes';
 
 const QuestionList = () => {
   const classes = useStyles();
@@ -32,7 +22,7 @@ const QuestionList = () => {
   const [questions, setQuestions] = useState(null);
   const [questionsRaw, setQuestionsRaw] = useState(null);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(10);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -40,6 +30,7 @@ const QuestionList = () => {
         `https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=${page}&limit=1`
       );
       setQuestionsRaw(res.data);
+      setTotalPage(10);
     })();
   }, [page]);
 
