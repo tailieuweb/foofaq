@@ -11,7 +11,7 @@ import "./index.scss";
 
 import reducer from "./reducers/index";
 
-import CategoriesGridView from "./pages/CategoriesGridView";
+import QuestionCategoryList from "./pages/QuestionCategoryList";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -23,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path="/categories" component={CategoriesGridView}></Route>
+        <Route path="/categories" component={QuestionCategoryList}></Route>
       </Switch>
     </Router>
   </Provider>,

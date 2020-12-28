@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { searchCategory } from "../../helpers";
 import SearchBar from "../../components/SearchBar";
-import PageLayout from "../../common/PageLayout";
 
 export default function CategoriesGridView({ extraColumns, extraRows }) {
   let columns = [
@@ -56,7 +55,6 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
 
   return (
     <>
-      <PageLayout>
         <SearchBar
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
@@ -71,7 +69,6 @@ export default function CategoriesGridView({ extraColumns, extraRows }) {
             {...data}
           />
         </div>
-      </PageLayout>
     </>
   );
 }
