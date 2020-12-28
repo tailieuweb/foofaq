@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 //components
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageLayoutManager from "../../common/PageManagerLayout";
 
 //Styles
 import "./index.scss";
