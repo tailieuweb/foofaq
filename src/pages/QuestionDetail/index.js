@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import QuestionAnswerDetail from "../../components/QuestionAnswerDetail";
 import QuestionInfoDetail from "../../components/QuestionInfoDetail";
 import AnswerForm from "../../components/AnswerForm";
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../partials/NavigationBar";
 import { Grid } from "@material-ui/core";
 
 //APIS
