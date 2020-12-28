@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
-const PageLayoutManager = (props) => {
+const PageManagerLayout = (props) => {
   return (
     <>
       <div className="row">
@@ -13,4 +13,4 @@ const PageLayoutManager = (props) => {
   );
 };
 
-export default PageLayoutManager;
+export default PageManagerLayout ;
