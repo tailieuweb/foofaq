@@ -4,14 +4,15 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 
 //import component
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../partials/NavigationBar";
 
 const PageLayout = (props) => {
   return (
     <>
-      <NavigationBar />
-      {props.outsideContainer}
+      {!props.hideNavbar ? <NavigationBar /> : null}
+      {props.outsideTopContainer}
       <Container maxWidth="lg">{props.children}</Container>
+      {props.outsideBottomContainer}
     </>
   );
 };
