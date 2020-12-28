@@ -1,0 +1,41 @@
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .tabs-left {
+    display: flex;
+    .border-tabs {
+      padding: 4px 10px;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+    .profile {
+      background: #f48024;
+    }
+    .background-tabs:hover {
+      background: #eff0f1;
+    }
+  }
+  .tabs-right {
+    display: flex;
+    .meta {
+      margin-right: 15px;
+    }
+  }
+}
+.meta-network {
+  color: #0077cc;
+}
+.meta-network:hover {
+  text-decoration: none;
+}
+.none-css-tabs {
+  color: black;
+  text-decoration: none;
+}
+.none-css-tabs:hover {
+  color: black;
+  text-decoration: none;
+}

@@ -1,0 +1,147 @@
+.badges {
+  display: flex;
+  padding-bottom: 8px;
+  border-bottom: 1px solid#d6d9dc;
+  margin-bottom: 10px;
+  .text {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .number {
+    font-size: 14px;
+  }
+}
+.badges-content {
+  display: flex;
+  justify-content: space-around;
+
+  .badges-content-gold {
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #e4e6e8;
+    width: 100%;
+    .badges-gold {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff4d1;
+      border: 1px solid #f1b600;
+      border-radius: 3px;
+      .gold {
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 8px;
+        margin-bottom: 5px;
+      }
+      .gold-number {
+        font-size: 22px;
+        font-weight: 700;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .badges-content-silver {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #e4e6e8;
+    width: 100%;
+    .badges-silver {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #e8e8e8;
+      border: 1px solid #9a9c9f;
+      border-radius: 3px;
+      .gold {
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 8px;
+        margin-bottom: 5px;
+      }
+      .gold-number {
+        font-size: 22px;
+        font-weight: 700;
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .badges-content-bronze {
+    width: 100%;
+    .badges-bronze {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2e9e1;
+      border: 1px solid #ab825f;
+      border-radius: 3px;
+      .gold {
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 8px;
+        margin-bottom: 5px;
+      }
+      .gold-number {
+        font-size: 22px;
+        font-weight: 700;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.rarest {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .time {
+    font-size: 14px;
+  }
+  .rarest-descrition-1 {
+    display: flex;
+    padding: 5px;
+    background: #eff0f1;
+    border: 1px solid #d6d9dc;
+    border-radius: 3px;
+    .rarest-descrition-shaps {
+      margin-top: 5px;
+      margin-right: 10px;
+      background: #ffcc01;
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+    .silver-rarest-descrition-shaps {
+      margin-top: 5px;
+      margin-right: 10px;
+      background: #b4b8bc;
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+    .bronze-rarest-descrition-shaps {
+      margin-top: 5px;
+      margin-right: 10px;
+      background: #d9baa2;
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+    .rarest-descrition-text {
+      color: gray;
+      font-size: 11px;
+    }
+    .rarest-descrition-text:hover {
+      color: gray;
+      text-decoration: none;
+    }
+  }
+}

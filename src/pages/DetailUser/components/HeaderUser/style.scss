@@ -1,0 +1,149 @@
+.header {
+  display: flex;
+  .image-user {
+    margin-right: 30px;
+    position: relative;
+    border: 1px solid #d6d9dc;
+    width: 500px;
+    height: 260px;
+    .reputation-image {
+      .reputation-image-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .number-reputation {
+          margin-right: 8px;
+        }
+        .text-reputation {
+          margin-top: -10px;
+          font-size: 9px;
+        }
+
+        .gold {
+          margin-right: 5px;
+          padding: 3px 15px 3px 8px;
+          display: flex;
+          background: #fff4d1;
+          border: 1px solid #f1b600;
+          border-radius: 3px;
+          .gold-shaps {
+            font-size: 11.5px;
+          }
+          .gold-number {
+            margin-top: 5px;
+            margin-right: 10px;
+            background: #ffcc01;
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            vertical-align: middle;
+            border-radius: 50%;
+          }
+        }
+        .silver {
+          margin-right: 5px;
+          padding: 3px 15px 3px 8px;
+          display: flex;
+          background: #e8e8e8;
+          border: 1px solid#9a9c9f;
+          border-radius: 3px;
+          .silver-shaps {
+            font-size: 11.5px;
+          }
+          .silver-number {
+            margin-top: 5px;
+            margin-right: 10px;
+            background: #b4b8bc;
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            vertical-align: middle;
+            border-radius: 50%;
+          }
+        }
+
+        .bronze {
+          padding: 3px 15px 3px 8px;
+          display: flex;
+          background: #f2e9e1;
+          border: 1px solid #ab825f;
+          border-radius: 3px;
+          .bronze-shaps {
+            font-size: 11.5px;
+          }
+          .bronze-number {
+            margin-top: 5px;
+            margin-right: 10px;
+            background: #d1a684;
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            vertical-align: middle;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    .background-image-user {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #eff0f1;
+      padding-bottom: 130px;
+      margin-bottom: 50px;
+      .image {
+        top: 25px;
+        position: absolute;
+        width: 77%;
+        height: 140px;
+      }
+    }
+  }
+  .description-user {
+    .title-name {
+      display: flex;
+      .title {
+        font-size: 25px;
+        font-weight: 700;
+      }
+      .top-percent {
+        margin-left: 30px;
+        margin-top: 8px;
+        border-radius: 3px;
+        border: 1px solid #0077cc;
+        color: #0077cc;
+        font-size: 10px;
+        height: 30%;
+        padding: 3px;
+      }
+    }
+  }
+}
+.data-user {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  .bold {
+    font-weight: 800;
+  }
+  .answer {
+    .text {
+      font-size: 14px;
+    }
+  }
+}
+.place-time-user {
+  margin-top: 20px;
+  .icon-place-time-user {
+    color: #adb3b9;
+    margin-right: 12px;
+    margin-bottom: 10px;
+  }
+  .country-text {
+    .text {
+      font-size: 13px;
+    }
+  }
+}

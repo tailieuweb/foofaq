@@ -1,0 +1,105 @@
+.top-network-posts {
+  display: flex;
+
+  .top-post-left {
+    width: 300px;
+    margin-right: 30px;
+
+    .title-top-post-left {
+      font-weight: bold;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #d6d9dc;
+    }
+    .description-top-post {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+  }
+  .top-post-right {
+    width: 100%;
+    .top-post {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #d6d9dc;
+      padding-bottom: 5px;
+      height: 30px;
+      .title-top-post-right {
+        display: flex;
+
+        .title {
+          margin-right: 3px;
+          font-weight: bold;
+        }
+        .title-number {
+          font-size: 15px;
+          color: #6a737c;
+        }
+      }
+      .taps-post {
+        display: flex;
+
+        font-size: 12.5px;
+        .question-answer {
+          display: flex;
+          border: 1px solid #848d95;
+          border-radius: 3px;
+          margin-right: 10px;
+          .color-padding {
+            padding: 2px 8px 0px 6px;
+            color: black;
+          }
+          .color-padding:hover {
+            text-decoration: none;
+          }
+          .all {
+            background: #e4e6e8;
+            border-right: 1px solid #848d95;
+          }
+          .question {
+            border-right: 1px solid #848d95;
+          }
+        }
+        .vote-netwest {
+          display: flex;
+          border: 1px solid #848d95;
+          border-radius: 3px;
+          .color-padding {
+            padding: 2px 8px 0px 6px;
+            color: black;
+          }
+          .color-padding:hover {
+            text-decoration: none;
+          }
+          .votes {
+            background: #e4e6e8;
+            border-right: 1px solid #848d95;
+          }
+        }
+      }
+    }
+    .content-answer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #d6d9dc;
+      .icon-answer-number {
+        display: flex;
+        .number {
+          background: #5eba7d;
+          margin-right: 15px;
+          padding: 2px 12px;
+          border-radius: 2px;
+          font-size: 13px;
+          color: white;
+        }
+        .answer:hover {
+          text-decoration: none;
+        }
+      }
+      .date {
+        font-size: 13px;
+      }
+    }
+  }
+}
