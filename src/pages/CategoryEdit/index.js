@@ -1,13 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 import CategoriesForm from "../../components/CategoryForm";
 export default function CategoryEdit() {
   return (
     <>
-      <PageLayoutManager>
+      <PageManagerLayout>
         <Route path="/forms/categories/:id" component={CategoriesForm}></Route>
-      </PageLayoutManager>
+      </PageManagerLayout>
     </>
   );
 }
