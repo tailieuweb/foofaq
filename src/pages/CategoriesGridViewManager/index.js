@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 
 //components
 import CategoriesGridView from "../../components/CategoriesGridView";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 import { DeleteCategory, UpdateCategory } from "../../helpers";
 
 //components mui
-import Button from "@material-ui/core/Button"; 
+import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 //styles
 import "./index.scss";
+import { IconButton } from "@material-ui/core";
 
 export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -49,33 +53,39 @@ export default function CategoriesGridViewManager() {
       renderCell: (params) => (
         <strong>
           <Link to={`/forms/categories/${params.getValue("id")}`}>
-            <Button
+            <IconButton
+              aria-label="update"
               variant="contained"
               color="primary"
               size="small"
               onClick={() => UpdateCategory(params.getValue("id"))}
             >
-              UPDATE
-            </Button>
+              <EditIcon />
+            </IconButton>
           </Link>
-          <Button
+          <IconButton
+            aria-label="delete"
             variant="contained"
             color="secondary"
             size="small"
             style={{ marginLeft: 16 }}
             onClick={() => deleteCategory(params.getValue("id"))}
           >
-            DELETE
-          </Button>
+            <DeleteIcon />
+          </IconButton>
         </strong>
       ),
     },
   ];
   return (
-    <PageLayoutManager>
-    
+    <PageManagerLayout>
       <Link to="/forms/categories">
-        <Button variant="contained" color="primary" className="btn-add" >
+        <Button
+          variant="contained"
+          color="primary"
+          className="btn-add"
+          startIcon={<AddBoxIcon />}
+        >
           Add Category
         </Button>
       </Link>
@@ -85,6 +95,6 @@ export default function CategoriesGridViewManager() {
           Delete success!
         </Alert>
       </Snackbar>
-    </PageLayoutManager>
+    </PageManagerLayout>
   );
 }
