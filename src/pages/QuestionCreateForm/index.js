@@ -10,8 +10,8 @@ function QuestionCreateForm() {
   return (
     <PageLayout>
       <Switch>
-        <Route exact path="/form/" component={QuestionForm}></Route>{" "}
-        <Route path="/form/:id" component={QuestionForm}></Route>{" "}
+        <Route exact path="/questionAdd/" component={QuestionForm}></Route>{" "}
+        <Route path="/questionAdd/:id" component={QuestionForm}></Route>{" "}
       </Switch>
     </PageLayout>
   );

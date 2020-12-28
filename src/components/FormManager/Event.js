@@ -103,6 +103,14 @@ function Events(props) {
     setOpen(false);
   };
 
+  const checkValueEmpty = () => {
+    if (name.length == "" || description.length == "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     setName(event.name);
     setDescription(event.description);
@@ -116,38 +124,48 @@ function Events(props) {
   }, [id]);
   if (id === undefined) {
     handleSubmit = (event) => {
-      event.preventDefault();
-      addEvent(name, image, date, description)
-        .then(function (response) {
-          setOpen(true);
-          //window.location.reload();
-          setNofi("Successfully");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          setOpen(true);
-          setNofi("Failed");
-        });
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNofi("Failed");
+      } else {
+        event.preventDefault();
+        addEvent(name, image, date, description)
+          .then(function (response) {
+            setOpen(true);
+            //window.location.reload();
+            setNofi("Successfully");
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            setOpen(true);
+            setNofi("Failed");
+          });
+      }
     };
   } else {
     handleSubmit = (event) => {
-      event.preventDefault();
-      updateEvent(id, name, image, date, description)
-        .then(function (response) {
-          setOpen(true);
-          //window.location.reload();
-          setNofi("Successfully");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          setOpen(true);
-          setNofi("Failed");
-        });
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNofi("Failed");
+      } else {
+        event.preventDefault();
+        updateEvent(id, name, image, date, description)
+          .then(function (response) {
+            setOpen(true);
+            //window.location.reload();
+            setNofi("Successfully");
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            setOpen(true);
+            setNofi("Failed");
+          });
+      }
     };
   }
-  // console.log(event.name);
+  console.log(event.name);
   return (
     <div>
       <h1>Event Form</h1>
@@ -192,6 +210,7 @@ function Events(props) {
             onChange={(e) => {
               setImage(e.target.value);
             }}
+            required
           />
           <label htmlFor="icon-button-file">
             <IconButton
@@ -216,6 +235,7 @@ function Events(props) {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
+            required
           />
         </li>
         <li>

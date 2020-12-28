@@ -50,7 +50,7 @@ ReactDOM.render(
         <Route path="/questions/:id" component={QuestionDetail}></Route>
         <Route path="/approval" component={QuestionApproval}></Route>
 
-        <Route path="/form" component={QuestionCreateForm}></Route>
+        <Route path="/questionAdd" component={QuestionCreateForm}></Route>
         <Route path="/categories" component={QuestionCategoryList}></Route>
         <Route path="/manager/" component={Managers}></Route>
         <Route path="/forms/" component={FormManager}></Route>

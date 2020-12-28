@@ -8,6 +8,7 @@ import PageLayout from "../../common/PageLayout";
 
 //  MUI components
 import Skeleton from "@material-ui/lab/Skeleton";
+import Pagination from "@material-ui/lab/Pagination";
 
 // components
 import QuestionCard from "../../components/QuestionCard";
@@ -18,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   skeletion: {
     margin: "0.5rem auto",
   },
+  pagination: {
+    margin: "1rem",
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 const QuestionList = () => {
@@ -25,15 +31,17 @@ const QuestionList = () => {
 
   const [questions, setQuestions] = useState(null);
   const [questionsRaw, setQuestionsRaw] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(10);
 
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        "https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=1&limit=1"
+        `https://5fc48ee536bc790016343a0b.mockapi.io/questions?page=${page}&limit=1`
       );
       setQuestionsRaw(res.data);
     })();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     if (questionsRaw) {
@@ -151,21 +159,34 @@ const QuestionList = () => {
     );
   };
 
+  const handlePageChange = (e, cmpPage) => {
+    setPage(cmpPage);
+  };
+
   return (
-    <PageLayout>
+    <PageLayout maxWidth="lg">
       <AdvancedFilter handleSearch={handleSearch} />
       {questions ? (
-        questions.map((question) => (
-          <QuestionCard
-            key={question.id}
-            className={classes.skeletion}
-            question={question}
-            increasePoint={increasePoint}
-            decreasePoint={decreasePoint}
-            voteUp={question.voteUp}
-            voteDown={question.voteDown}
+        <>
+          {questions.map((question) => (
+            <QuestionCard
+              key={question.id}
+              className={classes.skeletion}
+              question={question}
+              increasePoint={increasePoint}
+              decreasePoint={decreasePoint}
+              voteUp={question.voteUp}
+              voteDown={question.voteDown}
+            />
+          ))}
+          <Pagination
+            className={classes.pagination}
+            onChange={handlePageChange}
+            count={totalPage}
+            variant="outlined"
+            shape="rounded"
           />
-        ))
+        </>
       ) : (
         <>
           <Skeleton

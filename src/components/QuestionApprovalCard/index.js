@@ -323,7 +323,7 @@ const Index = (props) => {
             handleSearch={handleSearch}
           />{" "}
         </div>
-        <div className="infoadmin">
+        {/* <div className="infoadmin">
           <div className="user">
             <img
               className="avt"
@@ -332,7 +332,7 @@ const Index = (props) => {
             />
             <div className="adminname">Admin 1</div>
           </div>
-        </div>
+        </div> */}
         <div className="contentApproval">
           <div className="header-approve">
             <div className="row">
