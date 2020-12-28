@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
-import SendIcon from '@material-ui/icons/Send';
+import SendIcon from "@material-ui/icons/Send";
 //helper
 import { getCategory, AddCategory, UpdateCategory } from "../../helpers";
 
@@ -81,59 +81,52 @@ const CategoriesForm = () => {
   }
   console.log(category.name);
   return (
-    <div>
-      <h1> Categories Form</h1>
-
-      <div className={classes.root}>
-        <form>
-          <TextField
-            id="outlined-full-width"
-            label="Name"
-            style={{ margin: 8 }}
-            placeholder="Name..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            defaultValue={category.name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-full-width"
-            label="Description"
-            style={{ margin: 8 }}
-            placeholder="Description..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setDes(e.target.value);
-            }}
-            defaultValue={category.description}
-            variant="outlined"
-          />
-          <Button
-            onClick={handleSubmit}
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            startIcon={<SendIcon/>}
-          >
-            Send
-          </Button>
-        </form>
+    <div className="container">
+      <div className="form-edit mr-auto ml-auto">
+        <h1> Categories Form</h1>
+        <input
+          id="outlined-full-width"
+          label="Name"
+          className="form-control"
+          style={{ margin: 8 }}
+          placeholder="Name..."
+          margin="normal"
+          variant="outlined"
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          defaultValue={category.name}
+          required
+        />
+        <textarea
+          id="outlined-full-width"
+          label="Description"
+          className="form-control"
+          style={{ margin: 8 }}
+          placeholder="Description..."
+          margin="normal"
+          variant="outlined"
+          onChange={(e) => {
+            setDes(e.target.value);
+          }}
+          defaultValue={category.description}
+          required
+        />
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          startIcon={<SendIcon />}
+        >
+          Send
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            {notification}
+          </Alert>
+        </Snackbar>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          {notification}
-        </Alert>
-      </Snackbar>
     </div>
   );
 };
