@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { getCategory, AddCategory, UpdateCategory } from "../../helpers";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "25ch",
-  },
-  button: {
-    margin: "10px auto",
-  },
-}));
 
+//classes 
+import useStyles from "./classes";
 const CategoriesForm = () => {
   const [open, setOpen] = React.useState(false);
 
