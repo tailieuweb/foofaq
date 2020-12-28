@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
+
+//material UI
 import Button from "@material-ui/core/Button";
 import { DataGrid } from "@material-ui/data-grid";
-// import axios from "axios";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+
+//material ui icon
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 import "./index.scss";
 import Link from "../../common/CustomLink";
-// import EventsGridView from "../EventsGridView";
+
+//APIs
 import { deleteEvent, getEventsSearch } from "../../helpers";
 
 //components
 import SearchBar from "../../components/SearchBar";
-import PageLayoutManager from "../../common/PageLayoutManager";
-
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
+import PageLayoutManager from "../../common/PageManagerLayout";
 
 function EventsGridViewManager() {
   const [eventData, setEventData] = useState([]);
@@ -92,22 +98,21 @@ function EventsGridViewManager() {
       width: 200,
       renderCell: (params) => (
         <strong>
-          <Link to={"/forms/event/" + params.value}>
-            <Button variant="contained" color="primary" size="small">
+          <Link to={"/forms/event/" + params.getValue("id")}>
+            <EditIcon />
+            {/* <Button variant="contained" color="primary" size="small">
               Edit
-            </Button>
+            </Button> */}
           </Link>
-          <Button
+
+          <DeleteIcon
             variant="contained"
             color="secondary"
-            size="small"
-            style={{ marginLeft: 16 }}
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              DeleteEvent(params.value);
+              DeleteEvent(params.getValue("id"));
             }}
-          >
-            Delete
-          </Button>
+          />
         </strong>
       ),
     },
