@@ -122,9 +122,8 @@ function Index(props) {
               title={question.user_name}
               update={
                 <Link to={"/manager/edit/" + question.id}>
-                  <Button variant="contained" color="primary">
-                    {" "}
-                    Update{" "}
+                  <Button color="primary">
+                  <i class="fas fa-pen"></i>
                   </Button>
                 </Link>
               }
@@ -133,11 +132,10 @@ function Index(props) {
                   onClick={() => {
                     DeleteQuestion(question.id);
                   }}
-                  variant="contained"
+                  
                   color="secondary"
                 >
-                  {" "}
-                  Delete{" "}
+                  <i class="fas fa-minus-circle"></i>
                 </Button>
               }
             ></TableB>
