@@ -1,26 +1,22 @@
 import React, { useState } from "react";
+
+//Material UI
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 //components
 import PageLayoutManager from "../../common/PageLayoutManager";
 
+//Styles
 import "./index.scss";
+import useStyles from "./classes";
+
+//APIS
 import { addEvent } from "../../helpers";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  input: {
-    display: "none",
-  },
-}));
+
 function Events(props) {
   const classes = useStyles();
 
