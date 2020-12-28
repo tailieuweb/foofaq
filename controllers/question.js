@@ -69,6 +69,15 @@ const editQuestion = async function (req, res) {
     res.status(422).json({ errors: errors.array() });
     return;
   }
+  controllers
+  .findById(Tag, req.body.tagId)
+  .then((tagId) => {
+    if (!tagId) {
+      return res.status(404).json({
+        message: "Tag not found",
+      });
+    }
+  });
   try {
     //Search by id and edit
     const question = await controllers.findByIdAndUpdate(
@@ -77,7 +86,7 @@ const editQuestion = async function (req, res) {
       {
         title: req.body.title,
         content: req.body.content,
-        tag: req.body.tag
+        tag: req.body.tagId
       }
     );
     if (!question) throw Error("Something went wrong while updating!");
