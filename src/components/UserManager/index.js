@@ -121,7 +121,7 @@ function Index(props) {
               id={question.id}
               title={question.user_name}
               update={
-                <Link to={"/forms/adduser/" + question.id}>
+                <Link to={"/manager/edit/" + question.id}>
                   <Button variant="contained" color="primary">
                     {" "}
                     Update{" "}
