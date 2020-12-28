@@ -9,7 +9,6 @@ import thunk from "redux-thunk";
 import "./index.scss";
 
 import reducer from "./reducers/index";
-import FormManager from "./pages/FormManager";
 import CategoriesForm from "./pages/CategoryAdd";
 
 const composeEnhancers =
@@ -22,7 +21,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/forms/category/" component={CategoriesForm}></Route>
+        <Route exact path="/forms/categories/" component={CategoriesForm}></Route>
       </Switch>
     </Router>
   </Provider>,
