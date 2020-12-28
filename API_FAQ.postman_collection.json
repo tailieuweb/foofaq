@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1870986d-3322-43a7-aed9-9870f01e23b2",
+		"_postman_id": "9616c5a6-e467-42d1-8611-0c520c9aef2e",
 		"name": "API_FAQ",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -54,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"xuantri2000000\",\n\t\"password\": \"123456\"\n}",
+					"raw": "{\n\t\"username\": \"xuantri2000\",\n\t\"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,7 +145,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Iphone X\",\n\t\"image\": \"https://loremflickr.com/320/240\",\n\t\"description\": \"new 35 iphone\",\n\t\"price\": 35000\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -275,10 +275,16 @@
 			"name": "[Question]: Create question",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTYyMzR9.7605OD9IM2KpSZf3GJIInXyb1N6Xc8n2ArpvJjxtB20",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\" :\"cau hoi so 3\",\r\n    \"content\" : \"khong co gi het\"\r\n}",
+					"raw": "{\r\n    \"title\" :\"cau hoi so 34\",\r\n    \"content\" : \"khong co gi het\",\r\n    \"tagId\" : [\"5fe92a0525c3c117b0ea77d5\"]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -304,7 +310,13 @@
 			"name": "[Question]: Delete question",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTYyMzR9.7605OD9IM2KpSZf3GJIInXyb1N6Xc8n2ArpvJjxtB20",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -315,7 +327,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/question/delete/5fcb0d2c80695a16046264ab",
+					"raw": "http://localhost:8000/question/delete/5fe92b6bf650933aa88128ce",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -324,7 +336,7 @@
 					"path": [
 						"question",
 						"delete",
-						"5fcb0d2c80695a16046264ab"
+						"5fe92b6bf650933aa88128ce"
 					]
 				}
 			},
@@ -336,7 +348,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/question/detail/5fcd7cc86adf47154c8bc001",
+					"raw": "http://localhost:8000/question/detail/5fe92b556af3d01f8832af3f",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -345,7 +357,7 @@
 					"path": [
 						"question",
 						"detail",
-						"5fcd7cc86adf47154c8bc001"
+						"5fe92b556af3d01f8832af3f"
 					]
 				}
 			},
@@ -381,13 +393,24 @@
 			"name": "[Question] : Update question",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTYyMzR9.7605OD9IM2KpSZf3GJIInXyb1N6Xc8n2ArpvJjxtB20",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\" : \"cau hoi so 2\",\r\n    \"content\" : \"khong co gi het\"\r\n}"
+					"raw": "{\r\n    \"title\" : \"cau hoi so 2\",\r\n    \"content\" : \"khong co gi het\",\r\n    \"tagId\": [\"5fe92a0525c3c117b0ea77d5\"]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/question/edit/5fcd7cc86adf47154c8bc001",
+					"raw": "http://localhost:8000/question/edit/5fe92b556af3d01f8832af3f",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -396,7 +419,7 @@
 					"path": [
 						"question",
 						"edit",
-						"5fcd7cc86adf47154c8bc001"
+						"5fe92b556af3d01f8832af3f"
 					]
 				}
 			},
@@ -406,7 +429,13 @@
 			"name": "[Tag] Create Tag",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTU4MTJ9.DD8kGW9mpPO2li0U5Kp4Q_MMsnVxJJOj4KBKGSBpNFg",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"tagID\": \"123\",\r\n    \"tagName\": \"javascript\",\r\n    \"tagDescription\": \"kasdjasdkasdjassakjfsajkhfs skafhkashfsajhfkjsah kjshdjksahdjkash djksah\"\r\n}",
@@ -437,7 +466,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8000/tag/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tag",
+						""
+					]
 				}
 			},
 			"response": []
@@ -448,7 +486,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/tag/detail/",
+					"raw": "http://localhost:8000/tag/detail/5fe9297225c3c117b0ea77d1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -457,7 +495,7 @@
 					"path": [
 						"tag",
 						"detail",
-						""
+						"5fe9297225c3c117b0ea77d1"
 					]
 				}
 			},
@@ -467,9 +505,15 @@
 			"name": "[Tag] deleteTag",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTU4MTJ9.DD8kGW9mpPO2li0U5Kp4Q_MMsnVxJJOj4KBKGSBpNFg",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8000/tag/delete/5fcbb6259945e71dfcbcf4c4",
+					"raw": "http://localhost:8000/tag/delete/5fe9297225c3c117b0ea77d1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -478,7 +522,7 @@
 					"path": [
 						"tag",
 						"delete",
-						"5fcbb6259945e71dfcbcf4c4"
+						"5fe9297225c3c117b0ea77d1"
 					]
 				}
 			},
@@ -488,7 +532,13 @@
 			"name": "[Tag] editTag",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmQ2ZDgyNzYwMDZmZjI3MjRkMjllNDUiLCJyb2xlIjoxLCJpYXQiOjE2MDkxMTU4MTJ9.DD8kGW9mpPO2li0U5Kp4Q_MMsnVxJJOj4KBKGSBpNFg",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"tagName\": \"javascript\",\r\n    \"tagDescription\": \"kasdjasdkasdjassakjfsajkhfs skafhkashfsajhfkjsah kjshdjksahdjkash djksah\"\r\n}",
@@ -499,7 +549,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/tag/delete/5fcbbccc1739f71e0034a494",
+					"raw": "http://localhost:8000/tag/edit/5fe92a0525c3c117b0ea77d5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -507,13 +557,140 @@
 					"port": "8000",
 					"path": [
 						"tag",
+						"edit",
+						"5fe92a0525c3c117b0ea77d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Test] : Add Test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sID\": \"123\",\r\n    \"name\" : \"qweqw\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/test/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"test",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Test] : Get all test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sID\": \"123\",\r\n    \"name\" : \"qweqw\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/test/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"test",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Test] Detail test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sID\": \"123\",\r\n    \"name\" : \"qweqw\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/test/detail/5fe925abbfced525bce4efa2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"test",
+						"detail",
+						"5fe925abbfced525bce4efa2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Test] delete test",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sID\": \"123\",\r\n    \"name\" : \"qweeeeeeeeeeeeeeeeeeqw\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/test/delete/5fe6ddd1a1f4172c6880f479",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"test",
 						"delete",
-						"5fcbbccc1739f71e0034a494"
+						"5fe6ddd1a1f4172c6880f479"
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
