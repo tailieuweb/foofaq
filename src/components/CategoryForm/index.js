@@ -1,62 +1,82 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+
+//components mui
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
-import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import SendIcon from '@material-ui/icons/Send';
+//helper
 import { getCategory, AddCategory, UpdateCategory } from "../../helpers";
 
-//classes 
+//classes
 import useStyles from "./classes";
-const CategoriesForm = () => {
-  const [open, setOpen] = React.useState(false);
 
+const CategoriesForm = () => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [des, setDes] = useState("");
+  const [notification, setNotification] = useState("");
+
   let { id } = useParams();
+  let history = useHistory();
+
   let handleSubmit = (event) => {
     event.preventDefault();
   };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
+
+  const checkValueEmpty = () => {
+    if (name.length == "" || des.length == "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     (async () => {
       const questionData = await getCategory(id);
       setCategory(questionData);
     })();
   }, []);
+
   if (id === undefined) {
     handleSubmit = (event) => {
-      event.preventDefault();
-      AddCategory(name, des)
-        .then(function (response) {
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNotification("Add Failed!!");
+      } else {
+        event.preventDefault();
+        AddCategory(name, des).then(function (response) {
           setOpen(true);
+          setNotification("Add Successefully!");
           window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
         });
+      }
     };
   } else {
     handleSubmit = (event) => {
-      event.preventDefault();
-      UpdateCategory(id, name, des)
-        .then(function (response) {
+      if (checkValueEmpty() == true) {
+        setOpen(true);
+        setNotification("Update Failed!!");
+      } else {
+        event.preventDefault();
+        UpdateCategory(id, name, des).then(function (response) {
           setOpen(true);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
+          window.alert("Updated successfully!");
+          history.push("/manager/categories");
         });
+      }
     };
   }
   console.log(category.name);
@@ -103,6 +123,7 @@ const CategoriesForm = () => {
             variant="contained"
             color="primary"
             className={classes.button}
+            startIcon={<SendIcon/>}
           >
             Send
           </Button>
@@ -110,7 +131,7 @@ const CategoriesForm = () => {
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          This is a success message!
+          {notification}
         </Alert>
       </Snackbar>
     </div>
