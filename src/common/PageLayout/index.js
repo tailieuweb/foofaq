@@ -9,9 +9,10 @@ import NavigationBar from "../../components/NavigationBar";
 const PageLayout = (props) => {
   return (
     <>
-      <NavigationBar />
-      {props.outsideContainer}
+      {!props.hideNavbar ? <NavigationBar /> : null}
+      {props.outsideTopContainer}
       <Container maxWidth="lg">{props.children}</Container>
+      {props.outsideBottomContainer}
     </>
   );
 };
