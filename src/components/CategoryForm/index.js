@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import { getCategory, AddCategory, UpdateCategory } from "../../helpers";
 
 //classes 
-import useStyles from "../CategoryForm/classes";
+import useStyles from "./classes";
 const CategoriesForm = () => {
   const [open, setOpen] = React.useState(false);
 
