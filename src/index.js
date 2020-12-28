@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import thunk from "redux-thunk";
 
-
 import "./index.scss";
 
 import reducer from "./reducers/index";
 
 import QuestionCategoryList from "./pages/QuestionCategoryList";
+// imports pages
+
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
