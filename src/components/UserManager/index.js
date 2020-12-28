@@ -100,7 +100,7 @@ function Index(props) {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       ></SearchBar>
-      <Link to="/forms/adduser">
+      <Link to="/manager/add-user">
         {" "}
         <Button className={classes.btnadd} variant="contained" color="primary">
           Add
@@ -121,7 +121,7 @@ function Index(props) {
               id={question.id}
               title={question.user_name}
               update={
-                <Link to={"/forms/update/" + question.id}>
+                <Link to={"/manager/edit/" + question.id}>
                   <Button variant="contained" color="primary">
                     {" "}
                     Update{" "}

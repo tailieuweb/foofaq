@@ -62,7 +62,7 @@ function UserForm(props) {
   } else {
     handleSubmit = (event) => {
       event.preventDefault();
-      UpdateUser(id, user_name, user_password)
+      UpdateUser(id, user_name, user_password,user_email)
         .then(function (response) {
           setOpen(true);
           window.location.reload();
@@ -81,18 +81,18 @@ function UserForm(props) {
       <div className={classes.root}>
         <form>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Name</label>
+            <label htmlFor="exampleInputName">Name</label>
             <input
-              type="email"
+              
               className="form-control"
-              id="exampleInputName"
-              aria-describedby="emailHelp"
+              aria-describedby="namelHelp"
               placeholder="Name..."
               onChange={(e) => {
                 setName(e.target.value);
               }}
               defaultValue={user.user_name}
             />
+
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your name with anyone else.
             </small>
@@ -138,65 +138,6 @@ function UserForm(props) {
           </Button>
         
         </form>
-        {/* <form>
-          <input
-            label="Name"
-            style={{ margin: 8 }}
-            placeholder="Name..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          
-            defaultValue={user.user_name}
-            variant="outlined"
-          />
-          <input
-            title="Password"
-            label="PassWord"
-            style={{ margin: 8 }}
-            placeholder="Password..."
-         
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            defaultValue={user.user_password}
-            variant="outlined"
-          />
-          
-          <input
-            label="Email"
-            style={{ margin: 8 }}
-            placeholder="Email..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            defaultValue={user.user_email}
-            variant="outlined"
-          />
-          <Button
-            onClick={handleSubmit}
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Send
-          </Button>
-        </form> */}
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">

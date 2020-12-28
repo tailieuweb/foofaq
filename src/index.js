@@ -8,7 +8,7 @@ import "./index.scss";
 import reducer from "./reducers/index";
 // imports pages:
 import Managers from "./pages/QuestionManager";
-import FormManager from "./pages/FormManager";
+
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -20,7 +20,6 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route path="/manager/" component={Managers}></Route>
-        <Route path="/forms/" component={FormManager}></Route>
       </Switch>
     </Router>
   </Provider>,
