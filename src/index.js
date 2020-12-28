@@ -13,6 +13,8 @@ import BLayout from "./layout/BLayout/index";
 import BMain from "./partials/BMain/index";
 import ListNewUser from "./pages/ListNewUser/index";
 import UserDeveloperStoryAfter from "./pages/UserDeveloperStoryAfter/index";
+import UserListAnswer from "./pages/UserListAnswer/index";
+import UserListQuestion from "./pages/UserListQuestion/index";
 
 import "./index.scss";
 import reducer from "./reducers/index";
@@ -37,8 +39,8 @@ ReactDOM.render(
         <BLayout exact path="/userdeveloperstoryafter" component={UserDeveloperStoryAfter} />
         <ALayout exact path="/userdeveloperstorybefore" component={UserProfileActivity} />
         <ALayout exact path="/useredit" component={UserProfileActivity} />
-        <ALayout exact path="/userlistanswer" component={UserProfileActivity} />
-        <ALayout exact path="/userlistquestion" component={UserProfileActivity} />
+        <ALayout exact path="/userlistanswer" component={UserListAnswer} />
+        <ALayout exact path="/userlistquestion" component={UserListQuestion} />
         <ALayout exact path="/usermanager" component={UserProfileActivity} />
         <ALayout exact path="/userprofile" component={UserProfileActivity} />
         <BLayout path="/profile" component={BMain} />

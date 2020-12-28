@@ -208,9 +208,9 @@ export default function NavigationBar() {
             </Typography>
           </Link>
 
-          <Link to="/profile" className={classes.link}>
+          <Link to="/categories" className={classes.link}>
             <Button variant="text" color="inherit" className={classes.button}>
-              Profile
+              Categories
             </Button>
           </Link>
 
@@ -223,6 +223,11 @@ export default function NavigationBar() {
           <Link to="/events" className={classes.link}>
             <Button variant="text" color="inherit" className={classes.button}>
               Events
+            </Button>
+          </Link>
+          <Link to="/profile" className={classes.link}>
+            <Button variant="text" color="inherit" className={classes.button}>
+              Profile
             </Button>
           </Link>
 

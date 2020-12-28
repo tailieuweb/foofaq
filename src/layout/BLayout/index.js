@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect,Link } from "react-router-dom";
 import BHeader from "../../partials/BHeader/index";
 import BSideBar from "../../partials/BSideBar/index";
 
@@ -21,7 +21,7 @@ const BLayout = ({ children, ...rest }) => {
               <li>Gallery</li>
               <li>Collections</li>
               <li>Groups</li>
-              <li>About</li>
+              <li> <Link to="/">Home</Link></li>
             </ul>
             <span className="follow">Follow</span>
 
