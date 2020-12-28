@@ -1,3 +1,4 @@
+//hook call api:
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -99,7 +100,7 @@ function Index(props) {
         handleChangeSearch={handleChangeSearch}
         handleSearch={handleSearch}
       ></SearchBar>
-      <Link to="/forms/adduser">
+      <Link to="/manager/add-user">
         {" "}
         <Button className={classes.btnadd} variant="contained" color="primary">
           Add
@@ -120,10 +121,11 @@ function Index(props) {
               id={question.id}
               title={question.user_name}
               update={
-                <Link to={"/forms/adduser/" + question.id}>
-                  <Button variant="contained" color="primary">
-                    {" "}
-                    Update{" "}
+                <Link to={"/manager/edit/" + question.id}>
+                  <Button color="primary">
+                    {/* {" "}
+                    Update{" "} */}
+                    <i class="fas fa-pen"></i>
                   </Button>
                 </Link>
               }
@@ -132,12 +134,12 @@ function Index(props) {
                   onClick={() => {
                     DeleteQuestion(question.id);
                   }}
-                  variant="contained"
                   color="secondary"
                 >
-                  {" "}
-                  Delete{" "}
+                  <i class="fas fa-minus-circle"></i>
+
                 </Button>
+
               }
             ></TableB>
           ))}
