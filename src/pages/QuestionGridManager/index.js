@@ -1,13 +1,13 @@
 import React from "react";
 import QuestionGridViewManager from "../../components/QuestionGridViewManager";
 import { Route } from "react-router-dom";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 function QuestionGridManager(props) {
   return (
     <>
-      <PageLayoutManager float={"left"}>
+      <PageManagerLayout float={"left"}>
         <QuestionGridViewManager />
-      </PageLayoutManager>
+      </PageManagerLayout>
     </>
   );
 }
