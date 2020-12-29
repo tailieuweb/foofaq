@@ -251,8 +251,6 @@ function Jobs(props) {
         </li>
         <li>
           <Button onClick={handleSubmit} variant="outlined" color="primary" startIcon={<SendIcon />}>
-            {/* {" "}
-            Send */}
           </Button>
         </li>
       </ul>
