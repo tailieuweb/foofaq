@@ -144,7 +144,7 @@ const searchAndPagination = async function(req,res)
     const regex = new RegExp(req.params.title,'i');
     const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
     const page = req.query.page ? parseInt(req.query.page):1;
-    const question = await controllers.find({title:regex})
+    const question = await controllers.find(Question,{title:regex})
     .skip((page -1 )* pagination)
     .limit(pagination)
     .populate("Tag")
