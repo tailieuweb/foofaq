@@ -5,7 +5,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import thunk from "redux-thunk";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 
 import "./index.scss";
 
@@ -18,7 +18,7 @@ import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
 
 import AnswerEdit from "./pages/AnswerEdit";
 import EventsGridViewManager from "./pages/EventsGridViewManager";
-import EventList from "./pages/EventList";
+import EventsGridViewPage from "./pages/EventsGridViewPage";
 import JobsGridViewManager from "./pages/JobsGridViewManager";
 import JobsGridView from "./components/JobsGridView";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
@@ -37,8 +37,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/login" component={Login}></Route>
-        <Route path="/events" component={EventList}></Route>
+        {/* <Route exact path="/login" component={Login}></Route> */}
+        <Route path="/events" component={EventsGridViewPage}></Route>
         <Route exact path="/" component={QuestionList}></Route>
         {/* <Route path="/detail" component={QuestionDetail}></Route> */}
         <Route path="/questions/:id" component={QuestionDetail}></Route>
