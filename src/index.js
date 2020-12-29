@@ -5,8 +5,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import thunk from "redux-thunk";
-
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 
 import "./index.scss";
 
@@ -22,13 +21,8 @@ import EventsGridViewManager from "./pages/EventsGridViewManager";
 import EventList from "./pages/EventList";
 import JobsGridViewManager from "./pages/JobsGridViewManager";
 import JobsGridView from "./components/JobsGridView";
-//import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
-// import QuestionApprovalCard from "./components/QuestionApprovalCard";
-// import CategoriesManager from "./components/CategoriesManager";
-import Managers from "./pages/QuestionManager";
-// import CategoriesForm from "./components/FormManager/Categories";
-// import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
+
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
 import JobsGridViewPage from "./pages/JobsGridViewPage";
