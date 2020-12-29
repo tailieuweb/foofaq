@@ -8,7 +8,6 @@ import "./index.scss";
 import useStyles from "./classes";
 
 //material
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 // import Skeleton from "@material-ui/lab/Skeleton";
 
@@ -16,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import QuestionAnswerDetail from "../../components/QuestionAnswerDetail";
 import QuestionInfoDetail from "../../components/QuestionInfoDetail";
 import AnswerForm from "../../components/AnswerForm";
-import NavigationBar from "../../components/NavigationBar";
+import PageLayout from "../../common/PageLayout";
 import { Grid } from "@material-ui/core";
 
 //APIS
@@ -108,12 +107,7 @@ const QuestionDetail = (props) => {
   };
 
   return (
-    <div>
-      <div className="Nav">
-        <Paper>
-          <NavigationBar />
-        </Paper>
-      </div>
+    <PageLayout>
       <QuestionInfoDetail
         answersCount={answersCount}
         question={questions}
@@ -140,7 +134,7 @@ const QuestionDetail = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </PageLayout>
   );
 };
 export default QuestionDetail;
