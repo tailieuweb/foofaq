@@ -86,9 +86,13 @@ function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
   const [questionGetLastId, setQuestions] = useState([]);
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+
   //change
   const [cagtegories, setCategories] = useState([]);
   const [textCate, setTextCate] = useState([]);
+  const [title, setTitle] = useState("");
+  const [nofi, setNofi] = useState("");
 
   //get categories
   useEffect(() => {
@@ -162,12 +166,15 @@ function QuestionForm({ categories }) {
     setOpen(false);
   };
 
-  const [title, setTitle] = useState("");
-  // const [tag, setTag] = useState("");
-  // console.log(categories);
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  useEffect(() => {
+    (async () => {
+      const result = await getQuesitonById(id);
+      setQuestion(result);
+    })();
+  }, [id]);
 
   useEffect(() => {
+    setTitle(question.title);
     setEdittorStates(
       EditorState.createWithContent(
         ContentState.createFromBlockArray(
@@ -175,12 +182,10 @@ function QuestionForm({ categories }) {
         )
       )
     );
-  }, [question.content]);
-  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+  }, [question]);
 
   let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
 
-  const [nofi, setNofi] = useState("");
   let handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -224,10 +229,7 @@ function QuestionForm({ categories }) {
           setOpen(true);
         });
     };
-  }
-
-  //Truong hop id co gia tri => PUT
-  else {
+  } else {
     handleSubmit = (event) => {
       event.preventDefault();
 
@@ -256,22 +258,6 @@ function QuestionForm({ categories }) {
         });
     };
   }
-
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
-
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-
-  // console.log("question: " + question.content);
-
-  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import thunk from "redux-thunk";
 
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 
 import "./index.scss";
 
