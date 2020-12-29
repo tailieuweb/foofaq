@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
 //  MUI components
@@ -13,17 +12,7 @@ import PageLayout from "../../common/PageLayout";
 import EventCard from "../../components/EventCard";
 import EventSearchBar from "../../components/EventSearchBar";
 
-// styles
-const useStyles = makeStyles((theme) => ({
-  skeletion: {
-    margin: "1rem auto",
-  },
-  pagination: {
-    margin: "1rem",
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+import useStyles from "./classes";
 
 function EventList() {
   const classes = useStyles();
