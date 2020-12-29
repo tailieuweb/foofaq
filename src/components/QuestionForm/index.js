@@ -23,6 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
+import SendIcon from "@material-ui/icons/Send";
 
 import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
@@ -86,13 +87,9 @@ function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
   const [questionGetLastId, setQuestions] = useState([]);
-  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
-
   //change
   const [cagtegories, setCategories] = useState([]);
   const [textCate, setTextCate] = useState([]);
-  const [title, setTitle] = useState("");
-  const [nofi, setNofi] = useState("");
 
   //get categories
   useEffect(() => {
@@ -166,15 +163,12 @@ function QuestionForm({ categories }) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    (async () => {
-      const result = await getQuesitonById(id);
-      setQuestion(result);
-    })();
-  }, [id]);
+  const [title, setTitle] = useState("");
+  // const [tag, setTag] = useState("");
+  // console.log(categories);
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
-    setTitle(question.title);
     setEdittorStates(
       EditorState.createWithContent(
         ContentState.createFromBlockArray(
@@ -182,10 +176,12 @@ function QuestionForm({ categories }) {
         )
       )
     );
-  }, [question]);
+  }, [question.content]);
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
 
   let content = draftToMarkdown(convertToRaw(editorStates.getCurrentContent()));
 
+  const [nofi, setNofi] = useState("");
   let handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -229,7 +225,10 @@ function QuestionForm({ categories }) {
           setOpen(true);
         });
     };
-  } else {
+  }
+
+  //Truong hop id co gia tri => PUT
+  else {
     handleSubmit = (event) => {
       event.preventDefault();
 
@@ -258,6 +257,22 @@ function QuestionForm({ categories }) {
         });
     };
   }
+
+  // async function getQuestion() {
+  //   const response = await axios.get();
+  //   return response.data;
+  // }
+
+  // const sampleMarkup = `${question.id}`;
+  // const blocksFromHTML = convertFromHTML(sampleMarkup);
+  // const state = ContentState.createFromBlockArray(
+  //   blocksFromHTML.contentBlocks,
+  //   blocksFromHTML.entityMap
+  // );
+
+  // console.log("question: " + question.content);
+
+  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -313,7 +328,11 @@ function QuestionForm({ categories }) {
             />
           </div>
           <div className="aroundBtnQuestion">
-            <input type="submit" className="btn btn-success" value="Send" />
+            <input
+              type="submit"
+              className="btn btn-success"
+              startIcon={<SendIcon />}
+            />
           </div>
         </div>
       </form>
