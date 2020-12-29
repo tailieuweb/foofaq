@@ -15,4 +15,6 @@ router.put("/edit/:id",UserController.requireSignin, UserController.isAuth,valid
 router.delete("/delete/:id",UserController.requireSignin, UserController.isAuth, questionController.deleteQuestion);
 //Route detail Question
 router.get("/detail/:id", questionController.detailQuestion);
+//Route search Question
+router.get("/search/:title",questionController.searchAndPagination);
 module.exports = router;
