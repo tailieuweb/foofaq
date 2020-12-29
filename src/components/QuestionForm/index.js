@@ -302,7 +302,7 @@ function QuestionForm({ categories }) {
             />
           </div>
           <div className="aroundBtnQuestion">
-            <input type="submit" className="btn btn-success" startIcon={<SendIcon />} />
+            <button type="submit" className="btn btn-success"><SendIcon /></button>
           </div>
         </div>
       </form>
