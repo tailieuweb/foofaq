@@ -1,15 +1,69 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Icon from "@material-ui/core/Icon";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import "./Jos.scss";
 import { getJob, addJobs, updateJobs } from "../../helpers";
 
+import { withStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Typography from "@material-ui/core/Typography";
+import SendIcon from "@material-ui/icons/Send";
+
+import Link from "../../common/CustomLink";
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+
 function Jobs(props) {
+  const [nofi, setNofi] = useState("");
   const [open, setOpen] = React.useState(false);
   // name, description, type, area, company, experience, role
   const [job, setJob] = useState([]);
@@ -25,45 +79,72 @@ function Jobs(props) {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
 
+  const handleClose = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     (async () => {
       const questionData = await getJob(id);
       setJob(questionData);
     })();
   }, []);
+
+  const check = () => {
+    if(name.length == "" || description.length == "" || type.length == "" || area.length == "" || company.length == "" || experience.length == "" || role.length == "")
+    {
+      return true;
+    }
+    else{
+      return false
+    }
+  }
+
   if (id === undefined) {
     handleSubmit = (event) => {
-      event.preventDefault();
-      addJobs(name, description, type, area, company, experience, role)
+      if(check() == true){
+        setOpen(true);
+        setNofi("Failed");
+      }
+      else{
+        event.preventDefault();
+        addJobs(name, description, type, area, company, experience, role)
         .then(function (response) {
           setOpen(true);
           //window.location.reload();
+          setNofi("Successfully");
         })
         .catch(function (error) {
           // handle error
           console.log(error);
+          setOpen(true);
+          setNofi("Failed");
         });
+      }
     };
   } else {
     handleSubmit = (event) => {
-      event.preventDefault();
-      updateJobs(id, name, description, type, area, company, experience, role)
+      if(check() == true){
+        setOpen(true);
+        setNofi("Failed");
+      }
+      else{
+        event.preventDefault();
+        updateJobs(id, name, description, type, area, company, experience, role)
         .then(function (response) {
           setOpen(true);
-          window.location.reload();
+          //window.location.reload();
+          setNofi("Successfully");
         })
         .catch(function (error) {
           // handle error
           console.log(error);
+          setOpen(true);
+          setNofi("Failed");
         });
-    };
+      };
+    }
   }
   return (
     <div>
@@ -74,6 +155,7 @@ function Jobs(props) {
             Jobs Name <span className="required">*</span>
           </label>
           <input
+          required
             type="text"
             name="field1"
             className="field-divided"
@@ -81,7 +163,7 @@ function Jobs(props) {
             defaultValue={job.name}
             onChange={(e) => {
               setName(e.target.value);
-            }}
+            }} 
           />{" "}
         </li>
         <li>
@@ -95,7 +177,7 @@ function Jobs(props) {
             defaultValue={job.type}
             onChange={(e) => {
               setType(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -109,7 +191,7 @@ function Jobs(props) {
             defaultValue={job.area}
             onChange={(e) => {
               setArea(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -123,7 +205,7 @@ function Jobs(props) {
             defaultValue={job.company}
             onChange={(e) => {
               setCompany(e.target.value);
-            }}
+            }} required
           />
         </li>
         <li>
@@ -137,7 +219,7 @@ function Jobs(props) {
             defaultValue={job.experience}
             onChange={(e) => {
               setExperience(e.target.value);
-            }}
+            }} required
           />
         </li>
 
@@ -152,7 +234,8 @@ function Jobs(props) {
             defaultValue={job.role}
             onChange={(e) => {
               setRole(e.target.value);
-            }}
+            }} 
+            required
           />
         </li>
 
@@ -167,22 +250,38 @@ function Jobs(props) {
             defaultValue={job.description}
             onChange={(e) => {
               setDescription(e.target.value);
-            }}
+            }} 
+            required
           />
         </li>
         <li>
-          <Button onClick={handleSubmit} variant="outlined" color="primary">
-            {" "}
-            Send
+          <Button onClick={handleSubmit} variant="outlined" color="primary" startIcon={<SendIcon />}>
+            {/* {" "}
+            Send */}
           </Button>
         </li>
       </ul>
 
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Notification
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>{nofi}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Link to={"/manager/jobs"}>
+            <Button autoFocus onClick={handleClose} color="primary">
+              OK
+            </Button>
+          </Link>
+        </DialogActions>
+      </Dialog>
+      
     </div>
   );
 }
