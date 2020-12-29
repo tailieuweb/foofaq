@@ -86,9 +86,13 @@ function QuestionForm({ categories }) {
   const [open, setOpen] = React.useState(false);
   const [question, setQuestion] = useState([]);
   const [questionGetLastId, setQuestions] = useState([]);
+  const [editorStates, setEdittorStates] = useState(EditorState.createEmpty());
+
   //change
   const [cagtegories, setCategories] = useState([]);
   const [textCate, setTextCate] = useState([]);
+  const [title, setTitle] = useState("");
+  const [nofi, setNofi] = useState("");
 
   //get categories
   useEffect(() => {
