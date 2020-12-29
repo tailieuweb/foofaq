@@ -7,7 +7,7 @@ import JobsGridViewManager from "../../components/JobsGridViewManager";
 
 function JobsGridViewPage() {
     return (
-      <PageLayoutManager>
+      <PageLayoutManager float={"left"}>
         <JobsGridViewManager/>
       </PageLayoutManager>
     );
