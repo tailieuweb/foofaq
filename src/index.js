@@ -46,7 +46,7 @@ ReactDOM.render(
         {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
         <Route exact path="/jobs" component={JobsGridViewPage}></Route>
 
-        <Route path="/questionAdd" component={QuestionCreateForm}></Route>
+        <Route path="/forms/question" component={QuestionCreateForm}></Route>
         <Route path="/categories" component={QuestionCategoryList}></Route>
         {/* <Route path="/manager/" component={Managers}></Route> */}
         <Route path="/forms/" component={FormManager}></Route>
