@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import TextField from "@material-ui/core/TextField";
-// import Icon from "@material-ui/core/Icon";
-// import Snackbar from "@material-ui/core/Snackbar";
-// import Alert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import "./Jos.scss";
@@ -73,13 +68,6 @@ function Jobs(props) {
   let handleSubmit = (event) => {
     event.preventDefault();
   };
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -160,7 +148,7 @@ function Jobs(props) {
             type="text"
             name="field1"
             className="field-divided"
-            placeholder="name"
+            placeholder="Input name..."
             defaultValue={job.name}
             onChange={(e) => {
               setName(e.target.value);
@@ -175,6 +163,7 @@ function Jobs(props) {
             type="text"
             name="field3"
             className="field-long"
+            placeholder="Input type..."
             defaultValue={job.type}
             onChange={(e) => {
               setType(e.target.value);
@@ -189,6 +178,7 @@ function Jobs(props) {
             type="text"
             name="field3"
             className="field-long"
+            placeholder="Input area..."
             defaultValue={job.area}
             onChange={(e) => {
               setArea(e.target.value);
@@ -203,6 +193,7 @@ function Jobs(props) {
             type="text"
             name="field3"
             className="field-long"
+            placeholder="Input company..."
             defaultValue={job.company}
             onChange={(e) => {
               setCompany(e.target.value);
@@ -211,12 +202,13 @@ function Jobs(props) {
         </li>
         <li>
           <label>
-            experience <span className="required">*</span>
+            Experience <span className="required">*</span>
           </label>
           <input
             type="text"
             name="field3"
             className="field-long"
+            placeholder="Input experience..."
             defaultValue={job.experience}
             onChange={(e) => {
               setExperience(e.target.value);
@@ -232,6 +224,7 @@ function Jobs(props) {
             type="text"
             name="field3"
             className="field-long"
+            placeholder="Input role..."
             defaultValue={job.role}
             onChange={(e) => {
               setRole(e.target.value);
@@ -248,6 +241,7 @@ function Jobs(props) {
             name="field5"
             id="field5"
             className="field-long field-textarea"
+            placeholder="Input description..."
             defaultValue={job.description}
             onChange={(e) => {
               setDescription(e.target.value);
@@ -262,12 +256,6 @@ function Jobs(props) {
           </Button>
         </li>
       </ul>
-
-      {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar> */}
 
       <Dialog
         onClose={handleClose}
