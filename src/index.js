@@ -23,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/forms/job/7" component={JobEdit}></Route>
+        <Route exact path="/forms/job/" component={JobEdit}></Route>
       </Switch>
     </Router>
   </Provider>,
