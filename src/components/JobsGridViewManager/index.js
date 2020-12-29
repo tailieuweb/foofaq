@@ -4,6 +4,9 @@ import JobsGridView from "../JobsGridView";
 import Link from "../../common/CustomLink";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import { deleteJob } from "../../helpers";
 import "./index.scss";
 import PageLayoutManager from "../../common/PageLayoutManager";
@@ -52,7 +55,7 @@ export default function JobsGridViewManager() {
               style={{ marginLeft: 16 }}
               onClick={() => {}}
             >
-              UPDATE
+              <EditIcon />
             </Button>
           </Link>
           <Button
@@ -64,7 +67,7 @@ export default function JobsGridViewManager() {
               DeleteJobId(params.getValue("id"));
             }}
           >
-            DELETE
+            <DeleteIcon />
           </Button>
         </strong>
       ),
@@ -75,9 +78,9 @@ export default function JobsGridViewManager() {
     <PageLayoutManager>
       <div className="aroundAddJob">
         <Link to={"/forms/job/"}>
-          <Button variant="contained" color="primary">
-            {" "}
-            ADD{" "}
+          <Button variant="contained" color="primary" startIcon={<AddBoxIcon />}>
+            {/* {" "}
+            ADD{" "} */}
           </Button>
         </Link>
       </div>
