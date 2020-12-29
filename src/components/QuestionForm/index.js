@@ -311,24 +311,13 @@ function QuestionForm({ categories }) {
             <label htmlFor="questionTag">
               <b>Tag</b>
             </label>
-            {/* <input
-              type="text"
-              className="form-control"
-              id="questionTag"
-              aria-describedby="questionTag"
-              placeholder="Nhập thẻ liên quan đến câu hỏi..."
-              defaultValue={question.tag}
-              onChange={(e) => {
-                setTag(e.target.value);
-              }}
-            /> */}
             <CategoriesInput
               listCategories={cagtegories}
               setTextCate={setTextCate}
             />
           </div>
           <div className="aroundBtnQuestion">
-            <input type="submit" className="btn btn-success" startIcon={<SendIcon />}/>
+            <button type="submit" className="btn btn-success"><SendIcon /></button>
           </div>
         </div>
       </form>
