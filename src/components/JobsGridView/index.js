@@ -5,8 +5,6 @@ import SearchBar from "../../components/SearchBar";
 import Link from "../../common/CustomLink";
 import Button from "@material-ui/core/Button";
 
-import PageLayout from "../../common/PageLayout";
-
 export default function JobsGridView({ extraColumns, extraRows }) {
   const [jobs, setJobs] = useState([]);
   const [key, setKey] = useState("");
@@ -98,20 +96,12 @@ export default function JobsGridView({ extraColumns, extraRows }) {
   rows = extraRows ? [...rows, ...extraRows] : rows;
 
   return (
-    <PageLayout>
+    <>
       <div style={{ height: "600px", width: "100%" }}>
         <SearchBar
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
         />
-        <br />
-        <Link to={"/forms/event"}>
-          <Button variant="contained" color="primary">
-            {" "}
-            ADD{" "}
-          </Button>
-        </Link>
-        <br />
         <br />
         <DataGrid
           rows={rows}
@@ -122,6 +112,6 @@ export default function JobsGridView({ extraColumns, extraRows }) {
           {...jobs}
         />
       </div>
-    </PageLayout>
+    </>
   );
 }
