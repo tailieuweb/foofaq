@@ -6,7 +6,7 @@ import QuestionApprovalCard from "../../components/QuestionApprovalCard";
 import PageManagerLayout from "../../common/PageManagerLayout";
 const Index = () => {
   return (
-    <PageManagerLayout float={"left"} display={"none"}>
+    <PageManagerLayout float={"left"}>
       <QuestionApprovalCard />
       {/* <Route path="/approval/:id" component={QuestionApprovalDetail}></Route> */}
     </PageManagerLayout>
