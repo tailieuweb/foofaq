@@ -4,7 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DraftsIcon from "@material-ui/icons/Drafts";
-import DashboardIcon from "@material-ui/icons/Dashboard";
+//import DashboardIcon from "@material-ui/icons/Dashboard";
 
 //icon
 import WorkIcon from "@material-ui/icons/Work";
@@ -15,33 +15,23 @@ import Link from "../../common/CustomLink";
 import "./index.scss";
 function Index(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [active, setActive] = useState("");
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+    setActive("active");
   };
   return (
     <div>
       <div
         className="navigation"
         style={{
-          width: "15%",
-          position: "fixed",
+          width: "100%",
+          position: "relative",
           top: 0,
           left: 0,
         }}
       >
         <List component="nav" aria-label="main mailbox folders">
-          <ListItem
-            button
-            selected={selectedIndex === 0}
-            onClick={(event) => handleListItemClick(event, 0)}
-          >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-
           <Link
             style={{
               width: "100%",
@@ -61,6 +51,7 @@ function Index(props) {
               <ListItemText primary="Jobs" />
             </ListItem>
           </Link>
+
           <Link
             style={{
               width: "100%",
@@ -70,6 +61,7 @@ function Index(props) {
             to="/manager/events"
           >
             <ListItem
+              className={active}
               button
               selected={selectedIndex === 2}
               onClick={(event) => handleListItemClick(event, 2)}
@@ -126,7 +118,7 @@ function Index(props) {
               textDecoration: "none",
               color: "#000000b8",
             }}
-            to="/approval"
+            to="/manager/approval"
           >
             <ListItem
               button
