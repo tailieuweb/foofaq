@@ -9,7 +9,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import { deleteJob } from "../../helpers";
 import "./index.scss";
-import PageLayoutManager from "../../common/PageLayoutManager";
 
 export default function JobsGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -75,7 +74,7 @@ export default function JobsGridViewManager() {
   ];
 
   return (
-    <PageLayoutManager>
+    <>
       <div className="aroundAddJob">
         <Link to={"/forms/job/"}>
           <Button variant="contained" color="primary" startIcon={<AddBoxIcon />}>
@@ -90,6 +89,6 @@ export default function JobsGridViewManager() {
           Delete success!
         </Alert>
       </Snackbar>
-    </PageLayoutManager>
+    </>
   );
 }

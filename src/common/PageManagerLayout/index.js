@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   }),
 });
 
-const PageLayoutManager = (props) => {
+const PageManagerLayout = (props) => {
   const propsS = { float: `${props.float}`, display: props.display };
   const classes = useStyles(propsS);
 
@@ -31,4 +31,4 @@ const PageLayoutManager = (props) => {
   );
 };
 
-export default PageLayoutManager;
+export default PageManagerLayout;

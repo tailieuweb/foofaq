@@ -2,14 +2,14 @@
 import React from "react";
 
 //import component
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 import JobsGridViewManager from "../../components/JobsGridViewManager";
 
 function JobsGridViewPage() {
     return (
-      <PageLayoutManager float={"left"}>
+      <PageManagerLayout float={"left"}>
         <JobsGridViewManager/>
-      </PageLayoutManager>
+      </PageManagerLayout>
     );
   }
   
