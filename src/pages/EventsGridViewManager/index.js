@@ -8,7 +8,7 @@ import { deleteEvent, getEventsSearch } from "../../helpers";
 import SearchBar from "../../components/SearchBar";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 
 function EventsGridViewManager() {
   const [eventData, setEventData] = useState([]);
@@ -105,7 +105,7 @@ function EventsGridViewManager() {
   ];
 
   return (
-    <PageLayoutManager>
+    <PageManagerLayout float={"left"}>
       <div style={{ height: 600, width: "100%" }}>
         <h1>Events</h1>
         <SearchBar
@@ -136,7 +136,7 @@ function EventsGridViewManager() {
           </Alert>
         </Snackbar>
       </div>
-    </PageLayoutManager>
+    </PageManagerLayout>
   );
 }
 

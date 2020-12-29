@@ -11,22 +11,18 @@ import {
 import SearchBar from "../SearchBar";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
 import { DialogDecline } from "../Dialog";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import useStyles from "./classes";
 
-const useStyles = makeStyles((theme) => ({
-  fillterDate: {
-    marginBottom: "50px ",
-    textAlign: "right",
-    marginRight: "50px",
-  },
-  textField: { marginRight: "50px" },
-  btnDate: { marginTop: "15px" },
-}));
+//import PageLayoutManager from "../../common/PageLayoutManager";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
+import FilterListIcon from "@material-ui/icons/FilterList";
+
 function QuestionGridViewManager() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -277,22 +273,24 @@ function QuestionGridViewManager() {
 
       renderCell: (params) => (
         <strong>
-          <Link to={`/form/${params.getValue("id")}`}>
-            <Button variant="contained" color="primary" size="small">
-              EDIT
-            </Button>
+          <Link to={`/questionAdd/${params.getValue("id")}`}>
+            <EditIcon
+              variant="contained"
+              color="primary"
+              size="small"
+              className={classes.btnEdit}
+            />
           </Link>
-          <Button
+
+          <DeleteForeverIcon
+            className={classes.btntDelete}
             onClick={() => {
               handleClickDecline(params.getValue("id"));
             }}
             variant="contained"
             color="secondary"
             size="small"
-            style={{ marginLeft: 16 }}
-          >
-            DELETE
-          </Button>
+          />
         </strong>
       ),
     },
@@ -310,20 +308,20 @@ function QuestionGridViewManager() {
   ];
 
   return (
-    <PageLayoutManager>
-      <div>
+    <>
+      <div className={classes.questionGirdManager}>
         <SearchBar
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
         ></SearchBar>
-        <Link to={`/form/`}>
+        <Link to={`/questionAdd/`}>
           <Button
             style={{ margin: "50px" }}
             variant="contained"
             color="primary"
             size="small"
           >
-            Add question
+            <AddIcon /> Add question
           </Button>
         </Link>
         <h3>Question Manager </h3>
@@ -359,17 +357,17 @@ function QuestionGridViewManager() {
             onClick={handleDate}
             variant="contained"
           >
-            Fillter
+            <FilterListIcon /> Filter
           </Button>{" "}
           <Button
             className={classes.btnDate}
             onClick={unFillter}
             variant="contained"
           >
-            UnFillter
+            UnFilter
           </Button>{" "}
         </div>
-        <div style={{ height: "400px", width: "100%" }}>
+        <div className={classes.dataGrid}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -401,7 +399,7 @@ function QuestionGridViewManager() {
           handleOpentDecline();
         }}
       />
-    </PageLayoutManager>
+    </>
   );
 }
 export default QuestionGridViewManager;

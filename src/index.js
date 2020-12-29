@@ -20,7 +20,7 @@ import CategoriesGridViewManager from "./pages/CategoriesGridViewManager";
 import AnswerEdit from "./pages/AnswerEdit";
 import EventsGridViewManager from "./pages/EventsGridViewManager";
 import EventList from "./pages/EventList";
-import JobsGridViewManager from "./components/JobsGridViewManager";
+import JobsGridViewManager from "./pages/JobsGridViewManager";
 import JobsGridView from "./components/JobsGridView";
 //import QuestionApprovalDetail from "./components/QuetionAprovalDetail";
 import QuestionCreateForm from "./pages/QuestionCreateForm";
@@ -32,7 +32,7 @@ import Managers from "./pages/QuestionManager";
 import QuestionCategoryList from "./pages/QuestionCategoryList";
 import FormManager from "./pages/FormManager";
 import JobsGridViewPage from "./pages/JobsGridViewPage";
-import QuestionGridViewManager from "./components/QuestionGridViewManager";
+import QuestionGridViewManager from "./pages/QuestionGridManager";
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -44,31 +44,31 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route exact path="/login" component={Login}></Route>
-
+        <Route path="/events" component={EventList}></Route>
         <Route exact path="/" component={QuestionList}></Route>
         {/* <Route path="/detail" component={QuestionDetail}></Route> */}
         <Route path="/questions/:id" component={QuestionDetail}></Route>
-        <Route path="/approval" component={QuestionApproval}></Route>
+        <Route path="/jobgrid" component={JobsGridView}></Route>
+        {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
+        <Route exact path="/jobs" component={JobsGridViewPage}></Route>
 
         <Route path="/questionAdd" component={QuestionCreateForm}></Route>
         <Route path="/categories" component={QuestionCategoryList}></Route>
-        <Route path="/manager/" component={Managers}></Route>
+        {/* <Route path="/manager/" component={Managers}></Route> */}
         <Route path="/forms/" component={FormManager}></Route>
         {/* <Route path="/events" component={EventList}></Route> */}
+        <Route path="/manager/approval" component={QuestionApproval}></Route>
         <Route
           path="/manager/questions"
           component={QuestionGridViewManager}
         ></Route>
-        <Route path="/events" component={EventList}></Route>
+
         <Route
           path="/manager/categories"
           component={CategoriesGridViewManager}
         ></Route>
         <Route path="/manager/jobs" component={JobsGridViewManager}></Route>
 
-        <Route path="/jobgrid" component={JobsGridView}></Route>
-        {/* <Route path="/griddemo" component={QuestionGridViewManager}></Route> */}
-        <Route exact path="/jobs" component={JobsGridViewPage}></Route>
         <Route path="/manager/events" component={EventsGridViewManager}></Route>
         <Route path="/answer/edit/:qId/:id" component={AnswerEdit}></Route>
       </Switch>

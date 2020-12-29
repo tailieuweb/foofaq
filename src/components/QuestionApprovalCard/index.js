@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
@@ -9,62 +8,23 @@ import { DataGrid } from "@material-ui/data-grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { green } from "@material-ui/core/colors";
-
 //
 import TextField from "@material-ui/core/TextField";
 
 import { DialogDecline } from "../Dialog";
 
+import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
+import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 //
+import FilterListRoundedIcon from "@material-ui/icons/FilterListRounded";
 import axios from "axios";
+
+import useStyles from "./classes";
 
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-  buttonr: {
-    borderColor: green[500],
-    marginRight: "20px",
-    outline: "none",
-  },
-  pag: {
-    marginBottom: "50px",
-    width: "100%",
-  },
-  pagechill: {
-    marginLeft: "30%",
-  },
-  checkIcon: {
-    color: green[500],
-    fontSize: 30,
-  },
-  buttonc: {
-    borderColor: "red",
-    outline: "none",
-  },
-  closeIcon: {
-    fontSize: 30,
-    fontWeight: "bold",
-    cursor: "pointer",
-    color: "red",
-  },
-  fillterDate: {
-    marginBottom: "50px ",
-    textAlign: "right",
-    marginRight: "50px",
-  },
-  textField: { marginRight: "30px" },
-  btnDate: { marginTop: "15px" },
-}));
 
 const Index = (props) => {
   const classes = useStyles();
@@ -274,28 +234,25 @@ const Index = (props) => {
       renderCell: (params) => (
         <>
           <strong>
-            <Button
+            <DoneOutlineRoundedIcon
               onClick={() => {
                 handleClickOpenApproval(params.getValue("id"));
               }}
               variant="contained"
               color="primary"
               size="small"
-            >
-              Approval
-            </Button>
+              className={classes.btnApprove}
+            />
 
-            <Button
+            <ClearRoundedIcon
               onClick={() => {
                 handleClickDecline(params.getValue("id"));
               }}
+              className={classes.btnClear}
               variant="contained"
               color="secondary"
               size="small"
-              style={{ marginLeft: 16 }}
-            >
-              Decline
-            </Button>
+            />
           </strong>
         </>
       ),
@@ -372,14 +329,14 @@ const Index = (props) => {
                     onClick={handleDate}
                     variant="contained"
                   >
-                    Fillter
+                    <FilterListRoundedIcon /> Filter
                   </Button>{" "}
                   <Button
                     className={classes.btnDate}
                     onClick={unFillter}
                     variant="contained"
                   >
-                    UnFillter
+                    UnFilter
                   </Button>{" "}
                 </div>
               </div>
