@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { IconButton, Button } from "@material-ui/core";
 import JobsGridView from "../JobsGridView";
 import Link from "../../common/CustomLink";
 import Alert from "@material-ui/lab/Alert";
@@ -43,11 +43,11 @@ export default function JobsGridViewManager() {
       field: "action",
       headerName: "Actions",
       headerAlign: "center",
-      width: 200,
+      width: 100,
       renderCell: (params) => (
         <strong>
           <Link to={"/forms/job/" + params.getValue("id")}>
-            <Button
+            <IconButton
               variant="contained"
               color="primary"
               size="small"
@@ -55,9 +55,9 @@ export default function JobsGridViewManager() {
               onClick={() => {}}
             >
               <EditIcon />
-            </Button>
+            </IconButton>
           </Link>
-          <Button
+          <IconButton
             variant="contained"
             color="secondary"
             size="small"
@@ -67,7 +67,7 @@ export default function JobsGridViewManager() {
             }}
           >
             <DeleteIcon />
-          </Button>
+          </IconButton>
         </strong>
       ),
     },

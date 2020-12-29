@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import HeaderAsideNavbar from "../../partials/HeaderAsideNavbar";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   headersideBar: (propsS) => ({
