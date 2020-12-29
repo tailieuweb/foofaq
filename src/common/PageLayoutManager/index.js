@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderAsideNavbar from "../../components/HeaderAsideNavbar";
+import HeaderAsideNavbar from "../../partials/HeaderAsideNavbar";
 const PageLayoutManager = (props) => {
   return (
     <>
