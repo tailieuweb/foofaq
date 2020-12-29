@@ -23,7 +23,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/approval" component={QuestionApproval}></Route>
+        <Route
+          exact
+          path="/manager/approval"
+          component={QuestionApproval}
+        ></Route>
       </Switch>
     </Router>
   </Provider>,

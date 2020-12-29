@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import SearchBar from "../SearchBar";
 import Button from "@material-ui/core/Button";
@@ -9,142 +8,73 @@ import { DataGrid } from "@material-ui/data-grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { green } from "@material-ui/core/colors";
-
 //
 import TextField from "@material-ui/core/TextField";
 
 import { DialogDecline } from "../Dialog";
 
+import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
+import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 //
+import FilterListRoundedIcon from "@material-ui/icons/FilterListRounded";
 import axios from "axios";
+
+import useStyles from "./classes";
 
 import { getQuestions, approveQuestion, declineQuestion } from "../../helpers";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-  buttonr: {
-    borderColor: green[500],
-    marginRight: "20px",
-    outline: "none",
-  },
-  pag: {
-    marginBottom: "50px",
-    width: "100%",
-  },
-  pagechill: {
-    marginLeft: "30%",
-  },
-  checkIcon: {
-    color: green[500],
-    fontSize: 30,
-  },
-  buttonc: {
-    borderColor: "red",
-    outline: "none",
-  },
-  closeIcon: {
-    fontSize: 30,
-    fontWeight: "bold",
-    cursor: "pointer",
-    color: "red",
-  },
-  fillterDate: {
-    marginBottom: "50px ",
-    textAlign: "right",
-    marginRight: "50px",
-  },
-  textField: { marginRight: "30px" },
-  btnDate: { marginTop: "15px" },
-}));
-
 const Index = (props) => {
   const classes = useStyles();
-
+  //dialog
   const [open, setOpen] = useState(false);
   const [openDecline, setOpenDeline] = useState(false);
-
-  // const [page, setPage] = useState(1);
-
   const [decline, setDecline] = useState(false);
+  const [openDate, setOpenDate] = useState(false);
+  //get Questions
   const [questions, setQuestions] = useState([]);
   const [questionsRaw, setQuestionsRaw] = useState([]);
-  // const [all, setAll] = useState([]);
   // fillter Date
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   //search
   const [keyword, setKeyword] = useState("");
   const [key, setKey] = useState("");
-  //let perPage = 5;
-  // const [dateQuestion, setDateQuestion] = useState("");
-  // let count = Number(all.length) / perPage;
-  let status = true;
-  const [idRaw, setIdRaw] = useState("");
-  //let title, content;
-  // const [newest, setNewest] = useState("");
-  const [rows, setRows] = useState([]);
 
-  // const [oldest, setOldest] = useState("");
+  const [idRaw, setIdRaw] = useState("");
+  //status
   const [statusA, setStatusA] = useState("status=false");
-  const [openDate, setOpenDate] = useState(false);
+  let status = true;
+  // row in material-ui
+  const [rows, setRows] = useState([]);
+  const dateFrom = moment(from).valueOf();
+  const dateTo = moment(to).valueOf();
+  let dateProcessed = [];
   const handleClose = (event, reason) => {
     setOpen(false);
     setOpenDeline(false);
   };
-
-  //decline
-
-  const handleClickDecline = (id) => {
-    setDecline(true);
-    setIdRaw(id);
-  };
-  const handleOpentDecline = () => {
-    declineQuestion(idRaw)
-      .then(function (response) {
-        // handle success
-        setOpenDeline(true);
-        console.log("Delete Succecs");
-        setDecline(false);
-
-        window.location.reload();
-      })
-      .catch(function (error) {
-        setOpen(false);
-        console.log("err");
-      });
-  };
   const handleCloseDecline = () => {
     setDecline(false);
   };
-  //approve
-  const handleClickOpenApproval = (id) => {
-    approveQuestion(id, status)
-      .then(function (response) {
-        setOpen(true);
-        console.log("Successfully");
+  const handleDateClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-        window.location.reload();
-      })
-      .catch(function (error) {
-        setOpen(false);
-      });
+    setOpenDate(false);
   };
-
+  //get question
+  //get questions
   useEffect(() => {
     (async () => {
       const questionData = await getQuestions(key, statusA);
       setQuestionsRaw(questionData);
     })();
   }, [key, statusA]);
+
   useEffect(() => {
     if (questionsRaw) {
       const questionProcessed = [];
@@ -168,7 +98,48 @@ const Index = (props) => {
     }
   }, [questionsRaw]);
 
-  // searchBar
+  useEffect(() => {
+    setRows(questions);
+  }, [questions]);
+
+  //decline
+  //get id for decline
+  const handleClickDecline = (id) => {
+    setDecline(true);
+    setIdRaw(id);
+  };
+  //display dialog decline
+  const handleOpentDecline = () => {
+    declineQuestion(idRaw)
+      .then(function (response) {
+        // handle success
+        setOpenDeline(true);
+        console.log("Delete Succecs");
+        setDecline(false);
+
+        window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+        console.log("err");
+      });
+  };
+
+  //approve
+  const handleClickOpenApproval = (id) => {
+    approveQuestion(id, status)
+      .then(function (response) {
+        console.log("Successfully");
+        setRows([...questions]);
+        setOpen(true);
+        //  window.location.reload();
+      })
+      .catch(function (error) {
+        setOpen(false);
+      });
+  };
+
+  //search bar
   const handleChangeSearch = (e) => {
     setKeyword(e.target.value);
   };
@@ -181,13 +152,8 @@ const Index = (props) => {
       setStatusA("status=false");
     }
   };
-  const dateFrom = moment(from).valueOf();
-  const dateTo = moment(to).valueOf();
-  // console.log("to: " + dateTo);
-  // console.log("from: " + dateFrom);
-  // console.log("- " + to - from);
-  // dateQuestion;
-  let dateProcessed = [];
+  // fillter date
+
   const date = () => {
     if (dateFrom < dateTo) {
       questions.map((q) => {
@@ -211,16 +177,6 @@ const Index = (props) => {
   const handleDate = () => {
     date();
   };
-  const handleDateClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenDate(false);
-  };
-  useEffect(() => {
-    setRows(questions);
-  }, [questions]);
 
   const unFillter = () => {
     (async () => {
@@ -278,28 +234,25 @@ const Index = (props) => {
       renderCell: (params) => (
         <>
           <strong>
-            <Button
+            <DoneOutlineRoundedIcon
               onClick={() => {
                 handleClickOpenApproval(params.getValue("id"));
               }}
               variant="contained"
               color="primary"
               size="small"
-            >
-              Approval
-            </Button>
+              className={classes.btnApprove}
+            />
 
-            <Button
+            <ClearRoundedIcon
               onClick={() => {
                 handleClickDecline(params.getValue("id"));
               }}
+              className={classes.btnClear}
               variant="contained"
               color="secondary"
               size="small"
-              style={{ marginLeft: 16 }}
-            >
-              Decline
-            </Button>
+            />
           </strong>
         </>
       ),
@@ -327,7 +280,7 @@ const Index = (props) => {
             handleSearch={handleSearch}
           />{" "}
         </div>
-        <div className="infoadmin">
+        {/* <div className="infoadmin">
           <div className="user">
             <img
               className="avt"
@@ -336,7 +289,7 @@ const Index = (props) => {
             />
             <div className="adminname">Admin 1</div>
           </div>
-        </div>
+        </div> */}
         <div className="contentApproval">
           <div className="header-approve">
             <div className="row">
@@ -376,14 +329,14 @@ const Index = (props) => {
                     onClick={handleDate}
                     variant="contained"
                   >
-                    Fillter
+                    <FilterListRoundedIcon /> Filter
                   </Button>{" "}
                   <Button
                     className={classes.btnDate}
                     onClick={unFillter}
                     variant="contained"
                   >
-                    UnFillter
+                    UnFilter
                   </Button>{" "}
                 </div>
               </div>

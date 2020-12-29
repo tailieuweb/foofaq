@@ -1,12 +1,12 @@
 import React from "react";
 import QuestionApprovalCard from "../../components/QuestionApprovalCard";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 const QuestionApproval = () => {
   return (
     <>
-      <PageLayoutManager>
+      <PageManagerLayout float={"left"}>
         <QuestionApprovalCard />
-      </PageLayoutManager>
+      </PageManagerLayout>
     </>
   );
 };
