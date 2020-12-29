@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import thunk from "redux-thunk";
 
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 
 import "./index.scss";
 
@@ -43,7 +43,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/login" component={Login}></Route>
+        {/* <Route exact path="/login" component={Login}></Route> */}
 
         <Route exact path="/" component={QuestionList}></Route>
         {/* <Route path="/detail" component={QuestionDetail}></Route> */}
