@@ -1,37 +1,48 @@
-import React, { PureComponent } from "react";
-import AsyncSelect from "react-select/async";
-// import axios from "axios";
+import Checkbox from "@material-ui/core/Checkbox";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import React from "react";
 
-class CategoriesInput extends PureComponent {
-  state = { selectedUser: [] };
-  onChange = (selectedUser) => {
-    this.setState({
-      selectedUser: selectedUser || [],
-    });
-    console.log(this.state.selectedUser);
-  };
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-  loadOptions = async (inputText, callback) => {
-    const res = await fetch(
-      `https://5fc48ee536bc790016343a0b.mockapi.io/categories?name=${inputText}`
-    );
-    const json = await res.json();
-    callback(json.map((i) => ({ label: i.name, value: i.id })));
-  };
-
-  render() {
-    return (
-      <div>
-        <AsyncSelect
-          isMulti
-          value={this.state.selectedUser}
-          onChange={this.onChange}
-          placeholder={"Input..."}
-          loadOptions={this.loadOptions}
-        />
-      </div>
-    );
-  }
+function CategoriesInput({ listCategories, setTextCate, arr }) {
+  
+  return (
+    <>
+      <Autocomplete
+        onChange={(event, value) => setTextCate(value)}
+        multiple
+        // defaultValue = {[]}
+        id="checkboxes-tags-demo"
+        // options = mảng
+        options={listCategories}
+        disableCloseOnSelect
+        getOptionLabel={(option) => option.name}
+        renderOption={(option, { selected }) => (
+          <React.Fragment>
+            <Checkbox
+              icon={icon}
+              checkedIcon={checkedIcon}
+              style={{ marginRight: 8 }}
+              checked={selected}
+            />
+            {option.name}
+          </React.Fragment>
+        )}
+        style={{ width: 500 }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Checkboxes"
+            placeholder="Favorites"
+          />
+        )}
+      />
+    </>
+  );
 }
-
 export default CategoriesInput;
