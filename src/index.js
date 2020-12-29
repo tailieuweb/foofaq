@@ -24,7 +24,7 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route exact path="/form" component={QuestionCreateForm}></Route>
+        <Route exact path="/forms/question" component={QuestionCreateForm}></Route>
         
       </Switch>
     </Router>
