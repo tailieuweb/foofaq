@@ -43,7 +43,7 @@ export default function JobsGridViewManager() {
       field: "action",
       headerName: "Actions",
       headerAlign: "center",
-      width: 100,
+      width: 130,
       renderCell: (params) => (
         <strong>
           <Link to={"/forms/job/" + params.getValue("id")}>
