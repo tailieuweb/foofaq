@@ -8,7 +8,7 @@ import { Route } from "react-router-dom";
 
 function FormManager(props) {
   return (
-    <PageManagerLayout>
+    <PageManagerLayout float={"left"}>
       <Route exact path="/forms/categories/" component={CategoriesForm}></Route>
       <Route
         path="/forms/categories/:id"
