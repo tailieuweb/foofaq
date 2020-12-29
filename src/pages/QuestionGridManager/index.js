@@ -5,7 +5,7 @@ import PageLayoutManager from "../../common/PageLayoutManager";
 function QuestionGridManager(props) {
   return (
     <>
-      <PageLayoutManager>
+      <PageLayoutManager float={"left"}>
         <QuestionGridViewManager />
       </PageLayoutManager>
     </>
