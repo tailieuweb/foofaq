@@ -28,28 +28,14 @@ import SendIcon from "@material-ui/icons/Send";
 import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
 
-//APIS
-
-// export const listCategories = [];
+//classes
+import { styles } from "./classes";
 
 import {
   getQuesitonById,
   pagCategories,
   getQuestionForCate,
 } from "../../helpers";
-
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
