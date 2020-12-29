@@ -122,6 +122,22 @@ const detailQuestion = async function (req, res) {
     res.status(400).json({ msg: err });
   }
 };
+const paginationQuestion = async function (req, res) {
+  try{
+    const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+    const page = req.query.page ? parseInt(req.query.page):1;
+
+    const question = await Question.find(Question)
+    .skip((page -1 )* pagination)
+    .limit(pagination)
+    .populate("Tag")
+    .sort({ createdAt: -1 });
+    res.send(question);
+  }catch(err)
+  {
+    res.status(400).json({ msg: err });
+  }
+};
 
 module.exports = {
   createQuestion,
@@ -129,4 +145,5 @@ module.exports = {
   editQuestion,
   deleteQuestion,
   detailQuestion,
+  paginationQuestion,
 };
