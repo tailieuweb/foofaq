@@ -16,7 +16,7 @@ import UserDeveloperStoryAfter from "./pages/UserDeveloperStoryAfter/index";
 import UserDeveloperStoryBefore from "./pages/UserDeveloperStoryBefore/index";
 import UserListAnswer from "./pages/UserListAnswer/index";
 import UserListQuestion from "./pages/UserListQuestion/index";
-
+import Managers from "./pages/QuestionManager";
 import "./index.scss";
 import reducer from "./reducers/index";
 const composeEnhancers =
@@ -36,14 +36,12 @@ ReactDOM.render(
         <ALayout exact path="/formblog" component={UserProfileActivity} />
         <BLayout exact path="/listnewuser" component={ListNewUser} />
         <ALayout exact path="/updatepost" component={UserProfileActivity} />
-        <ALayout exact path="/useradd" component={UserProfileActivity} />
         <BLayout exact path="/userdeveloperstoryafter" component={UserDeveloperStoryAfter} />
         <ALayout exact path="/userdeveloperstorybefore" component={UserDeveloperStoryBefore} />
-        <ALayout exact path="/useredit" component={UserProfileActivity} />
         <ALayout exact path="/userlistanswer" component={UserListAnswer} />
         <ALayout exact path="/userlistquestion" component={UserListQuestion} />
-        <ALayout exact path="/usermanager" component={UserProfileActivity} />
         <ALayout exact path="/userprofile" component={UserProfileActivity} />
+        <Route path="/manager/" component={Managers}></Route>
         <BLayout path="/profile" component={BMain} />
       </Switch>
     </Router>
