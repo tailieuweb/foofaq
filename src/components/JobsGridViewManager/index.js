@@ -78,8 +78,6 @@ export default function JobsGridViewManager() {
       <div className="aroundAddJob">
         <Link to={"/forms/job/"}>
           <Button variant="contained" color="primary" startIcon={<AddBoxIcon />}>
-            {/* {" "}
-            ADD{" "} */}
           </Button>
         </Link>
       </div>
