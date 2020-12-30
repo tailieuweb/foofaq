@@ -9,6 +9,7 @@ import Alert from "@material-ui/lab/Alert";
 //material ui icon
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 import "./index.scss";
 import Link from "../../common/CustomLink";
@@ -100,9 +101,6 @@ function EventsGridViewManager() {
         <strong>
           <Link to={"/forms/event/" + params.getValue("id")}>
             <EditIcon />
-            {/* <Button variant="contained" color="primary" size="small">
-              Edit
-            </Button> */}
           </Link>
 
           <DeleteIcon
@@ -128,9 +126,9 @@ function EventsGridViewManager() {
         />
         <br />
         <Link to={"/forms/event"}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" startIcon={<AddBoxIcon />}>
             {" "}
-            ADD{" "}
+            ADD New Event{" "}
           </Button>
         </Link>
         <br />
