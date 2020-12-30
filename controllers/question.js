@@ -4,6 +4,7 @@ const Question = require("../models/question");
 const Tag = require("../models/tag");
 const { response } = require("../orm/response");
 const {validationResult} = require('express-validator');
+const { Model } = require("mongoose");
 
 
 // Create Question
@@ -144,7 +145,7 @@ const searchAndPagination = async function(req,res)
     const regex = new RegExp(req.params.title,'i');
     const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
     const page = req.query.page ? parseInt(req.query.page):1;
-    const question = await controllers.find(Question,{title:regex})
+    const question = await Question.find({title:regex})
     .skip((page -1 )* pagination)
     .limit(pagination)
     .populate("Tag")
