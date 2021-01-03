@@ -22,24 +22,9 @@ function Index(props) {
   };
   return (
     <div>
-      <div
-        className="navigation"
-        style={{
-          width: "100%",
-          position: "relative",
-          top: 0,
-          left: 0,
-        }}
-      >
+      <div className="navigation">
         <List component="nav" aria-label="main mailbox folders">
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/jobs"
-          >
+          <Link className="Linkto" to="/manager/jobs">
             <ListItem
               button
               selected={selectedIndex === 1}
@@ -52,14 +37,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/events"
-          >
+          <Link className="Linkto" to="/manager/events">
             <ListItem
               className={active}
               button
@@ -73,14 +51,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/questions"
-          >
+          <Link className="Linkto" to="/manager/questions">
             <ListItem
               button
               selected={selectedIndex === 3}
@@ -92,14 +63,7 @@ function Index(props) {
               <ListItemText primary="Questions" />
             </ListItem>
           </Link>
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/categories"
-          >
+          <Link className="Linkto" to="/manager/categories">
             <ListItem
               button
               selected={selectedIndex === 4}
@@ -112,14 +76,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/approval"
-          >
+          <Link className="Linkto" to="/manager/approval">
             <ListItem
               button
               selected={selectedIndex === 5}
