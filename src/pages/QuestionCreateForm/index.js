@@ -2,17 +2,17 @@
 import React from "react";
 
 //import component
-import PageLayout from "../../common/PageLayout";
+import NavigationBar from "../../partials/NavigationBar";
 import QuestionForm from "../../components/QuestionForm";
 import { Route, Switch } from "react-router-dom";
 
 function QuestionCreateForm() {
   return (
-    <PageLayout>
+    <NavigationBar>
       <Switch>
         <Route exact path="/forms/question" component={QuestionForm}></Route>{" "}
       </Switch>
-    </PageLayout>
+    </NavigationBar>
   );
 }
 
