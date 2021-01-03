@@ -137,8 +137,8 @@ function Jobs(props) {
   }
   return (
     <div>
-      <h1>Jobs Form</h1>
-      <ul className="form-style-1">
+      <ul className="form-style-1 ml-auto mr-auto">
+        <h1>Jobs Form</h1>
         <li>
           <label>
             Jobs Name <span className="required">*</span>

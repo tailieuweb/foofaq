@@ -168,8 +168,8 @@ function Events(props) {
   console.log(event.name);
   return (
     <div>
-      <h1>Event Form</h1>
-      <ul className="form-style-1">
+      <ul className="form-style-1 mr-auto ml-auto">
+        <h1>Event Form</h1>
         <li>
           <label>
             Event Name <span className="required">*</span>
