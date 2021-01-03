@@ -11,7 +11,7 @@ function QuestionCreateForm() {
     <PageLayout>
       <Switch>
         <Route exact path="/forms/question" component={QuestionForm}></Route>{" "}
-        <Route path="/forms/question/:id" component={QuestionForm}></Route>{" "}
+        <Route path="/forms/question/edit/:id" component={QuestionForm}></Route>{" "}
       </Switch>
     </PageLayout>
   );

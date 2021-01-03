@@ -107,7 +107,7 @@ const QuestionDetail = (props) => {
   };
 
   return (
-    <PageLayout>
+    <NavigationBar>
       <QuestionInfoDetail
         answersCount={answersCount}
         question={questions}
@@ -134,7 +134,7 @@ const QuestionDetail = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </PageLayout>
+    </NavigationBar>
   );
 };
 export default QuestionDetail;
