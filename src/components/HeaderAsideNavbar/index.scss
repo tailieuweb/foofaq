@@ -4,3 +4,21 @@
 .active {
   background-color: #212529;
 }
+.to-manager {
+  text-decoration: none;
+}
+.navigation {
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.toLink {
+  width: 100%;
+  text-decoration: none;
+  color: #000000b8;
+  &:hover {
+    text-decoration: none;
+    color: #000000b8;
+  }
+}

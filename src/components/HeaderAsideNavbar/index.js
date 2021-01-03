@@ -13,6 +13,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "../../common/CustomLink";
 import "./index.scss";
+
 function Index(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [active, setActive] = useState("");
@@ -22,24 +23,9 @@ function Index(props) {
   };
   return (
     <div>
-      <div
-        className="navigation"
-        style={{
-          width: "100%",
-          position: "relative",
-          top: 0,
-          left: 0,
-        }}
-      >
+      <div className="navigation">
         <List component="nav" aria-label="main mailbox folders">
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/jobs"
-          >
+          <Link to="/manager/jobs" className="toLink">
             <ListItem
               button
               selected={selectedIndex === 1}
@@ -52,14 +38,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/events"
-          >
+          <Link className="toLink" to="/manager/events">
             <ListItem
               className={active}
               button
@@ -73,14 +52,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/questions"
-          >
+          <Link className="toLink" to="/manager/questions">
             <ListItem
               button
               selected={selectedIndex === 3}
@@ -92,14 +64,7 @@ function Index(props) {
               <ListItemText primary="Questions" />
             </ListItem>
           </Link>
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/categories"
-          >
+          <Link className="toLink" to="/manager/categories">
             <ListItem
               button
               selected={selectedIndex === 4}
@@ -112,14 +77,7 @@ function Index(props) {
             </ListItem>
           </Link>
 
-          <Link
-            style={{
-              width: "100%",
-              textDecoration: "none",
-              color: "#000000b8",
-            }}
-            to="/manager/approval"
-          >
+          <Link className="toLink" to="/manager/approval">
             <ListItem
               button
               selected={selectedIndex === 5}
