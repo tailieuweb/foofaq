@@ -273,7 +273,7 @@ function QuestionGridViewManager() {
 
       renderCell: (params) => (
         <strong>
-          <Link to={`/forms/question/${params.getValue("id")}`}>
+          <Link to={`/forms/question/edit/${params.getValue("id")}`}>
             <EditIcon
               variant="contained"
               color="primary"
