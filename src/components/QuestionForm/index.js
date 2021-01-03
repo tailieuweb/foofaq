@@ -28,28 +28,14 @@ import SendIcon from "@material-ui/icons/Send";
 import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
 
-//APIS
-
-// export const listCategories = [];
+//classes
+import { styles } from "./classes";
 
 import {
   getQuesitonById,
   pagCategories,
   getQuestionForCate,
 } from "../../helpers";
-
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -258,21 +244,6 @@ function QuestionForm({ categories }) {
     };
   }
 
-  // async function getQuestion() {
-  //   const response = await axios.get();
-  //   return response.data;
-  // }
-
-  // const sampleMarkup = `${question.id}`;
-  // const blocksFromHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-
-  // console.log("question: " + question.content);
-
-  // console.log("question: " + question.content);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -311,28 +282,13 @@ function QuestionForm({ categories }) {
             <label htmlFor="questionTag">
               <b>Tag</b>
             </label>
-            {/* <input
-              type="text"
-              className="form-control"
-              id="questionTag"
-              aria-describedby="questionTag"
-              placeholder="Nhập thẻ liên quan đến câu hỏi..."
-              defaultValue={question.tag}
-              onChange={(e) => {
-                setTag(e.target.value);
-              }}
-            /> */}
             <CategoriesInput
               listCategories={cagtegories}
               setTextCate={setTextCate}
             />
           </div>
           <div className="aroundBtnQuestion">
-            <input
-              type="submit"
-              className="btn btn-success"
-              startIcon={<SendIcon />}
-            />
+            <button type="submit" className="btn btn-success"><SendIcon /></button>
           </div>
         </div>
       </form>
