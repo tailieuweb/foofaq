@@ -273,7 +273,7 @@ function QuestionGridViewManager() {
 
       renderCell: (params) => (
         <strong>
-          <Link to={`/questionAdd/${params.getValue("id")}`}>
+          <Link to={`/forms/question/edit/${params.getValue("id")}`}>
             <EditIcon
               variant="contained"
               color="primary"
@@ -314,7 +314,7 @@ function QuestionGridViewManager() {
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
         ></SearchBar>
-        <Link to={`/questionAdd/`}>
+        <Link to={`/forms/question/`}>
           <Button
             style={{ margin: "50px" }}
             variant="contained"
