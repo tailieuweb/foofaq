@@ -2,7 +2,7 @@
 import React from "react";
 
 //import component
-import NavigationBar from "../../partials/NavigationBar";
+import NavigationBar from "../../common/PageLayout";
 import QuestionForm from "../../components/QuestionForm";
 import { Route, Switch } from "react-router-dom";
 
