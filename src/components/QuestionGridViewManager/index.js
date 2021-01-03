@@ -314,7 +314,7 @@ function QuestionGridViewManager() {
           handleChangeSearch={handleChangeSearch}
           handleSearch={handleSearch}
         ></SearchBar>
-        <Link to={`/forms/question/`}>
+        <Link to={`/forms/question`}>
           <Button
             style={{ margin: "50px" }}
             variant="contained"
