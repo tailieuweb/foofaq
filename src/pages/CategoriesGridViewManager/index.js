@@ -6,13 +6,13 @@ import CategoriesGridView from "../../components/CategoriesGridView";
 import { DeleteCategory, UpdateCategory } from "../../helpers";
 
 //components mui
-import Button from "@material-ui/core/Button"; 
+import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
 //styles
 import "./index.scss";
-import PageLayoutManager from "../../common/PageLayoutManager";
+import PageManagerLayout from "../../common/PageManagerLayout";
 
 export default function CategoriesGridViewManager() {
   const [open, setOpen] = useState(false);
@@ -72,9 +72,9 @@ export default function CategoriesGridViewManager() {
     },
   ];
   return (
-    <PageLayoutManager>
+    <PageManagerLayout float={"left"}>
       <Link to="/forms/categories">
-        <Button variant="contained" color="primary" className="btn-add" >
+        <Button variant="contained" color="primary" className="btn-add">
           Add Category
         </Button>
       </Link>
@@ -84,6 +84,6 @@ export default function CategoriesGridViewManager() {
           Delete success!
         </Alert>
       </Snackbar>
-    </PageLayoutManager>
+    </PageManagerLayout>
   );
 }

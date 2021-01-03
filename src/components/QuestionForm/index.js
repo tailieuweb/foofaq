@@ -23,6 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import draftToMarkdown from "draftjs-to-markdown";
+import SendIcon from "@material-ui/icons/Send";
 
 import CategoriesInput from "../CategoriesInput";
 import Link from "../../common/CustomLink";
@@ -327,7 +328,11 @@ function QuestionForm({ categories }) {
             />
           </div>
           <div className="aroundBtnQuestion">
-            <input type="submit" className="btn btn-success" value="Send" />
+            <input
+              type="submit"
+              className="btn btn-success"
+              startIcon={<SendIcon />}
+            />
           </div>
         </div>
       </form>

@@ -1,7 +1,8 @@
 import React from "react";
+import axios from "axios";
 
 // Components
-import LoginProvider from "../../provider/login-sample";
+import LoginProvider from "../../provider/login";
 
 // styles
 import "./index.scss";
@@ -13,6 +14,11 @@ const Login = () => {
     console.log(res);
     if (res.status !== "unknown") {
       alert("Logged in successfully!");
+      axios.post("api/auth/login", {
+        email: res.email,
+        username: res.username,
+        fullname: res.fullname,
+      });
     }
   };
 
@@ -20,6 +26,11 @@ const Login = () => {
     console.log(res);
     if (res.profileObj.name) {
       alert("Logged in successfully!");
+      axios.post("api/auth/login", {
+        email: res.email,
+        username: res.username,
+        fullname: res.fullname,
+      });
     }
   };
 
@@ -27,6 +38,11 @@ const Login = () => {
     console.log(res);
     if (res.code) {
       alert("Logged in successfully!");
+      axios.post("api/auth/login", {
+        email: res.email,
+        username: res.username,
+        fullname: res.fullname,
+      });
     }
   };
 
