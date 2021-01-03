@@ -2,13 +2,18 @@
   text-decoration: none;
 }
 .navigation {
-  width: "100%";
-  position: "relative";
+  width: 100%;
+  position: relative;
   top: 0;
   left: 0;
 }
 .Linkto {
-  width: "100%";
-  textdecoration: "none";
-  color: "#000000b8";
+  width: 100%;
+  text-decoration: none;
+  color: #000000b8;
+  &:hover {
+    width: 100%;
+    text-decoration: none;
+    color: #000000b8;
+  }
 }
