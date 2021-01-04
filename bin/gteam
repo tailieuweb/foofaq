@@ -1,0 +1,151 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies
+ */
+const async = require('async');
+const generators = require('../lib/generators');
+const program = require('commander');
+
+const pkg = require('../package.json');
+const version = pkg.version;
+
+const ALLOWER_FIELDS_TYPES = ['string', 'number', 'date', 'boolean', 'array', 'objectId'];
+const CLI_PHRASES = {
+    AVAILABLE_TYPE: 'Available types : string, number, date, boolean, array',
+    ERROR_COMMAND: 'An error has occurred in the command',
+    ERROR_MODEL_NAME: 'Argument required : Model name',
+    ERROR_FIELD_NAME_REQUIRED: 'Argument required : Field Name',
+    ERROR_FIELD_TYPE_REQUIRED: 'Argument required : Field type',
+    ERROR_FIELD_TYPE_INVALID: 'Invalid Argument : Field type is not allowed'
+};
+
+// CLI
+program
+    .version(version)
+    .usage('[options]')
+    .option('-ge, --generate <string>', 'name model', 'sampleMongo')
+    .option('-del, --delete <string>', 'delete sample mongodb')
+    .option('-f, --fields <fields>', 'model fields (name1:type1,name2:type2)')
+    .parse(process.argv)
+    ;
+
+// Main program
+(function (path) {
+    if(program.delete){
+        deleteModel(path);
+    }else if(program.generate){
+        runGenerateG(path);
+    }else{
+        console.error(CLI_PHRASES.ERROR_COMMAND);
+    }
+    
+})('.');
+
+/**
+ * Get parameters in interactive mode
+ * @param {string} path destination path
+ */
+function runGenerateG(path) {
+    if (!isModelNameParamValid(program.generate)) {
+        return closeProgram();
+    }
+    const generate = program.generate;
+    var modelFields = "";
+    if(program.fields){
+        modelFields  = formatFieldsParamInArray(program.fields);
+        if(!modelFields){
+            return closeProgram();
+        }
+    }
+     
+    async.parallel([
+        function (cb) {
+            generators.generateModel(path, generate, modelFields, cb);
+        },
+        function (cb) {
+            generators.generateController(path, generate, modelFields, cb);
+        },
+        function (cb) {
+            generators.generateRoute(path, generate, cb);
+        },
+    ]);
+}
+
+function deleteModel(path){
+    var modelName = program.delete;
+    async.parallel([
+        function (cb) {
+            generators.deleteModel(path, modelName, cb);
+        }
+    ]);
+}
+
+/**
+ * Validate name / type of a field
+ * @param {string} fieldName
+ * @param {string} fieldType
+ * @returns {boolean} is validated
+ */
+function isFieldValid(fieldName, fieldType) {
+    if (!fieldName || fieldName.trim().length === 0) {
+        console.error(CLI_PHRASES.ERROR_FIELD_NAME_REQUIRED);
+        return false;
+    }
+    if (!fieldType || fieldType.trim().length === 0) {
+        console.error(CLI_PHRASES.ERROR_FIELD_TYPE_REQUIRED);
+        return false;
+    }
+    if (ALLOWER_FIELDS_TYPES.indexOf(fieldType) === -1) {
+        console.error(CLI_PHRASES.ERROR_FIELD_TYPE_INVALID);
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Format fields input in array
+ * @param {string} fields fields input
+ * @returns {Array} fields formatted
+ */
+function formatFieldsParamInArray(fields) {
+    var arrayFields = fields.split(',');
+    var result = [];
+    console.log("Fields: [ " + arrayFields + " ]");
+    var err = arrayFields.every(function (field) {
+        var f = field.split(':');
+        var fieldName = f[0];
+        var fieldType = (f[1] || ALLOWER_FIELDS_TYPES[0]);
+
+        if (!isFieldValid(fieldName, fieldType)) { return false; }
+
+        result.push({
+            name: fieldName,
+            type: fieldType
+        });
+
+        return true;
+    });
+
+    return (!err) ? false : result;
+}
+
+/**
+ * Validate model name input
+ * @param {string} name
+ * @returns {boolean} is validated
+ */
+function isModelNameParamValid(name) {
+    if (!name || name.trim().length === 0) {
+        console.error(CLI_PHRASES.ERROR_MODEL_NAME);
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Close the program
+ */
+function closeProgram() {
+    process.exit();
+}

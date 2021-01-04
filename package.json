@@ -1,28 +1,61 @@
 {
-  "name": "foofaq",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "generator-mongodb",
+  "version": "2.0.0",
+  "description": "Mô hình mongoose, khởi tạo RESTful API trên ứng dụng Express NodeJS",
+  "main": "bin/gteam",
+  "dependencies": {
+    "async": "^3.2.0",
+    "commander": "^6.2.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "os": "^0.1.1",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "gteam": "bin/gteam"
+  },
+  "devDependencies": {
+    "jscs": "^2.5.1",
+    "jshint": "^2.8.0",
+    "mkdirp": "^0.5.0",
+    "mocha": "^2.0.1",
+    "nexpect": "^0.4.2",
+    "rimraf": "^2.2.8"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "cs": "jscs ./**/*.js ./bin/gteam",
+    "lint": "jshint ./**/*.js ./bin/gteam",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tailieuweb/foofaq.git"
+    "url": "git+https://github.com/Huytue/generator-mongodb.git"
   },
   "author": "",
   "license": "ISC",
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "express",
+    "generator",
+    "rest",
+    "restfull",
+    "api",
+    "app",
+    "web"
+  ],
+  "files": [
+    "LICENSE",
+    "bin/",
+    "templates/",
+    "lib/"
+  ],
   "bugs": {
-    "url": "https://github.com/tailieuweb/foofaq/issues"
+    "url": "https://github.com/Huytue/generator-mongodb/issues"
   },
-  "homepage": "https://github.com/tailieuweb/foofaq#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.15",
-    "nodemon": "^2.0.6"
-  }
+  "homepage": "https://github.com/Huytue/generator-mongodb#readme"
 }
