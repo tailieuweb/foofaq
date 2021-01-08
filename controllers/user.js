@@ -143,6 +143,13 @@ const signIn = async (req, res, next) => {
 //Login with SNS user
 const signInSNS = async (req, res, next) => {
 	const { authID, authType } = req.body;
+
+	if(!req.body.username)
+	{
+		response(res, 200, "Invalid parameters");
+		next();
+	}
+
 	// Check if there is a user with the same user
 	const foundUser = await controllers.findOne(User, {
 		authID: authID,
