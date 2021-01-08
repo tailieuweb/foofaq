@@ -24,7 +24,7 @@ router.post('/signin', UserController.signIn);
 // Route login sns
 router.post('/signinsns', UserController.signInSNS)
 // Route logout
-router.post('/signout', UserController.signOut)
+router.post('/signout', UserController.requireSignin, UserController.signOut)
 // Route secret
 router.get('/secret/:userID', UserController.requireSignin, (req, res) => {
 	res.json({
