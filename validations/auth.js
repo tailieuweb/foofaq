@@ -4,7 +4,7 @@ exports.userSignupValidator = [
 	check('username')
 		.not()
 		.isEmpty()
-		.withMessage('Name is required'),
+		.withMessage('Username is required'),
 	check('email')
 		.isEmail()
 		.withMessage('Must be a valid email address'),
